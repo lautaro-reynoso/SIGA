@@ -7,9 +7,9 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 
-    public String url = "jdbc:mysql://34.176.177.146:3306/bd_florida";
-    public String user = "lautaro";
-    public String pass = "lautikapo11";
+    public String url = "jdbc:mysql://34.176.29.19:3306/bd_florida";
+    public String user = "root";
+    public String pass = "123456";
     public java.sql.Statement s;
     public ResultSet resultado;
     public Connection conexion = null;

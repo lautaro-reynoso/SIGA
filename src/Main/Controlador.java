@@ -62,10 +62,7 @@ public class Controlador {
     public ResultSet BuscarAportante(String dni) throws SQLException {
 
         if (Main.conexion != null) {
-            System.out.println("ingrese el dni del aportante");
-            //le paso la conexion de la base de datos
-
-            //      String dni = tc.nextLine();
+            
             ResultSet res = modelo.BuscarAportante(dni);
 
             return res;
@@ -88,23 +85,7 @@ public class Controlador {
         return null;
     }
 
-    /*
-    public int IngresoParticular(String documento, String nombre, String cod_pulsera, String categoria, String dia_ingreso, float importe) {
 
-        if (Main.conexion != null) {
-
-            //devuelve 1 si se completo el registro
-            int c = modelo.InsertarIngreso(documento, nombre, cod_pulsera, categoria, dia_ingreso, importe);
-
-            if (c == 1) {
-                return c;
-            } else {
-                return c;
-            }
-        }
-        return 0;
-    }
-     */
     public int IngresoParticular(String documento, String nombre, String categoria, String dia_ingreso, String dia_egreso,String parsela, float importe) {
 
         if (Main.conexion != null) {
