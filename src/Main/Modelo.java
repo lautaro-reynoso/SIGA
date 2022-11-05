@@ -20,7 +20,11 @@ public class Modelo {
                 + "VALUES('" + documento + "','" + nombre + "','" + categoria + "','" + dia_ingreso + "','" + dia_egreso + "','" + parsela + "','" + importe + "')";
         return Main.conexion.EjecutarOperacion(sql);
     }
-
+     public int InsertarIngresoDiario(String documento, String nombre, String hora_ingreso, String categoria) {
+        String sql = "INSERT INTO ingreso_diario (nombre, dni, hora_ingreso ,categoria)"
+                + "VALUES('" + nombre + "','" + documento + "','" + hora_ingreso + "','" + categoria + "')";
+        return Main.conexion.EjecutarOperacion(sql);
+    }
 
     public int InsertarRegistro(String usuario, String comentario, String fecha, String hora) {
         String sql = "INSERT INTO registros (usuario, comentario, fecha ,hora)"
@@ -68,7 +72,11 @@ public class Modelo {
         sql = "SELECT * FROM ingreso WHERE documento = '" + documento + "'";
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
-
+    public ResultSet BuscarDocumentoDiario(String documento) {
+        String sql;
+        sql = "SELECT * FROM ingreso_diario WHERE dni = '" + documento + "'";
+        return Main.conexion.EjecutarConsultaSQL(sql);
+    }
     public ResultSet BuscarParsela(String parsela) {
 
         String sql;
@@ -234,4 +242,6 @@ public class Modelo {
          return Main.conexion.EjecutarConsultaSQL(sql);
          
      }
+     
+     
 }

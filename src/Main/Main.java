@@ -11,6 +11,7 @@ import Paneles_principales.Login;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Calendar;
 
 /**
  *
@@ -24,7 +25,7 @@ public class Main {
     public static String HoraActual = LocalTime.now().toString();
     public static float tarfia_acampar_alumnos, tarfia_acampar_aportantes, tarfia_acampar_particular,
             tarifa_dia_alumnos,tarifa_dia_aportantes,tarifa_dia_particular;
-    
+    public static Calendar calendario = Calendar.getInstance();
     
 
     public static void main(String args[]) throws SQLException, ClassNotFoundException {
@@ -32,6 +33,10 @@ public class Main {
         
         conexion.Conectar();
         controlador.setear_tarifas();
+        System.out.println(calendario.get(Calendar.HOUR_OF_DAY));
+        String hora = null;
+    
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

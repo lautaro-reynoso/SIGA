@@ -26,7 +26,7 @@ import javax.swing.JPanel;
 public class Principal extends javax.swing.JFrame {
 
     Ingre ingreso = new Ingre();
-   // Ocupacion ocupacion = new Ocupacion();
+    // Ocupacion ocupacion = new Ocupacion();
     Salidas_temporales salidas = new Salidas_temporales();
     Usuarios usuarios = new Usuarios();
     static OcupacionC ocupacionC = new OcupacionC();
@@ -243,22 +243,24 @@ public class Principal extends javax.swing.JFrame {
 
     private void UsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsuariosMousePressed
 
-          usuarios.actualizarUsuario();
-             MostrarPanel(usuarios);
-    
+        usuarios.actualizarUsuario();
+        MostrarPanel(usuarios);
 
 
     }//GEN-LAST:event_UsuariosMousePressed
 
     private void UsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsuariosMouseEntered
 
-     
-     
+
     }//GEN-LAST:event_UsuariosMouseEntered
 
     private void IngresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IngresoMousePressed
 
         MostrarPanel(ingreso);
+
+        ingreso.setearnullalumno();
+        ingreso.setearnullparticular();
+        ingreso.setearnullaportante();
     }//GEN-LAST:event_IngresoMousePressed
 
     private void IngresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IngresoMouseClicked

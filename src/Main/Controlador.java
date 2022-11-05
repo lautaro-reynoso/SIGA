@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import java.util.Scanner;
 
-
 public class Controlador {
 
     Modelo modelo = new Modelo();
@@ -62,7 +61,7 @@ public class Controlador {
     public ResultSet BuscarAportante(String dni) throws SQLException {
 
         if (Main.conexion != null) {
-            
+
             ResultSet res = modelo.BuscarAportante(dni);
 
             return res;
@@ -85,8 +84,7 @@ public class Controlador {
         return null;
     }
 
-
-    public int IngresoParticular(String documento, String nombre, String categoria, String dia_ingreso, String dia_egreso,String parsela, float importe) {
+    public int IngresoParticular(String documento, String nombre, String categoria, String dia_ingreso, String dia_egreso, String parsela, float importe) {
 
         if (Main.conexion != null) {
 
@@ -102,10 +100,22 @@ public class Controlador {
         return 0;
     }
 
+    public int IngresoDiario(String documento, String nombre, String hora_ingreso, String categoria) {
+        if (Main.conexion != null) {
 
-    
-    
-      public int IngresoRegistro(String usuario, String comentario, String fecha, String hora) {
+            //devuelve 1 si se completo el registro
+            int c = modelo.InsertarIngresoDiario(documento, nombre, hora_ingreso, categoria);
+
+            if (c == 1) {
+                return c;
+            } else {
+                return c;
+            }
+        }
+        return 0;
+    }
+
+    public int IngresoRegistro(String usuario, String comentario, String fecha, String hora) {
 
         if (Main.conexion != null) {
 
@@ -121,9 +131,6 @@ public class Controlador {
         return 0;
     }
 
-    
-    
-    
     public int IngresoParsela(String documento, String parsela, int quincho, String fecha_egreso) {
 
         if (Main.conexion != null) {
@@ -203,7 +210,7 @@ public class Controlador {
      * CREAR NUEVO USUARIO * *
      * *************************************************************************
      */
-    public void NuevoUsuario(String usuario, String contrasenia , String privilegio) {
+    public void NuevoUsuario(String usuario, String contrasenia, String privilegio) {
 
         int c = modelo.NuevoUsuario(usuario, contrasenia, privilegio);
 
@@ -343,8 +350,6 @@ public class Controlador {
 
     }
 
-    
-   
     /**
      * *************************************************************************
      * CALCULAR IMPORTE* *
@@ -360,23 +365,21 @@ public class Controlador {
         if (Main.conexion != null) {
 
             if (categoria == 1) {
-               
-                    importe = (CantDias * (Main.tarfia_acampar_alumnos));
-                    return importe;
-               
+
+                importe = (CantDias * (Main.tarfia_acampar_alumnos));
+                return importe;
+
             }
             if (categoria == 2) {
-               
-                    importe = (CantDias * (Main.tarfia_acampar_aportantes));
-                    return importe;
-                
+
+                importe = (CantDias * (Main.tarfia_acampar_aportantes));
+                return importe;
 
             }
             if (categoria == 3) {
-              
-                    importe = (CantDias * (Main.tarfia_acampar_particular));
-                    return importe;
-              
+
+                importe = (CantDias * (Main.tarfia_acampar_particular));
+                return importe;
 
             }
 
@@ -384,73 +387,54 @@ public class Controlador {
 
         return 0;
     }
-    public void setear_tarifas() throws SQLException{
+
+    public void setear_tarifas() throws SQLException {
         ResultSet res;
         res = modelo.tarifas();
-        while(res.next()){
-        Main.tarfia_acampar_alumnos = Float.parseFloat(res.getString("tarifa_alumno"));
-        Main.tarfia_acampar_aportantes = Float.parseFloat(res.getString("tarifa_aportante"));
-        Main.tarfia_acampar_particular = Float.parseFloat(res.getString("tarifa_particular"));
-        Main.tarifa_dia_alumnos = Float.parseFloat(res.getString("alumno_d"));
-        Main.tarifa_dia_aportantes = Float.parseFloat(res.getString("aportante_d"));
-        Main.tarifa_dia_particular = Float.parseFloat(res.getString("particular_d"));
-    
-        
-                }
+        while (res.next()) {
+            Main.tarfia_acampar_alumnos = Float.parseFloat(res.getString("tarifa_alumno"));
+            Main.tarfia_acampar_aportantes = Float.parseFloat(res.getString("tarifa_aportante"));
+            Main.tarfia_acampar_particular = Float.parseFloat(res.getString("tarifa_particular"));
+            Main.tarifa_dia_alumnos = Float.parseFloat(res.getString("alumno_d"));
+            Main.tarifa_dia_aportantes = Float.parseFloat(res.getString("aportante_d"));
+            Main.tarifa_dia_particular = Float.parseFloat(res.getString("particular_d"));
+
+        }
     }
-    
-    public int Controldnirepetidoingreso(String dni) throws SQLException{
-        
+
+    public int Controldnirepetidoingreso(String dni) throws SQLException {
+
         ResultSet res;
-        
+
         res = modelo.BuscarDocumento(dni);
-        
-        if(res.next() == true){
+
+        if (res.next() == true) {
             return 1;
-        }
-        else
+        } else {
             return 0;
-              
-        
-    }
-    
-    
-         public int IngresoTarifaParticular(float particular) {
-
-        if (Main.conexion != null) {
-
-            //devuelve 1 si se completo el registro
-                int c = modelo.InsertarTarifaParticular(particular);
-
-            if (c == 1) {
-                return c;
-            } else {
-                return c;
-            }
         }
-        return 0;
-    }  
-         public int IngresoTarifaAlumno(float alumno) {
 
-        if (Main.conexion != null) {
-
-            //devuelve 1 si se completo el registro
-                int c = modelo.InsertarTarifaAlumno(alumno);
-
-            if (c == 1) {
-                return c;
-            } else {
-                return c;
-            }
-        }
-        return 0;
     }
-         public int IngresoTarifaAportante(float aportante) {
+      public int Controldnirepetidoingresodiario(String dni) throws SQLException {
+
+        ResultSet res;
+
+        res = modelo.BuscarDocumentoDiario(dni);
+
+        if (res.next() == true) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
+    public int IngresoTarifaParticular(float particular) {
 
         if (Main.conexion != null) {
 
             //devuelve 1 si se completo el registro
-                int c = modelo.InsertarTarifaAportante(aportante);
+            int c = modelo.InsertarTarifaParticular(particular);
 
             if (c == 1) {
                 return c;
@@ -460,12 +444,13 @@ public class Controlador {
         }
         return 0;
     }
-         public int IngresoTarifaAportante_dia(float aportante) {
+
+    public int IngresoTarifaAlumno(float alumno) {
 
         if (Main.conexion != null) {
 
             //devuelve 1 si se completo el registro
-                int c = modelo.InsertarTarifaAportante_dia(aportante);
+            int c = modelo.InsertarTarifaAlumno(alumno);
 
             if (c == 1) {
                 return c;
@@ -475,12 +460,13 @@ public class Controlador {
         }
         return 0;
     }
-         public int IngresoTarifaAlumno_dia(float alumno) {
+
+    public int IngresoTarifaAportante(float aportante) {
 
         if (Main.conexion != null) {
 
             //devuelve 1 si se completo el registro
-                int c = modelo.InsertarTarifaAlumno_dia(alumno);
+            int c = modelo.InsertarTarifaAportante(aportante);
 
             if (c == 1) {
                 return c;
@@ -490,12 +476,13 @@ public class Controlador {
         }
         return 0;
     }
-         public int IngresoTarifaParticular_dia(float particular) {
+
+    public int IngresoTarifaAportante_dia(float aportante) {
 
         if (Main.conexion != null) {
 
             //devuelve 1 si se completo el registro
-                int c = modelo.InsertarTarifaParticular_dia(particular);
+            int c = modelo.InsertarTarifaAportante_dia(aportante);
 
             if (c == 1) {
                 return c;
@@ -505,10 +492,37 @@ public class Controlador {
         }
         return 0;
     }
-          
-          
-          
-          
-          
+
+    public int IngresoTarifaAlumno_dia(float alumno) {
+
+        if (Main.conexion != null) {
+
+            //devuelve 1 si se completo el registro
+            int c = modelo.InsertarTarifaAlumno_dia(alumno);
+
+            if (c == 1) {
+                return c;
+            } else {
+                return c;
+            }
+        }
+        return 0;
+    }
+
+    public int IngresoTarifaParticular_dia(float particular) {
+
+        if (Main.conexion != null) {
+
+            //devuelve 1 si se completo el registro
+            int c = modelo.InsertarTarifaParticular_dia(particular);
+
+            if (c == 1) {
+                return c;
+            } else {
+                return c;
+            }
+        }
+        return 0;
+    }
 
 }
