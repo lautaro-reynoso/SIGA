@@ -229,9 +229,9 @@ public class Modelo {
         return Main.conexion.EjecutarOperacion(sql);
     }
          
-    public int insertarvehiculo (String patente, String marca){
-        String sql = "INSERT INTO vehiculos (marca,patente,fecha_egreso)"
-                + "VALUES ('" + marca + "','" + patente + "','" + Main.DiaActual + "')";
+    public int insertarvehiculo (String patente, String marca, String importe){
+        String sql = "INSERT INTO vehiculos (marca,patente,importe)"
+                + "VALUES ('" + marca + "','" + patente + "','" + importe + "')";
         
        return Main.conexion.EjecutarOperacion(sql);
     }  

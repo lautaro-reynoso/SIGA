@@ -913,7 +913,7 @@ public class OcupacionC extends javax.swing.JPanel {
         jPanel1.add(j47, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
 
         jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/mapaxl.jpg"))); // NOI18N
-        jPanel1.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 1070, 690));
+        jPanel1.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1080, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

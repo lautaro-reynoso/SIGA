@@ -115,7 +115,7 @@ public class Principal extends javax.swing.JFrame {
                 SalirMousePressed(evt);
             }
         });
-        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 639, 179, 52));
+        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 179, 52));
 
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         SalidasTemporales.setForeground(new java.awt.Color(0, 46, 15));
@@ -218,16 +218,21 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void PadronMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PadronMousePressed
-
+        Padron.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
+        Inicio.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(padron);
     }//GEN-LAST:event_PadronMousePressed
 
@@ -237,12 +242,23 @@ public class Principal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Ocupacion.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
+        Inicio.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(ocupacionC);
 
     }//GEN-LAST:event_OcupacionMousePressed
 
     private void UsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsuariosMousePressed
-
+        Usuarios.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
+        Inicio.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         usuarios.actualizarUsuario();
         MostrarPanel(usuarios);
 
@@ -255,7 +271,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_UsuariosMouseEntered
 
     private void IngresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IngresoMousePressed
-
+        Ingreso.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
+        Inicio.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(ingreso);
 
         ingreso.setearnullalumno();
@@ -268,7 +289,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_IngresoMouseClicked
 
     private void SalidasTemporalesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalidasTemporalesMousePressed
-
+        SalidasTemporales.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
+        Inicio.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(salidas);
     }//GEN-LAST:event_SalidasTemporalesMousePressed
 
@@ -277,6 +303,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirMousePressed
 
     private void InicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioMousePressed
+        Inicio.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
+        Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(inicio);
     }//GEN-LAST:event_InicioMousePressed
     public void MostrarPanel(JPanel p) {

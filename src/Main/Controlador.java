@@ -387,6 +387,18 @@ public class Controlador {
 
         return 0;
     }
+    public String calcularimportevehiculo() throws SQLException{
+        ResultSet res;
+        res = modelo.tarifas();
+        String importe;
+        if(res.next()){
+            importe = res.getString("tarifa_vehiculo");
+            return importe;
+        }
+        else
+            return null;
+        
+    }
 
     public void setear_tarifas() throws SQLException {
         ResultSet res;

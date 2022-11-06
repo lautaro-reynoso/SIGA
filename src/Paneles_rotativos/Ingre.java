@@ -12,6 +12,7 @@ import Paneles_principales.Login;
 import com.formdev.flatlaf.json.ParseException;
 import com.toedter.calendar.JDateChooser;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -217,7 +219,7 @@ public class Ingre extends javax.swing.JPanel {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        vehiculos = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         documento_p = new javax.swing.JTextField();
@@ -295,6 +297,12 @@ public class Ingre extends javax.swing.JPanel {
         Documento = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         Buscar = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        patente = new javax.swing.JTextField();
+        marca = new javax.swing.JTextField();
+        ingreso_vehiculo = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -302,9 +310,9 @@ public class Ingre extends javax.swing.JPanel {
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+        vehiculos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MousePressed(evt);
+                vehiculosMousePressed(evt);
             }
         });
 
@@ -315,6 +323,11 @@ public class Ingre extends javax.swing.JPanel {
         documento_p.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 documento_pActionPerformed(evt);
+            }
+        });
+        documento_p.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                documento_pKeyPressed(evt);
             }
         });
 
@@ -425,7 +438,7 @@ public class Ingre extends javax.swing.JPanel {
                         .addComponent(fecha_ingreso_p, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                         .addComponent(fecha_egreso_p, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(Obtener1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -473,7 +486,7 @@ public class Ingre extends javax.swing.JPanel {
                             .addComponent(documento_p)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel17)
-                                .addGap(0, 393, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,7 +496,7 @@ public class Ingre extends javax.swing.JPanel {
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel18)
                                 .addGap(367, 367, 367))
-                            .addComponent(nombre_p, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)))
+                            .addComponent(nombre_p)))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -506,9 +519,9 @@ public class Ingre extends javax.swing.JPanel {
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nombre_p, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(pasar_dia2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addGap(55, 55, 55)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
@@ -519,18 +532,18 @@ public class Ingre extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(102, 102, 102)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(392, Short.MAX_VALUE))
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(350, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("PARTICULAR", jPanel3);
+        vehiculos.addTab("PARTICULAR", jPanel3);
 
         Documento_a.setForeground(new java.awt.Color(204, 204, 204));
         Documento_a.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -538,6 +551,11 @@ public class Ingre extends javax.swing.JPanel {
         Documento_a.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Documento_aActionPerformed(evt);
+            }
+        });
+        Documento_a.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Documento_aKeyPressed(evt);
             }
         });
 
@@ -731,7 +749,7 @@ public class Ingre extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(301, Short.MAX_VALUE)
+                .addContainerGap(206, Short.MAX_VALUE)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(299, 299, 299))
             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -775,14 +793,14 @@ public class Ingre extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(documento_a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(pasar_dia1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
         );
 
-        jTabbedPane1.addTab("APORTANTES", jPanel4);
+        vehiculos.addTab("APORTANTES", jPanel4);
 
         documento_e.setForeground(new java.awt.Color(204, 204, 204));
         documento_e.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1039,6 +1057,11 @@ public class Ingre extends javax.swing.JPanel {
                 DocumentoActionPerformed(evt);
             }
         });
+        Documento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DocumentoKeyPressed(evt);
+            }
+        });
 
         jLabel10.setText("DOCUMENTO");
 
@@ -1095,7 +1118,7 @@ public class Ingre extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1107,17 +1130,72 @@ public class Ingre extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("ALUMNOS", jPanel2);
+        vehiculos.addTab("ALUMNOS", jPanel2);
+
+        jLabel21.setText("Marca-Modelo");
+
+        jLabel22.setText("Patente");
+
+        patente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                patenteActionPerformed(evt);
+            }
+        });
+
+        ingreso_vehiculo.setText("Ingresar vehiculo");
+        ingreso_vehiculo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ingreso_vehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ingreso_vehiculoMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(patente, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                            .addGap(199, 199, 199)
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                            .addGap(306, 306, 306)
+                            .addComponent(ingreso_vehiculo))))
+                .addContainerGap(465, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(patente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ingreso_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(333, Short.MAX_VALUE))
+        );
+
+        vehiculos.addTab("VEHICULOS", jPanel10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(vehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 867, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(vehiculos)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1524,9 +1602,9 @@ public class Ingre extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_Parsela_pActionPerformed
 
-    private void jTabbedPane1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MousePressed
+    private void vehiculosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehiculosMousePressed
       
-    }//GEN-LAST:event_jTabbedPane1MousePressed
+    }//GEN-LAST:event_vehiculosMousePressed
 
     private void pasar_dia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_dia2ActionPerformed
         if(pasar_dia2.isSelected()){
@@ -1571,6 +1649,62 @@ public class Ingre extends javax.swing.JPanel {
          }
     }//GEN-LAST:event_pasar_diaActionPerformed
 
+    private void documento_pKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documento_pKeyPressed
+       char validador = evt.getKeyChar();
+        
+        if(Character.isLetter(validador)){
+            getToolkit().beep();
+            evt.consume();
+           Component rootPane = null;
+        
+           JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+            
+        }
+    }//GEN-LAST:event_documento_pKeyPressed
+
+    private void Documento_aKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Documento_aKeyPressed
+         char validador = evt.getKeyChar();
+        
+        if(Character.isLetter(validador)){
+            getToolkit().beep();
+            evt.consume();
+           Component rootPane = null;
+        
+           JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+            
+        }
+    }//GEN-LAST:event_Documento_aKeyPressed
+
+    private void DocumentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DocumentoKeyPressed
+         char validador = evt.getKeyChar();
+        
+        if(Character.isLetter(validador)){
+            getToolkit().beep();
+            evt.consume();
+           Component rootPane = null;
+        
+           JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+            
+        }
+    }//GEN-LAST:event_DocumentoKeyPressed
+
+    private void patenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_patenteActionPerformed
+
+    private void ingreso_vehiculoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingreso_vehiculoMousePressed
+        try {
+            modelo.insertarvehiculo(patente.getText(), marca.getText(), controlador.calcularimportevehiculo());
+            marca.setText(null);
+            patente.setText(null);
+            
+        } catch (SQLException ex) {
+            Component rootPane = null;
+        
+           JOptionPane.showMessageDialog(rootPane, "Problemas al ingresar un vehiculo, vuelve a intentarlo.  ");
+        }
+    }//GEN-LAST:event_ingreso_vehiculoMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Boton_ingreso;
@@ -1600,6 +1734,7 @@ public class Ingre extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser fecha_ingreso;
     private com.toedter.calendar.JDateChooser fecha_ingreso_p;
     private com.toedter.calendar.JDateChooser fecha_ingreso_p1;
+    private javax.swing.JLabel ingreso_vehiculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1613,6 +1748,8 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1632,6 +1769,7 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
@@ -1644,16 +1782,18 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField marca;
     private javax.swing.JTextField nombre_a;
     private javax.swing.JTextField nombre_e;
     private javax.swing.JTextField nombre_p;
     private javax.swing.JCheckBox pasar_dia;
     private javax.swing.JCheckBox pasar_dia1;
     private javax.swing.JCheckBox pasar_dia2;
+    private javax.swing.JTextField patente;
     private javax.swing.JTextField tarifa;
     private javax.swing.JTextField tarifa1;
     private javax.swing.JTextField tarifa2;
+    private javax.swing.JTabbedPane vehiculos;
     // End of variables declaration//GEN-END:variables
 
 }
