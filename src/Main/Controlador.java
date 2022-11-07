@@ -228,11 +228,11 @@ public class Controlador {
      * ELIMINAR NUEVO USUARIO * *
      * *************************************************************************
      */
-    public void EliminarUsuario() {
+    public void EliminarUsuario(String usuario) {
 
         if (Main.conexion != null) {
 
-            int c = modelo.EliminarUsuario("usuario");
+            int c = modelo.EliminarUsuario(usuario);
 
             if (c != 1) {
                 System.out.println("Este usuario no existe");
@@ -536,5 +536,63 @@ public class Controlador {
         }
         return 0;
     }
+    
+    
+     public ResultSet MostarOcupacionActualDia() throws SQLException {
+
+        if (Main.conexion != null) {
+
+            ResultSet res;
+
+            res = modelo.MostarOcupacionActualDia();
+            return res;
+
+        }
+        return null;
+    }
+  
+    
+    
+    
+       public ResultSet MostarDocumentoDia(String documento) throws SQLException {
+
+        if (Main.conexion != null) {
+         
+            ResultSet res;
+
+            res = modelo.BuscarDocumentoDia(documento);
+            return res;
+
+        }
+        return null;
+    }
+       
+        public ResultSet MostrarUsuarios() throws SQLException {
+
+        if (Main.conexion != null) {
+         
+            ResultSet res;
+
+            res = modelo.MostrarUsuarios();
+            return res;
+
+        }
+        return null;
+    }
+       
+        public ResultSet MostarVehiculos() throws SQLException {
+
+        if (Main.conexion != null) {
+         
+            ResultSet res;
+
+            res = modelo.MostrarVehiculos();
+            return res;
+
+        }
+        return null;
+    }
+    
+    
 
 }

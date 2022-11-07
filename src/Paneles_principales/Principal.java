@@ -36,10 +36,10 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public Principal() {
+    public Principal() throws SQLException {
         initComponents();
         MostrarPanel(inicio);
-
+        inicio.Tabla();
     }
 
     /**
@@ -115,7 +115,7 @@ public class Principal extends javax.swing.JFrame {
                 SalirMousePressed(evt);
             }
         });
-        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 179, 52));
+        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 179, 60));
 
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         SalidasTemporales.setForeground(new java.awt.Color(0, 46, 15));
@@ -210,17 +210,17 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 1178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 1157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

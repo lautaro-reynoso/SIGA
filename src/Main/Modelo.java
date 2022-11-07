@@ -244,4 +244,39 @@ public class Modelo {
      }
      
      
+     
+      public ResultSet MostrarVehiculos (){
+         String sql = "SELECT * FROM vehiculos";
+         
+         return Main.conexion.EjecutarConsultaSQL(sql);
+         
+     }
+   
+     
+      public ResultSet MostarOcupacionActualDia() {
+
+        String sql;
+            sql = "SELECT * FROM ingreso_diario";
+
+        return Main.conexion.EjecutarConsultaSQL(sql);
+
+    }
+      
+      public ResultSet MostrarUsuarios() {
+
+        String sql;
+            sql = "SELECT * FROM usuarios";
+
+        return Main.conexion.EjecutarConsultaSQL(sql);
+
+    }
+      
+        public ResultSet BuscarDocumentoDia(String documento) {
+        String sql;
+        sql = "SELECT * FROM ingreso_diario WHERE dni = '" + documento + "'";
+        
+    
+        return Main.conexion.EjecutarConsultaSQL(sql);
+    }
+     
 }

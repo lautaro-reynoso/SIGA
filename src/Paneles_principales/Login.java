@@ -20,7 +20,7 @@ public class Login extends javax.swing.JFrame {
 
     public static String usuario;
     Controlador controlador = new Controlador();
-    Principal principal = new Principal();
+
     Modelo modelo = new Modelo();
     int xMouse, yMouse;
 
@@ -133,7 +133,7 @@ public class Login extends javax.swing.JFrame {
         favicon.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
         favicon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/icon-2.png"))); // NOI18N
         favicon.setText("SiGA");
-        bg.add(favicon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 410, 50));
+        bg.add(favicon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 410, 30));
 
         title.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
         title.setText("INICIAR SESIÓN");
@@ -305,7 +305,7 @@ public class Login extends javax.swing.JFrame {
                 controlador.SetearPrivilegio(usuario);
 
                 modelo.ConsultarSalida(); //  JFrame1.dispose();  Remove JFrame 1
-
+                Principal principal = new Principal();
                 principal.setVisible(true); //Show other frame
                 dispose();
                 /*        
