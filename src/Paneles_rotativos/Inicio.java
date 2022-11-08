@@ -17,8 +17,8 @@ import javax.swing.table.DefaultTableModel;
  * @author mateo
  */
 public class Inicio extends javax.swing.JPanel {
-
-    int filas = 0, filas_dia = 0, filas_vehiculos = 0;
+    
+    int filas = 0, filas_dia = 0, filas_vehiculos = 0, filas_parcelas = 0;
     Controlador controlador = new Controlador();
     Modelo modelo = new Modelo();
 
@@ -27,25 +27,30 @@ public class Inicio extends javax.swing.JPanel {
      */
     public Inicio() {
         initComponents();
-
+        
     }
-
+    
     public void buscarDocumento() throws SQLException {
-
-        ResultSet res_1, res_2;
-
-        res_1 = controlador.MostarDocumento(busca_documento.getText());
+        
+        ResultSet res_1;
+        
+        res_1 = controlador.MostarDocumento(busca_documento2.getText());
         Busqueda(res_1);
-
-        res_2 = controlador.MostarDocumentoDia(busca_documento.getText());
-        BusquedaDia(res_2);
-
+        
     }
-
+    
+    public void buscarDocumentoDia() throws SQLException {
+        ResultSet res_2;
+        
+        res_2 = controlador.MostarDocumentoDia(busca_documento1.getText());
+        BusquedaDia(res_2);
+        
+    }
+    
     public void Busqueda(ResultSet res) throws SQLException {
         int f = 0;
         while (res.next()) {
-
+            
             f++;
             String documento = res.getString("documento");
             String nombre = res.getString("nombre");
@@ -53,23 +58,24 @@ public class Inicio extends javax.swing.JPanel {
             String importe = String.valueOf(res.getFloat("importe"));
             String fecha_egreso = res.getString("fecha_egreso");
             String fecha_ingreso = res.getString("fecha_ingreso");
-            String tab[] = {documento, nombre, categoria, importe, fecha_egreso, fecha_ingreso};
+            String parcela = res.getString("parsela");
+            String tab[] = {documento, nombre, categoria, importe, fecha_egreso, fecha_ingreso, parcela};
             DefaultTableModel tablamodelo = (DefaultTableModel) jTable1.getModel();
-
+            
             tablamodelo.addRow(tab);
             filas = f;
             int rows = tablamodelo.getRowCount();
             for (int i = rows - (filas + 1); i >= 0; i--) {
                 tablamodelo.removeRow(i);
             }
-
+            
         }
     }
-
+    
     public void BusquedaDia(ResultSet res) throws SQLException {
         int f = 0;
         while (res.next()) {
-
+            
             f++;
             String documento = res.getString("dni");
             String nombre = res.getString("nombre");
@@ -77,46 +83,54 @@ public class Inicio extends javax.swing.JPanel {
             String categoria = res.getString("categoria");
             String tab[] = {documento, nombre, hora_ingreso, categoria};
             DefaultTableModel tablamodelo = (DefaultTableModel) jTable2.getModel();
-
+            
             tablamodelo.addRow(tab);
             filas_dia = f;
             int rows = tablamodelo.getRowCount();
             for (int i = rows - (filas_dia + 1); i >= 0; i--) {
                 tablamodelo.removeRow(i);
             }
-
+            
         }
     }
-
+    
     public void BusquedaVehiculos(ResultSet res) throws SQLException {
         int f = 0;
         while (res.next()) {
-
+            
             f++;
             String marca = res.getString("marca");
             String patente = res.getString("patente");
             String tab[] = {marca, patente};
             DefaultTableModel tablamodelo = (DefaultTableModel) jTable3.getModel();
-
+            
             tablamodelo.addRow(tab);
             filas_vehiculos = f;
             int rows = tablamodelo.getRowCount();
             for (int i = rows - (filas_vehiculos + 1); i >= 0; i--) {
                 tablamodelo.removeRow(i);
             }
-
+            
         }
     }
-
+    
+    public void BusquedaParcelasPorNro() throws SQLException {
+        
+        ResultSet res_2;
+        
+        res_2 = controlador.BuscarParsela(busca_parcela.getText());
+        Busqueda(res_2);
+    }
+    
     public void Tabla() throws SQLException {
-        ResultSet res_1, res_2;
+        ResultSet res_1, res_2, res_3;
         res_1 = controlador.MostarOcupacionActual();
-
+        
         Busqueda(res_1);
-
+        
         res_2 = controlador.MostarOcupacionActualDia();
         BusquedaDia(res_2);
-
+        ;
         //  String id = String.valueOf(s.getString("id"));
     }
 
@@ -138,17 +152,18 @@ public class Inicio extends javax.swing.JPanel {
         cant_p = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        busca_documento = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        busca_parcela = new javax.swing.JTextField();
+        parsela_btn = new javax.swing.JLabel();
         consultar_btn = new javax.swing.JLabel();
+        busca_documento1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        busca_documento2 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
-        dni_b = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,7 +172,15 @@ public class Inicio extends javax.swing.JPanel {
             new String [] {
                 "Documento", "Nombre", "Hora de ingreso", "Categoría"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -165,39 +188,79 @@ public class Inicio extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Documento", "Nombre", "Categoria", "Importe", "Fecha de egreso", "Fecha de ingreso"
+                "Documento", "Nombre", "Categoria", "Importe", "Fecha de egreso", "Fecha de ingreso", "Parcela"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         cant_p.setText("Personas en el camping: consultar");
 
-        jLabel1.setText("Personas con parsela");
+        jLabel1.setText("Personas con parsela:");
 
-        jLabel3.setText("Personas para pasar el día");
+        jLabel3.setText("Personas para pasar el día:");
 
-        busca_documento.setText("Buscar Documento");
-        busca_documento.addActionListener(new java.awt.event.ActionListener() {
+        busca_parcela.setText("Buscar por numero de parcela");
+        busca_parcela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                busca_documentoActionPerformed(evt);
+                busca_parcelaActionPerformed(evt);
             }
         });
 
-        jLabel4.setText(" Buscar por DNI ");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        parsela_btn.setText("BUSCAR");
+        parsela_btn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        parsela_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        parsela_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
+                parsela_btnMousePressed(evt);
             }
         });
 
-        consultar_btn.setText(" Consultar ");
+        consultar_btn.setText("Actualizar Tablas");
         consultar_btn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         consultar_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         consultar_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 consultar_btnMousePressed(evt);
+            }
+        });
+
+        busca_documento1.setText("Buscar por numero de documento");
+        busca_documento1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                busca_documento1ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("BUSCAR");
+        jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel6MousePressed(evt);
+            }
+        });
+
+        busca_documento2.setText("Buscar por numero de documento");
+        busca_documento2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                busca_documento2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("BUSCAR");
+        jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel4MousePressed(evt);
             }
         });
 
@@ -209,39 +272,58 @@ public class Inicio extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(busca_documento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1094, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(cant_p)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(consultar_btn))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(33, 33, 33)
+                                .addComponent(busca_documento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(73, 73, 73)
+                        .addComponent(busca_parcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(parsela_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(busca_documento2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(consultar_btn))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cant_p)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(110, 110, 110))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cant_p)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(busca_documento2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(busca_parcela, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(parsela_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(busca_documento1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(consultar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(busca_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cant_p, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(58, 58, 58))
         );
 
@@ -263,50 +345,41 @@ public class Inicio extends javax.swing.JPanel {
             new String [] {
                 "Marca", "Patente"
             }
-        ));
-        jScrollPane3.setViewportView(jTable3);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        jLabel5.setText("Buscar acampante por DNI");
-
-        jButton2.setText("ACEPTAR");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton2MousePressed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane3.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dni_b, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1094, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(dni_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(466, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("BUSQUEDAS", jPanel2);
@@ -334,37 +407,26 @@ public class Inicio extends javax.swing.JPanel {
             Tabla();
             int cantidad_personas = jTable1.getRowCount() + jTable2.getRowCount();
             cant_p.setText("Cantidad de personas en el camping: " + cantidad_personas);
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_consultar_btnMousePressed
 
-    private void busca_documentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busca_documentoActionPerformed
+    private void busca_parcelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busca_parcelaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_busca_documentoActionPerformed
-
+    }//GEN-LAST:event_busca_parcelaActionPerformed
+    
     public void TablaVehiculos() throws SQLException {
         ResultSet res_1;
         res_1 = controlador.MostarVehiculos();
-
+        
         BusquedaVehiculos(res_1);
-
+        
     }
 
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-
-        try {
-            buscarDocumento();
-        } catch (SQLException ex) {
-            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-    }//GEN-LAST:event_jLabel4MousePressed
-
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-
+        
         try {
             TablaVehiculos();
         } catch (SQLException ex) {
@@ -373,52 +435,60 @@ public class Inicio extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton1MousePressed
 
-    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
-        //buscar en dos modelos:
+    private void busca_documento1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busca_documento1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_busca_documento1ActionPerformed
 
-        ResultSet res_1, res_2;
+    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+        
         try {
-            res_1 = controlador.MostarOcupacionActualDia();
-
-            while (res_1.next() == true) {
-
-                if (dni_b.getText().equals(res_1.getString("dni"))) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Se encuentra actualmente en el camping para pasar el dia.", "PERSONA", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                       
-                }
-
-            }
-            res_2 = controlador.MostarOcupacionActual();
-            while (res_2.next() == true) {
-
-                if (dni_b.getText().equals(res_2.getString("documento"))) {
-                    String nombre = res_2.getString("nombre");
-                    javax.swing.JOptionPane.showMessageDialog(this, "nombre: "+ nombre, "PERSONA", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                     
-                }
-
-            }
-
+            buscarDocumentoDia();
         } catch (SQLException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
 
+    }//GEN-LAST:event_jLabel6MousePressed
 
-    }//GEN-LAST:event_jButton2MousePressed
+    private void busca_documento2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busca_documento2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_busca_documento2ActionPerformed
+
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+        
+        try {
+            buscarDocumento();
+        } catch (SQLException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+    }//GEN-LAST:event_jLabel4MousePressed
+
+    private void parsela_btnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_parsela_btnMousePressed
+        
+        try {
+            BusquedaParcelasPorNro();
+        } catch (SQLException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+    }//GEN-LAST:event_parsela_btnMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField busca_documento;
+    private javax.swing.JTextField busca_documento1;
+    private javax.swing.JTextField busca_documento2;
+    private javax.swing.JTextField busca_parcela;
     private javax.swing.JLabel cant_p;
     private javax.swing.JLabel consultar_btn;
-    private javax.swing.JTextField dni_b;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -428,5 +498,6 @@ public class Inicio extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JLabel parsela_btn;
     // End of variables declaration//GEN-END:variables
 }

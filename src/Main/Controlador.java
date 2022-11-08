@@ -343,7 +343,14 @@ public class Controlador {
             if (res.next() == true) {
                 privilegio = res.getInt("privilegios");
 
-                Main.privilegio = privilegio;
+                
+                if(privilegio == 1)
+                    Main.privilegio = "Administrador";
+                if(privilegio == 2)
+                     Main.privilegio = "Cajero";
+                if(privilegio == 3)
+                     Main.privilegio = "Personal";
+               
             }
 
         }

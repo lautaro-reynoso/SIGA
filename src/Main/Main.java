@@ -20,7 +20,7 @@ import java.util.Calendar;
 public class Main {
     public static Controlador controlador = new Controlador();
     public static Conexion conexion = new Conexion();
-    public static int privilegio;
+    public static String privilegio;
     public static String DiaActual = LocalDate.now().toString();
     public static String HoraActual = LocalTime.now().toString();
     public static float tarfia_acampar_alumnos, tarfia_acampar_aportantes, tarfia_acampar_particular,

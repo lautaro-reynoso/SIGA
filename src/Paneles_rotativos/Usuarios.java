@@ -104,7 +104,7 @@ public class Usuarios extends javax.swing.JPanel {
         jLabel2.setText("NOMBRE DE USUARIO: " + Login.usuario);
         jLabel3.setText("PRIVILEGIO: " + Main.privilegio);
 
-        if (Main.privilegio != 1) {
+        if (!"Administrador".equals(Main.privilegio)) {
             jButton1.setEnabled(false);
             particular_dia.setEnabled(false);
             alumno_dia.setEnabled(false);
@@ -305,7 +305,7 @@ public class Usuarios extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cajero", "Personal" }));
 
         jLabel16.setText("Privilegio:");
 
@@ -390,7 +390,15 @@ public class Usuarios extends javax.swing.JPanel {
             new String [] {
                 "Usuario", "Privilegio"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         tabla.setText("Consultar tabla");
@@ -499,7 +507,16 @@ public class Usuarios extends javax.swing.JPanel {
             f++;
             String usuario = res.getString("usuario");
             String privilegios = res.getString("privilegios");
-            String tab[] = {usuario, privilegios};
+            String codificado = "Personal";
+            if (privilegios.equals("1")) {
+                codificado = "Administrador";
+            }
+            if (privilegios.equals("2")) {
+                codificado = "Cajero";
+            }
+
+            String tab[] = {usuario, codificado};
+
             DefaultTableModel tablamodelo = (DefaultTableModel) jTable1.getModel();
 
             tablamodelo.addRow(tab);
@@ -518,8 +535,15 @@ public class Usuarios extends javax.swing.JPanel {
         if (!nombre.getText().isEmpty() && !contra.getPassword().toString().isEmpty() && !jComboBox1.getSelectedItem().toString().isEmpty()) {
 
             if ((Arrays.equals(contra.getPassword(), confcontra.getPassword()))) {
-
-                controlador.NuevoUsuario(nombre.getText(), String.valueOf(contra.getPassword()), jComboBox1.getSelectedItem().toString());
+                String codificado = "0";
+                if(jComboBox1.getSelectedItem().toString().equals("Administrador"))
+                    codificado = "1";
+                if(jComboBox1.getSelectedItem().toString().equals("Cajero"))
+                    codificado = "2";
+                if(jComboBox1.getSelectedItem().toString().equals("Personal"))
+                    codificado = "3";
+                
+                controlador.NuevoUsuario(nombre.getText(), String.valueOf(contra.getPassword()), codificado);
 
                 nombre.setText(null);
                 contra.setText(null);
@@ -544,7 +568,7 @@ public class Usuarios extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2MousePressed
 
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
-        if (Main.privilegio == 1) {
+        if ("Administrador".equals(Main.privilegio)) {
 
             try {
                 TablaUsuario();
@@ -582,7 +606,7 @@ public class Usuarios extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "ERROR, No tiene permitido eliminar.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "ERROR, Porfavor seleccione un usuario que desea eliminar.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
         }
 
