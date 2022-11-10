@@ -33,13 +33,15 @@ public class OcupacionC extends javax.swing.JPanel {
         
         while (res.next() == true) {
 
-            for (int i = 0; i < label.length; i++) {
+            for (int i = 0; i <= label.length; i++) {
 
                 if (String.valueOf(i+1).equals(res.getString("parsela"))) {
                     label[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/false1x.png"))); // NOI18N
                     label[i].setText((i+1) + "(ocupado)");
                     label[i].repaint();
+                    
                 }
+                
 
             }
 

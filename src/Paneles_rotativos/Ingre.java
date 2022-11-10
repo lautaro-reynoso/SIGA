@@ -303,6 +303,13 @@ public class Ingre extends javax.swing.JPanel {
         patente = new javax.swing.JTextField();
         marca = new javax.swing.JTextField();
         ingreso_vehiculo = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        dni_buscado = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -533,7 +540,7 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(102, 102, 102)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1187,6 +1194,93 @@ public class Ingre extends javax.swing.JPanel {
 
         vehiculos.addTab("VEHICULOS", jPanel10);
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Documento", "Nombre", "Categoria", "Importe", "Fecha de egreso", "Fecha de ingreso", "Parcela"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        dni_buscado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dni_buscadoActionPerformed(evt);
+            }
+        });
+
+        jLabel31.setText("Ingrese el documento");
+
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("BUSCAR");
+        jLabel32.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel32.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel32MousePressed(evt);
+            }
+        });
+        jLabel32.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel32KeyPressed(evt);
+            }
+        });
+
+        jLabel33.setText("ACTUALIZAR TABLA");
+        jLabel33.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel33.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel33MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(310, 310, 310)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(dni_buscado, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dni_buscado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(179, Short.MAX_VALUE))
+        );
+
+        vehiculos.addTab("EGRESOS", jPanel15);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -1705,6 +1799,75 @@ public class Ingre extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_ingreso_vehiculoMousePressed
 
+    private void dni_buscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dni_buscadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dni_buscadoActionPerformed
+
+    private void jLabel32KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel32KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel32KeyPressed
+    public void buscar_egreso() throws SQLException{
+        ResultSet res_1;
+        
+        res_1 = controlador.MostarDocumento(dni_buscado.getText());
+        if(res_1.getRow()==0){
+             Component rootPane = null;
+        
+           JOptionPane.showMessageDialog(rootPane, "No se econtro ningun acampante con ese dni.");
+        }
+        else{
+            Busqueda(res_1);    
+        }
+        
+        
+    }
+    public void Tabla() throws SQLException {
+        ResultSet res_1;
+        res_1 = controlador.MostarOcupacionActual();
+        
+        Busqueda(res_1);
+    }
+      public void Busqueda(ResultSet res) throws SQLException {
+        int f = 0;
+        while (res.next()) {
+            
+            f++;
+            String documento = res.getString("documento");
+            String nombre = res.getString("nombre");
+            String categoria = res.getString("categoria");
+            String importe = String.valueOf(res.getFloat("importe"));
+            String fecha_egreso = res.getString("fecha_egreso");
+            String fecha_ingreso = res.getString("fecha_ingreso");
+            String parcela = res.getString("parsela");
+            String tab[] = {documento, nombre, categoria, importe, fecha_egreso, fecha_ingreso, parcela};
+            DefaultTableModel tablamodelo = (DefaultTableModel) jTable1.getModel();
+            
+            tablamodelo.addRow(tab);
+            filas = f;
+            int rows = tablamodelo.getRowCount();
+            for (int i = rows - (filas + 1); i >= 0; i--) {
+                tablamodelo.removeRow(i);
+            }
+            
+        }
+    }
+    private void jLabel32MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MousePressed
+        try {
+            buscar_egreso();
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel32MousePressed
+
+    private void jLabel33MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel33MousePressed
+        
+        try {
+            Tabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel33MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Boton_ingreso;
@@ -1724,6 +1887,7 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JTextField apellido_e;
     private javax.swing.JTextField carrera_e;
     private javax.swing.JTextField cod_aportante;
+    private javax.swing.JTextField dni_buscado;
     private javax.swing.JTextField documento_a;
     private javax.swing.JTextField documento_e;
     private javax.swing.JTextField documento_p;
@@ -1759,6 +1923,9 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1774,6 +1941,7 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1782,6 +1950,8 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField marca;
     private javax.swing.JTextField nombre_a;
     private javax.swing.JTextField nombre_e;

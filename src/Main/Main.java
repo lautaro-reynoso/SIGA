@@ -30,7 +30,7 @@ public class Main {
 
     public static void main(String args[]) throws SQLException, ClassNotFoundException {
         
-
+        
         conexion.Conectar();
         controlador.setear_tarifas();
         System.out.println(calendario.get(Calendar.HOUR_OF_DAY));
@@ -65,6 +65,7 @@ public class Main {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(
                 new Runnable() {
             @Override

@@ -26,6 +26,7 @@ public class Conexion {
                 System.out.println("Conexion a base de datos: "+url+" ... Ok");
         }catch (SQLException e) {
             System.out.println("Problema al establecer la Conexión a la base de datos");
+              
         }
         this.s = conexion.createStatement();
 
