@@ -30,7 +30,7 @@ public class Main {
 
     public static void main(String args[]) throws SQLException, ClassNotFoundException {
         
-        
+        System.out.println("xd");
         conexion.Conectar();
         controlador.setear_tarifas();
         System.out.println(calendario.get(Calendar.HOUR_OF_DAY));
