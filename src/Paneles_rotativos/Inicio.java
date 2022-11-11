@@ -204,7 +204,7 @@ public class Inicio extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        cant_p.setText("Personas en el camping: consultar");
+        cant_p.setText("Personas en el camping: Actualizar Tablas");
 
         jLabel1.setText("Tabla de acampantes");
 

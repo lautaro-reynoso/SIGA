@@ -269,7 +269,7 @@
             </Container>
             <Component class="javax.swing.JLabel" name="cant_p">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Personas en el camping: consultar"/>
+                <Property name="text" type="java.lang.String" value="Personas en el camping: Actualizar Tablas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
