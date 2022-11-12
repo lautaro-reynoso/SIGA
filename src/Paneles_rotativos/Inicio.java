@@ -6,6 +6,7 @@ package Paneles_rotativos;
 
 import Main.Modelo;
 import Main.Controlador;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author mateo
  */
 public class Inicio extends javax.swing.JPanel {
-    
+
     int filas = 0, filas_dia = 0, filas_vehiculos = 0, filas_parcelas = 0;
     Controlador controlador = new Controlador();
     Modelo modelo = new Modelo();
@@ -27,30 +28,30 @@ public class Inicio extends javax.swing.JPanel {
      */
     public Inicio() {
         initComponents();
-        
+
     }
-    
+
     public void buscarDocumento() throws SQLException {
-        
+
         ResultSet res_1;
-        
+
         res_1 = controlador.MostarDocumento(busca_documento2.getText());
         Busqueda(res_1);
-        
+
     }
-    
+
     public void buscarDocumentoDia() throws SQLException {
         ResultSet res_2;
-        
+
         res_2 = controlador.MostarDocumentoDia(busca_documento1.getText());
         BusquedaDia(res_2);
-        
+
     }
-    
+
     public void Busqueda(ResultSet res) throws SQLException {
         int f = 0;
         while (res.next()) {
-            
+
             f++;
             String documento = res.getString("documento");
             String nombre = res.getString("nombre");
@@ -61,21 +62,21 @@ public class Inicio extends javax.swing.JPanel {
             String parcela = res.getString("parsela");
             String tab[] = {documento, nombre, categoria, importe, fecha_egreso, fecha_ingreso, parcela};
             DefaultTableModel tablamodelo = (DefaultTableModel) jTable1.getModel();
-            
+
             tablamodelo.addRow(tab);
             filas = f;
             int rows = tablamodelo.getRowCount();
             for (int i = rows - (filas + 1); i >= 0; i--) {
                 tablamodelo.removeRow(i);
             }
-            
+
         }
     }
-    
+
     public void BusquedaDia(ResultSet res) throws SQLException {
         int f = 0;
         while (res.next()) {
-            
+
             f++;
             String documento = res.getString("dni");
             String nombre = res.getString("nombre");
@@ -83,51 +84,51 @@ public class Inicio extends javax.swing.JPanel {
             String categoria = res.getString("categoria");
             String tab[] = {documento, nombre, hora_ingreso, categoria};
             DefaultTableModel tablamodelo = (DefaultTableModel) jTable2.getModel();
-            
+
             tablamodelo.addRow(tab);
             filas_dia = f;
             int rows = tablamodelo.getRowCount();
             for (int i = rows - (filas_dia + 1); i >= 0; i--) {
                 tablamodelo.removeRow(i);
             }
-            
+
         }
     }
-    
+
     public void BusquedaVehiculos(ResultSet res) throws SQLException {
         int f = 0;
         while (res.next()) {
-            
+
             f++;
             String marca = res.getString("marca");
             String patente = res.getString("patente");
             String tab[] = {marca, patente};
             DefaultTableModel tablamodelo = (DefaultTableModel) jTable3.getModel();
-            
+
             tablamodelo.addRow(tab);
             filas_vehiculos = f;
             int rows = tablamodelo.getRowCount();
             for (int i = rows - (filas_vehiculos + 1); i >= 0; i--) {
                 tablamodelo.removeRow(i);
             }
-            
+
         }
     }
-    
+
     public void BusquedaParcelasPorNro() throws SQLException {
-        
+
         ResultSet res_2;
-        
+
         res_2 = controlador.BuscarParsela(busca_parcela.getText());
         Busqueda(res_2);
     }
-    
+
     public void Tabla() throws SQLException {
         ResultSet res_1, res_2, res_3;
         res_1 = controlador.MostarOcupacionActual();
-        
+
         Busqueda(res_1);
-        
+
         res_2 = controlador.MostarOcupacionActualDia();
         BusquedaDia(res_2);
         ;
@@ -215,6 +216,11 @@ public class Inicio extends javax.swing.JPanel {
                 busca_parcelaActionPerformed(evt);
             }
         });
+        busca_parcela.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                busca_parcelaKeyPressed(evt);
+            }
+        });
 
         parsela_btn.setText("BUSCAR");
         parsela_btn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -239,6 +245,11 @@ public class Inicio extends javax.swing.JPanel {
                 busca_documento1ActionPerformed(evt);
             }
         });
+        busca_documento1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                busca_documento1KeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("BUSCAR");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -252,6 +263,11 @@ public class Inicio extends javax.swing.JPanel {
         busca_documento2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 busca_documento2ActionPerformed(evt);
+            }
+        });
+        busca_documento2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                busca_documento2KeyPressed(evt);
             }
         });
 
@@ -432,7 +448,7 @@ public class Inicio extends javax.swing.JPanel {
             Tabla();
             int cantidad_personas = jTable1.getRowCount() + jTable2.getRowCount();
             cant_p.setText("Cantidad de personas en el camping: " + cantidad_personas);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -441,17 +457,17 @@ public class Inicio extends javax.swing.JPanel {
     private void busca_parcelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busca_parcelaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_busca_parcelaActionPerformed
-    
+
     public void TablaVehiculos() throws SQLException {
         ResultSet res_1;
         res_1 = controlador.MostarVehiculos();
-        
+
         BusquedaVehiculos(res_1);
-        
+
     }
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        
+
         try {
             TablaVehiculos();
         } catch (SQLException ex) {
@@ -465,13 +481,13 @@ public class Inicio extends javax.swing.JPanel {
     }//GEN-LAST:event_busca_documento1ActionPerformed
 
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
-        
+
         try {
             buscarDocumentoDia();
         } catch (SQLException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
     }//GEN-LAST:event_jLabel6MousePressed
 
@@ -480,26 +496,57 @@ public class Inicio extends javax.swing.JPanel {
     }//GEN-LAST:event_busca_documento2ActionPerformed
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-        
+
         try {
             buscarDocumento();
         } catch (SQLException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void parsela_btnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_parsela_btnMousePressed
-        
+
         try {
             BusquedaParcelasPorNro();
         } catch (SQLException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
     }//GEN-LAST:event_parsela_btnMousePressed
+
+    private void busca_parcelaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busca_parcelaKeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+                BusquedaParcelasPorNro();
+            } catch (SQLException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_busca_parcelaKeyPressed
+
+    private void busca_documento2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busca_documento2KeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+                buscarDocumento();
+            } catch (SQLException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_busca_documento2KeyPressed
+
+    private void busca_documento1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busca_documento1KeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+                buscarDocumentoDia();
+            } catch (SQLException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_busca_documento1KeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

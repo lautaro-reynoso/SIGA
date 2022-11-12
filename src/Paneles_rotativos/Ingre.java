@@ -13,6 +13,7 @@ import com.formdev.flatlaf.json.ParseException;
 import com.toedter.calendar.JDateChooser;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
@@ -23,6 +24,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -46,37 +48,40 @@ public class Ingre extends javax.swing.JPanel {
         fecha_egreso_p1.setEnabled(true);
         fecha_ingreso.setEnabled(true);
         fecha_egreso.setEnabled(true);
-        
 
     }
- 
+
     Controlador controlador = new Controlador();
-    public void setearnullparticular (){
+
+    public void setearnullparticular() {
         documento_p.setText("");
         nombre_p.setText("");
-       
+
         Parsela_p.setText("Parsela");
-        
+
     }
-    public void setearnullaportante (){
+
+    public void setearnullaportante() {
         documento_a.setText("");
         nombre_a.setText("");
-        
+
         Parsela_a.setText("Parsela");
         cod_aportante.setText("");
         apellido_a.setText("");
-        
+
     }
-    public void setearnullalumno (){
+
+    public void setearnullalumno() {
         documento_e.setText("");
         nombre_e.setText("");
-        
+
         Parcela.setText("Parsela");
         apellido_e.setText("");
         carrera_e.setText("");
         facultad_e.setText("");
-        
+
     }
+
     public void BuscarEstudiante() throws SQLException {
         ResultSet res;
 
@@ -144,7 +149,7 @@ public class Ingre extends javax.swing.JPanel {
                 }
 
             } else {
-                setearnullaportante ();
+                setearnullaportante();
                 javax.swing.JOptionPane.showMessageDialog(this, "Debe de ingresar una fecha de ingreso y egreso.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }
 
@@ -166,7 +171,8 @@ public class Ingre extends javax.swing.JPanel {
             apellido_a.setText(res.getString("apellido"));
 
         } else {
-            System.out.print("Error");
+            javax.swing.JOptionPane.showMessageDialog(this, "No se encontro el documento solicitado.\n Intente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
         }
     }
 
@@ -199,7 +205,7 @@ public class Ingre extends javax.swing.JPanel {
             if (c != 1) {
                 javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             } else {
-                setearnullalumno ();
+                setearnullalumno();
                 javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }
 
@@ -305,11 +311,12 @@ public class Ingre extends javax.swing.JPanel {
         ingreso_vehiculo = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla_egreso = new javax.swing.JTable();
         dni_buscado = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -346,6 +353,11 @@ public class Ingre extends javax.swing.JPanel {
         nombre_p.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nombre_p.setText("Nombre");
         nombre_e.setEnabled(false);
+        nombre_p.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nombre_pKeyPressed(evt);
+            }
+        });
 
         jLabel19.setText("DOCUMENTO");
 
@@ -483,19 +495,6 @@ public class Ingre extends javax.swing.JPanel {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(documento_p)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
-            .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addContainerGap()
@@ -508,10 +507,21 @@ public class Ingre extends javax.swing.JPanel {
                         .addGap(21, 21, 21)
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pasar_dia2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(documento_p)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19)
+                            .addComponent(pasar_dia2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,9 +536,9 @@ public class Ingre extends javax.swing.JPanel {
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nombre_p, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(pasar_dia2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(53, 53, 53)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
@@ -547,7 +557,7 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         vehiculos.addTab("PARTICULAR", jPanel3);
@@ -800,7 +810,7 @@ public class Ingre extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(documento_a, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(pasar_dia1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1148,6 +1158,11 @@ public class Ingre extends javax.swing.JPanel {
                 patenteActionPerformed(evt);
             }
         });
+        patente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                patenteKeyPressed(evt);
+            }
+        });
 
         ingreso_vehiculo.setText("Ingresar vehiculo");
         ingreso_vehiculo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1189,12 +1204,12 @@ public class Ingre extends javax.swing.JPanel {
                 .addComponent(patente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ingreso_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(406, Short.MAX_VALUE))
         );
 
         vehiculos.addTab("VEHICULOS", jPanel10);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_egreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1210,11 +1225,21 @@ public class Ingre extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tabla_egreso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tabla_egresoKeyPressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabla_egreso);
 
         dni_buscado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dni_buscadoActionPerformed(evt);
+            }
+        });
+        dni_buscado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dni_buscadoKeyPressed(evt);
             }
         });
 
@@ -1234,11 +1259,21 @@ public class Ingre extends javax.swing.JPanel {
             }
         });
 
-        jLabel33.setText("ACTUALIZAR TABLA");
+        jLabel33.setText("ACTUALIZAR ");
         jLabel33.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel33.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel33.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel33MousePressed(evt);
+            }
+        });
+
+        jLabel34.setText("ELIMINAR");
+        jLabel34.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel34.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel34.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel34MousePressed(evt);
             }
         });
 
@@ -1257,11 +1292,14 @@ public class Ingre extends javax.swing.JPanel {
                             .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(dni_buscado, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 369, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel33)
+                .addGap(9, 9, 9))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1274,9 +1312,11 @@ public class Ingre extends javax.swing.JPanel {
                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         vehiculos.addTab("EGRESOS", jPanel15);
@@ -1429,17 +1469,17 @@ public class Ingre extends javax.swing.JPanel {
     }
     private void Boton_ingresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_ingresoMousePressed
         try {
-            
+
             int c = controlador.Controldnirepetidoingreso(documento_e.getText());
             int b = controlador.Controldnirepetidoingresodiario(documento_e.getText());
-            
-            if(documento_e.getText().equals("")||nombre_e.getText().equals("")){
+
+            if (documento_e.getText().equals("") || nombre_e.getText().equals("")) {
                 throw new Exception();
             }
             if (c == 0 && b == 0) {
                 if (pasar_dia.isSelected()) {
-                    
-                    ingre_dia("alumno",documento_e.getText(),nombre_e.getText());
+
+                    ingre_dia("alumno", documento_e.getText(), nombre_e.getText());
                 } else {
                     ingre();
                 }
@@ -1451,9 +1491,8 @@ public class Ingre extends javax.swing.JPanel {
             Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
-                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
-           
 
 
     }//GEN-LAST:event_Boton_ingresoMousePressed
@@ -1544,7 +1583,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void ingre_dia(String categoria, String dni, String nombre) {
-        
+
         int c;
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
@@ -1557,10 +1596,10 @@ public class Ingre extends javax.swing.JPanel {
         if (c != 1) {
             javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         } else {
-            setearnullalumno ();
+            setearnullalumno();
             setearnullparticular();
             setearnullaportante();
-            javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso", "EXITOSO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -1611,32 +1650,31 @@ public class Ingre extends javax.swing.JPanel {
         try {
             int c = controlador.Controldnirepetidoingreso(documento_p.getText());
             int b = controlador.Controldnirepetidoingresodiario(documento_p.getText());
-            
-            if(documento_p.getText().equals("")||nombre_p.getText().equals("")){
+
+            if (documento_p.getText().equals("") || nombre_p.getText().equals("")) {
                 throw new Exception();
             }
-            
+
             if (c == 0 && b == 0) {
                 if (pasar_dia2.isSelected()) {
-                    
-                    ingre_dia("particular",documento_p.getText(),nombre_p.getText());
+
+                    ingre_dia("particular", documento_p.getText(), nombre_p.getText());
                 } else {
                     ingre_p();
                 }
-            }
-            else {
+            } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
-                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
 
     }//GEN-LAST:event_Boton_ingreso_pMousePressed
-    
+
     private void jPanel12ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel12ComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel12ComponentHidden
@@ -1659,18 +1697,18 @@ public class Ingre extends javax.swing.JPanel {
         try {
             int c = controlador.Controldnirepetidoingreso(documento_a.getText());
             int b = controlador.Controldnirepetidoingresodiario(documento_a.getText());
-            
-            if(documento_a.getText().equals("")||nombre_a.getText().equals("")||apellido_a.getText().isEmpty()||cod_aportante.getText().isEmpty()){
+
+            if (documento_a.getText().equals("") || nombre_a.getText().equals("") || apellido_a.getText().isEmpty() || cod_aportante.getText().isEmpty()) {
                 throw new Exception();
             }
 
             if (c == 0 && b == 0) {
                 if (pasar_dia1.isSelected()) {
-                    ingre_dia("aportante",documento_a.getText(),nombre_a.getText());
+                    ingre_dia("aportante", documento_a.getText(), nombre_a.getText());
                 } else {
                     ingre_a();
                 }
-                
+
             } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -1679,7 +1717,7 @@ public class Ingre extends javax.swing.JPanel {
             Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
-                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
 
     }//GEN-LAST:event_Boton_ingreso_aMousePressed
@@ -1697,89 +1735,102 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_Parsela_pActionPerformed
 
     private void vehiculosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehiculosMousePressed
-      
+
     }//GEN-LAST:event_vehiculosMousePressed
 
     private void pasar_dia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_dia2ActionPerformed
-        if(pasar_dia2.isSelected()){
+        if (pasar_dia2.isSelected()) {
             fecha_ingreso_p.setEnabled(false);
             fecha_egreso_p.setEnabled(false);
             Parsela_p.setEnabled(false);
-        }
-         else{
+        } else {
             Parsela_p.setEnabled(true);
             fecha_ingreso_p.setEnabled(true);
             fecha_egreso_p.setEnabled(true);
-         }
+        }
     }//GEN-LAST:event_pasar_dia2ActionPerformed
 
     private void pasar_dia2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pasar_dia2MousePressed
-       
+
     }//GEN-LAST:event_pasar_dia2MousePressed
 
     private void pasar_dia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_dia1ActionPerformed
-        if(pasar_dia1.isSelected()){
+        if (pasar_dia1.isSelected()) {
             fecha_ingreso_p1.setEnabled(false);
             fecha_egreso_p1.setEnabled(false);
             Parsela_a.setEnabled(false);
-        }
-         else{
+        } else {
             Parsela_a.setEnabled(true);
             fecha_ingreso_p1.setEnabled(true);
             fecha_egreso_p1.setEnabled(true);
-         }
+        }
     }//GEN-LAST:event_pasar_dia1ActionPerformed
 
     private void pasar_diaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_diaActionPerformed
-       if(pasar_dia.isSelected()){
+        if (pasar_dia.isSelected()) {
             fecha_ingreso.setEnabled(false);
             fecha_egreso.setEnabled(false);
             Parcela.setEnabled(false);
-        }
-         else{
+        } else {
             fecha_ingreso.setEnabled(true);
             fecha_egreso.setEnabled(true);
             Parcela.setEnabled(true);
-         }
+        }
     }//GEN-LAST:event_pasar_diaActionPerformed
 
     private void documento_pKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documento_pKeyPressed
-       char validador = evt.getKeyChar();
-        
-        if(Character.isLetter(validador)){
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
             getToolkit().beep();
             evt.consume();
-           Component rootPane = null;
-        
-           JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
-            
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
         }
     }//GEN-LAST:event_documento_pKeyPressed
 
     private void Documento_aKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Documento_aKeyPressed
-         char validador = evt.getKeyChar();
-        
-        if(Character.isLetter(validador)){
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
             getToolkit().beep();
             evt.consume();
-           Component rootPane = null;
-        
-           JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
-            
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
         }
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+                BuscarAportante();
+            } catch (SQLException ex) {
+                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }//GEN-LAST:event_Documento_aKeyPressed
 
     private void DocumentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DocumentoKeyPressed
-         char validador = evt.getKeyChar();
-        
-        if(Character.isLetter(validador)){
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
             getToolkit().beep();
             evt.consume();
-           Component rootPane = null;
-        
-           JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
-            
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
         }
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+                BuscarEstudiante();
+            } catch (SQLException ex) {
+                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }//GEN-LAST:event_DocumentoKeyPressed
 
     private void patenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patenteActionPerformed
@@ -1791,46 +1842,33 @@ public class Ingre extends javax.swing.JPanel {
             modelo.insertarvehiculo(patente.getText(), marca.getText(), controlador.calcularimportevehiculo());
             marca.setText(null);
             patente.setText(null);
-            
+
         } catch (SQLException ex) {
             Component rootPane = null;
-        
-           JOptionPane.showMessageDialog(rootPane, "Problemas al ingresar un vehiculo, vuelve a intentarlo.  ");
+
+            JOptionPane.showMessageDialog(rootPane, "Problemas al ingresar un vehiculo, vuelve a intentarlo.  ");
         }
     }//GEN-LAST:event_ingreso_vehiculoMousePressed
 
     private void dni_buscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dni_buscadoActionPerformed
-        // TODO add your handling code here:
+         if(dni_buscado.getText()==null){
+            try {
+            Tabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     }//GEN-LAST:event_dni_buscadoActionPerformed
 
     private void jLabel32KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel32KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel32KeyPressed
-    public void buscar_egreso() throws SQLException{
-        ResultSet res_1;
-        
-        res_1 = controlador.MostarDocumento(dni_buscado.getText());
-        if(res_1.getRow()==0){
-             Component rootPane = null;
-        
-           JOptionPane.showMessageDialog(rootPane, "No se econtro ningun acampante con ese dni.");
-        }
-        else{
-            Busqueda(res_1);    
-        }
-        
-        
-    }
-    public void Tabla() throws SQLException {
-        ResultSet res_1;
-        res_1 = controlador.MostarOcupacionActual();
-        
-        Busqueda(res_1);
-    }
-      public void Busqueda(ResultSet res) throws SQLException {
+    public void buscar_egreso() throws SQLException {
+        ResultSet res;
         int f = 0;
-        while (res.next()) {
-            
+        res = controlador.MostarDocumento(dni_buscado.getText());
+
+        if (res.next() == true) {
             f++;
             String documento = res.getString("documento");
             String nombre = res.getString("nombre");
@@ -1840,15 +1878,49 @@ public class Ingre extends javax.swing.JPanel {
             String fecha_ingreso = res.getString("fecha_ingreso");
             String parcela = res.getString("parsela");
             String tab[] = {documento, nombre, categoria, importe, fecha_egreso, fecha_ingreso, parcela};
-            DefaultTableModel tablamodelo = (DefaultTableModel) jTable1.getModel();
-            
+            DefaultTableModel tablamodelo = (DefaultTableModel) tabla_egreso.getModel();
+
             tablamodelo.addRow(tab);
             filas = f;
             int rows = tablamodelo.getRowCount();
             for (int i = rows - (filas + 1); i >= 0; i--) {
                 tablamodelo.removeRow(i);
             }
-            
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se encontro el documento solicitado.\n Intente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+
+    public void Tabla() throws SQLException {
+        ResultSet res_1;
+        res_1 = controlador.MostarOcupacionActual();
+
+        Busqueda(res_1);
+    }
+
+    public void Busqueda(ResultSet res) throws SQLException {
+        int f = 0;
+        while (res.next()) {
+
+            f++;
+            String documento = res.getString("documento");
+            String nombre = res.getString("nombre");
+            String categoria = res.getString("categoria");
+            String importe = String.valueOf(res.getFloat("importe"));
+            String fecha_egreso = res.getString("fecha_egreso");
+            String fecha_ingreso = res.getString("fecha_ingreso");
+            String parcela = res.getString("parsela");
+            String tab[] = {documento, nombre, categoria, importe, fecha_egreso, fecha_ingreso, parcela};
+            DefaultTableModel tablamodelo = (DefaultTableModel) tabla_egreso.getModel();
+
+            tablamodelo.addRow(tab);
+            filas = f;
+            int rows = tablamodelo.getRowCount();
+            for (int i = rows - (filas + 1); i >= 0; i--) {
+                tablamodelo.removeRow(i);
+            }
+
         }
     }
     private void jLabel32MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MousePressed
@@ -1860,13 +1932,92 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel32MousePressed
 
     private void jLabel33MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel33MousePressed
-        
+
         try {
             Tabla();
         } catch (SQLException ex) {
             Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel33MousePressed
+
+    private void dni_buscadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dni_buscadoKeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+                buscar_egreso();
+            } catch (SQLException ex) {
+                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (evt.getKeyChar() == KeyEvent.VK_DELETE) {
+            dni_buscado.setText(null);
+            try {
+            Tabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_dni_buscadoKeyPressed
+
+    private void nombre_pKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_pKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombre_pKeyPressed
+
+    private void patenteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_patenteKeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+                modelo.insertarvehiculo(patente.getText(), marca.getText(), controlador.calcularimportevehiculo());
+                marca.setText(null);
+                patente.setText(null);
+
+            } catch (SQLException ex) {
+                Component rootPane = null;
+                JOptionPane.showMessageDialog(rootPane, "Problemas al ingresar un vehiculo, vuelve a intentarlo.  ");
+            }
+        }
+    }//GEN-LAST:event_patenteKeyPressed
+    public void eliminar_acampante() throws SQLException {
+        int fila = tabla_egreso.getSelectedRow();
+        String valor = tabla_egreso.getValueAt(fila, 0).toString();
+        JFrame jFrame = new JFrame();
+        int result = JOptionPane.showConfirmDialog(jFrame, "Este es el acampante que desea eliminar");
+        if (result == 0) {
+            int control = modelo.EliminarAcampante(valor);
+            if (control == 1) {
+                Component rootPane = null;
+
+                JOptionPane.showMessageDialog(rootPane, "Se elimino correctamente.");
+                Tabla();
+
+            } else {
+                Component rootPane = null;
+                JOptionPane.showMessageDialog(rootPane, "Ocurrio un problema, vuelva a intentar");
+            }
+
+        }
+
+    }
+    private void jLabel34MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel34MousePressed
+
+        try {
+            eliminar_acampante();
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(java.lang.ArrayIndexOutOfBoundsException ex){
+                javax.swing.JOptionPane.showMessageDialog(this, "Error, ingrese un acampante de la lista.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+    }//GEN-LAST:event_jLabel34MousePressed
+
+    private void tabla_egresoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabla_egresoKeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+                eliminar_acampante();
+            } catch (SQLException ex) {
+                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_tabla_egresoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1926,6 +2077,7 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1951,7 +2103,6 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField marca;
     private javax.swing.JTextField nombre_a;
     private javax.swing.JTextField nombre_e;
@@ -1960,6 +2111,7 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JCheckBox pasar_dia1;
     private javax.swing.JCheckBox pasar_dia2;
     private javax.swing.JTextField patente;
+    private javax.swing.JTable tabla_egreso;
     private javax.swing.JTextField tarifa;
     private javax.swing.JTextField tarifa1;
     private javax.swing.JTextField tarifa2;

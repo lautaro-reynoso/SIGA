@@ -115,7 +115,7 @@ public class Principal extends javax.swing.JFrame {
                 SalirMousePressed(evt);
             }
         });
-        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 179, 60));
+        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 179, 60));
 
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         SalidasTemporales.setForeground(new java.awt.Color(0, 46, 15));
@@ -134,7 +134,7 @@ public class Principal extends javax.swing.JFrame {
         Ingreso.setForeground(new java.awt.Color(0, 46, 15));
         Ingreso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Ingreso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_login_black_24dp.png"))); // NOI18N
-        Ingreso.setText("INGRESO");
+        Ingreso.setText("INGRESO/EGRESO");
         Ingreso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Ingreso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -219,8 +219,8 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

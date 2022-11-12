@@ -54,6 +54,10 @@ public class Modelo {
         String sql = "DELETE FROM salida WHERE doc='" + documento + "'";
         return Main.conexion.EjecutarOperacion(sql);
     }
+    public int EliminarAcampante(String documento) {
+        String sql = "DELETE FROM ingreso WHERE documento='" + documento + "'";
+        return Main.conexion.EjecutarOperacion(sql);
+    }
 
     public ResultSet BuscarEstudiante(String documento) {
         String sql;
@@ -278,5 +282,6 @@ public class Modelo {
     
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
+        
      
 }

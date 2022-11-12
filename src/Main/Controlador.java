@@ -1,7 +1,9 @@
 package Main;
 
+import static Paneles_rotativos.Ingre.calendario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import java.util.Scanner;
 
@@ -155,8 +157,12 @@ public class Controlador {
     public int Salidas_Temporales(String nombre, String categoria, String documento) {
 
         if (Main.conexion != null) {
+            String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+        String segundos = String.valueOf(calendario.get(Calendar.SECOND));
 
-            int c = modelo.InsertarSalida(documento, nombre, Main.HoraActual, categoria);
+        String hora_actual = hora + ":" + minutos;
+            int c = modelo.InsertarSalida(documento, nombre,hora_actual, categoria);
 
             if (c == 1) {
                 return 1;

@@ -348,6 +348,7 @@ public class Login extends javax.swing.JFrame {
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             Controlar_Logear();
         }
+        
     }//GEN-LAST:event_passTxtKeyPressed
 
     /**
