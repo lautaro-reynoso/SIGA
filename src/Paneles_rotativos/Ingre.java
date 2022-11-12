@@ -1409,18 +1409,18 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void ingre() {
-        int parsela = 0;
+        int parcela = 0;
         try {
 
             //controlar que en parsela no haya un string
             try {
-                parsela = Integer.parseInt(Parcela.getText());
+                parcela = Integer.parseInt(Parcela.getText());
             } catch (java.lang.NumberFormatException e) {
                 System.out.println("es un string y no se puede pasar");
             }
 
             //control que parsela este entre 128 y 1
-            if (parsela <= 128 && parsela >= 1) {
+            if (parcela <= 128 && parcela >= 1) {
 
                 //  Ocupacion ocupacion = new Ocupacion();
                 // RegistrarParsela();
@@ -1557,7 +1557,7 @@ public class Ingre extends javax.swing.JPanel {
                 }
             }
             String mes = "";
-            System.out.println(x);
+       
             if (x < 10) {
                 mes = String.format("0%d", x);
             } else {
@@ -1851,7 +1851,7 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_ingreso_vehiculoMousePressed
 
     private void dni_buscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dni_buscadoActionPerformed
-         if(dni_buscado.getText()==null){
+         if(dni_buscado.getText().isEmpty()){
             try {
             Tabla();
         } catch (SQLException ex) {
@@ -1948,7 +1948,7 @@ public class Ingre extends javax.swing.JPanel {
                 Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (evt.getKeyChar() == KeyEvent.VK_DELETE) {
+        if (evt.getKeyChar() == KeyEvent.VK_SUBTRACT) {
             dni_buscado.setText(null);
             try {
             Tabla();

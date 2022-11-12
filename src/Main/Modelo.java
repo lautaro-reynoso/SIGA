@@ -20,7 +20,8 @@ public class Modelo {
                 + "VALUES('" + documento + "','" + nombre + "','" + categoria + "','" + dia_ingreso + "','" + dia_egreso + "','" + parsela + "','" + importe + "')";
         return Main.conexion.EjecutarOperacion(sql);
     }
-     public int InsertarIngresoDiario(String documento, String nombre, String hora_ingreso, String categoria) {
+
+    public int InsertarIngresoDiario(String documento, String nombre, String hora_ingreso, String categoria) {
         String sql = "INSERT INTO ingreso_diario (nombre, dni, hora_ingreso ,categoria)"
                 + "VALUES('" + nombre + "','" + documento + "','" + hora_ingreso + "','" + categoria + "')";
         return Main.conexion.EjecutarOperacion(sql);
@@ -54,6 +55,7 @@ public class Modelo {
         String sql = "DELETE FROM salida WHERE doc='" + documento + "'";
         return Main.conexion.EjecutarOperacion(sql);
     }
+
     public int EliminarAcampante(String documento) {
         String sql = "DELETE FROM ingreso WHERE documento='" + documento + "'";
         return Main.conexion.EjecutarOperacion(sql);
@@ -76,11 +78,13 @@ public class Modelo {
         sql = "SELECT * FROM ingreso WHERE documento = '" + documento + "'";
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
+
     public ResultSet BuscarDocumentoDiario(String documento) {
         String sql;
         sql = "SELECT * FROM ingreso_diario WHERE dni = '" + documento + "'";
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
+
     public ResultSet BuscarParsela(String parsela) {
 
         String sql;
@@ -130,14 +134,14 @@ public class Modelo {
 
         }
 
+        //SELECT * FROM TABLENAME WHERE DateTime >= '2011-04-12T00:00:00.000'
         String sql2 = "DELETE FROM ingreso where fecha_egreso <= '" + Main.DiaActual + "'";
-        String sql3 = "DELETE FROM parselas where fecha_egreso <= '" + Main.DiaActual + "'";
+
         int v = Main.conexion.EjecutarOperacion(sql2);
-        int x = Main.conexion.EjecutarOperacion(sql3);
 
     }
 
- public int NuevoUsuario(String nombre, String contrasenia, String privilegios) {
+    public int NuevoUsuario(String nombre, String contrasenia, String privilegios) {
 
         String sql;
         sql = " INSERT INTO usuarios (usuario,password, privilegios)"
@@ -204,84 +208,110 @@ public class Modelo {
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
 
-    
-    
-    
     //float particular_d, float alumno_d, float aportante_d, float particular, float alumno,
-         public int InsertarTarifaAportante( float aportante) {
-        String sql = "UPDATE tarifas SET tarifa_aportante = ' "+aportante+" ' WHERE id = 8";
+    public int InsertarTarifaAportante(float aportante) {
+        String sql = "UPDATE tarifas SET tarifa_aportante = ' " + aportante + " ' WHERE id = 8";
         return Main.conexion.EjecutarOperacion(sql);
     }
-         public int InsertarTarifaParticular( float particular) {
-        String sql = "UPDATE tarifas SET tarifa_particular = ' "+particular+" ' WHERE id = 8";
+
+    public int InsertarTarifaParticular(float particular) {
+        String sql = "UPDATE tarifas SET tarifa_particular = ' " + particular + " ' WHERE id = 8";
         return Main.conexion.EjecutarOperacion(sql);
     }
-         public int InsertarTarifaAlumno( float alumno) {
-        String sql = "UPDATE tarifas SET tarifa_alumno = ' "+alumno+" ' WHERE id = 8";
+
+    public int InsertarTarifaAlumno(float alumno) {
+        String sql = "UPDATE tarifas SET tarifa_alumno = ' " + alumno + " ' WHERE id = 8";
         return Main.conexion.EjecutarOperacion(sql);
     }
-         public int InsertarTarifaAlumno_dia( float alumno) {
-        String sql = "UPDATE tarifas SET alumno_d = ' "+alumno+" ' WHERE id = 8";
-        return Main.conexion.EjecutarOperacion(sql);
-    }      
-         public int InsertarTarifaAportante_dia( float aportante) {
-        String sql = "UPDATE tarifas SET aportante_d = ' "+aportante+" ' WHERE id = 8";
+
+    public int InsertarTarifaAlumno_dia(float alumno) {
+        String sql = "UPDATE tarifas SET alumno_d = ' " + alumno + " ' WHERE id = 8";
         return Main.conexion.EjecutarOperacion(sql);
     }
-         public int InsertarTarifaParticular_dia( float particular) {
-        String sql = "UPDATE tarifas SET particular_d = ' "+particular+" ' WHERE id = 8";
+
+    public int InsertarTarifaAportante_dia(float aportante) {
+        String sql = "UPDATE tarifas SET aportante_d = ' " + aportante + " ' WHERE id = 8";
         return Main.conexion.EjecutarOperacion(sql);
     }
-         
-    public int insertarvehiculo (String patente, String marca, String importe){
+
+    public int InsertarTarifaParticular_dia(float particular) {
+        String sql = "UPDATE tarifas SET particular_d = ' " + particular + " ' WHERE id = 8";
+        return Main.conexion.EjecutarOperacion(sql);
+    }
+    
+    
+    
+    
+    
+    
+
+    public int insertarvehiculo(String patente, String marca, String importe) {
         String sql = "INSERT INTO vehiculos (marca,patente,importe)"
                 + "VALUES ('" + marca + "','" + patente + "','" + importe + "')";
-        
-       return Main.conexion.EjecutarOperacion(sql);
-    }  
-         
-     public ResultSet tarifas (){
-         String sql = "SELECT * FROM tarifas";
-         
-         return Main.conexion.EjecutarConsultaSQL(sql);
-         
-     }
-     
-     
-     
-      public ResultSet MostrarVehiculos (){
-         String sql = "SELECT * FROM vehiculos";
-         
-         return Main.conexion.EjecutarConsultaSQL(sql);
-         
-     }
-   
-     
-      public ResultSet MostarOcupacionActualDia() {
 
-        String sql;
-            sql = "SELECT * FROM ingreso_diario";
+        return Main.conexion.EjecutarOperacion(sql);
+    }
+
+    public ResultSet tarifas() {
+        String sql = "SELECT * FROM tarifas";
 
         return Main.conexion.EjecutarConsultaSQL(sql);
 
     }
-      
-      public ResultSet MostrarUsuarios() {
 
-        String sql;
-            sql = "SELECT * FROM usuarios";
+    public ResultSet MostrarVehiculos() {
+        String sql = "SELECT * FROM vehiculos";
 
         return Main.conexion.EjecutarConsultaSQL(sql);
 
     }
-      
-        public ResultSet BuscarDocumentoDia(String documento) {
+
+    public ResultSet MostarOcupacionActualDia() {
+
+        String sql;
+        sql = "SELECT * FROM ingreso_diario";
+
+        return Main.conexion.EjecutarConsultaSQL(sql);
+
+    }
+
+    public ResultSet MostrarUsuarios() {
+
+        String sql;
+        sql = "SELECT * FROM usuarios";
+
+        return Main.conexion.EjecutarConsultaSQL(sql);
+
+    }
+
+    public ResultSet BuscarDocumentoDia(String documento) {
         String sql;
         sql = "SELECT * FROM ingreso_diario WHERE dni = '" + documento + "'";
-        
-    
+
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
+    
+    
+    
+    
+    
+     public int ModificarParcela(int parcela, int parcela_actual) {
+        String sql = "UPDATE ingreso SET parsela = '" + Integer.toString(parcela_actual) + "' WHERE parsela = "+Integer.toString(parcela);
+        //     String sql = "UPDATE tarifas SET tarifa_particular = ' " + particular + " ' WHERE id = 8";
         
+            System.out.println(parcela + "::::" + parcela_actual);
+        
+        return Main.conexion.EjecutarOperacion(sql);
+    }
+
+     
+        public ResultSet MostrarEgreso() {
+        String sql;
+        sql = "SELECT * FROM egreso WHERE fecha_egreso = '" + Main.DiaActual + "'";
+
+        return Main.conexion.EjecutarConsultaSQL(sql);
+    }
+     
+     
      
 }

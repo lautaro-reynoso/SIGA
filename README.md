@@ -10,7 +10,7 @@ Login with Java Swing and material design style (only design).
 
 <p align="center">
   <kbd>
-    <img src="https://i.ibb.co/DgwwkBw/loginnew.png"></img>
+    <img src="https://i.kym-cdn.com/photos/images/newsfeed/002/383/318/a24.gif"></img>
   </kbd>
 </p>
 

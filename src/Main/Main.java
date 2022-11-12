@@ -33,9 +33,10 @@ public class Main {
         
         conexion.Conectar();
         controlador.setear_tarifas();
-        System.out.println(calendario.get(Calendar.HOUR_OF_DAY));
+        //System.out.println(calendario.get(Calendar.HOUR_OF_DAY));
         String hora = null;
     
+        System.out.println(DiaActual);
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

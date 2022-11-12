@@ -158,11 +158,11 @@ public class Controlador {
 
         if (Main.conexion != null) {
             String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
-        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
-        String segundos = String.valueOf(calendario.get(Calendar.SECOND));
+            String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+            String segundos = String.valueOf(calendario.get(Calendar.SECOND));
 
-        String hora_actual = hora + ":" + minutos;
-            int c = modelo.InsertarSalida(documento, nombre,hora_actual, categoria);
+            String hora_actual = hora + ":" + minutos;
+            int c = modelo.InsertarSalida(documento, nombre, hora_actual, categoria);
 
             if (c == 1) {
                 return 1;
@@ -349,14 +349,16 @@ public class Controlador {
             if (res.next() == true) {
                 privilegio = res.getInt("privilegios");
 
-                
-                if(privilegio == 1)
+                if (privilegio == 1) {
                     Main.privilegio = "Administrador";
-                if(privilegio == 2)
-                     Main.privilegio = "Cajero";
-                if(privilegio == 3)
-                     Main.privilegio = "Personal";
-               
+                }
+                if (privilegio == 2) {
+                    Main.privilegio = "Cajero";
+                }
+                if (privilegio == 3) {
+                    Main.privilegio = "Personal";
+                }
+
             }
 
         }
@@ -400,17 +402,18 @@ public class Controlador {
 
         return 0;
     }
-    public String calcularimportevehiculo() throws SQLException{
+
+    public String calcularimportevehiculo() throws SQLException {
         ResultSet res;
         res = modelo.tarifas();
         String importe;
-        if(res.next()){
+        if (res.next()) {
             importe = res.getString("tarifa_vehiculo");
             return importe;
-        }
-        else
+        } else {
             return null;
-        
+        }
+
     }
 
     public void setear_tarifas() throws SQLException {
@@ -440,7 +443,8 @@ public class Controlador {
         }
 
     }
-      public int Controldnirepetidoingresodiario(String dni) throws SQLException {
+
+    public int Controldnirepetidoingresodiario(String dni) throws SQLException {
 
         ResultSet res;
 
@@ -549,9 +553,8 @@ public class Controlador {
         }
         return 0;
     }
-    
-    
-     public ResultSet MostarOcupacionActualDia() throws SQLException {
+
+    public ResultSet MostarOcupacionActualDia() throws SQLException {
 
         if (Main.conexion != null) {
 
@@ -563,14 +566,11 @@ public class Controlador {
         }
         return null;
     }
-  
-    
-    
-    
-       public ResultSet MostarDocumentoDia(String documento) throws SQLException {
+
+    public ResultSet MostarDocumentoDia(String documento) throws SQLException {
 
         if (Main.conexion != null) {
-         
+
             ResultSet res;
 
             res = modelo.BuscarDocumentoDia(documento);
@@ -579,11 +579,11 @@ public class Controlador {
         }
         return null;
     }
-       
-        public ResultSet MostrarUsuarios() throws SQLException {
+
+    public ResultSet MostrarUsuarios() throws SQLException {
 
         if (Main.conexion != null) {
-         
+
             ResultSet res;
 
             res = modelo.MostrarUsuarios();
@@ -592,11 +592,11 @@ public class Controlador {
         }
         return null;
     }
-       
-        public ResultSet MostarVehiculos() throws SQLException {
+
+    public ResultSet MostarVehiculos() throws SQLException {
 
         if (Main.conexion != null) {
-         
+
             ResultSet res;
 
             res = modelo.MostrarVehiculos();
@@ -605,7 +605,35 @@ public class Controlador {
         }
         return null;
     }
+
     
+     public ResultSet MostarEgreso() throws SQLException {
+
+        if (Main.conexion != null) {
+
+            ResultSet res;
+
+            res = modelo.MostrarEgreso();
+            return res;
+
+        }
+        return null;
+    }
     
+    public int ModificarParcela(int parcela, int parcela_actual) {
+
+        if (Main.conexion != null) {
+
+            //devuelve 1 si se completo el registro
+            int c = modelo.ModificarParcela(parcela, parcela_actual);
+
+            if (c == 1) {
+                return c;
+            } else {
+                return c;
+            }
+        }
+        return 0;
+    }
 
 }
