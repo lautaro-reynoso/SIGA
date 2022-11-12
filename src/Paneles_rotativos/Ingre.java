@@ -71,7 +71,7 @@ public class Ingre extends javax.swing.JPanel {
         documento_e.setText("");
         nombre_e.setText("");
         
-        Parsela.setText("Parsela");
+        Parcela.setText("Parsela");
         apellido_e.setText("");
         carrera_e.setText("");
         facultad_e.setText("");
@@ -194,7 +194,7 @@ public class Ingre extends javax.swing.JPanel {
 
         if (fecha_egreso.getDate() != null && fecha_ingreso.getDate() != null) {
 
-            c = controlador.IngresoParticular(documento_e.getText(), nombre_e.getText(), "1", calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), Parsela.getText(), importe);
+            c = controlador.IngresoParticular(documento_e.getText(), nombre_e.getText(), "1", calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), Parcela.getText(), importe);
 
             if (c != 1) {
                 javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -290,7 +290,7 @@ public class Ingre extends javax.swing.JPanel {
         tarifa = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         Boton_ingreso = new javax.swing.JLabel();
-        Parsela = new javax.swing.JTextField();
+        Parcela = new javax.swing.JTextField();
         pasar_dia = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -585,7 +585,7 @@ public class Ingre extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Documento_a)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -899,10 +899,10 @@ public class Ingre extends javax.swing.JPanel {
             }
         });
 
-        Parsela.setText("Parsela");
-        Parsela.addActionListener(new java.awt.event.ActionListener() {
+        Parcela.setText("Parcela");
+        Parcela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ParselaActionPerformed(evt);
+                ParcelaActionPerformed(evt);
             }
         });
 
@@ -913,7 +913,7 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Parsela)
+                    .addComponent(Parcela)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Boton_ingreso))
@@ -930,7 +930,7 @@ public class Ingre extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Parsela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Parcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addGap(2, 2, 2)
@@ -1342,8 +1342,8 @@ public class Ingre extends javax.swing.JPanel {
                     System.out.println("es un string y no se puede pasar");
                 }
 
-                //control que parsela este entre 50 y 1
-                if (parsela <= 50 && parsela >= 1) {
+                //control que parsela este entre 128 y 1
+                if (parsela <= 128 && parsela >= 1) {
 
                     //  Ocupacion ocupacion = new Ocupacion();
                     // RegistrarParsela();
@@ -1374,13 +1374,13 @@ public class Ingre extends javax.swing.JPanel {
 
             //controlar que en parsela no haya un string
             try {
-                parsela = Integer.parseInt(Parsela.getText());
+                parsela = Integer.parseInt(Parcela.getText());
             } catch (java.lang.NumberFormatException e) {
                 System.out.println("es un string y no se puede pasar");
             }
 
-            //control que parsela este entre 50 y 1
-            if (parsela <= 50 && parsela >= 1) {
+            //control que parsela este entre 128 y 1
+            if (parsela <= 128 && parsela >= 1) {
 
                 //  Ocupacion ocupacion = new Ocupacion();
                 // RegistrarParsela();
@@ -1409,8 +1409,8 @@ public class Ingre extends javax.swing.JPanel {
                 System.out.println("es un string y no se puede pasar");
             }
 
-            //control que parsela este entre 50 y 1
-            if (parsela <= 50 && parsela >= 1) {
+            //control que parsela este entre 128 y 1
+            if (parsela <= 128 && parsela >= 1) {
 
                 //  Ocupacion ocupacion = new Ocupacion();
                 // RegistrarParsela();
@@ -1584,9 +1584,9 @@ public class Ingre extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel8ComponentHidden
 
-    private void ParselaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ParselaActionPerformed
+    private void ParcelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ParcelaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ParselaActionPerformed
+    }//GEN-LAST:event_ParcelaActionPerformed
 
     private void documento_pActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documento_pActionPerformed
         // TODO add your handling code here:
@@ -1734,12 +1734,12 @@ public class Ingre extends javax.swing.JPanel {
        if(pasar_dia.isSelected()){
             fecha_ingreso.setEnabled(false);
             fecha_egreso.setEnabled(false);
-            Parsela.setEnabled(false);
+            Parcela.setEnabled(false);
         }
          else{
             fecha_ingreso.setEnabled(true);
             fecha_egreso.setEnabled(true);
-            Parsela.setEnabled(true);
+            Parcela.setEnabled(true);
          }
     }//GEN-LAST:event_pasar_diaActionPerformed
 
@@ -1880,7 +1880,7 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JButton Obtener;
     private javax.swing.JButton Obtener1;
     private javax.swing.JButton Obtener2;
-    private javax.swing.JTextField Parsela;
+    private javax.swing.JTextField Parcela;
     private javax.swing.JTextField Parsela_a;
     private javax.swing.JTextField Parsela_p;
     private javax.swing.JTextField apellido_a;

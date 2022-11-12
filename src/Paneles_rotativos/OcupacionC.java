@@ -25,32 +25,36 @@ public class OcupacionC extends javax.swing.JPanel {
      */
     Controlador controlador = new Controlador();
     Modelo modelo = new Modelo();
-    public void prueba() throws SQLException{
-        javax.swing.JLabel[] label = {j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15, j16, j17, j18, j19, j20, j21, j22, j23, j24, j25, j26, j27, j28, j29, j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j40, j41, j42, j43, j44, j45, j46, j47, j47, j48, j49, j50};
+
+    public void prueba() throws SQLException {
+        javax.swing.JLabel[] label = {j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15, j16, j17, j18, j19, j20, j21, j22, j23, j24, j25, j26, j27, j28, j29, j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j40, j41, j42, j43, j44, j45, j46, j47, j48, j49, j50,
+            j51, j52, j53, j54, j55, j56, j57, j68, j59, j60, j61, j62, j63, j64, j65, j66, j67, j68, j69, j70, j71, j72, j73, j74, j75, j76, j77, j78, j79, j80, j81, j82, j83, j84, j85, j86, j87, j88, j89, j90, j91, j92, j93, j94, j95, j96, j97, j98, j99, j100, j101, j102, j103, j104, j105, j106, j107, j108, j109, j110, j111, j112, j113, j114,
+            j115, j116, j117, j118, j119, j120, j121, j122, j123, j124, j125, j126, j127, j128
+
+        };
 
         ResultSet res;
         res = modelo.MostarOcupacionActual();
-        
+
         while (res.next() == true) {
 
             for (int i = 0; i <= label.length; i++) {
 
-                if (String.valueOf(i+1).equals(res.getString("parsela"))) {
+                if (String.valueOf(i + 1).equals(res.getString("parsela"))) {
                     label[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/false1x.png"))); // NOI18N
-                    label[i].setText((i+1) + "(ocupado)");
+                    label[i].setText(String.valueOf(i + 1));
                     label[i].repaint();
-                    
+                    i = 128;
+
                 }
                 
 
             }
 
-            
-         
             //    jLabel6.paintImmediately(jLabel6.getVisibleRect());
         }
     }
- 
+
     public OcupacionC() {
         initComponents();
     }
@@ -119,6 +123,86 @@ public class OcupacionC extends javax.swing.JPanel {
         j22 = new javax.swing.JLabel();
         j44 = new javax.swing.JLabel();
         j47 = new javax.swing.JLabel();
+        j51 = new javax.swing.JLabel();
+        j52 = new javax.swing.JLabel();
+        j53 = new javax.swing.JLabel();
+        j54 = new javax.swing.JLabel();
+        j55 = new javax.swing.JLabel();
+        j56 = new javax.swing.JLabel();
+        j57 = new javax.swing.JLabel();
+        j58 = new javax.swing.JLabel();
+        j59 = new javax.swing.JLabel();
+        j60 = new javax.swing.JLabel();
+        j61 = new javax.swing.JLabel();
+        j62 = new javax.swing.JLabel();
+        j63 = new javax.swing.JLabel();
+        j64 = new javax.swing.JLabel();
+        j65 = new javax.swing.JLabel();
+        j66 = new javax.swing.JLabel();
+        j67 = new javax.swing.JLabel();
+        j68 = new javax.swing.JLabel();
+        j69 = new javax.swing.JLabel();
+        j70 = new javax.swing.JLabel();
+        j71 = new javax.swing.JLabel();
+        j72 = new javax.swing.JLabel();
+        j73 = new javax.swing.JLabel();
+        j74 = new javax.swing.JLabel();
+        j75 = new javax.swing.JLabel();
+        j76 = new javax.swing.JLabel();
+        j77 = new javax.swing.JLabel();
+        j78 = new javax.swing.JLabel();
+        j79 = new javax.swing.JLabel();
+        j80 = new javax.swing.JLabel();
+        j81 = new javax.swing.JLabel();
+        j82 = new javax.swing.JLabel();
+        j83 = new javax.swing.JLabel();
+        j84 = new javax.swing.JLabel();
+        j85 = new javax.swing.JLabel();
+        j86 = new javax.swing.JLabel();
+        j87 = new javax.swing.JLabel();
+        j88 = new javax.swing.JLabel();
+        j89 = new javax.swing.JLabel();
+        j90 = new javax.swing.JLabel();
+        j91 = new javax.swing.JLabel();
+        j92 = new javax.swing.JLabel();
+        j93 = new javax.swing.JLabel();
+        j94 = new javax.swing.JLabel();
+        j95 = new javax.swing.JLabel();
+        j96 = new javax.swing.JLabel();
+        j97 = new javax.swing.JLabel();
+        j98 = new javax.swing.JLabel();
+        j99 = new javax.swing.JLabel();
+        j100 = new javax.swing.JLabel();
+        j101 = new javax.swing.JLabel();
+        j102 = new javax.swing.JLabel();
+        j103 = new javax.swing.JLabel();
+        j104 = new javax.swing.JLabel();
+        j105 = new javax.swing.JLabel();
+        j106 = new javax.swing.JLabel();
+        j107 = new javax.swing.JLabel();
+        j108 = new javax.swing.JLabel();
+        j109 = new javax.swing.JLabel();
+        j110 = new javax.swing.JLabel();
+        j111 = new javax.swing.JLabel();
+        j112 = new javax.swing.JLabel();
+        j113 = new javax.swing.JLabel();
+        j114 = new javax.swing.JLabel();
+        j115 = new javax.swing.JLabel();
+        j116 = new javax.swing.JLabel();
+        j117 = new javax.swing.JLabel();
+        j118 = new javax.swing.JLabel();
+        j119 = new javax.swing.JLabel();
+        j120 = new javax.swing.JLabel();
+        j121 = new javax.swing.JLabel();
+        j122 = new javax.swing.JLabel();
+        j123 = new javax.swing.JLabel();
+        j124 = new javax.swing.JLabel();
+        j125 = new javax.swing.JLabel();
+        j126 = new javax.swing.JLabel();
+        j127 = new javax.swing.JLabel();
+        j128 = new javax.swing.JLabel();
+        boton_v = new javax.swing.JLabel();
+        boton_r = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
 
         jMenuItem1.setText("mostrar ocupantes");
@@ -152,7 +236,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j10MousePressed(evt);
             }
         });
-        jPanel1.add(j10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 430, -1, -1));
+        jPanel1.add(j10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, -1, -1));
 
         j12.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -162,7 +246,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j12MousePressed(evt);
             }
         });
-        jPanel1.add(j12, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, -1, -1));
+        jPanel1.add(j12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, -1, -1));
 
         j5.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -172,7 +256,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j5MousePressed(evt);
             }
         });
-        jPanel1.add(j5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 580, -1, -1));
+        jPanel1.add(j5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, -1, -1));
 
         j27.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -182,7 +266,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j27MousePressed(evt);
             }
         });
-        jPanel1.add(j27, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
+        jPanel1.add(j27, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, -1, -1));
 
         j7.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -202,7 +286,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j29MousePressed(evt);
             }
         });
-        jPanel1.add(j29, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, -1));
+        jPanel1.add(j29, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, -1, -1));
 
         j20.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -212,7 +296,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j20MousePressed(evt);
             }
         });
-        jPanel1.add(j20, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, -1, -1));
+        jPanel1.add(j20, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 520, -1, -1));
 
         j3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -222,7 +306,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j3MousePressed(evt);
             }
         });
-        jPanel1.add(j3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, -1, -1));
+        jPanel1.add(j3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, -1));
 
         j31.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -232,7 +316,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j31MousePressed(evt);
             }
         });
-        jPanel1.add(j31, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, -1, -1));
+        jPanel1.add(j31, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, -1, -1));
 
         j40.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -242,7 +326,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j40MousePressed(evt);
             }
         });
-        jPanel1.add(j40, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, -1, -1));
+        jPanel1.add(j40, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, -1, -1));
 
         j49.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -252,7 +336,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j49MousePressed(evt);
             }
         });
-        jPanel1.add(j49, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 630, -1, -1));
+        jPanel1.add(j49, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, -1));
 
         j45.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -262,7 +346,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j45MousePressed(evt);
             }
         });
-        jPanel1.add(j45, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, -1, -1));
+        jPanel1.add(j45, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, -1, -1));
 
         j50.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -272,7 +356,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j50MousePressed(evt);
             }
         });
-        jPanel1.add(j50, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 400, -1, -1));
+        jPanel1.add(j50, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, -1, -1));
 
         j6.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -282,7 +366,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j6MousePressed(evt);
             }
         });
-        jPanel1.add(j6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, -1, -1));
+        jPanel1.add(j6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, -1, -1));
 
         j15.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -292,7 +376,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j15MousePressed(evt);
             }
         });
-        jPanel1.add(j15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, -1, -1));
+        jPanel1.add(j15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, -1, -1));
 
         j2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -304,7 +388,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j2MousePressed(evt);
             }
         });
-        jPanel1.add(j2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 550, -1, -1));
+        jPanel1.add(j2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, -1, -1));
 
         j25.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -314,7 +398,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j25MousePressed(evt);
             }
         });
-        jPanel1.add(j25, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, -1, -1));
+        jPanel1.add(j25, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, -1, -1));
 
         j33.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -324,7 +408,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j33MousePressed(evt);
             }
         });
-        jPanel1.add(j33, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, -1, -1));
+        jPanel1.add(j33, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, -1, -1));
 
         j37.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -334,7 +418,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j37MousePressed(evt);
             }
         });
-        jPanel1.add(j37, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 360, -1, -1));
+        jPanel1.add(j37, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, -1, -1));
 
         j36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j36.setText("36");
@@ -343,7 +427,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j36MousePressed(evt);
             }
         });
-        jPanel1.add(j36, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, -1, -1));
+        jPanel1.add(j36, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, -1, -1));
 
         j48.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -353,7 +437,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j48MousePressed(evt);
             }
         });
-        jPanel1.add(j48, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, -1, -1));
+        jPanel1.add(j48, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, -1, -1));
 
         j39.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -363,7 +447,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j39MousePressed(evt);
             }
         });
-        jPanel1.add(j39, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, -1, -1));
+        jPanel1.add(j39, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 490, -1, -1));
 
         j38.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -373,7 +457,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j38MousePressed(evt);
             }
         });
-        jPanel1.add(j38, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, -1, -1));
+        jPanel1.add(j38, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, -1, -1));
 
         j34.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -383,7 +467,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j34MousePressed(evt);
             }
         });
-        jPanel1.add(j34, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, -1, -1));
+        jPanel1.add(j34, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
 
         j43.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -393,7 +477,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j43MousePressed(evt);
             }
         });
-        jPanel1.add(j43, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, -1, -1));
+        jPanel1.add(j43, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, -1, -1));
 
         j30.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -403,7 +487,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j30MousePressed(evt);
             }
         });
-        jPanel1.add(j30, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
+        jPanel1.add(j30, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, -1));
 
         j42.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -413,7 +497,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j42MousePressed(evt);
             }
         });
-        jPanel1.add(j42, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, -1, -1));
+        jPanel1.add(j42, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, -1, -1));
 
         j24.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -423,7 +507,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j24MousePressed(evt);
             }
         });
-        jPanel1.add(j24, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, -1, -1));
+        jPanel1.add(j24, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, -1));
 
         j23.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -433,7 +517,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j23MousePressed(evt);
             }
         });
-        jPanel1.add(j23, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
+        jPanel1.add(j23, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
 
         j21.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -443,7 +527,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j21MousePressed(evt);
             }
         });
-        jPanel1.add(j21, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, -1, -1));
+        jPanel1.add(j21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, -1, -1));
 
         j19.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -453,7 +537,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j19MousePressed(evt);
             }
         });
-        jPanel1.add(j19, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 510, -1, -1));
+        jPanel1.add(j19, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, -1, -1));
 
         j18.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -463,7 +547,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j18MousePressed(evt);
             }
         });
-        jPanel1.add(j18, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 520, -1, -1));
+        jPanel1.add(j18, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 550, -1, -1));
 
         j4.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -473,7 +557,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j4MousePressed(evt);
             }
         });
-        jPanel1.add(j4, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 530, -1, -1));
+        jPanel1.add(j4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
 
         j16.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -483,7 +567,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j16MousePressed(evt);
             }
         });
-        jPanel1.add(j16, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 600, -1, -1));
+        jPanel1.add(j16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
 
         j17.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -493,7 +577,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j17MousePressed(evt);
             }
         });
-        jPanel1.add(j17, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 490, -1, -1));
+        jPanel1.add(j17, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
 
         j14.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -503,7 +587,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j14MousePressed(evt);
             }
         });
-        jPanel1.add(j14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 470, -1, -1));
+        jPanel1.add(j14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 480, -1, -1));
 
         j13.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -513,7 +597,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j13MousePressed(evt);
             }
         });
-        jPanel1.add(j13, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 460, -1, -1));
+        jPanel1.add(j13, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, -1, -1));
 
         j8.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -523,7 +607,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j8MousePressed(evt);
             }
         });
-        jPanel1.add(j8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 430, -1, -1));
+        jPanel1.add(j8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, -1, -1));
 
         j9.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -533,7 +617,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j9MousePressed(evt);
             }
         });
-        jPanel1.add(j9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 420, -1, -1));
+        jPanel1.add(j9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, -1, -1));
 
         j11.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -543,7 +627,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j11MousePressed(evt);
             }
         });
-        jPanel1.add(j11, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 560, -1, -1));
+        jPanel1.add(j11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
 
         j46.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -553,7 +637,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j46MousePressed(evt);
             }
         });
-        jPanel1.add(j46, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 560, -1, -1));
+        jPanel1.add(j46, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 570, -1, -1));
 
         j35.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -563,7 +647,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j35MousePressed(evt);
             }
         });
-        jPanel1.add(j35, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, -1, -1));
+        jPanel1.add(j35, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 370, -1, -1));
 
         j41.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -573,7 +657,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j41MousePressed(evt);
             }
         });
-        jPanel1.add(j41, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, -1));
+        jPanel1.add(j41, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, -1, -1));
 
         j32.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -583,7 +667,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j32MousePressed(evt);
             }
         });
-        jPanel1.add(j32, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 470, -1, -1));
+        jPanel1.add(j32, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, -1, -1));
 
         j28.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -593,7 +677,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j28MousePressed(evt);
             }
         });
-        jPanel1.add(j28, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
+        jPanel1.add(j28, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, -1, -1));
 
         j26.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -603,7 +687,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j26MousePressed(evt);
             }
         });
-        jPanel1.add(j26, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, -1, -1));
+        jPanel1.add(j26, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
 
         j1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -614,7 +698,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j1MousePressed(evt);
             }
         });
-        jPanel1.add(j1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 500, -1, -1));
+        jPanel1.add(j1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
 
         j22.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -624,7 +708,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j22MousePressed(evt);
             }
         });
-        jPanel1.add(j22, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, -1, -1));
+        jPanel1.add(j22, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, -1));
 
         j44.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -634,7 +718,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j44MousePressed(evt);
             }
         });
-        jPanel1.add(j44, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 530, -1, -1));
+        jPanel1.add(j44, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
 
         j47.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         j47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
@@ -644,16 +728,819 @@ public class OcupacionC extends javax.swing.JPanel {
                 j47MousePressed(evt);
             }
         });
-        jPanel1.add(j47, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
+        jPanel1.add(j47, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, -1, -1));
 
-        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/mapaxl.jpg"))); // NOI18N
+        j51.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j51.setText("51");
+        j51.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j51MousePressed(evt);
+            }
+        });
+        jPanel1.add(j51, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, -1, -1));
+
+        j52.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j52.setText("52");
+        j52.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j52MousePressed(evt);
+            }
+        });
+        jPanel1.add(j52, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, -1, -1));
+
+        j53.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j53.setText("53");
+        j53.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j53MousePressed(evt);
+            }
+        });
+        jPanel1.add(j53, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, -1, -1));
+
+        j54.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j54.setText("54");
+        j54.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j54MousePressed(evt);
+            }
+        });
+        jPanel1.add(j54, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
+
+        j55.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j55.setText("55");
+        j55.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j55MousePressed(evt);
+            }
+        });
+        jPanel1.add(j55, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, -1));
+
+        j56.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j56.setText("56");
+        j56.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j56MousePressed(evt);
+            }
+        });
+        jPanel1.add(j56, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, -1, -1));
+
+        j57.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j57.setText("57");
+        j57.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j57MousePressed(evt);
+            }
+        });
+        jPanel1.add(j57, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
+
+        j58.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j58.setText("58");
+        j58.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j58MousePressed(evt);
+            }
+        });
+        jPanel1.add(j58, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, -1, -1));
+
+        j59.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j59.setText("59");
+        j59.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j59MousePressed(evt);
+            }
+        });
+        jPanel1.add(j59, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, -1, -1));
+
+        j60.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j60.setText("60");
+        j60.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j60MousePressed(evt);
+            }
+        });
+        jPanel1.add(j60, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, -1));
+
+        j61.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j61.setText("61");
+        j61.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j61MousePressed(evt);
+            }
+        });
+        jPanel1.add(j61, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, -1, -1));
+
+        j62.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j62.setText("62");
+        j62.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j62MousePressed(evt);
+            }
+        });
+        jPanel1.add(j62, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, -1, -1));
+
+        j63.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j63.setText("63");
+        j63.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j63MousePressed(evt);
+            }
+        });
+        jPanel1.add(j63, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, -1, -1));
+
+        j64.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j64.setText("64");
+        j64.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j64MousePressed(evt);
+            }
+        });
+        jPanel1.add(j64, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, -1, -1));
+
+        j65.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j65.setText("65");
+        j65.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j65MousePressed(evt);
+            }
+        });
+        jPanel1.add(j65, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, -1, -1));
+
+        j66.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j66.setText("78");
+        j66.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j66MousePressed(evt);
+            }
+        });
+        jPanel1.add(j66, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
+
+        j67.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j67.setText("67");
+        j67.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j67MousePressed(evt);
+            }
+        });
+        jPanel1.add(j67, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+
+        j68.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j68.setText("66");
+        j68.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j68MousePressed(evt);
+            }
+        });
+        jPanel1.add(j68, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
+
+        j69.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j69.setText("68");
+        j69.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j69MousePressed(evt);
+            }
+        });
+        jPanel1.add(j69, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
+
+        j70.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j70.setText("69");
+        j70.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j70MousePressed(evt);
+            }
+        });
+        jPanel1.add(j70, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, -1, -1));
+
+        j71.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j71.setText("71");
+        j71.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j71MousePressed(evt);
+            }
+        });
+        jPanel1.add(j71, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, -1, -1));
+
+        j72.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j72.setText("72");
+        j72.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j72MousePressed(evt);
+            }
+        });
+        jPanel1.add(j72, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
+
+        j73.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j73.setText("73");
+        j73.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j73MousePressed(evt);
+            }
+        });
+        jPanel1.add(j73, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, -1, -1));
+
+        j74.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j74.setText("74");
+        j74.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j74MousePressed(evt);
+            }
+        });
+        jPanel1.add(j74, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+
+        j75.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j75.setText("75");
+        j75.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j75MousePressed(evt);
+            }
+        });
+        jPanel1.add(j75, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, -1));
+
+        j76.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j76.setText("76");
+        j76.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j76MousePressed(evt);
+            }
+        });
+        jPanel1.add(j76, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
+
+        j77.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j77.setText("77");
+        j77.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j77MousePressed(evt);
+            }
+        });
+        jPanel1.add(j77, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, -1, -1));
+
+        j78.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j78.setText("70");
+        j78.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j78MousePressed(evt);
+            }
+        });
+        jPanel1.add(j78, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, -1, -1));
+
+        j79.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j79.setText("79");
+        j79.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j79MousePressed(evt);
+            }
+        });
+        jPanel1.add(j79, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, -1));
+
+        j80.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j80.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j80.setText("80");
+        j80.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j80MousePressed(evt);
+            }
+        });
+        jPanel1.add(j80, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, -1, -1));
+
+        j81.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j81.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j81.setText("81");
+        j81.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j81MousePressed(evt);
+            }
+        });
+        jPanel1.add(j81, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
+
+        j82.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j82.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j82.setText("82");
+        j82.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j82MousePressed(evt);
+            }
+        });
+        jPanel1.add(j82, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, -1, -1));
+
+        j83.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j83.setText("83");
+        j83.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j83MousePressed(evt);
+            }
+        });
+        jPanel1.add(j83, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, -1, -1));
+
+        j84.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j84.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j84.setText("84");
+        j84.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j84MousePressed(evt);
+            }
+        });
+        jPanel1.add(j84, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, -1, -1));
+
+        j85.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j85.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j85.setText("85");
+        j85.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j85MousePressed(evt);
+            }
+        });
+        jPanel1.add(j85, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
+
+        j86.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j86.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j86.setText("86");
+        j86.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j86MousePressed(evt);
+            }
+        });
+        jPanel1.add(j86, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, -1, -1));
+
+        j87.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j87.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j87.setText("87");
+        j87.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j87MousePressed(evt);
+            }
+        });
+        jPanel1.add(j87, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, -1, -1));
+
+        j88.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j88.setText("88");
+        j88.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j88MousePressed(evt);
+            }
+        });
+        jPanel1.add(j88, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, -1, -1));
+
+        j89.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j89.setText("89");
+        j89.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j89MousePressed(evt);
+            }
+        });
+        jPanel1.add(j89, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, -1, -1));
+
+        j90.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j90.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j90.setText("90");
+        j90.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j90MousePressed(evt);
+            }
+        });
+        jPanel1.add(j90, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, -1, -1));
+
+        j91.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j91.setText("91");
+        j91.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j91MousePressed(evt);
+            }
+        });
+        jPanel1.add(j91, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, -1, -1));
+
+        j92.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j92.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j92.setText("92");
+        j92.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j92MousePressed(evt);
+            }
+        });
+        jPanel1.add(j92, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, -1, -1));
+
+        j93.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j93.setText("93");
+        j93.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j93MousePressed(evt);
+            }
+        });
+        jPanel1.add(j93, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, -1, -1));
+
+        j94.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j94.setText("94");
+        j94.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j94MousePressed(evt);
+            }
+        });
+        jPanel1.add(j94, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, -1, -1));
+
+        j95.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j95.setText("95");
+        j95.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j95MousePressed(evt);
+            }
+        });
+        jPanel1.add(j95, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
+
+        j96.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j96.setText("96");
+        j96.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j96MousePressed(evt);
+            }
+        });
+        jPanel1.add(j96, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, -1, -1));
+
+        j97.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j97.setText("97");
+        j97.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j97MousePressed(evt);
+            }
+        });
+        jPanel1.add(j97, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, -1, -1));
+
+        j98.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j98.setText("98");
+        j98.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j98MousePressed(evt);
+            }
+        });
+        jPanel1.add(j98, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, -1, -1));
+
+        j99.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j99.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j99.setText("99");
+        j99.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j99MousePressed(evt);
+            }
+        });
+        jPanel1.add(j99, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, -1));
+
+        j100.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j100.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j100.setText("100");
+        j100.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j100MousePressed(evt);
+            }
+        });
+        jPanel1.add(j100, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
+
+        j101.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j101.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j101.setText("101");
+        j101.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j101MousePressed(evt);
+            }
+        });
+        jPanel1.add(j101, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
+
+        j102.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j102.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j102.setText("102");
+        j102.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j102MousePressed(evt);
+            }
+        });
+        jPanel1.add(j102, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, -1));
+
+        j103.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j103.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j103.setText("103");
+        j103.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j103MousePressed(evt);
+            }
+        });
+        jPanel1.add(j103, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, -1, -1));
+
+        j104.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j104.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j104.setText("104");
+        j104.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j104MousePressed(evt);
+            }
+        });
+        jPanel1.add(j104, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+
+        j105.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j105.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j105.setText("105");
+        j105.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j105MousePressed(evt);
+            }
+        });
+        jPanel1.add(j105, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
+
+        j106.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j106.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j106.setText("106");
+        j106.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j106MousePressed(evt);
+            }
+        });
+        jPanel1.add(j106, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+
+        j107.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j107.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j107.setText("107");
+        j107.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j107MousePressed(evt);
+            }
+        });
+        jPanel1.add(j107, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
+
+        j108.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j108.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j108.setText("108");
+        j108.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j108MousePressed(evt);
+            }
+        });
+        jPanel1.add(j108, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
+
+        j109.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j109.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j109.setText("109");
+        j109.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j109MousePressed(evt);
+            }
+        });
+        jPanel1.add(j109, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+
+        j110.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j110.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j110.setText("110");
+        j110.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j110MousePressed(evt);
+            }
+        });
+        jPanel1.add(j110, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, -1, -1));
+
+        j111.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j111.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j111.setText("111");
+        j111.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j111MousePressed(evt);
+            }
+        });
+        jPanel1.add(j111, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, -1, -1));
+
+        j112.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j112.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j112.setText("112");
+        j112.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j112MousePressed(evt);
+            }
+        });
+        jPanel1.add(j112, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
+
+        j113.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j113.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j113.setText("113");
+        j113.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j113MousePressed(evt);
+            }
+        });
+        jPanel1.add(j113, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, -1, -1));
+
+        j114.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j114.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j114.setText("114");
+        j114.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j114MousePressed(evt);
+            }
+        });
+        jPanel1.add(j114, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+
+        j115.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j115.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j115.setText("115");
+        j115.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j115MousePressed(evt);
+            }
+        });
+        jPanel1.add(j115, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, -1, -1));
+
+        j116.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j116.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j116.setText("116");
+        j116.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j116MousePressed(evt);
+            }
+        });
+        jPanel1.add(j116, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
+
+        j117.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j117.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j117.setText("117");
+        j117.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j117MousePressed(evt);
+            }
+        });
+        jPanel1.add(j117, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
+
+        j118.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j118.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j118.setText("118");
+        j118.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j118MousePressed(evt);
+            }
+        });
+        jPanel1.add(j118, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
+
+        j119.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j119.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j119.setText("119");
+        j119.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j119MousePressed(evt);
+            }
+        });
+        jPanel1.add(j119, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, -1));
+
+        j120.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j120.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j120.setText("120");
+        j120.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j120MousePressed(evt);
+            }
+        });
+        jPanel1.add(j120, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
+
+        j121.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j121.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j121.setText("121");
+        j121.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j121MousePressed(evt);
+            }
+        });
+        jPanel1.add(j121, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, -1, -1));
+
+        j122.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j122.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j122.setText("122");
+        j122.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j122MousePressed(evt);
+            }
+        });
+        jPanel1.add(j122, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, -1, -1));
+
+        j123.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j123.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j123.setText("123");
+        j123.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j123MousePressed(evt);
+            }
+        });
+        jPanel1.add(j123, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+
+        j124.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j124.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j124.setText("124");
+        j124.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j124MousePressed(evt);
+            }
+        });
+        jPanel1.add(j124, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 670, -1, -1));
+
+        j125.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j125.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j125.setText("125");
+        j125.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j125MousePressed(evt);
+            }
+        });
+        jPanel1.add(j125, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 600, -1, -1));
+
+        j126.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j126.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j126.setText("126");
+        j126.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j126MousePressed(evt);
+            }
+        });
+        jPanel1.add(j126, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 630, -1, -1));
+
+        j127.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j127.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j127.setText("127");
+        j127.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j127MousePressed(evt);
+            }
+        });
+        jPanel1.add(j127, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 690, -1, -1));
+
+        j128.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j128.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j128.setText("128");
+        j128.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j128MousePressed(evt);
+            }
+        });
+        jPanel1.add(j128, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 650, -1, -1));
+
+        boton_v.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        boton_v.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        boton_v.setText("Libre");
+        boton_v.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                boton_vMousePressed(evt);
+            }
+        });
+        jPanel1.add(boton_v, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, -1, -1));
+
+        boton_r.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        boton_r.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/false1x.png"))); // NOI18N
+        boton_r.setText("Ocupado");
+        boton_r.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                boton_rMousePressed(evt);
+            }
+        });
+        jPanel1.add(boton_r, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, -1, -1));
+
+        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/mapa-4.jpg"))); // NOI18N
         jPanel1.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1080, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -662,11 +1549,11 @@ public class OcupacionC extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 public void ActualizarOcupacion() throws SQLException {
         int i = 1;
-       /* while (i <= 50) {
+        /* while (i <= 50) {
             BuscarParsela(Integer.toString(i));
             i++;
         }
-        */
+         */
         prueba();
     }
     private void jPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseEntered
@@ -721,7 +1608,7 @@ public void ActualizarOcupacion() throws SQLException {
 
         res = modelo.traerinfo(parsela);
 
-        int  i = 0;
+        int i = 0;
         while (res.next()) {
 
             javax.swing.JOptionPane.showMessageDialog(this, " documento : '" + res.getString("documento") + "'" + "\n"
@@ -732,7 +1619,6 @@ public void ActualizarOcupacion() throws SQLException {
                     + "fecha de egreso: " + "'" + res.getString("fecha_egreso") + "'" + "\n",
                     "Persona nro " + (i + 1), javax.swing.JOptionPane.INFORMATION_MESSAGE);
             i++;
-         
 
         }
 
@@ -1227,12 +2113,831 @@ public void ActualizarOcupacion() throws SQLException {
 
     }//GEN-LAST:event_j50MousePressed
 
+    private void j51MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j51MousePressed
+  
+        try {
+            traerinfo(51);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j51MousePressed
+
+    private void j52MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j52MousePressed
+       
+        try {
+            traerinfo(52);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j52MousePressed
+
+    private void j53MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j53MousePressed
+        
+        try {
+            traerinfo(53);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j53MousePressed
+
+    private void j54MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j54MousePressed
+    
+        try {
+            traerinfo(54);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j54MousePressed
+
+    private void j55MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j55MousePressed
+      
+        try {
+            traerinfo(55);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j55MousePressed
+
+    private void j56MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j56MousePressed
+   
+        try {
+            traerinfo(56);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j56MousePressed
+
+    private void j57MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j57MousePressed
+    
+        try {
+            traerinfo(57);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j57MousePressed
+
+    private void j58MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j58MousePressed
+  
+        try {
+            traerinfo(58);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j58MousePressed
+
+    private void j59MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j59MousePressed
+       
+        try {
+            traerinfo(59);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j59MousePressed
+
+    private void j60MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j60MousePressed
+       
+        try {
+            traerinfo(60);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j60MousePressed
+
+    private void j61MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j61MousePressed
+     
+        try {
+            traerinfo(61);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j61MousePressed
+
+    private void j62MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j62MousePressed
+     
+        try {
+            traerinfo(62);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j62MousePressed
+
+    private void j63MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j63MousePressed
+  
+        try {
+            traerinfo(63);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j63MousePressed
+
+    private void j64MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j64MousePressed
+     
+        try {
+            traerinfo(64);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j64MousePressed
+
+    private void j65MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j65MousePressed
+      
+        try {
+            traerinfo(65);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j65MousePressed
+
+    private void j66MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j66MousePressed
+    
+        try {
+            traerinfo(66);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j66MousePressed
+
+    private void j67MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j67MousePressed
+    
+        try {
+            traerinfo(67);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j67MousePressed
+
+    private void j68MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j68MousePressed
+   
+        try {
+            traerinfo(68);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j68MousePressed
+
+    private void j69MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j69MousePressed
+       
+        try {
+            traerinfo(69);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j69MousePressed
+
+    private void j70MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j70MousePressed
+        
+        try {
+            traerinfo(70);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j70MousePressed
+
+    private void j71MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j71MousePressed
+      
+        try {
+            traerinfo(71);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j71MousePressed
+
+    private void j72MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j72MousePressed
+      
+        try {
+            traerinfo(72);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j72MousePressed
+
+    private void j73MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j73MousePressed
+    
+        try {
+            traerinfo(73);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j73MousePressed
+
+    private void j74MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j74MousePressed
+       
+        try {
+            traerinfo(74);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j74MousePressed
+
+    private void j75MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j75MousePressed
+  
+        try {
+            traerinfo(75);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j75MousePressed
+
+    private void j76MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j76MousePressed
+       
+        try {
+            traerinfo(76);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j76MousePressed
+
+    private void j77MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j77MousePressed
+    
+        try {
+            traerinfo(77);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j77MousePressed
+
+    private void j78MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j78MousePressed
+      
+        try {
+            traerinfo(78);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j78MousePressed
+
+    private void j79MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j79MousePressed
+     
+        try {
+            traerinfo(79);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j79MousePressed
+
+    private void j80MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j80MousePressed
+     
+        try {
+            traerinfo(80);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j80MousePressed
+
+    private void j81MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j81MousePressed
+      
+        try {
+            traerinfo(81);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j81MousePressed
+
+    private void j82MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j82MousePressed
+     
+        try {
+            traerinfo(82);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j82MousePressed
+
+    private void j83MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j83MousePressed
+        
+        try {
+            traerinfo(83);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j83MousePressed
+
+    private void j84MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j84MousePressed
+      
+        try {
+            traerinfo(84);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j84MousePressed
+
+    private void j85MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j85MousePressed
+    
+        try {
+            traerinfo(85);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j85MousePressed
+
+    private void j86MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j86MousePressed
+       
+        try {
+            traerinfo(86);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j86MousePressed
+
+    private void j87MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j87MousePressed
+
+        try {
+            traerinfo(87);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j87MousePressed
+
+    private void j88MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j88MousePressed
+  
+        try {
+            traerinfo(88);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j88MousePressed
+
+    private void j89MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j89MousePressed
+  
+        try {
+            traerinfo(89);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j89MousePressed
+
+    private void j90MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j90MousePressed
+    
+        try {
+            traerinfo(90);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j90MousePressed
+
+    private void j91MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j91MousePressed
+
+        try {
+            traerinfo(91);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j91MousePressed
+
+    private void j92MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j92MousePressed
+  
+        try {
+            traerinfo(92);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j92MousePressed
+
+    private void j93MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j93MousePressed
+   
+        try {
+            traerinfo(93);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j93MousePressed
+
+    private void j94MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j94MousePressed
+      
+        try {
+            traerinfo(94);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j94MousePressed
+
+    private void j95MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j95MousePressed
+  
+        try {
+            traerinfo(95);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j95MousePressed
+
+    private void j96MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j96MousePressed
+      
+        try {
+            traerinfo(96);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j96MousePressed
+
+    private void j97MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j97MousePressed
+      
+        try {
+            traerinfo(97);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j97MousePressed
+
+    private void j98MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j98MousePressed
+   
+        try {
+            traerinfo(98);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j98MousePressed
+
+    private void j99MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j99MousePressed
+  
+        try {
+            traerinfo(99);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j99MousePressed
+
+    private void j100MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j100MousePressed
+ 
+        try {
+            traerinfo(100);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j100MousePressed
+
+    private void j101MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j101MousePressed
+       
+        try {
+            traerinfo(101);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j101MousePressed
+
+    private void j102MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j102MousePressed
+ 
+        try {
+            traerinfo(102);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j102MousePressed
+
+    private void j103MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j103MousePressed
+   
+        try {
+            traerinfo(103);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j103MousePressed
+
+    private void j104MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j104MousePressed
+    
+        try {
+            traerinfo(104);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j104MousePressed
+
+    private void j105MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j105MousePressed
+    
+        try {
+            traerinfo(105);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j105MousePressed
+
+    private void j106MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j106MousePressed
+    
+        try {
+            traerinfo(106);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j106MousePressed
+
+    private void j107MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j107MousePressed
+    
+        try {
+            traerinfo(107);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j107MousePressed
+
+    private void j108MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j108MousePressed
+  
+        try {
+            traerinfo(108);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j108MousePressed
+
+    private void j109MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j109MousePressed
+    
+        try {
+            traerinfo(109);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j109MousePressed
+
+    private void j110MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j110MousePressed
+      
+        try {
+            traerinfo(110);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j110MousePressed
+
+    private void j111MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j111MousePressed
+     
+        try {
+            traerinfo(111);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j111MousePressed
+
+    private void j112MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j112MousePressed
+    
+        try {
+            traerinfo(112);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j112MousePressed
+
+    private void j113MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j113MousePressed
+     
+        try {
+            traerinfo(113);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j113MousePressed
+
+    private void j114MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j114MousePressed
+     
+        try {
+            traerinfo(114);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j114MousePressed
+
+    private void j115MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j115MousePressed
+       
+        try {
+            traerinfo(115);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j115MousePressed
+
+    private void j116MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j116MousePressed
+      
+        try {
+            traerinfo(116);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j116MousePressed
+
+    private void j117MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j117MousePressed
+  
+        try {
+            traerinfo(117);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j117MousePressed
+
+    private void j118MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j118MousePressed
+
+        try {
+            traerinfo(118);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j118MousePressed
+
+    private void j119MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j119MousePressed
+        
+        try {
+            traerinfo(119);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j119MousePressed
+
+    private void j120MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j120MousePressed
+   
+        try {
+            traerinfo(120);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j120MousePressed
+
+    private void j121MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j121MousePressed
+    
+        try {
+            traerinfo(121);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j121MousePressed
+
+    private void j122MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j122MousePressed
+       
+        try {
+            traerinfo(122);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j122MousePressed
+
+    private void j123MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j123MousePressed
+      
+        try {
+            traerinfo(123);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j123MousePressed
+
+    private void j124MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j124MousePressed
+     
+        try {
+            traerinfo(124);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j124MousePressed
+
+    private void j125MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j125MousePressed
+   
+        try {
+            traerinfo(125);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j125MousePressed
+
+    private void j126MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j126MousePressed
+  
+        try {
+            traerinfo(126);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j126MousePressed
+
+    private void j127MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j127MousePressed
+    
+        try {
+            traerinfo(127);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j127MousePressed
+
+    private void j128MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j128MousePressed
+
+        try {
+            traerinfo(128);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_j128MousePressed
+
+    private void boton_vMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_vMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_vMousePressed
+
+    private void boton_rMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_rMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_rMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel boton_r;
+    private javax.swing.JLabel boton_v;
     private javax.swing.JLabel j1;
     private javax.swing.JLabel j10;
+    private javax.swing.JLabel j100;
+    private javax.swing.JLabel j101;
+    private javax.swing.JLabel j102;
+    private javax.swing.JLabel j103;
+    private javax.swing.JLabel j104;
+    private javax.swing.JLabel j105;
+    private javax.swing.JLabel j106;
+    private javax.swing.JLabel j107;
+    private javax.swing.JLabel j108;
+    private javax.swing.JLabel j109;
     private javax.swing.JLabel j11;
+    private javax.swing.JLabel j110;
+    private javax.swing.JLabel j111;
+    private javax.swing.JLabel j112;
+    private javax.swing.JLabel j113;
+    private javax.swing.JLabel j114;
+    private javax.swing.JLabel j115;
+    private javax.swing.JLabel j116;
+    private javax.swing.JLabel j117;
+    private javax.swing.JLabel j118;
+    private javax.swing.JLabel j119;
     private javax.swing.JLabel j12;
+    private javax.swing.JLabel j120;
+    private javax.swing.JLabel j121;
+    private javax.swing.JLabel j122;
+    private javax.swing.JLabel j123;
+    private javax.swing.JLabel j124;
+    private javax.swing.JLabel j125;
+    private javax.swing.JLabel j126;
+    private javax.swing.JLabel j127;
+    private javax.swing.JLabel j128;
     private javax.swing.JLabel j13;
     private javax.swing.JLabel j14;
     private javax.swing.JLabel j15;
@@ -1275,10 +2980,59 @@ public void ActualizarOcupacion() throws SQLException {
     private javax.swing.JLabel j49;
     private javax.swing.JLabel j5;
     private javax.swing.JLabel j50;
+    private javax.swing.JLabel j51;
+    private javax.swing.JLabel j52;
+    private javax.swing.JLabel j53;
+    private javax.swing.JLabel j54;
+    private javax.swing.JLabel j55;
+    private javax.swing.JLabel j56;
+    private javax.swing.JLabel j57;
+    private javax.swing.JLabel j58;
+    private javax.swing.JLabel j59;
     private javax.swing.JLabel j6;
+    private javax.swing.JLabel j60;
+    private javax.swing.JLabel j61;
+    private javax.swing.JLabel j62;
+    private javax.swing.JLabel j63;
+    private javax.swing.JLabel j64;
+    private javax.swing.JLabel j65;
+    private javax.swing.JLabel j66;
+    private javax.swing.JLabel j67;
+    private javax.swing.JLabel j68;
+    private javax.swing.JLabel j69;
     private javax.swing.JLabel j7;
+    private javax.swing.JLabel j70;
+    private javax.swing.JLabel j71;
+    private javax.swing.JLabel j72;
+    private javax.swing.JLabel j73;
+    private javax.swing.JLabel j74;
+    private javax.swing.JLabel j75;
+    private javax.swing.JLabel j76;
+    private javax.swing.JLabel j77;
+    private javax.swing.JLabel j78;
+    private javax.swing.JLabel j79;
     private javax.swing.JLabel j8;
+    private javax.swing.JLabel j80;
+    private javax.swing.JLabel j81;
+    private javax.swing.JLabel j82;
+    private javax.swing.JLabel j83;
+    private javax.swing.JLabel j84;
+    private javax.swing.JLabel j85;
+    private javax.swing.JLabel j86;
+    private javax.swing.JLabel j87;
+    private javax.swing.JLabel j88;
+    private javax.swing.JLabel j89;
     private javax.swing.JLabel j9;
+    private javax.swing.JLabel j90;
+    private javax.swing.JLabel j91;
+    private javax.swing.JLabel j92;
+    private javax.swing.JLabel j93;
+    private javax.swing.JLabel j94;
+    private javax.swing.JLabel j95;
+    private javax.swing.JLabel j96;
+    private javax.swing.JLabel j97;
+    private javax.swing.JLabel j98;
+    private javax.swing.JLabel j99;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;

@@ -473,7 +473,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="Documento_a" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="34" max="32767" attributes="0"/>
+                          <EmptySpace pref="36" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -1084,7 +1084,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="Parsela" max="32767" attributes="0"/>
+                                      <Component id="Parcela" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           <Component id="Boton_ingreso" min="-2" max="-2" attributes="0"/>
@@ -1107,7 +1107,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="Parsela" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Parcela" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -1164,12 +1164,12 @@
                             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Boton_ingresoMousePressed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="Parsela">
+                        <Component class="javax.swing.JTextField" name="Parcela">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Parsela"/>
+                            <Property name="text" type="java.lang.String" value="Parcela"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ParselaActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ParcelaActionPerformed"/>
                           </Events>
                         </Component>
                       </SubComponents>
