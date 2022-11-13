@@ -453,6 +453,11 @@ public class Inicio extends javax.swing.JPanel {
                 tabla_ocupacionMousePressed(evt);
             }
         });
+        tabla_ocupacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tabla_ocupacionKeyPressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(tabla_ocupacion);
 
         jButton2.setText("Confirmar rehubicación");
@@ -769,6 +774,15 @@ public class Inicio extends javax.swing.JPanel {
 
         parcela_s.setText(parcela);
     }//GEN-LAST:event_tabla_ocupacionMousePressed
+
+    private void tabla_ocupacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabla_ocupacionKeyPressed
+         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            String parcela = tabla_ocupacion.getModel().getValueAt(tabla_ocupacion.getSelectedRow(), 0).toString();
+
+        parcela_s.setText(parcela);
+        }
+        
+    }//GEN-LAST:event_tabla_ocupacionKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

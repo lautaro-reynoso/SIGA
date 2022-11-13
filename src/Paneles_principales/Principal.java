@@ -278,7 +278,11 @@ public class Principal extends javax.swing.JFrame {
         Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(ingreso);
-
+        try {
+            ingreso.Tabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ingreso.setearnullalumno();
         ingreso.setearnullparticular();
         ingreso.setearnullaportante();

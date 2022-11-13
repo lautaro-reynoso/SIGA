@@ -365,6 +365,18 @@ public class Ingre extends javax.swing.JPanel {
 
         jLabel24.setText("FECHA DE INGRESO");
 
+        fecha_ingreso_p.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fecha_ingreso_pKeyPressed(evt);
+            }
+        });
+
+        fecha_egreso_p.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fecha_egreso_pKeyPressed(evt);
+            }
+        });
+
         Obtener1.setText("Obtener Total");
         Obtener1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -398,11 +410,21 @@ public class Ingre extends javax.swing.JPanel {
                 Boton_ingreso_pMousePressed(evt);
             }
         });
+        Boton_ingreso_p.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Boton_ingreso_pKeyPressed(evt);
+            }
+        });
 
         Parsela_p.setText("Parsela");
         Parsela_p.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Parsela_pActionPerformed(evt);
+            }
+        });
+        Parsela_p.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Parsela_pKeyPressed(evt);
             }
         });
 
@@ -489,6 +511,11 @@ public class Ingre extends javax.swing.JPanel {
                 pasar_dia2ActionPerformed(evt);
             }
         });
+        pasar_dia2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pasar_dia2KeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -550,7 +577,7 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(102, 102, 102)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addContainerGap(568, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -641,6 +668,18 @@ public class Ingre extends javax.swing.JPanel {
 
         jLabel28.setText("FECHA DE INGRESO");
 
+        fecha_ingreso_p1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fecha_ingreso_p1KeyPressed(evt);
+            }
+        });
+
+        fecha_egreso_p1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fecha_egreso_p1KeyPressed(evt);
+            }
+        });
+
         Obtener2.setText("Obtener Total");
         Obtener2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -679,6 +718,11 @@ public class Ingre extends javax.swing.JPanel {
         Parsela_a.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Parsela_aActionPerformed(evt);
+            }
+        });
+        Parsela_a.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Parsela_aKeyPressed(evt);
             }
         });
 
@@ -760,13 +804,18 @@ public class Ingre extends javax.swing.JPanel {
                 pasar_dia1ActionPerformed(evt);
             }
         });
+        pasar_dia1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pasar_dia1KeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
+                .addContainerGap(424, Short.MAX_VALUE)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(299, 299, 299))
             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -875,6 +924,18 @@ public class Ingre extends javax.swing.JPanel {
 
         jLabel2.setText("FECHA DE INGRESO");
 
+        fecha_ingreso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fecha_ingresoKeyPressed(evt);
+            }
+        });
+
+        fecha_egreso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fecha_egresoKeyPressed(evt);
+            }
+        });
+
         Obtener.setText("Obtener Total");
         Obtener.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -913,6 +974,11 @@ public class Ingre extends javax.swing.JPanel {
         Parcela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ParcelaActionPerformed(evt);
+            }
+        });
+        Parcela.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ParcelaKeyPressed(evt);
             }
         });
 
@@ -992,6 +1058,11 @@ public class Ingre extends javax.swing.JPanel {
         pasar_dia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pasar_diaActionPerformed(evt);
+            }
+        });
+        pasar_dia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pasar_diaKeyPressed(evt);
             }
         });
 
@@ -1135,7 +1206,7 @@ public class Ingre extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1189,7 +1260,7 @@ public class Ingre extends javax.swing.JPanel {
                         .addGroup(jPanel10Layout.createSequentialGroup()
                             .addGap(306, 306, 306)
                             .addComponent(ingreso_vehiculo))))
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addContainerGap(683, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1284,7 +1355,7 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1071, Short.MAX_VALUE)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(310, 310, 310)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1292,7 +1363,7 @@ public class Ingre extends javax.swing.JPanel {
                             .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(dni_buscado, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 369, Short.MAX_VALUE)))
+                        .addGap(0, 587, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1325,7 +1396,7 @@ public class Ingre extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(vehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 867, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(vehiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2018,6 +2089,380 @@ public class Ingre extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_tabla_egresoKeyPressed
+
+    private void pasar_diaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasar_diaKeyPressed
+        
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+
+            int c = controlador.Controldnirepetidoingreso(documento_e.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_e.getText());
+
+            if (documento_e.getText().equals("") || nombre_e.getText().equals("")) {
+                throw new Exception();
+            }
+            if (c == 0 && b == 0) {
+                if (pasar_dia.isSelected()) {
+
+                    ingre_dia("alumno", documento_e.getText(), nombre_e.getText());
+                } else {
+                    ingre();
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_pasar_diaKeyPressed
+
+    private void ParcelaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ParcelaKeyPressed
+        
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+
+            int c = controlador.Controldnirepetidoingreso(documento_e.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_e.getText());
+
+            if (documento_e.getText().equals("") || nombre_e.getText().equals("")) {
+                throw new Exception();
+            }
+            if (c == 0 && b == 0) {
+                if (pasar_dia.isSelected()) {
+
+                    ingre_dia("alumno", documento_e.getText(), nombre_e.getText());
+                } else {
+                    ingre();
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_ParcelaKeyPressed
+
+    private void fecha_egresoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_egresoKeyPressed
+         
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+
+            int c = controlador.Controldnirepetidoingreso(documento_e.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_e.getText());
+
+            if (documento_e.getText().equals("") || nombre_e.getText().equals("")) {
+                throw new Exception();
+            }
+            if (c == 0 && b == 0) {
+                if (pasar_dia.isSelected()) {
+
+                    ingre_dia("alumno", documento_e.getText(), nombre_e.getText());
+                } else {
+                    ingre();
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_fecha_egresoKeyPressed
+
+    private void fecha_ingresoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_ingresoKeyPressed
+         
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            try {
+
+            int c = controlador.Controldnirepetidoingreso(documento_e.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_e.getText());
+
+            if (documento_e.getText().equals("") || nombre_e.getText().equals("")) {
+                throw new Exception();
+            }
+            if (c == 0 && b == 0) {
+                if (pasar_dia.isSelected()) {
+
+                    ingre_dia("alumno", documento_e.getText(), nombre_e.getText());
+                } else {
+                    ingre();
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_fecha_ingresoKeyPressed
+
+    private void Parsela_aKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Parsela_aKeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) { 
+        try {
+            int c = controlador.Controldnirepetidoingreso(documento_a.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_a.getText());
+
+            if (documento_a.getText().equals("") || nombre_a.getText().equals("") || apellido_a.getText().isEmpty() || cod_aportante.getText().isEmpty()) {
+                throw new Exception();
+            }
+
+            if (c == 0 && b == 0) {
+                if (pasar_dia1.isSelected()) {
+                    ingre_dia("aportante", documento_a.getText(), nombre_a.getText());
+                } else {
+                    ingre_a();
+                }
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        }
+        
+    }//GEN-LAST:event_Parsela_aKeyPressed
+
+    private void fecha_ingreso_p1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_ingreso_p1KeyPressed
+         if (evt.getKeyChar() == KeyEvent.VK_ENTER) { 
+        try {
+            int c = controlador.Controldnirepetidoingreso(documento_a.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_a.getText());
+
+            if (documento_a.getText().equals("") || nombre_a.getText().equals("") || apellido_a.getText().isEmpty() || cod_aportante.getText().isEmpty()) {
+                throw new Exception();
+            }
+
+            if (c == 0 && b == 0) {
+                if (pasar_dia1.isSelected()) {
+                    ingre_dia("aportante", documento_a.getText(), nombre_a.getText());
+                } else {
+                    ingre_a();
+                }
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_fecha_ingreso_p1KeyPressed
+
+    private void fecha_egreso_p1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_egreso_p1KeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) { 
+        try {
+            int c = controlador.Controldnirepetidoingreso(documento_a.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_a.getText());
+
+            if (documento_a.getText().equals("") || nombre_a.getText().equals("") || apellido_a.getText().isEmpty() || cod_aportante.getText().isEmpty()) {
+                throw new Exception();
+            }
+
+            if (c == 0 && b == 0) {
+                if (pasar_dia1.isSelected()) {
+                    ingre_dia("aportante", documento_a.getText(), nombre_a.getText());
+                } else {
+                    ingre_a();
+                }
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_fecha_egreso_p1KeyPressed
+
+    private void pasar_dia1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasar_dia1KeyPressed
+         if (evt.getKeyChar() == KeyEvent.VK_ENTER) { 
+        try {
+            int c = controlador.Controldnirepetidoingreso(documento_a.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_a.getText());
+
+            if (documento_a.getText().equals("") || nombre_a.getText().equals("") || apellido_a.getText().isEmpty() || cod_aportante.getText().isEmpty()) {
+                throw new Exception();
+            }
+
+            if (c == 0 && b == 0) {
+                if (pasar_dia1.isSelected()) {
+                    ingre_dia("aportante", documento_a.getText(), nombre_a.getText());
+                } else {
+                    ingre_a();
+                }
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_pasar_dia1KeyPressed
+
+    private void Boton_ingreso_pKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Boton_ingreso_pKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Boton_ingreso_pKeyPressed
+
+    private void pasar_dia2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasar_dia2KeyPressed
+         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            
+        try {
+            int c = controlador.Controldnirepetidoingreso(documento_p.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_p.getText());
+
+            if (documento_p.getText().equals("") || nombre_p.getText().equals("")) {
+                throw new Exception();
+            }
+
+            if (c == 0 && b == 0) {
+                if (pasar_dia2.isSelected()) {
+
+                    ingre_dia("particular", documento_p.getText(), nombre_p.getText());
+                } else {
+                    ingre_p();
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+         }
+    }//GEN-LAST:event_pasar_dia2KeyPressed
+
+    private void Parsela_pKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Parsela_pKeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            
+        try {
+            int c = controlador.Controldnirepetidoingreso(documento_p.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_p.getText());
+
+            if (documento_p.getText().equals("") || nombre_p.getText().equals("")) {
+                throw new Exception();
+            }
+
+            if (c == 0 && b == 0) {
+                if (pasar_dia2.isSelected()) {
+
+                    ingre_dia("particular", documento_p.getText(), nombre_p.getText());
+                } else {
+                    ingre_p();
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+         }
+    }//GEN-LAST:event_Parsela_pKeyPressed
+
+    private void fecha_ingreso_pKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_ingreso_pKeyPressed
+       if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            
+        try {
+            int c = controlador.Controldnirepetidoingreso(documento_p.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_p.getText());
+
+            if (documento_p.getText().equals("") || nombre_p.getText().equals("")) {
+                throw new Exception();
+            }
+
+            if (c == 0 && b == 0) {
+                if (pasar_dia2.isSelected()) {
+
+                    ingre_dia("particular", documento_p.getText(), nombre_p.getText());
+                } else {
+                    ingre_p();
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+         }
+       
+    }//GEN-LAST:event_fecha_ingreso_pKeyPressed
+
+    private void fecha_egreso_pKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_egreso_pKeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            
+        try {
+            int c = controlador.Controldnirepetidoingreso(documento_p.getText());
+            int b = controlador.Controldnirepetidoingresodiario(documento_p.getText());
+
+            if (documento_p.getText().equals("") || nombre_p.getText().equals("")) {
+                throw new Exception();
+            }
+
+            if (c == 0 && b == 0) {
+                if (pasar_dia2.isSelected()) {
+
+                    ingre_dia("particular", documento_p.getText(), nombre_p.getText());
+                } else {
+                    ingre_p();
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+         }
+    }//GEN-LAST:event_fecha_egreso_pKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
