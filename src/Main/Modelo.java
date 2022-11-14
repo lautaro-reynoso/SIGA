@@ -1,9 +1,12 @@
 package Main;
 
+import Paneles_principales.Login;
+import static Paneles_rotativos.Ingre.calendario;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Modelo {
 
@@ -238,12 +241,6 @@ public class Modelo {
         String sql = "UPDATE tarifas SET particular_d = ' " + particular + " ' WHERE id = 8";
         return Main.conexion.EjecutarOperacion(sql);
     }
-    
-    
-    
-    
-    
-    
 
     public int insertarvehiculo(String patente, String marca, String importe) {
         String sql = "INSERT INTO vehiculos (marca,patente,importe)"
@@ -290,28 +287,138 @@ public class Modelo {
 
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
-    
-    
-    
-    
-    
-     public int ModificarParcela(int parcela, int parcela_actual) {
-        String sql = "UPDATE ingreso SET parsela = '" + Integer.toString(parcela_actual) + "' WHERE parsela = "+Integer.toString(parcela);
+
+    public int ModificarParcela(int parcela, int parcela_actual) {
+        String sql = "UPDATE ingreso SET parsela = '" + Integer.toString(parcela_actual) + "' WHERE parsela = " + Integer.toString(parcela);
         //     String sql = "UPDATE tarifas SET tarifa_particular = ' " + particular + " ' WHERE id = 8";
-        
-            System.out.println(parcela + "::::" + parcela_actual);
-        
+
+        System.out.println(parcela + "::::" + parcela_actual);
+
         return Main.conexion.EjecutarOperacion(sql);
     }
 
-     
-        public ResultSet MostrarEgreso() {
+    public ResultSet MostrarEgreso() {
         String sql;
         sql = "SELECT * FROM egreso WHERE fecha_egreso = '" + Main.DiaActual + "'";
 
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
-     
-     
-     
+
+    public int AbrirCaja(String monto_inicial) {
+        String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+
+        String hora_actual = hora + ":" + minutos;
+        String sql = "INSERT INTO caja_abierta (usuario,retiros,plata_en_caja,fecha_abertura)" + "VALUES('" + Login.usuario + "','" + "0" + "','" + monto_inicial + "','" + Main.DiaActual + " " + hora_actual + "')";
+        return Main.conexion.EjecutarOperacion(sql);
+
+    }
+
+    public ResultSet cajausuario(String usuario) {
+        String sql;
+        sql = "SELECT * FROM caja_abierta WHERE usuario = '" + usuario + "'";
+
+        return Main.conexion.EjecutarConsultaSQL(sql);
+    }
+
+    public int CerrarCaja(String usuario) throws SQLException {
+        String sql;
+        sql = "SELECT * FROM caja_abierta WHERE usuario = '" + usuario + "'";
+        String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+
+        String hora_actual = hora + ":" + minutos;
+        ResultSet res = Main.conexion.EjecutarConsultaSQL(sql);
+
+        if (res.next()) {
+            String fecha_abertura = res.getString("fecha_abertura");
+            float retiros = Float.valueOf(res.getString("retiros"));
+            float plata_en_caja = Float.valueOf(res.getString("plata_en_caja"));
+
+            float plata_alcierre = (plata_en_caja-retiros);
+            
+            
+            String sql2 = "INSERT INTO caja_cerradas (usuario,retiros,total_recaudado,fecha_abertura,fecha_cierre,plata_en_caja_al_cierre)" + "VALUES('" + usuario
+                    + "','" + retiros + "','" + String.valueOf(plata_en_caja) + "','" + fecha_abertura + "','" + Main.DiaActual + " " + hora_actual + "','" + String.valueOf(plata_alcierre) + "')";
+            int v = Main.conexion.EjecutarOperacion(sql2);
+
+            if (v == 1) {
+
+                String sql3 = "DELETE FROM caja_abierta WHERE usuario = '" + usuario + "'";
+
+                int v1 = Main.conexion.EjecutarOperacion(sql3);
+                if (v1 != 1) {
+                    return 2;
+                } else {
+                    return 1;//todo ok
+                }
+
+            } else {
+                return 2; //error no pudo cerra caja
+            }
+
+        } else {
+            return 2;//error no encontro ninguna caja abierta a este usuario
+        }
+
+    }
+
+    public int generearretiro(String importe_retiro) throws SQLException {
+        String sql1;
+        sql1 = "SELECT * FROM caja_abierta WHERE usuario = '" + Login.usuario + "'";
+
+        ResultSet res = Main.conexion.EjecutarConsultaSQL(sql1);
+        if (res.next()) {
+            float retiro = Float.valueOf(res.getString("retiros"));
+
+            float retiro_total = retiro + Float.valueOf(importe_retiro);
+
+            String sql = "UPDATE caja_abierta SET retiros = ' " + String.valueOf(retiro_total) + " ' WHERE usuario = '" + Login.usuario + "'";
+
+            int respuesta = Main.conexion.EjecutarOperacion(sql);
+            if (respuesta == 1) {
+                String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+                String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+
+                String hora_actual = hora + ":" + minutos;
+
+                String sql3 = "INSERT INTO retiros (usuario,fecha_hora,importe)" + "VALUES('" + Login.usuario + "','" + Main.DiaActual +  "','" + importe_retiro + "')";
+                Main.conexion.EjecutarOperacion(sql3);
+            } else {
+                return 0;
+            }
+
+        } else {
+            return 0;
+        }
+        return 0;
+    }
+    
+    public ResultSet mostrarretiros (String usuario){
+        String sql1;
+        sql1 = "SELECT * FROM retiros WHERE usuario = '" + Login.usuario + "'";
+
+        ResultSet res = Main.conexion.EjecutarConsultaSQL(sql1);
+        return res;
+    }
+    
+    public int insertardinerocaja(float importe) throws SQLException{
+        String sql1;
+        sql1 = "SELECT * FROM caja_abierta WHERE usuario = '" + Login.usuario + "'";
+
+        ResultSet res = Main.conexion.EjecutarConsultaSQL(sql1);
+        if (res.next()) {
+            float actual = Float.valueOf(res.getString("plata_en_caja"));
+
+            float ingreso_total = actual + importe;
+
+            String sql = "UPDATE caja_abierta SET plata_en_caja = ' " + String.valueOf(ingreso_total) + " ' WHERE usuario = '" + Login.usuario + "'";
+            int respuesta = Main.conexion.EjecutarOperacion(sql);
+            if (respuesta == 1){
+                return respuesta;
+            }
+        }else
+            return 0;
+        return 0;
+    }
 }

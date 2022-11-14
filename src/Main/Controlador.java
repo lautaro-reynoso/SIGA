@@ -1,5 +1,6 @@
 package Main;
 
+import Paneles_principales.Login;
 import static Paneles_rotativos.Ingre.calendario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -101,13 +102,26 @@ public class Controlador {
         }
         return 0;
     }
+    
+    public int ControlarCajaAbierta () throws SQLException{
+        
+        ResultSet res = modelo.cajausuario(Login.usuario);
+        
+        if(res.next()){
+            return 1; //existe una caja abierta
+        }
+        else{
+            return 0;
+        }
+        
+    }
 
     public int IngresoDiario(String documento, String nombre, String hora_ingreso, String categoria) {
         if (Main.conexion != null) {
 
             //devuelve 1 si se completo el registro
             int c = modelo.InsertarIngresoDiario(documento, nombre, hora_ingreso, categoria);
-
+            
             if (c == 1) {
                 return c;
             } else {

@@ -47,7 +47,6 @@ public class OcupacionC extends javax.swing.JPanel {
                     i = 128;
 
                 }
-                
 
             }
 
@@ -2114,7 +2113,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j50MousePressed
 
     private void j51MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j51MousePressed
-  
+
         try {
             traerinfo(51);
         } catch (SQLException ex) {
@@ -2124,7 +2123,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j51MousePressed
 
     private void j52MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j52MousePressed
-       
+
         try {
             traerinfo(52);
         } catch (SQLException ex) {
@@ -2134,7 +2133,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j52MousePressed
 
     private void j53MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j53MousePressed
-        
+
         try {
             traerinfo(53);
         } catch (SQLException ex) {
@@ -2144,7 +2143,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j53MousePressed
 
     private void j54MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j54MousePressed
-    
+
         try {
             traerinfo(54);
         } catch (SQLException ex) {
@@ -2154,7 +2153,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j54MousePressed
 
     private void j55MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j55MousePressed
-      
+
         try {
             traerinfo(55);
         } catch (SQLException ex) {
@@ -2164,7 +2163,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j55MousePressed
 
     private void j56MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j56MousePressed
-   
+
         try {
             traerinfo(56);
         } catch (SQLException ex) {
@@ -2174,7 +2173,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j56MousePressed
 
     private void j57MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j57MousePressed
-    
+
         try {
             traerinfo(57);
         } catch (SQLException ex) {
@@ -2184,7 +2183,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j57MousePressed
 
     private void j58MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j58MousePressed
-  
+
         try {
             traerinfo(58);
         } catch (SQLException ex) {
@@ -2194,7 +2193,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j58MousePressed
 
     private void j59MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j59MousePressed
-       
+
         try {
             traerinfo(59);
         } catch (SQLException ex) {
@@ -2204,7 +2203,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j59MousePressed
 
     private void j60MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j60MousePressed
-       
+
         try {
             traerinfo(60);
         } catch (SQLException ex) {
@@ -2214,7 +2213,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j60MousePressed
 
     private void j61MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j61MousePressed
-     
+
         try {
             traerinfo(61);
         } catch (SQLException ex) {
@@ -2224,7 +2223,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j61MousePressed
 
     private void j62MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j62MousePressed
-     
+
         try {
             traerinfo(62);
         } catch (SQLException ex) {
@@ -2234,7 +2233,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j62MousePressed
 
     private void j63MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j63MousePressed
-  
+
         try {
             traerinfo(63);
         } catch (SQLException ex) {
@@ -2244,7 +2243,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j63MousePressed
 
     private void j64MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j64MousePressed
-     
+
         try {
             traerinfo(64);
         } catch (SQLException ex) {
@@ -2254,7 +2253,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j64MousePressed
 
     private void j65MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j65MousePressed
-      
+
         try {
             traerinfo(65);
         } catch (SQLException ex) {
@@ -2264,7 +2263,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j65MousePressed
 
     private void j66MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j66MousePressed
-    
+
         try {
             traerinfo(66);
         } catch (SQLException ex) {
@@ -2274,7 +2273,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j66MousePressed
 
     private void j67MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j67MousePressed
-    
+
         try {
             traerinfo(67);
         } catch (SQLException ex) {
@@ -2284,7 +2283,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j67MousePressed
 
     private void j68MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j68MousePressed
-   
+
         try {
             traerinfo(68);
         } catch (SQLException ex) {
@@ -2294,7 +2293,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j68MousePressed
 
     private void j69MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j69MousePressed
-       
+
         try {
             traerinfo(69);
         } catch (SQLException ex) {
@@ -2304,7 +2303,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j69MousePressed
 
     private void j70MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j70MousePressed
-        
+
         try {
             traerinfo(70);
         } catch (SQLException ex) {
@@ -2314,7 +2313,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j70MousePressed
 
     private void j71MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j71MousePressed
-      
+
         try {
             traerinfo(71);
         } catch (SQLException ex) {
@@ -2324,7 +2323,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j71MousePressed
 
     private void j72MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j72MousePressed
-      
+
         try {
             traerinfo(72);
         } catch (SQLException ex) {
@@ -2334,7 +2333,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j72MousePressed
 
     private void j73MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j73MousePressed
-    
+
         try {
             traerinfo(73);
         } catch (SQLException ex) {
@@ -2344,7 +2343,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j73MousePressed
 
     private void j74MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j74MousePressed
-       
+
         try {
             traerinfo(74);
         } catch (SQLException ex) {
@@ -2354,7 +2353,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j74MousePressed
 
     private void j75MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j75MousePressed
-  
+
         try {
             traerinfo(75);
         } catch (SQLException ex) {
@@ -2364,7 +2363,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j75MousePressed
 
     private void j76MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j76MousePressed
-       
+
         try {
             traerinfo(76);
         } catch (SQLException ex) {
@@ -2374,7 +2373,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j76MousePressed
 
     private void j77MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j77MousePressed
-    
+
         try {
             traerinfo(77);
         } catch (SQLException ex) {
@@ -2384,7 +2383,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j77MousePressed
 
     private void j78MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j78MousePressed
-      
+
         try {
             traerinfo(78);
         } catch (SQLException ex) {
@@ -2394,7 +2393,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j78MousePressed
 
     private void j79MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j79MousePressed
-     
+
         try {
             traerinfo(79);
         } catch (SQLException ex) {
@@ -2404,7 +2403,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j79MousePressed
 
     private void j80MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j80MousePressed
-     
+
         try {
             traerinfo(80);
         } catch (SQLException ex) {
@@ -2414,7 +2413,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j80MousePressed
 
     private void j81MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j81MousePressed
-      
+
         try {
             traerinfo(81);
         } catch (SQLException ex) {
@@ -2424,7 +2423,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j81MousePressed
 
     private void j82MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j82MousePressed
-     
+
         try {
             traerinfo(82);
         } catch (SQLException ex) {
@@ -2434,7 +2433,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j82MousePressed
 
     private void j83MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j83MousePressed
-        
+
         try {
             traerinfo(83);
         } catch (SQLException ex) {
@@ -2444,7 +2443,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j83MousePressed
 
     private void j84MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j84MousePressed
-      
+
         try {
             traerinfo(84);
         } catch (SQLException ex) {
@@ -2454,7 +2453,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j84MousePressed
 
     private void j85MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j85MousePressed
-    
+
         try {
             traerinfo(85);
         } catch (SQLException ex) {
@@ -2464,7 +2463,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j85MousePressed
 
     private void j86MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j86MousePressed
-       
+
         try {
             traerinfo(86);
         } catch (SQLException ex) {
@@ -2484,7 +2483,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j87MousePressed
 
     private void j88MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j88MousePressed
-  
+
         try {
             traerinfo(88);
         } catch (SQLException ex) {
@@ -2494,7 +2493,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j88MousePressed
 
     private void j89MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j89MousePressed
-  
+
         try {
             traerinfo(89);
         } catch (SQLException ex) {
@@ -2504,7 +2503,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j89MousePressed
 
     private void j90MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j90MousePressed
-    
+
         try {
             traerinfo(90);
         } catch (SQLException ex) {
@@ -2524,7 +2523,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j91MousePressed
 
     private void j92MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j92MousePressed
-  
+
         try {
             traerinfo(92);
         } catch (SQLException ex) {
@@ -2534,7 +2533,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j92MousePressed
 
     private void j93MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j93MousePressed
-   
+
         try {
             traerinfo(93);
         } catch (SQLException ex) {
@@ -2544,7 +2543,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j93MousePressed
 
     private void j94MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j94MousePressed
-      
+
         try {
             traerinfo(94);
         } catch (SQLException ex) {
@@ -2554,7 +2553,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j94MousePressed
 
     private void j95MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j95MousePressed
-  
+
         try {
             traerinfo(95);
         } catch (SQLException ex) {
@@ -2564,7 +2563,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j95MousePressed
 
     private void j96MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j96MousePressed
-      
+
         try {
             traerinfo(96);
         } catch (SQLException ex) {
@@ -2574,7 +2573,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j96MousePressed
 
     private void j97MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j97MousePressed
-      
+
         try {
             traerinfo(97);
         } catch (SQLException ex) {
@@ -2584,7 +2583,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j97MousePressed
 
     private void j98MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j98MousePressed
-   
+
         try {
             traerinfo(98);
         } catch (SQLException ex) {
@@ -2594,7 +2593,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j98MousePressed
 
     private void j99MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j99MousePressed
-  
+
         try {
             traerinfo(99);
         } catch (SQLException ex) {
@@ -2604,7 +2603,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j99MousePressed
 
     private void j100MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j100MousePressed
- 
+
         try {
             traerinfo(100);
         } catch (SQLException ex) {
@@ -2614,7 +2613,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j100MousePressed
 
     private void j101MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j101MousePressed
-       
+
         try {
             traerinfo(101);
         } catch (SQLException ex) {
@@ -2624,7 +2623,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j101MousePressed
 
     private void j102MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j102MousePressed
- 
+
         try {
             traerinfo(102);
         } catch (SQLException ex) {
@@ -2634,7 +2633,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j102MousePressed
 
     private void j103MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j103MousePressed
-   
+
         try {
             traerinfo(103);
         } catch (SQLException ex) {
@@ -2644,7 +2643,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j103MousePressed
 
     private void j104MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j104MousePressed
-    
+
         try {
             traerinfo(104);
         } catch (SQLException ex) {
@@ -2654,7 +2653,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j104MousePressed
 
     private void j105MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j105MousePressed
-    
+
         try {
             traerinfo(105);
         } catch (SQLException ex) {
@@ -2664,7 +2663,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j105MousePressed
 
     private void j106MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j106MousePressed
-    
+
         try {
             traerinfo(106);
         } catch (SQLException ex) {
@@ -2674,7 +2673,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j106MousePressed
 
     private void j107MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j107MousePressed
-    
+
         try {
             traerinfo(107);
         } catch (SQLException ex) {
@@ -2684,7 +2683,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j107MousePressed
 
     private void j108MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j108MousePressed
-  
+
         try {
             traerinfo(108);
         } catch (SQLException ex) {
@@ -2694,7 +2693,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j108MousePressed
 
     private void j109MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j109MousePressed
-    
+
         try {
             traerinfo(109);
         } catch (SQLException ex) {
@@ -2704,7 +2703,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j109MousePressed
 
     private void j110MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j110MousePressed
-      
+
         try {
             traerinfo(110);
         } catch (SQLException ex) {
@@ -2714,7 +2713,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j110MousePressed
 
     private void j111MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j111MousePressed
-     
+
         try {
             traerinfo(111);
         } catch (SQLException ex) {
@@ -2724,7 +2723,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j111MousePressed
 
     private void j112MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j112MousePressed
-    
+
         try {
             traerinfo(112);
         } catch (SQLException ex) {
@@ -2734,7 +2733,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j112MousePressed
 
     private void j113MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j113MousePressed
-     
+
         try {
             traerinfo(113);
         } catch (SQLException ex) {
@@ -2744,7 +2743,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j113MousePressed
 
     private void j114MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j114MousePressed
-     
+
         try {
             traerinfo(114);
         } catch (SQLException ex) {
@@ -2754,7 +2753,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j114MousePressed
 
     private void j115MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j115MousePressed
-       
+
         try {
             traerinfo(115);
         } catch (SQLException ex) {
@@ -2764,7 +2763,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j115MousePressed
 
     private void j116MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j116MousePressed
-      
+
         try {
             traerinfo(116);
         } catch (SQLException ex) {
@@ -2774,7 +2773,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j116MousePressed
 
     private void j117MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j117MousePressed
-  
+
         try {
             traerinfo(117);
         } catch (SQLException ex) {
@@ -2794,7 +2793,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j118MousePressed
 
     private void j119MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j119MousePressed
-        
+
         try {
             traerinfo(119);
         } catch (SQLException ex) {
@@ -2804,7 +2803,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j119MousePressed
 
     private void j120MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j120MousePressed
-   
+
         try {
             traerinfo(120);
         } catch (SQLException ex) {
@@ -2814,7 +2813,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j120MousePressed
 
     private void j121MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j121MousePressed
-    
+
         try {
             traerinfo(121);
         } catch (SQLException ex) {
@@ -2824,7 +2823,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j121MousePressed
 
     private void j122MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j122MousePressed
-       
+
         try {
             traerinfo(122);
         } catch (SQLException ex) {
@@ -2834,7 +2833,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j122MousePressed
 
     private void j123MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j123MousePressed
-      
+
         try {
             traerinfo(123);
         } catch (SQLException ex) {
@@ -2844,7 +2843,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j123MousePressed
 
     private void j124MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j124MousePressed
-     
+
         try {
             traerinfo(124);
         } catch (SQLException ex) {
@@ -2854,7 +2853,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j124MousePressed
 
     private void j125MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j125MousePressed
-   
+
         try {
             traerinfo(125);
         } catch (SQLException ex) {
@@ -2864,7 +2863,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j125MousePressed
 
     private void j126MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j126MousePressed
-  
+
         try {
             traerinfo(126);
         } catch (SQLException ex) {
@@ -2874,7 +2873,7 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_j126MousePressed
 
     private void j127MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j127MousePressed
-    
+
         try {
             traerinfo(127);
         } catch (SQLException ex) {
