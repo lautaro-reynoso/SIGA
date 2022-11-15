@@ -82,6 +82,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(214, 226, 195));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
