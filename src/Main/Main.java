@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 /**
  *
- * @author lauti
+ * @author ig:lauti_reynosoo
  */
 public class Main {
     public static Controlador controlador = new Controlador();

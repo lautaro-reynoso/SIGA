@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 
 import java.util.Scanner;
-
+//ig:lauti_reynosoo
 public class Controlador {
 
     Modelo modelo = new Modelo();

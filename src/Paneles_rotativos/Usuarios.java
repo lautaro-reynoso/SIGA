@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author lauti
+ * @author ig:lauti_reynosoo
  */
 public class Usuarios extends javax.swing.JPanel {
 

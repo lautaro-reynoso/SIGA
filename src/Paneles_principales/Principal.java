@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author mateo
+ * @author ig:lauti_reynosoo
  */
 public class Principal extends javax.swing.JFrame {
 
@@ -243,6 +243,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void PadronMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PadronMousePressed

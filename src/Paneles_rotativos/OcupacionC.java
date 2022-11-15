@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author mateo
+ * @author ig:lauti_reynosoo
  */
 public class OcupacionC extends javax.swing.JPanel {
 

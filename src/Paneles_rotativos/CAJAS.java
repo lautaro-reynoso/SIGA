@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author lauti
+ * @author ig:lauti_reynosoo
  */
 public class Cajas extends javax.swing.JPanel {
 
