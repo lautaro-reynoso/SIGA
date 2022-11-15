@@ -215,11 +215,7 @@ public class Controlador {
 
             int c = modelo.EliminarSalida(dni);
 
-            if (c == 1) {
-                return 1;
-            } else {
-                return 0;
-            }
+            return c;
 
         }
         return 0;

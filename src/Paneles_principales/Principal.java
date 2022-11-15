@@ -65,7 +65,7 @@ public class Principal extends javax.swing.JFrame {
         Ingreso = new javax.swing.JLabel();
         Inicio = new javax.swing.JLabel();
         Usuarios = new javax.swing.JLabel();
-        CAJAS = new javax.swing.JLabel();
+        Ocupacion = new javax.swing.JLabel();
         Padron = new javax.swing.JLabel();
         Cajas = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
@@ -182,18 +182,18 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(Usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 121, 179, 52));
 
-        CAJAS.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        CAJAS.setForeground(new java.awt.Color(0, 46, 15));
-        CAJAS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CAJAS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_supervised_user_circle_black_24dp.png"))); // NOI18N
-        CAJAS.setText("OCUPACION");
-        CAJAS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        CAJAS.addMouseListener(new java.awt.event.MouseAdapter() {
+        Ocupacion.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        Ocupacion.setForeground(new java.awt.Color(0, 46, 15));
+        Ocupacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Ocupacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_supervised_user_circle_black_24dp.png"))); // NOI18N
+        Ocupacion.setText("OCUPACION");
+        Ocupacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Ocupacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                CAJASMousePressed(evt);
+                OcupacionMousePressed(evt);
             }
         });
-        jPanel2.add(CAJAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 179, 45));
+        jPanel2.add(Ocupacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 179, 45));
 
         Padron.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         Padron.setForeground(new java.awt.Color(0, 46, 15));
@@ -249,27 +249,29 @@ public class Principal extends javax.swing.JFrame {
         Padron.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
         Inicio.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
-        CAJAS.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(padron);
     }//GEN-LAST:event_PadronMousePressed
 
-    private void CAJASMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CAJASMousePressed
+    private void OcupacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OcupacionMousePressed
         try {
             ocupacionC.ActualizarOcupacion();
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        CAJAS.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
         Inicio.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(ocupacionC);
 
-    }//GEN-LAST:event_CAJASMousePressed
+    }//GEN-LAST:event_OcupacionMousePressed
 
     private void UsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsuariosMousePressed
         Usuarios.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
@@ -277,7 +279,8 @@ public class Principal extends javax.swing.JFrame {
         Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
-        CAJAS.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         usuarios.actualizarUsuario();
         MostrarPanel(usuarios);
 
@@ -295,14 +298,24 @@ public class Principal extends javax.swing.JFrame {
         Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
-        CAJAS.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(ingreso);
         try {
             ingreso.Tabla();
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+        try {
+            ingreso.prueba();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ingreso.BusquedaVehiculos();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ingreso.setearnullalumno();
         ingreso.setearnullparticular();
         ingreso.setearnullaportante();
@@ -318,8 +331,14 @@ public class Principal extends javax.swing.JFrame {
         Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
-        CAJAS.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(salidas);
+          try { 
+            salidas.tabla_salidas_temp();
+        } catch (SQLException ex) {
+            Logger.getLogger(Salidas_temporales.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_SalidasTemporalesMousePressed
 
     private void SalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMousePressed
@@ -332,7 +351,8 @@ public class Principal extends javax.swing.JFrame {
         Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
-        CAJAS.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(inicio);
     }//GEN-LAST:event_InicioMousePressed
 
@@ -342,7 +362,7 @@ public class Principal extends javax.swing.JFrame {
         Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Padron.setFont(new java.awt.Font("Segoe UI ", 0, 10));
-        CAJAS.setFont(new java.awt.Font("Segoe UI ", 0, 10));
+        Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(cajas);
         try {
             cajas.tablacajaabierta();
@@ -374,10 +394,10 @@ public class Principal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CAJAS;
     private javax.swing.JLabel Cajas;
     private javax.swing.JLabel Ingreso;
     private javax.swing.JLabel Inicio;
+    private javax.swing.JLabel Ocupacion;
     private javax.swing.JLabel Padron;
     private javax.swing.JLabel SalidasTemporales;
     private javax.swing.JLabel Salir;

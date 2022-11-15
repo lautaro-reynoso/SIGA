@@ -304,7 +304,8 @@ public class Login extends javax.swing.JFrame {
             if (c) {
                 controlador.SetearPrivilegio(usuario);
 
-                modelo.ConsultarSalida(); //  JFrame1.dispose();  Remove JFrame 1
+                modelo.ConsultarSalida();
+                modelo.egreso_diario();//  JFrame1.dispose();  Remove JFrame 1
                 Principal principal = new Principal();
                 principal.setVisible(true); //Show other frame
                 dispose();

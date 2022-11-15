@@ -32,13 +32,18 @@ public class OcupacionC extends javax.swing.JPanel {
             j115, j116, j117, j118, j119, j120, j121, j122, j123, j124, j125, j126, j127, j128
 
         };
-
+        for(int i = 0; i < label.length; i++){
+            label[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+                    label[i].setText(String.valueOf(i + 1));
+                    label[i].repaint();
+        }
+       
         ResultSet res;
         res = modelo.MostarOcupacionActual();
 
         while (res.next() == true) {
 
-            for (int i = 0; i <= label.length; i++) {
+            for (int i = 0; i < label.length; i++) {
 
                 if (String.valueOf(i + 1).equals(res.getString("parsela"))) {
                     label[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/false1x.png"))); // NOI18N

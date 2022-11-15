@@ -25,8 +25,8 @@ public class Modelo {
     }
 
     public int InsertarIngresoDiario(String documento, String nombre, String hora_ingreso, String categoria) {
-        String sql = "INSERT INTO ingreso_diario (nombre, dni, hora_ingreso ,categoria)"
-                + "VALUES('" + nombre + "','" + documento + "','" + hora_ingreso + "','" + categoria + "')";
+        String sql = "INSERT INTO ingreso_diario (nombre, dni, hora_ingreso ,categoria,fecha_ingreso)"
+                + "VALUES('" + nombre + "','" + documento + "','" + hora_ingreso + "','" + categoria + "','" +Main.DiaActual+ "')";
         return Main.conexion.EjecutarOperacion(sql);
     }
 
@@ -143,6 +143,43 @@ public class Modelo {
         int v = Main.conexion.EjecutarOperacion(sql2);
 
     }
+    public void egreso_diario() throws SQLException{
+        String sql;
+        ResultSet res;
+
+        sql = "SELECT * FROM ingreso_diario where fecha_ingreso < '" + Main.DiaActual + "'";
+
+        res = Main.conexion.EjecutarConsultaSQL(sql);
+
+        ArrayList<String> nombre = new ArrayList<>();
+        ArrayList<String> documento = new ArrayList<>();
+        ArrayList<String> categoria = new ArrayList<>();
+        ArrayList<String> dia_ingreso = new ArrayList<>();
+        ArrayList<String> hora_ingreso = new ArrayList<>();
+       
+         while (res.next()) {
+
+            documento.add(res.getString("dni"));
+            nombre.add(res.getString("nombre"));
+            categoria.add(res.getString("categoria"));
+            dia_ingreso.add(res.getString("fecha_ingreso"));
+            hora_ingreso.add(res.getString("hora_ingreso"));
+            
+
+        }
+         for (int i = 0; i < documento.size(); i++) {
+
+            String sql1 = "INSERT INTO egreso_diario (documento, nombre, categoria ,fecha_ingreso ,hora_ingreso)"
+                    + "VALUES('" + documento.get(i) + "','" + nombre.get(i) + "','" + categoria.get(i) + "','" + dia_ingreso.get(i) + "','" + hora_ingreso.get(i) + "')";
+            int c = Main.conexion.EjecutarOperacion(sql1);
+
+        }
+        
+        String sql2 = "DELETE FROM ingreso_diario where fecha_ingreso < '" + Main.DiaActual + "'";
+
+        int v = Main.conexion.EjecutarOperacion(sql2);
+        
+    }
 
     public int NuevoUsuario(String nombre, String contrasenia, String privilegios) {
 
@@ -164,6 +201,11 @@ public class Modelo {
 
         return Main.conexion.EjecutarOperacion(sql);
 
+    }
+    public int eliminarvehiculo(String patente){
+        String sql = "DELETE FROM vehiculos WHERE patente = '" + patente + "'";
+
+        return Main.conexion.EjecutarOperacion(sql);
     }
 
     public ResultSet MostarTablaAlumnos() {
@@ -188,7 +230,13 @@ public class Modelo {
         return Main.conexion.EjecutarConsultaSQL(sql);
 
     }
+    public ResultSet ConsultarSalidaTemporales() {
 
+        String sql = "SELECT * FROM salida";
+
+        return Main.conexion.EjecutarConsultaSQL(sql);
+
+    }
     public ResultSet ConsultarSalidaTemporal(String dni) {
 
         String sql = "SELECT * FROM salida where doc = '" + dni + "'";
@@ -317,6 +365,12 @@ public class Modelo {
     public ResultSet cajausuario(String usuario) {
         String sql;
         sql = "SELECT * FROM caja_abierta WHERE usuario = '" + usuario + "'";
+
+        return Main.conexion.EjecutarConsultaSQL(sql);
+    }
+     public ResultSet cajausuariocerrada (String usuario) {
+        String sql;
+        sql = "SELECT * FROM caja_cerradas WHERE usuario = '" + usuario + "'";
 
         return Main.conexion.EjecutarConsultaSQL(sql);
     }

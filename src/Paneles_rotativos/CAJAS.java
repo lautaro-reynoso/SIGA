@@ -7,11 +7,13 @@ package Paneles_rotativos;
 import Main.Controlador;
 import Main.Modelo;
 import Paneles_principales.Login;
+import java.awt.Component;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,7 +24,7 @@ public class Cajas extends javax.swing.JPanel {
 
     Modelo modelo = new Modelo();
 
-    public Cajas() {
+    public Cajas() throws SQLException, SQLException, SQLException {
         initComponents();
     }
 
@@ -53,32 +55,26 @@ public class Cajas extends javax.swing.JPanel {
         tabla_retiros = new javax.swing.JTable();
         jLabel31 = new javax.swing.JLabel();
         jPanel36 = new javax.swing.JPanel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        monto_caja = new javax.swing.JTextField();
         jPanel35 = new javax.swing.JPanel();
         importe_retiro = new javax.swing.JTextField();
         generar_retiro = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jPanel29 = new javax.swing.JPanel();
-        jPanel32 = new javax.swing.JPanel();
-        cantidad_estudiantes = new javax.swing.JTextField();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        ingresos_estudiantes = new javax.swing.JTextField();
-        jLabel51 = new javax.swing.JLabel();
-        jPanel33 = new javax.swing.JPanel();
-        cantidad_particulares = new javax.swing.JTextField();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        ingresos_particulares = new javax.swing.JTextField();
-        jLabel52 = new javax.swing.JLabel();
         jPanel34 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
         actualizar_totales = new javax.swing.JButton();
         jLabel48 = new javax.swing.JLabel();
         ingresos = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cantidad_dia = new javax.swing.JLabel();
+        cantidad_acampantes = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tabla_cajas_cerrada = new javax.swing.JTable();
 
         tabla_cajas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,6 +95,12 @@ public class Cajas extends javax.swing.JPanel {
         jScrollPane6.setViewportView(tabla_cajas);
 
         jPanel40.setBorder(javax.swing.BorderFactory.createTitledBorder("Nueva Caja"));
+
+        importe_inicial_caja.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                importe_inicial_cajaKeyPressed(evt);
+            }
+        });
 
         jLabel11.setText("Caja Inicial");
 
@@ -147,7 +149,7 @@ public class Cajas extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel34.setText("Detalle de Cajas");
+        jLabel34.setText("Detalle de Cajas Abiertas");
 
         cerrar_caja.setText("Cerrar Caja");
         cerrar_caja.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -172,15 +174,17 @@ public class Cajas extends javax.swing.JPanel {
             .addGroup(jPanel39Layout.createSequentialGroup()
                 .addGap(172, 172, 172)
                 .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel34)
-                        .addGroup(jPanel39Layout.createSequentialGroup()
-                            .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(147, 147, 147)
-                            .addComponent(cerrar_caja, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 261, Short.MAX_VALUE))
+                    .addGroup(jPanel39Layout.createSequentialGroup()
+                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel39Layout.createSequentialGroup()
+                                .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(147, 147, 147)
+                                .addComponent(cerrar_caja, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(170, 170, 170)))
+                .addGap(0, 76, Short.MAX_VALUE))
         );
         jPanel39Layout.setVerticalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,9 +198,9 @@ public class Cajas extends javax.swing.JPanel {
                         .addComponent(cerrar_caja, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(jLabel34)
-                .addGap(26, 26, 26)
+                .addGap(20, 20, 20)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -223,11 +227,13 @@ public class Cajas extends javax.swing.JPanel {
 
         jLabel31.setText("Detalle de Retiros");
 
-        jLabel29.setText("$");
-
-        jLabel21.setText("Monto en Caja");
-
         jPanel35.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo Retiro"));
+
+        importe_retiro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                importe_retiroKeyPressed(evt);
+            }
+        });
 
         generar_retiro.setText("Generar Retiro");
         generar_retiro.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -273,27 +279,13 @@ public class Cajas extends javax.swing.JPanel {
             jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel36Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel36Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(monto_caja, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)))
+                .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel36Layout.setVerticalGroup(
             jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel36Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(monto_caja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel29))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -310,7 +302,7 @@ public class Cajas extends javax.swing.JPanel {
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(327, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,122 +314,14 @@ public class Cajas extends javax.swing.JPanel {
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel22Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
+                        .addGap(145, 145, 145)
                         .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         jTabbedPane6.addTab("RETIROS", jPanel22);
 
-        jPanel32.setBorder(javax.swing.BorderFactory.createTitledBorder("Estudiantes"));
-
-        cantidad_estudiantes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cantidad_estudiantes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cantidad_estudiantes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cantidad_estudiantesActionPerformed(evt);
-            }
-        });
-
-        jLabel45.setText("Cantidad de Estudiantes");
-
-        jLabel44.setText("Ingresos Estudiantes");
-
-        ingresos_estudiantes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        ingresos_estudiantes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        ingresos_estudiantes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ingresos_estudiantesActionPerformed(evt);
-            }
-        });
-
-        jLabel51.setText("$");
-
-        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
-        jPanel32.setLayout(jPanel32Layout);
-        jPanel32Layout.setHorizontalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel32Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel45)
-                .addGap(46, 46, 46)
-                .addComponent(cantidad_estudiantes, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel44)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ingresos_estudiantes, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel32Layout.setVerticalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel32Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel45)
-                    .addComponent(cantidad_estudiantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel44)
-                    .addComponent(ingresos_estudiantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel51))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-
-        jPanel33.setBorder(javax.swing.BorderFactory.createTitledBorder("Particulares"));
-
-        cantidad_particulares.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cantidad_particulares.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cantidad_particulares.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cantidad_particularesActionPerformed(evt);
-            }
-        });
-
-        jLabel46.setText("Cantidad de Particulares");
-
-        jLabel43.setText("Ingresos Particulares");
-
-        ingresos_particulares.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        ingresos_particulares.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        ingresos_particulares.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ingresos_particularesActionPerformed(evt);
-            }
-        });
-
-        jLabel52.setText("$");
-
-        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
-        jPanel33.setLayout(jPanel33Layout);
-        jPanel33Layout.setHorizontalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel33Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel46)
-                .addGap(46, 46, 46)
-                .addComponent(cantidad_particulares, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-                .addComponent(jLabel43)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ingresos_particulares, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel33Layout.setVerticalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel33Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel46)
-                        .addComponent(cantidad_particulares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ingresos_particulares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel43)
-                        .addComponent(jLabel52)))
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
+        jPanel34.setBorder(javax.swing.BorderFactory.createTitledBorder("Infomacion Recaudacion de caja"));
 
         jLabel42.setText("Ingresos Actuales");
 
@@ -466,17 +350,14 @@ public class Cajas extends javax.swing.JPanel {
                 .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ingresos, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(actualizar_totales, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel34Layout.setVerticalGroup(
             jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel34Layout.createSequentialGroup()
                 .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel34Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(actualizar_totales, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel34Layout.createSequentialGroup()
                             .addContainerGap()
@@ -485,7 +366,91 @@ public class Cajas extends javax.swing.JPanel {
                             .addGap(16, 16, 16)
                             .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel42)
-                                .addComponent(jLabel48)))))
+                                .addComponent(jLabel48))))
+                    .addGroup(jPanel34Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(actualizar_totales, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        jLabel4.setText("ACTUALIZAR");
+        jLabel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel4MousePressed(evt);
+            }
+        });
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion Diaria "));
+
+        jLabel5.setText("Cantidad De ingresos Diarios de Hoy:");
+
+        jLabel6.setText("Cantidad de Ingresos de Acampantes de hoy:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cantidad_dia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cantidad_acampantes, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cantidad_dia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cantidad_acampantes, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Caja Cerradas de Este usuario"));
+
+        tabla_cajas_cerrada.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Usuario", "Fecha-Hora Apertura", "Fecha-Hora Cierre", "Retiros", "Monto en Caja", "Total Recaudado", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(tabla_cajas_cerrada);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -494,24 +459,32 @@ public class Cajas extends javax.swing.JPanel {
         jPanel29Layout.setHorizontalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel29Layout.createSequentialGroup()
-                .addContainerGap(307, Short.MAX_VALUE)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(307, Short.MAX_VALUE))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(382, 382, 382)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel29Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jPanel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(466, 466, 466)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane6.addTab("INGRESOS TOTALES", jPanel29);
@@ -526,42 +499,20 @@ public class Cajas extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jTabbedPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cantidad_estudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidad_estudiantesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cantidad_estudiantesActionPerformed
-
-    private void ingresos_estudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresos_estudiantesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ingresos_estudiantesActionPerformed
-
-    private void cantidad_particularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidad_particularesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cantidad_particularesActionPerformed
-
-    private void ingresos_particularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresos_particularesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ingresos_particularesActionPerformed
 
     private void actualizar_totalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizar_totalesActionPerformed
 
@@ -651,9 +602,11 @@ public class Cajas extends javax.swing.JPanel {
             float retiro = Float.valueOf(res.getString("retiros"));
             float plata_en_caja = Float.valueOf(res.getString("plata_en_caja"));
 
-            float total_recaudado = (retiro + plata_en_caja);
-
-            String tab[] = {usuario, fecha_apertura, retiros, monto_caja, String.valueOf(total_recaudado), "abierta"};
+            
+            float total_recaudado = plata_en_caja;
+            float montocaja = (plata_en_caja- retiro );
+            
+            String tab[] = {usuario, fecha_apertura, retiros, String.valueOf(montocaja), String.valueOf(total_recaudado), "abierta"};
             
 
             modelo.addRow(tab);
@@ -663,44 +616,7 @@ public class Cajas extends javax.swing.JPanel {
 
     }
 
-    public void cajaabiert() throws SQLException {
-        ResultSet res = modelo.cajausuario(Login.usuario);
-
-        DefaultTableModel modelo = new DefaultTableModel();
-
-        ArrayList<Object> nombrecolumna = new ArrayList<Object>();
-        nombrecolumna.add("Usuario");
-        nombrecolumna.add("Fecha-Hora Apertura");
-        nombrecolumna.add("Retiros");
-        nombrecolumna.add("Monto en Caja");
-        nombrecolumna.add("Total Recaudado");
-        nombrecolumna.add("Estado");
-
-        for (Object columna : nombrecolumna) {
-            modelo.addColumn(columna);
-        }
-
-        this.tabla_cajas.setModel(modelo);
-
-        while (res.next()) {
-
-            String usuario = res.getString("usuario");
-            String fecha_apertura = res.getString("fecha_abertura");
-            String monto_caja = res.getString("plata_en_caja");
-            String retiros = String.valueOf(res.getString("retiros"));
-            float retiro = Float.valueOf(res.getString("retiros"));
-            float plata_en_caja = Float.valueOf(res.getString("plata_en_caja"));
-
-            float total_recaudado = (retiro + plata_en_caja);
-
-            String tab[] = {usuario, fecha_apertura, retiros, monto_caja, String.valueOf(total_recaudado), "abierta"};
-            DefaultTableModel tablamodelo = (DefaultTableModel) tabla_cajas.getModel();
-
-            modelo.addRow(tab);
-        }
-
-        tabla_cajas.setModel(modelo);
-    }
+  
 
     public void actualizarretiros() throws SQLException {
         ResultSet res = modelo.mostrarretiros(Login.usuario);
@@ -772,6 +688,110 @@ public class Cajas extends javax.swing.JPanel {
         }
 
     }
+    public void ingresosactuales(){
+         ResultSet res = modelo.cajausuario(Login.usuario);
+        try {
+            if (res.next()) {
+
+                ingresos.setText(res.getString("plata_en_caja"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void cantacmapantesydiario() throws SQLException{
+        int contador_acampantes=0,contador_diario=0; 
+        ResultSet res = modelo.MostarOcupacionActual();
+        while(res.next()){
+            if(res.getString("fecha_ingreso").equals(Main.Main.DiaActual)){
+                contador_acampantes++;
+            }
+            
+        }
+        ResultSet res2 = modelo.MostarOcupacionActualDia();
+        
+        
+        while(res2.next()){
+            contador_diario++;
+        }
+        
+        cantidad_acampantes.setText(String.valueOf(contador_acampantes));
+        cantidad_dia.setText(String.valueOf(contador_diario));
+        
+    }
+    public void tabla_caja_cerrada() throws SQLException{
+        ResultSet res = modelo.cajausuariocerrada(Login.usuario);
+
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        ArrayList<Object> nombrecolumna = new ArrayList<Object>();
+        nombrecolumna.add("Usuario");
+        nombrecolumna.add("Fecha-Hora Apertura");
+        nombrecolumna.add("Fecha-Hora Cierre");
+        nombrecolumna.add("Retiros");
+        nombrecolumna.add("Monto en Caja");
+        nombrecolumna.add("Total Recaudado");
+        nombrecolumna.add("Estado");
+
+        for (Object columna : nombrecolumna) {
+            modelo.addColumn(columna);
+        }
+
+        this.tabla_cajas_cerrada.setModel(modelo);
+
+        while (res.next()) {
+
+            String usuario = res.getString("usuario");
+            String fecha_apertura = res.getString("fecha_abertura");
+            String fecha_cierre = res.getString("fecha_cierre");
+            
+            String retiros = String.valueOf(res.getString("retiros"));
+            float retiro = Float.valueOf(res.getString("retiros"));
+            float plata_en_caja = Float.valueOf(res.getString("plata_en_caja_al_cierre"));
+
+            float total_recaudado = (retiro + plata_en_caja);
+
+            String tab[] = {usuario, fecha_apertura,fecha_cierre, retiros, String.valueOf(plata_en_caja), String.valueOf(total_recaudado), "cerrada"};
+            
+
+            modelo.addRow(tab);
+        }
+
+        tabla_cajas_cerrada.setModel(modelo);
+
+    }
+    private void actualizar_totalesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actualizar_totalesMousePressed
+
+       ingresosactuales();
+       
+        try {
+            cantacmapantesydiario();
+        } catch (SQLException ex) {
+            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+try {
+            tabla_caja_cerrada();
+        } catch (SQLException ex) {
+            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_actualizar_totalesMousePressed
+
+    private void importe_inicial_cajaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_importe_inicial_cajaKeyPressed
+       char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+            importe_inicial_caja.setText(null);
+        }
+    }//GEN-LAST:event_importe_inicial_cajaKeyPressed
+
     private void generar_retiroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generar_retiroMousePressed
         try {
             generarretiro();
@@ -785,56 +805,50 @@ public class Cajas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_generar_retiroMousePressed
 
-    private void actualizar_totalesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actualizar_totalesMousePressed
+    private void importe_retiroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_importe_retiroKeyPressed
+        char validador = evt.getKeyChar();
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
 
-        ResultSet res = modelo.cajausuario(Login.usuario);
-        try {
-            if (res.next()) {
-
-                ingresos.setText(res.getString("plata_en_caja"));
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+            importe_retiro.setText(null);
         }
+    }//GEN-LAST:event_importe_retiroKeyPressed
 
-    }//GEN-LAST:event_actualizar_totalesMousePressed
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel4MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton actualizar_totales;
-    public javax.swing.JTextField cantidad_estudiantes;
-    public javax.swing.JTextField cantidad_particulares;
+    private javax.swing.JLabel cantidad_acampantes;
+    private javax.swing.JLabel cantidad_dia;
     public javax.swing.JButton cerrar_caja;
     public javax.swing.JButton generar_retiro;
     public javax.swing.JTextField importe_inicial_caja;
     public javax.swing.JTextField importe_retiro;
     private javax.swing.JLabel ingresos;
-    public javax.swing.JTextField ingresos_estudiantes;
-    public javax.swing.JTextField ingresos_particulares;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel29;
-    private javax.swing.JPanel jPanel32;
-    private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel36;
@@ -842,9 +856,10 @@ public class Cajas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel40;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane6;
-    private javax.swing.JTextField monto_caja;
     public javax.swing.JTable tabla_cajas;
+    public javax.swing.JTable tabla_cajas_cerrada;
     public javax.swing.JTable tabla_retiros;
     // End of variables declaration//GEN-END:variables
 

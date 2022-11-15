@@ -6,11 +6,13 @@ package Paneles_rotativos;
 
 import Main.Modelo;
 import Main.Controlador;
+import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -391,7 +393,7 @@ public class Inicio extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(3, 3, 3)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -541,7 +543,7 @@ public class Inicio extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(parcela_e, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -554,7 +556,7 @@ public class Inicio extends javax.swing.JPanel {
                 .addGap(54, 54, 54))
         );
 
-        jTabbedPane1.addTab("BUSQUEDAS", jPanel2);
+        jTabbedPane1.addTab("EGRESANTES/REUBICACION", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -655,6 +657,15 @@ public class Inicio extends javax.swing.JPanel {
                 Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+         char validador = evt.getKeyChar();
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+            busca_parcela.setText(null);
+        }
     }//GEN-LAST:event_busca_parcelaKeyPressed
 
     private void busca_documento2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busca_documento2KeyPressed
@@ -675,6 +686,15 @@ public class Inicio extends javax.swing.JPanel {
                 Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+        }
+         char validador = evt.getKeyChar();
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+            busca_documento1.setText(null);
         }
     }//GEN-LAST:event_busca_documento1KeyPressed
 
