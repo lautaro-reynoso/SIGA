@@ -438,6 +438,7 @@ public class Modelo {
 
                 String sql3 = "INSERT INTO retiros (usuario,fecha_hora,importe)" + "VALUES('" + Login.usuario + "','" + Main.DiaActual +  "','" + importe_retiro + "')";
                 Main.conexion.EjecutarOperacion(sql3);
+                return 1;
             } else {
                 return 0;
             }
@@ -445,15 +446,17 @@ public class Modelo {
         } else {
             return 0;
         }
-        return 0;
+        
     }
     
     public ResultSet mostrarretiros (String usuario){
+        
         String sql1;
         sql1 = "SELECT * FROM retiros WHERE usuario = '" + Login.usuario + "'";
 
         ResultSet res = Main.conexion.EjecutarConsultaSQL(sql1);
         return res;
+        
     }
     
     public int insertardinerocaja(float importe) throws SQLException{

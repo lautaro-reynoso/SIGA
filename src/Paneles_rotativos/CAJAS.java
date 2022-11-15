@@ -602,12 +602,10 @@ public class Cajas extends javax.swing.JPanel {
             float retiro = Float.valueOf(res.getString("retiros"));
             float plata_en_caja = Float.valueOf(res.getString("plata_en_caja"));
 
-            
             float total_recaudado = plata_en_caja;
-            float montocaja = (plata_en_caja- retiro );
-            
+            float montocaja = (plata_en_caja - retiro);
+
             String tab[] = {usuario, fecha_apertura, retiros, String.valueOf(montocaja), String.valueOf(total_recaudado), "abierta"};
-            
 
             modelo.addRow(tab);
         }
@@ -615,8 +613,6 @@ public class Cajas extends javax.swing.JPanel {
         tabla_cajas.setModel(modelo);
 
     }
-
-  
 
     public void actualizarretiros() throws SQLException {
         ResultSet res = modelo.mostrarretiros(Login.usuario);
@@ -676,7 +672,7 @@ public class Cajas extends javax.swing.JPanel {
         if (!importe_retiro.getText().isEmpty()) {
             int respuesta = modelo.generearretiro(importe_retiro.getText());
 
-            if (respuesta != 1) {
+            if (respuesta == 1) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Se registro un retiro exitoso", "Exitoso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
                 actualizarretiros();
             } else {
@@ -688,8 +684,9 @@ public class Cajas extends javax.swing.JPanel {
         }
 
     }
-    public void ingresosactuales(){
-         ResultSet res = modelo.cajausuario(Login.usuario);
+
+    public void ingresosactuales() {
+        ResultSet res = modelo.cajausuario(Login.usuario);
         try {
             if (res.next()) {
 
@@ -700,27 +697,28 @@ public class Cajas extends javax.swing.JPanel {
             Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void cantacmapantesydiario() throws SQLException{
-        int contador_acampantes=0,contador_diario=0; 
+
+    public void cantacmapantesydiario() throws SQLException {
+        int contador_acampantes = 0, contador_diario = 0;
         ResultSet res = modelo.MostarOcupacionActual();
-        while(res.next()){
-            if(res.getString("fecha_ingreso").equals(Main.Main.DiaActual)){
+        while (res.next()) {
+            if (res.getString("fecha_ingreso").equals(Main.Main.DiaActual)) {
                 contador_acampantes++;
             }
-            
+
         }
         ResultSet res2 = modelo.MostarOcupacionActualDia();
-        
-        
-        while(res2.next()){
+
+        while (res2.next()) {
             contador_diario++;
         }
-        
+
         cantidad_acampantes.setText(String.valueOf(contador_acampantes));
         cantidad_dia.setText(String.valueOf(contador_diario));
-        
+
     }
-    public void tabla_caja_cerrada() throws SQLException{
+
+    public void tabla_caja_cerrada() throws SQLException {
         ResultSet res = modelo.cajausuariocerrada(Login.usuario);
 
         DefaultTableModel modelo = new DefaultTableModel();
@@ -745,15 +743,14 @@ public class Cajas extends javax.swing.JPanel {
             String usuario = res.getString("usuario");
             String fecha_apertura = res.getString("fecha_abertura");
             String fecha_cierre = res.getString("fecha_cierre");
-            
+
             String retiros = String.valueOf(res.getString("retiros"));
             float retiro = Float.valueOf(res.getString("retiros"));
             float plata_en_caja = Float.valueOf(res.getString("plata_en_caja_al_cierre"));
 
             float total_recaudado = (retiro + plata_en_caja);
 
-            String tab[] = {usuario, fecha_apertura,fecha_cierre, retiros, String.valueOf(plata_en_caja), String.valueOf(total_recaudado), "cerrada"};
-            
+            String tab[] = {usuario, fecha_apertura, fecha_cierre, retiros, String.valueOf(plata_en_caja), String.valueOf(total_recaudado), "cerrada"};
 
             modelo.addRow(tab);
         }
@@ -763,24 +760,24 @@ public class Cajas extends javax.swing.JPanel {
     }
     private void actualizar_totalesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actualizar_totalesMousePressed
 
-       ingresosactuales();
-       
+        ingresosactuales();
+
         try {
             cantacmapantesydiario();
         } catch (SQLException ex) {
             Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
-try {
+
+        try {
             tabla_caja_cerrada();
         } catch (SQLException ex) {
             Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_actualizar_totalesMousePressed
 
     private void importe_inicial_cajaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_importe_inicial_cajaKeyPressed
-       char validador = evt.getKeyChar();
+        char validador = evt.getKeyChar();
 
         if (Character.isLetter(validador)) {
             getToolkit().beep();

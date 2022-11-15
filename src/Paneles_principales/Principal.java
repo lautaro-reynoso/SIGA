@@ -283,6 +283,11 @@ public class Principal extends javax.swing.JFrame {
         Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         usuarios.actualizarUsuario();
         MostrarPanel(usuarios);
+        try {
+            usuarios.tarifasactulaes();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_UsuariosMousePressed
@@ -374,6 +379,11 @@ public class Principal extends javax.swing.JFrame {
             cajas.tablaretiros(res);
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          try {
+            cajas.tabla_caja_cerrada();
+        } catch (SQLException ex) {
+            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
