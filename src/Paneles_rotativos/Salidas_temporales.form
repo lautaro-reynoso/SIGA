@@ -274,7 +274,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="Nombre">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nombre"/>
+                    <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NombreActionPerformed"/>
@@ -282,7 +282,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="Categoria">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Categoria"/>
+                    <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CategoriaActionPerformed"/>
@@ -290,7 +290,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="Documento">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Documento"/>
+                    <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DocumentoActionPerformed"/>
@@ -500,7 +500,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="nombre_e">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="nombre"/>
+                    <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombre_eActionPerformed"/>
@@ -508,12 +508,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="categoria_e">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="categoria"/>
+                    <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="documento_e">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="documento"/>
+                    <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="documento_eActionPerformed"/>

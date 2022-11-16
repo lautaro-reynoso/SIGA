@@ -310,18 +310,8 @@ public class Login extends javax.swing.JFrame {
                 Principal principal = new Principal();
                 principal.setVisible(true); //Show other frame
                 dispose();
-                /*        
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        .setVisible(true);
-                    }
-                });
-                 */
-                System.out.println("se encontro");
-                //  Main principal = new Main();
-                // Main main = new Main();
-
-                //Vista
+             
+               
             } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta\nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("contrasenia inc");

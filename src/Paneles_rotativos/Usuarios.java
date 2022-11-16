@@ -380,21 +380,27 @@ public class Usuarios extends javax.swing.JPanel {
 
         jLabel23.setText("Particular:");
 
-        particular_dia1.setEnabled(false);
+        particular_dia1.setEditable(false);
+        particular_dia1.setForeground(new java.awt.Color(0, 0, 0));
+        particular_dia1.setEnabled(true);
         particular_dia1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 particular_dia1ActionPerformed(evt);
             }
         });
 
-        alumno_dia1.setEnabled(false);
+        alumno_dia1.setEditable(false);
+        alumno_dia1.setForeground(new java.awt.Color(0, 0, 0));
+        alumno_dia1.setEnabled(true);
         alumno_dia1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 alumno_dia1ActionPerformed(evt);
             }
         });
 
-        aportante_dia1.setEnabled(false);
+        aportante_dia1.setEditable(false);
+        aportante_dia1.setForeground(new java.awt.Color(0, 0, 0));
+        aportante_dia1.setEnabled(true);
 
         jLabel24.setText("Aportante:");
 
@@ -469,11 +475,17 @@ public class Usuarios extends javax.swing.JPanel {
 
         jLabel30.setText("Aportante:");
 
-        aportante_t1.setEnabled(false);
+        aportante_t1.setEditable(false);
+        aportante_t1.setForeground(new java.awt.Color(0, 0, 0));
+        aportante_t1.setEnabled(true);
 
-        particular_t1.setEnabled(false);
+        particular_t1.setEditable(false);
+        particular_t1.setForeground(new java.awt.Color(0, 0, 0));
+        particular_t1.setEnabled(true);
 
-        alumno_t1.setEnabled(false);
+        alumno_t1.setEditable(false);
+        alumno_t1.setForeground(new java.awt.Color(0, 0, 0));
+        alumno_t1.setEnabled(true);
 
         jLabel31.setText("$");
 

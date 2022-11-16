@@ -45,6 +45,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         MostrarPanel(inicio);
         inicio.Tabla();
+        setResizable(false);
     }
 
     /**
@@ -82,7 +83,6 @@ public class Principal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(214, 226, 195));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -231,8 +231,8 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 1289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1289, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,6 +256,16 @@ public class Principal extends javax.swing.JFrame {
         Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(padron);
+        try {
+            padron.tabla_completa_aportante();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            padron.tabla_completa_alumnos();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_PadronMousePressed
 
     private void OcupacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OcupacionMousePressed
@@ -272,7 +282,7 @@ public class Principal extends javax.swing.JFrame {
         Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(ocupacionC);
-
+        
     }//GEN-LAST:event_OcupacionMousePressed
 
     private void UsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsuariosMousePressed

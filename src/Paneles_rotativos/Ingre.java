@@ -121,7 +121,7 @@ public class Ingre extends javax.swing.JPanel {
                 } else {
                     modelo.insertardinerocaja(importe);
                     setearnullparticular();
-                    javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso", "Exitoso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
                 }
 
             } else {
@@ -148,7 +148,7 @@ public class Ingre extends javax.swing.JPanel {
                 if (c != 1) {
                     javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso", "Exitoso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
                     modelo.insertardinerocaja(importe);
                 }
 
@@ -211,7 +211,7 @@ public class Ingre extends javax.swing.JPanel {
             } else {
                 modelo.insertardinerocaja(importe);
                 setearnullalumno();
-                javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso", "Exitoso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }
 
         }
@@ -481,7 +481,7 @@ public class Ingre extends javax.swing.JPanel {
 
         jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda de Aportante"));
 
-        Documento_a.setForeground(new java.awt.Color(204, 204, 204));
+        Documento_a.setForeground(new java.awt.Color(0, 0, 0));
         Documento_a.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Documento_a.setText(null);
         Documento_a.addActionListener(new java.awt.event.ActionListener() {
@@ -1069,7 +1069,7 @@ public class Ingre extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda por Documento"));
 
-        Documento.setForeground(new java.awt.Color(204, 204, 204));
+        Documento.setForeground(new java.awt.Color(0, 0, 0));
         Documento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Documento.setText(null);
         Documento.addActionListener(new java.awt.event.ActionListener() {
@@ -1179,7 +1179,7 @@ public class Ingre extends javax.swing.JPanel {
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar un Particular"));
 
-        documento_p.setForeground(new java.awt.Color(204, 204, 204));
+        documento_p.setForeground(new java.awt.Color(0, 0, 0));
         documento_p.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         documento_p.setText("Documento");
         documento_e.setEnabled(false);
@@ -1196,7 +1196,7 @@ public class Ingre extends javax.swing.JPanel {
 
         jLabel18.setText("NOMBRE");
 
-        nombre_p.setForeground(new java.awt.Color(204, 204, 204));
+        nombre_p.setForeground(new java.awt.Color(0, 0, 0));
         nombre_p.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nombre_p.setText("Nombre");
         nombre_e.setEnabled(false);

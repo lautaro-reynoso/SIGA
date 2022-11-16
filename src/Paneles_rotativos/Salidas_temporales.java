@@ -137,21 +137,21 @@ public class Salidas_temporales extends javax.swing.JPanel {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Info de Acampante"));
 
-        Nombre.setText("Nombre");
+        Nombre.setEditable(false);
         Nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NombreActionPerformed(evt);
             }
         });
 
-        Categoria.setText("Categoria");
+        Categoria.setEditable(false);
         Categoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CategoriaActionPerformed(evt);
             }
         });
 
-        Documento.setText("Documento");
+        Documento.setEditable(false);
         Documento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DocumentoActionPerformed(evt);
@@ -284,16 +284,16 @@ public class Salidas_temporales extends javax.swing.JPanel {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Info de Acampante"));
 
-        nombre_e.setText("nombre");
+        nombre_e.setEditable(false);
         nombre_e.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombre_eActionPerformed(evt);
             }
         });
 
-        categoria_e.setText("categoria");
+        categoria_e.setEditable(false);
 
-        documento_e.setText("documento");
+        documento_e.setEditable(false);
         documento_e.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 documento_eActionPerformed(evt);
@@ -504,13 +504,19 @@ public class Salidas_temporales extends javax.swing.JPanel {
 
     }
     private void InsetarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InsetarMousePressed
+        if(!Nombre.getText().isEmpty()||!Documento.getText().isEmpty()||!Categoria.getText().isEmpty()){
         InsertarSalida();
         try { 
             tabla_salidas_temp();
         } catch (SQLException ex) {
             Logger.getLogger(Salidas_temporales.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        }
+        else{
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Error, No ingreso datos");
+        }
     }//GEN-LAST:event_InsetarMousePressed
      public void tabla_salidas_temp() throws SQLException {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -548,7 +554,7 @@ public class Salidas_temporales extends javax.swing.JPanel {
     }//GEN-LAST:event_documento_eActionPerformed
 
     private void Eliminar_salidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Eliminar_salidaMousePressed
-        
+        if(!nombre_e.getText().isEmpty()||!documento_e.getText().isEmpty()||!categoria_e.getText().isEmpty()){
         int respuesta = controlador.Verificar_salida(documento_e.getText());
         if(respuesta == 1){
              Component rootPane = null;
@@ -567,6 +573,11 @@ public class Salidas_temporales extends javax.swing.JPanel {
             tabla_salidas_temp();
         } catch (SQLException ex) {
             Logger.getLogger(Salidas_temporales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }else{
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Error, No ingreso datos");
         }
         
     }//GEN-LAST:event_Eliminar_salidaMousePressed

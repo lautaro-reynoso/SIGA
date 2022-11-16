@@ -26,7 +26,7 @@ public class Modelo {
 
     public int InsertarIngresoDiario(String documento, String nombre, String hora_ingreso, String categoria) {
         String sql = "INSERT INTO ingreso_diario (nombre, dni, hora_ingreso ,categoria,fecha_ingreso)"
-                + "VALUES('" + nombre + "','" + documento + "','" + hora_ingreso + "','" + categoria + "','" +Main.DiaActual+ "')";
+                + "VALUES('" + nombre + "','" + documento + "','" + hora_ingreso + "','" + categoria + "','" + Main.DiaActual + "')";
         return Main.conexion.EjecutarOperacion(sql);
     }
 
@@ -76,6 +76,16 @@ public class Modelo {
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
 
+    public ResultSet mostraraportantes() {
+        String sql;
+        sql = "SELECT * FROM aportantes";
+        return Main.conexion.EjecutarConsultaSQL(sql);
+    }
+     public ResultSet mostraralumnos() {
+        String sql;
+        sql = "SELECT * FROM alumnos";
+        return Main.conexion.EjecutarConsultaSQL(sql);
+    }
     public ResultSet BuscarDocumento(String documento) {
         String sql;
         sql = "SELECT * FROM ingreso WHERE documento = '" + documento + "'";
@@ -143,7 +153,8 @@ public class Modelo {
         int v = Main.conexion.EjecutarOperacion(sql2);
 
     }
-    public void egreso_diario() throws SQLException{
+
+    public void egreso_diario() throws SQLException {
         String sql;
         ResultSet res;
 
@@ -156,29 +167,28 @@ public class Modelo {
         ArrayList<String> categoria = new ArrayList<>();
         ArrayList<String> dia_ingreso = new ArrayList<>();
         ArrayList<String> hora_ingreso = new ArrayList<>();
-       
-         while (res.next()) {
+
+        while (res.next()) {
 
             documento.add(res.getString("dni"));
             nombre.add(res.getString("nombre"));
             categoria.add(res.getString("categoria"));
             dia_ingreso.add(res.getString("fecha_ingreso"));
             hora_ingreso.add(res.getString("hora_ingreso"));
-            
 
         }
-         for (int i = 0; i < documento.size(); i++) {
+        for (int i = 0; i < documento.size(); i++) {
 
             String sql1 = "INSERT INTO egreso_diario (documento, nombre, categoria ,fecha_ingreso ,hora_ingreso)"
                     + "VALUES('" + documento.get(i) + "','" + nombre.get(i) + "','" + categoria.get(i) + "','" + dia_ingreso.get(i) + "','" + hora_ingreso.get(i) + "')";
             int c = Main.conexion.EjecutarOperacion(sql1);
 
         }
-        
+
         String sql2 = "DELETE FROM ingreso_diario where fecha_ingreso < '" + Main.DiaActual + "'";
 
         int v = Main.conexion.EjecutarOperacion(sql2);
-        
+
     }
 
     public int NuevoUsuario(String nombre, String contrasenia, String privilegios) {
@@ -202,7 +212,8 @@ public class Modelo {
         return Main.conexion.EjecutarOperacion(sql);
 
     }
-    public int eliminarvehiculo(String patente){
+
+    public int eliminarvehiculo(String patente) {
         String sql = "DELETE FROM vehiculos WHERE patente = '" + patente + "'";
 
         return Main.conexion.EjecutarOperacion(sql);
@@ -230,6 +241,7 @@ public class Modelo {
         return Main.conexion.EjecutarConsultaSQL(sql);
 
     }
+
     public ResultSet ConsultarSalidaTemporales() {
 
         String sql = "SELECT * FROM salida";
@@ -237,6 +249,7 @@ public class Modelo {
         return Main.conexion.EjecutarConsultaSQL(sql);
 
     }
+
     public ResultSet ConsultarSalidaTemporal(String dni) {
 
         String sql = "SELECT * FROM salida where doc = '" + dni + "'";
@@ -368,7 +381,8 @@ public class Modelo {
 
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
-     public ResultSet cajausuariocerrada (String usuario) {
+
+    public ResultSet cajausuariocerrada(String usuario) {
         String sql;
         sql = "SELECT * FROM caja_cerradas WHERE usuario = '" + usuario + "'";
 
@@ -389,9 +403,8 @@ public class Modelo {
             float retiros = Float.valueOf(res.getString("retiros"));
             float plata_en_caja = Float.valueOf(res.getString("plata_en_caja"));
 
-            float plata_alcierre = (plata_en_caja-retiros);
-            
-            
+            float plata_alcierre = (plata_en_caja - retiros);
+
             String sql2 = "INSERT INTO caja_cerradas (usuario,retiros,total_recaudado,fecha_abertura,fecha_cierre,plata_en_caja_al_cierre)" + "VALUES('" + usuario
                     + "','" + retiros + "','" + String.valueOf(plata_en_caja) + "','" + fecha_abertura + "','" + Main.DiaActual + " " + hora_actual + "','" + String.valueOf(plata_alcierre) + "')";
             int v = Main.conexion.EjecutarOperacion(sql2);
@@ -436,7 +449,7 @@ public class Modelo {
 
                 String hora_actual = hora + ":" + minutos;
 
-                String sql3 = "INSERT INTO retiros (usuario,fecha_hora,importe)" + "VALUES('" + Login.usuario + "','" + Main.DiaActual +  "','" + importe_retiro + "')";
+                String sql3 = "INSERT INTO retiros (usuario,fecha_hora,importe)" + "VALUES('" + Login.usuario + "','" + Main.DiaActual + "','" + importe_retiro + "')";
                 Main.conexion.EjecutarOperacion(sql3);
                 return 1;
             } else {
@@ -446,20 +459,20 @@ public class Modelo {
         } else {
             return 0;
         }
-        
+
     }
-    
-    public ResultSet mostrarretiros (String usuario){
-        
+
+    public ResultSet mostrarretiros(String usuario) {
+
         String sql1;
         sql1 = "SELECT * FROM retiros WHERE usuario = '" + Login.usuario + "'";
 
         ResultSet res = Main.conexion.EjecutarConsultaSQL(sql1);
         return res;
-        
+
     }
-    
-    public int insertardinerocaja(float importe) throws SQLException{
+
+    public int insertardinerocaja(float importe) throws SQLException {
         String sql1;
         sql1 = "SELECT * FROM caja_abierta WHERE usuario = '" + Login.usuario + "'";
 
@@ -471,11 +484,12 @@ public class Modelo {
 
             String sql = "UPDATE caja_abierta SET plata_en_caja = ' " + String.valueOf(ingreso_total) + " ' WHERE usuario = '" + Login.usuario + "'";
             int respuesta = Main.conexion.EjecutarOperacion(sql);
-            if (respuesta == 1){
+            if (respuesta == 1) {
                 return respuesta;
             }
-        }else
+        } else {
             return 0;
+        }
         return 0;
     }
 }
