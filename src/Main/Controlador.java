@@ -436,6 +436,12 @@ public class Controlador {
             Main.tarifa_dia_alumnos = Float.parseFloat(res.getString("alumno_d"));
             Main.tarifa_dia_aportantes = Float.parseFloat(res.getString("aportante_d"));
             Main.tarifa_dia_particular = Float.parseFloat(res.getString("particular_d"));
+            
+            Main.tarifa_dia_invitados = Float.parseFloat(res.getString("tarifa_invitados"));
+            Main.tarifa_acampar_invitados =Float.parseFloat(res.getString("invitados_acampar"));
+            Main.tarifa_cabaña_aportante =Float.parseFloat(res.getString("tarifa_cabañas"));
+            Main.tarifa_cabaña_noaportante =Float.parseFloat(res.getString("cabañas_noaportantes"));
+                    
 
         }
     }

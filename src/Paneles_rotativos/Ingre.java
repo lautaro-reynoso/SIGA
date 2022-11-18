@@ -128,7 +128,21 @@ public class Ingre extends javax.swing.JPanel {
                     modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular acampante", Main.DiaActual, hora_actual);
                     modelo.insertardinerocaja(importe);
                     setearnullparticular();
-                    javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso", "Exitoso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    Component jFrame = null;
+                    int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
+
+                    if (result == 0) {
+
+                        if (!pasar_dia2.isSelected()) {
+
+                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe);
+                        } else {
+
+                            importe = Main.tarifa_dia_particular;
+                            imprimirtiketdia("Particular", importe);
+                        }
+                    }
+
                 }
 
             } else {
@@ -157,7 +171,6 @@ public class Ingre extends javax.swing.JPanel {
                 } else {
                     String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
                     String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
-                    
 
                     String hora_actual = hora + ":" + minutos;
                     modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo aportante acampante", Main.DiaActual, hora_actual);
@@ -165,11 +178,11 @@ public class Ingre extends javax.swing.JPanel {
                     modelo.insertardinerocaja(importe);
                     Component jFrame = null;
                     int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
-                    System.out.println(result);
+
                     if (result == 0) {
-                        
+
                         if (!pasar_dia1.isSelected()) {
-                            
+
                             imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe);
                         } else {
 
@@ -246,19 +259,20 @@ public class Ingre extends javax.swing.JPanel {
                 modelo.insertardinerocaja(importe);
                 setearnullalumno();
                 Component jFrame = null;
-                    int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
-                    System.out.println(result);
-                    if (result == 0) {
-                        
-                        if (!pasar_dia.isSelected()) {
-                            
-                            imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe);
-                        } else {
+                int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
 
-                            importe = Main.tarifa_dia_alumnos;
-                            imprimirtiketdia("Alumno", importe);
-                        }
+                if (result == 0) {
+
+                    if (!pasar_dia.isSelected()) {
+
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe);
+                    } else {
+
+                        importe = Main.tarifa_dia_alumnos;
+                        imprimirtiketdia("Alumno", importe);
+
                     }
+                }
             }
 
         }
@@ -277,8 +291,8 @@ public class Ingre extends javax.swing.JPanel {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        vehiculos = new javax.swing.JTabbedPane();
-        jPanel4 = new javax.swing.JPanel();
+        menu_ingreso_egreso = new javax.swing.JTabbedPane();
+        aportantes = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         Documento_a = new javax.swing.JTextField();
@@ -307,7 +321,7 @@ public class Ingre extends javax.swing.JPanel {
         Parsela_a = new javax.swing.JTextField();
         pasar_dia1 = new javax.swing.JCheckBox();
         jLabel17 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        alumnoss = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -338,7 +352,7 @@ public class Ingre extends javax.swing.JPanel {
         Documento = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         Buscar = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        particular = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         documento_p = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
@@ -358,7 +372,27 @@ public class Ingre extends javax.swing.JPanel {
         Parsela_p = new javax.swing.JTextField();
         pasar_dia2 = new javax.swing.JCheckBox();
         jLabel37 = new javax.swing.JLabel();
+        invitados = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        documento_p1 = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        nombre_p1 = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        fecha_ingreso_p2 = new com.toedter.calendar.JDateChooser();
+        fecha_egreso_p2 = new com.toedter.calendar.JDateChooser();
+        Obtener3 = new javax.swing.JButton();
+        jPanel23 = new javax.swing.JPanel();
+        jLabel42 = new javax.swing.JLabel();
+        tarifa3 = new javax.swing.JTextField();
+        jLabel43 = new javax.swing.JLabel();
+        Boton_ingreso_p1 = new javax.swing.JLabel();
+        Parsela_p1 = new javax.swing.JTextField();
+        pasar_dia3 = new javax.swing.JCheckBox();
+        jLabel44 = new javax.swing.JLabel();
+        egresos = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         dni_buscado = new javax.swing.JTextField();
@@ -368,7 +402,7 @@ public class Ingre extends javax.swing.JPanel {
         tabla_egreso = new javax.swing.JTable();
         jLabel34 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
+        vahiculos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla_vehiculo = new javax.swing.JTable();
         jLabel35 = new javax.swing.JLabel();
@@ -518,9 +552,9 @@ public class Ingre extends javax.swing.JPanel {
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
-        vehiculos.addMouseListener(new java.awt.event.MouseAdapter() {
+        menu_ingreso_egreso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                vehiculosMousePressed(evt);
+                menu_ingreso_egresoMousePressed(evt);
             }
         });
 
@@ -845,23 +879,23 @@ public class Ingre extends javax.swing.JPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout aportantesLayout = new javax.swing.GroupLayout(aportantes);
+        aportantes.setLayout(aportantesLayout);
+        aportantesLayout.setHorizontalGroup(
+            aportantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aportantesLayout.createSequentialGroup()
                 .addGap(84, 84, 84)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(93, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        aportantesLayout.setVerticalGroup(
+            aportantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aportantesLayout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 58, Short.MAX_VALUE))
         );
 
-        vehiculos.addTab("APORTANTES", jPanel4);
+        menu_ingreso_egreso.addTab("APORTANTES", aportantes);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso Alumno"));
 
@@ -1210,24 +1244,24 @@ public class Ingre extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout alumnossLayout = new javax.swing.GroupLayout(alumnoss);
+        alumnoss.setLayout(alumnossLayout);
+        alumnossLayout.setHorizontalGroup(
+            alumnossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(alumnossLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(166, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        alumnossLayout.setVerticalGroup(
+            alumnossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(alumnossLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(72, Short.MAX_VALUE))
         );
 
-        vehiculos.addTab("ALUMNOS", jPanel2);
+        menu_ingreso_egreso.addTab("ALUMNOS", alumnoss);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar un Particular"));
 
@@ -1476,24 +1510,290 @@ public class Ingre extends javax.swing.JPanel {
                 .addGap(36, 36, 36))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout particularLayout = new javax.swing.GroupLayout(particular);
+        particular.setLayout(particularLayout);
+        particularLayout.setHorizontalGroup(
+            particularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(particularLayout.createSequentialGroup()
                 .addGap(102, 102, 102)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(149, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        particularLayout.setVerticalGroup(
+            particularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(particularLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(207, Short.MAX_VALUE))
         );
 
-        vehiculos.addTab("PARTICULAR", jPanel3);
+        menu_ingreso_egreso.addTab("PARTICULAR", particular);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar un Invitado"));
+
+        documento_p1.setForeground(new java.awt.Color(0, 0, 0));
+        documento_p1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        documento_p1.setText("Documento");
+        documento_e.setEnabled(false);
+        documento_p1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                documento_p1ActionPerformed(evt);
+            }
+        });
+        documento_p1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                documento_p1KeyPressed(evt);
+            }
+        });
+
+        jLabel38.setText("NOMBRE");
+
+        nombre_p1.setForeground(new java.awt.Color(0, 0, 0));
+        nombre_p1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nombre_p1.setText("Nombre");
+        nombre_e.setEnabled(false);
+        nombre_p1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nombre_p1KeyPressed(evt);
+            }
+        });
+
+        jLabel39.setText("DOCUMENTO");
+
+        jLabel40.setText("FECHA DE EGRESO");
+
+        jLabel41.setText("FECHA DE INGRESO");
+
+        fecha_ingreso_p2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fecha_ingreso_p2KeyPressed(evt);
+            }
+        });
+
+        fecha_egreso_p2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fecha_egreso_p2KeyPressed(evt);
+            }
+        });
+
+        Obtener3.setText("Obtener Total");
+        Obtener3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Obtener3MousePressed(evt);
+            }
+        });
+
+        jPanel23.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jPanel23ComponentHidden(evt);
+            }
+        });
+
+        jLabel42.setText("Total");
+
+        tarifa3.setText("Tarifa");
+        tarifa.setEnabled(false);
+        tarifa3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tarifa3ActionPerformed(evt);
+            }
+        });
+
+        jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_attach_money_black_24dp.png"))); // NOI18N
+
+        Boton_ingreso_p1.setText(" REGISTRAR INGRESO ");
+        Boton_ingreso_p1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Boton_ingreso_p1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_ingreso_p1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Boton_ingreso_p1MousePressed(evt);
+            }
+        });
+        Boton_ingreso_p1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Boton_ingreso_p1KeyPressed(evt);
+            }
+        });
+
+        Parsela_p1.setText("Parcela");
+        Parsela_p1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Parsela_p1ActionPerformed(evt);
+            }
+        });
+        Parsela_p1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Parsela_p1KeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Parsela_p1)
+                    .addGroup(jPanel23Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Boton_ingreso_p1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel23Layout.createSequentialGroup()
+                        .addComponent(jLabel43)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel42)
+                            .addComponent(tarifa3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Parsela_p1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel42)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel43)
+                    .addComponent(tarifa3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Boton_ingreso_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Obtener3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel40)
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(fecha_egreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fecha_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel41))
+                        .addGap(75, 75, 75))))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel41)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fecha_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fecha_egreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Obtener3))
+                    .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        pasar_dia3.setText("Pasar el dia");
+        pasar_dia3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pasar_dia3MousePressed(evt);
+            }
+        });
+        pasar_dia3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasar_dia3ActionPerformed(evt);
+            }
+        });
+        pasar_dia3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pasar_dia3KeyPressed(evt);
+            }
+        });
+
+        jLabel44.setText("Selecione si solo pasa el dia:");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(documento_p1)
+                        .addContainerGap())
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel39)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel38)
+                                .addGap(367, 367, 367))
+                            .addComponent(nombre_p1)))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pasar_dia3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(documento_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nombre_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pasar_dia3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel44))
+                .addGap(43, 43, 43)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
+        );
+
+        javax.swing.GroupLayout invitadosLayout = new javax.swing.GroupLayout(invitados);
+        invitados.setLayout(invitadosLayout);
+        invitadosLayout.setHorizontalGroup(
+            invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(invitadosLayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
+        );
+        invitadosLayout.setVerticalGroup(
+            invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(invitadosLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(187, Short.MAX_VALUE))
+        );
+
+        menu_ingreso_egreso.addTab("INVITADOS", invitados);
 
         jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Acampante"));
 
@@ -1620,22 +1920,22 @@ public class Ingre extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
+        javax.swing.GroupLayout egresosLayout = new javax.swing.GroupLayout(egresos);
+        egresos.setLayout(egresosLayout);
+        egresosLayout.setHorizontalGroup(
+            egresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(egresosLayout.createSequentialGroup()
                 .addGap(136, 136, 136)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, egresosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(461, 461, 461))
         );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
+        egresosLayout.setVerticalGroup(
+            egresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(egresosLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
@@ -1643,7 +1943,7 @@ public class Ingre extends javax.swing.JPanel {
                 .addContainerGap(200, Short.MAX_VALUE))
         );
 
-        vehiculos.addTab("EGRESOS", jPanel15);
+        menu_ingreso_egreso.addTab("EGRESOS", egresos);
 
         tabla_vehiculo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1738,23 +2038,23 @@ public class Ingre extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        javax.swing.GroupLayout vahiculosLayout = new javax.swing.GroupLayout(vahiculos);
+        vahiculos.setLayout(vahiculosLayout);
+        vahiculosLayout.setHorizontalGroup(
+            vahiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vahiculosLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(vahiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(vahiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel35)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        vahiculosLayout.setVerticalGroup(
+            vahiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vahiculosLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -1766,7 +2066,7 @@ public class Ingre extends javax.swing.JPanel {
                 .addGap(69, 69, 69))
         );
 
-        vehiculos.addTab("VEHICULOS", jPanel10);
+        menu_ingreso_egreso.addTab("VEHICULOS", vahiculos);
 
         jPanel22.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -3083,20 +3383,21 @@ public class Ingre extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(vehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(menu_ingreso_egreso, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(vehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(menu_ingreso_egreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -3368,34 +3669,62 @@ public class Ingre extends javax.swing.JPanel {
             if (categoria.equals("alumno")) {
                 modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo alumno por el dia", Main.DiaActual, hora_actual);
                 modelo.insertardinerocaja(Main.tarifa_dia_alumnos);
+                Component jFrame = null;
+                int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
+
+                if (result == 0) {
+
+                    if (!pasar_dia.isSelected()) {
+                        float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso, fecha_egreso), 2);
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe);
+                    } else {
+
+                        float importe = Main.tarifa_dia_alumnos;
+                        imprimirtiketdia("Alumno", importe);
+                    }
+                }
             }
             if (categoria.equals("aportante")) {
                 modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo aportante por el dia", Main.DiaActual, hora_actual);
                 modelo.insertardinerocaja(Main.tarifa_dia_aportantes);
-                 Component jFrame = null;
-                    int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
-                    System.out.println(result);
-                    if (result == 0) {
-                        System.out.println("entro");
-                        if (!pasar_dia1.isSelected()) {
-                            float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p1, fecha_egreso_p1), 2);
-                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe);
-                        } else {
-                            
-                            float importe = Main.tarifa_dia_aportantes;
-                            imprimirtiketdia("Aportante", importe);
-                        }
+                Component jFrame = null;
+                int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
+
+                if (result == 0) {
+
+                    if (!pasar_dia1.isSelected()) {
+                        float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p1, fecha_egreso_p1), 2);
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe);
+                    } else {
+
+                        float importe = Main.tarifa_dia_aportantes;
+                        imprimirtiketdia("Aportante", importe);
                     }
-                
+                }
+
             }
             if (categoria.equals("particular")) {
                 modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular por el dia", Main.DiaActual, hora_actual);
                 modelo.insertardinerocaja(Main.tarifa_dia_particular);
+                Component jFrame = null;
+                int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
+
+                if (result == 0) {
+
+                    if (!pasar_dia2.isSelected()) {
+                        float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 2);
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe);
+                    } else {
+
+                        float importe = Main.tarifa_dia_particular;
+                        imprimirtiketdia("Particular", importe);
+                    }
+                }
             }
             setearnullalumno();
             setearnullparticular();
             setearnullaportante();
-            
+
         }
     }
 
@@ -3584,9 +3913,9 @@ public class Ingre extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_Parsela_pActionPerformed
 
-    private void vehiculosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehiculosMousePressed
+    private void menu_ingreso_egresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_ingreso_egresoMousePressed
 
-    }//GEN-LAST:event_vehiculosMousePressed
+    }//GEN-LAST:event_menu_ingreso_egresoMousePressed
 
     private void pasar_dia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_dia2ActionPerformed
         if (pasar_dia2.isSelected()) {
@@ -5481,11 +5810,120 @@ public class Ingre extends javax.swing.JPanel {
 
     }//GEN-LAST:event_documento_aKeyPressed
 
+    private void documento_p1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documento_p1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_documento_p1ActionPerformed
+
+    private void documento_p1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documento_p1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_documento_p1KeyPressed
+
+    private void nombre_p1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_p1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombre_p1KeyPressed
+
+    private void fecha_ingreso_p2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_ingreso_p2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fecha_ingreso_p2KeyPressed
+
+    private void fecha_egreso_p2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_egreso_p2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fecha_egreso_p2KeyPressed
+
+    private void Obtener3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Obtener3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Obtener3MousePressed
+
+    private void tarifa3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarifa3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tarifa3ActionPerformed
+    public void RegistrarIngresoInvitados() throws java.text.ParseException, java.lang.NullPointerException, SQLException {
+
+        try {
+
+            float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 3);
+            int c;
+            if (fecha_egreso_p2.getDate() != null && fecha_ingreso_p2.getDate() != null) {
+
+                c = controlador.IngresoParticular(documento_p1.getText(), nombre_p1.getText(), "4", calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), Parsela_p1.getText(), importe);
+
+                if (c != 1) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+                    String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+                    String segundos = String.valueOf(calendario.get(Calendar.SECOND));
+
+                    String hora_actual = hora + ":" + minutos;
+                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular acampante", Main.DiaActual, hora_actual);
+                    modelo.insertardinerocaja(importe);
+                    setearnullparticular();
+                    Component jFrame = null;
+                    int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
+
+                    if (result == 0) {
+
+                        if (!pasar_dia2.isSelected()) {
+
+                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe);
+                        } else {
+
+                            importe = Main.tarifa_dia_particular;
+                            imprimirtiketdia("Particular", importe);
+                        }
+                    }
+
+                }
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe de ingresar una fecha de ingreso y egreso.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (java.lang.NullPointerException e) {
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe completar todos los campos de ingreso.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+    }
+    private void Boton_ingreso_p1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_ingreso_p1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Boton_ingreso_p1MousePressed
+
+    private void Boton_ingreso_p1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Boton_ingreso_p1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Boton_ingreso_p1KeyPressed
+
+    private void Parsela_p1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Parsela_p1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Parsela_p1ActionPerformed
+
+    private void Parsela_p1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Parsela_p1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Parsela_p1KeyPressed
+
+    private void jPanel23ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel23ComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel23ComponentHidden
+
+    private void pasar_dia3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pasar_dia3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pasar_dia3MousePressed
+
+    private void pasar_dia3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_dia3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pasar_dia3ActionPerformed
+
+    private void pasar_dia3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasar_dia3KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pasar_dia3KeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Boton_ingreso;
     private javax.swing.JLabel Boton_ingreso_a;
     private javax.swing.JLabel Boton_ingreso_p;
+    private javax.swing.JLabel Boton_ingreso_p1;
     private javax.swing.JLabel Buscar;
     private javax.swing.JLabel Buscar_a;
     private javax.swing.JTextField Documento;
@@ -5493,11 +5931,15 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JButton Obtener;
     private javax.swing.JButton Obtener1;
     private javax.swing.JButton Obtener2;
+    private javax.swing.JButton Obtener3;
     private javax.swing.JTextField Parcela;
     private javax.swing.JTextField Parsela_a;
     private javax.swing.JTextField Parsela_p;
+    private javax.swing.JTextField Parsela_p1;
+    private javax.swing.JPanel alumnoss;
     private javax.swing.JTextField apellido_a;
     private javax.swing.JTextField apellido_e;
+    private javax.swing.JPanel aportantes;
     private javax.swing.JLabel boton_r;
     private javax.swing.JLabel boton_v;
     private javax.swing.JTextField carrera_e;
@@ -5506,14 +5948,19 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JTextField documento_a;
     private javax.swing.JTextField documento_e;
     private javax.swing.JTextField documento_p;
+    private javax.swing.JTextField documento_p1;
+    private javax.swing.JPanel egresos;
     private javax.swing.JTextField facultad_e;
     private com.toedter.calendar.JDateChooser fecha_egreso;
     private com.toedter.calendar.JDateChooser fecha_egreso_p;
     private com.toedter.calendar.JDateChooser fecha_egreso_p1;
+    private com.toedter.calendar.JDateChooser fecha_egreso_p2;
     private com.toedter.calendar.JDateChooser fecha_ingreso;
     private com.toedter.calendar.JDateChooser fecha_ingreso_p;
     private com.toedter.calendar.JDateChooser fecha_ingreso_p1;
+    private com.toedter.calendar.JDateChooser fecha_ingreso_p2;
     private javax.swing.JLabel ingreso_vehiculo;
+    private javax.swing.JPanel invitados;
     private javax.swing.JLabel j1;
     private javax.swing.JLabel j10;
     private javax.swing.JLabel j100;
@@ -5673,7 +6120,14 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel6;
@@ -5693,12 +6147,10 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -5707,19 +6159,24 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField marca;
+    private javax.swing.JTabbedPane menu_ingreso_egreso;
     private javax.swing.JTextField nombre_a;
     private javax.swing.JTextField nombre_e;
     private javax.swing.JTextField nombre_p;
+    private javax.swing.JTextField nombre_p1;
+    private javax.swing.JPanel particular;
     private javax.swing.JCheckBox pasar_dia;
     private javax.swing.JCheckBox pasar_dia1;
     private javax.swing.JCheckBox pasar_dia2;
+    private javax.swing.JCheckBox pasar_dia3;
     private javax.swing.JTextField patente;
     private javax.swing.JTable tabla_egreso;
     private javax.swing.JTable tabla_vehiculo;
     private javax.swing.JTextField tarifa;
     private javax.swing.JTextField tarifa1;
     private javax.swing.JTextField tarifa2;
-    private javax.swing.JTabbedPane vehiculos;
+    private javax.swing.JTextField tarifa3;
+    private javax.swing.JPanel vahiculos;
     // End of variables declaration//GEN-END:variables
 
 }

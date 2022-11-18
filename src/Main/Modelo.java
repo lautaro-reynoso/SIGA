@@ -282,6 +282,22 @@ public class Modelo {
         String sql = "UPDATE tarifas SET tarifa_particular = ' " + particular + " ' WHERE id = 8";
         return Main.conexion.EjecutarOperacion(sql);
     }
+    public int InsertarTarifaInvitados_dia(float invitados_dia) {
+        String sql = "UPDATE tarifas SET tarifa_invitados = ' " + invitados_dia + " ' WHERE id = 8";
+        return Main.conexion.EjecutarOperacion(sql);
+    }
+    public int InsertarTarifaInvitados(float invitados) {
+        String sql = "UPDATE tarifas SET invitados_acampar = ' " + invitados + " ' WHERE id = 8";
+        return Main.conexion.EjecutarOperacion(sql);
+    }
+    public int InsertarTarifaCabañas(float invitados) {
+        String sql = "UPDATE tarifas SET tarifa_cabañas = ' " + invitados + " ' WHERE id = 8";
+        return Main.conexion.EjecutarOperacion(sql);
+    }
+    public int InsertarTarifaCabañasnoaportantes(float invitados) {
+        String sql = "UPDATE tarifas SET cabañas_noaportantes = ' " + invitados + " ' WHERE id = 8";
+        return Main.conexion.EjecutarOperacion(sql);
+    }
 
     public int InsertarTarifaAlumno(float alumno) {
         String sql = "UPDATE tarifas SET tarifa_alumno = ' " + alumno + " ' WHERE id = 8";
