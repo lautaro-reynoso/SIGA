@@ -407,6 +407,12 @@ public class Controlador {
                 return importe;
 
             }
+            if (categoria == 4) {
+
+                importe = (CantDias * (Main.tarifa_acampar_invitados));
+                return importe;
+
+            }
 
         }
 

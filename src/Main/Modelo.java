@@ -57,11 +57,46 @@ public class Modelo {
     public int EliminarSalida(String documento) {
         String sql = "DELETE FROM salida WHERE doc='" + documento + "'";
         return Main.conexion.EjecutarOperacion(sql);
-    }
+        }
 
-    public int EliminarAcampante(String documento) {
-        String sql = "DELETE FROM ingreso WHERE documento='" + documento + "'";
-        return Main.conexion.EjecutarOperacion(sql);
+      
+
+    public int EliminarAcampante(String documento) throws SQLException {
+         String sql = "SELECT * FROM ingreso where documento = '" + documento + "'";
+
+        ResultSet res = Main.conexion.EjecutarConsultaSQL(sql);
+
+        ArrayList<String> nombre = new ArrayList<>();
+        ArrayList<String> dni = new ArrayList<>();
+        ArrayList<String> categoria = new ArrayList<>();
+        ArrayList<String> dia_ingreso = new ArrayList<>();
+        ArrayList<String> dia_egreso = new ArrayList<>();
+        ArrayList<Float> importe = new ArrayList<>();
+
+        while (res.next()) {
+
+            dni.add(res.getString("documento"));
+            nombre.add(res.getString("nombre"));
+            categoria.add(res.getString("categoria"));
+            dia_ingreso.add(res.getString("fecha_ingreso"));
+            dia_egreso.add(res.getString("fecha_egreso"));
+            importe.add(res.getFloat("importe"));
+
+        }
+
+        for (int i = 0; i < dni.size(); i++) {
+
+            String sql1 = "INSERT INTO egreso (documento, nombre, categoria ,fecha_ingreso ,fecha_egreso , importe )"
+                    + "VALUES('" + dni.get(i) + "','" + nombre.get(i) + "','" + categoria.get(i) + "','" + dia_ingreso.get(i) + "','" + Main.DiaActual + "','" + importe.get(i) + "')";
+            int c = Main.conexion.EjecutarOperacion(sql1);
+
+        }
+
+        //SELECT * FROM TABLENAME WHERE DateTime >= '2011-04-12T00:00:00.000'
+        String sql2 = "DELETE FROM ingreso where documento = '" + documento + "'";
+
+        int v = Main.conexion.EjecutarOperacion(sql2);
+        return v;
     }
 
     public ResultSet BuscarEstudiante(String documento) {

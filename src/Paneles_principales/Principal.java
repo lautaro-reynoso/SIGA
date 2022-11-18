@@ -122,7 +122,7 @@ public class Principal extends javax.swing.JFrame {
                 SalirMousePressed(evt);
             }
         });
-        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 179, 60));
+        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 720, 179, 60));
 
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         SalidasTemporales.setForeground(new java.awt.Color(0, 46, 15));
@@ -239,8 +239,8 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

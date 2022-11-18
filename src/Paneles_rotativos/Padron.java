@@ -197,7 +197,7 @@ public class Padron extends javax.swing.JPanel {
             String apellido = res.getString("apellido");
             String cod_aportante = res.getString("cod_aportante");
 
-            String tab[] = {id, nombre, doc,apellido,cod_aportante};
+            String tab[] = {id, nombre, apellido,doc,cod_aportante};
 
             modelo.addRow(tab);
 
