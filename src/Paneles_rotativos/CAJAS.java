@@ -4,13 +4,18 @@
  */
 package Paneles_rotativos;
 
+import Clases_tiketera.ConectorPluginV3;
 import Main.Controlador;
+import Main.Main;
 import Main.Modelo;
 import Paneles_principales.Login;
+import static Paneles_rotativos.Ingre.calendario;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,11 +25,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ig:lauti_reynosoo
  */
-public class Cajas extends javax.swing.JPanel {
+public class cajas extends javax.swing.JPanel {
 
     Modelo modelo = new Modelo();
 
-    public Cajas() throws SQLException, SQLException, SQLException {
+    public cajas() throws SQLException, SQLException, SQLException {
         initComponents();
     }
 
@@ -75,6 +80,7 @@ public class Cajas extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tabla_cajas_cerrada = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
 
         tabla_cajas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -173,17 +179,16 @@ public class Cajas extends javax.swing.JPanel {
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel39Layout.createSequentialGroup()
                 .addGap(172, 172, 172)
-                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel39Layout.createSequentialGroup()
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel39Layout.createSequentialGroup()
-                                .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(147, 147, 147)
-                                .addComponent(cerrar_caja, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(170, 170, 170)))
+                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel39Layout.createSequentialGroup()
+                            .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cerrar_caja, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(151, 151, 151))))
                 .addGap(0, 76, Short.MAX_VALUE))
         );
         jPanel39Layout.setVerticalGroup(
@@ -194,11 +199,11 @@ public class Cajas extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel39Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
+                        .addGap(58, 58, 58)
                         .addComponent(cerrar_caja, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(jLabel34)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -424,18 +429,32 @@ public class Cajas extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Usuario", "Fecha-Hora Apertura", "Fecha-Hora Cierre", "Retiros", "Monto en Caja", "Total Recaudado", "Estado"
+                "Usuario", "Fecha-Hora Apertura", "Fecha-Hora Cierre", "Retiros", "Monto en Caja", "Total Recaudado", "id"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tabla_cajas_cerrada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tabla_cajas_cerradaKeyPressed(evt);
+            }
+        });
         jScrollPane8.setViewportView(tabla_cajas_cerrada);
+
+        jLabel7.setText("Imprimir Cierre");
+        jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel7MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -443,7 +462,9 @@ public class Cajas extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -451,7 +472,8 @@ public class Cajas extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
@@ -549,21 +571,48 @@ public class Cajas extends javax.swing.JPanel {
         try {
             abrircaja();
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             tablacajaabierta();
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jLabel1MousePressed
     public void cerrarcaja() throws SQLException {
         ResultSet res = modelo.cajausuario(Login.usuario);
+        String fecha_ab = "";
+        String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+
+        String hora_actual = hora + ":" + minutos;
         if (res.next()) {
+            String fecha_apertura = res.getString("fecha_abertura");
+            for (int i = 0; i < 12; i++) {
+                char a = fecha_apertura.charAt(i);
+
+                if (!String.valueOf(a).equals(" ")) {
+                    fecha_ab += a;
+                } else {
+                    i = 12;
+                }
+            }
+            System.out.println(fecha_ab);
+            String id = res.getString("id");
+            String retiros = res.getString("retiros");
+            String total = res.getString("plata_en_caja");
+            float plata_alcierre = (Float.valueOf(total) - Float.valueOf(retiros));
+
             int respuesta = modelo.CerrarCaja(Login.usuario);
             if (respuesta == 1) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Se cerro la caja correctamente", "Exito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                modelo.borrarretiros();
+                Component jFrame = null;
+                int result = JOptionPane.showConfirmDialog(jFrame, "Desea imprimir cierre?");
+                if (result == 0) {
+                    imprimir_tiket_caja(fecha_ab, Main.DiaActual+" "+hora_actual, Login.usuario, id, fecha_apertura, retiros, String.valueOf(plata_alcierre), total);
+                }
+
             }
             if (respuesta == 2) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Ocurrio un problema al cerrar la caja, compruebe todo y vuelva a intentarlo", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -572,6 +621,124 @@ public class Cajas extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(this, "No hay una caja abierta con este usuario", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
 
+    }
+
+    public void imprimir_tiket_caja(String fecha_apertura, String fecha_cierre, String usuario, String id_caja, String fecha_hora, String retiros, String plata_al_cierre, String total) throws SQLException {
+
+        String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+
+        String hora_actual = hora + ":" + minutos;
+        int cont_alumnos_acampantes = 0, cont_aportantes_acampantes = 0, cont_particular_acampantes = 0, cont_invitados_acampantes = 0;
+        int cont_alumnos_dia = 0, cont_aportantes_dia = 0, cont_particular_dia = 0, cont_invitados_dia = 0;
+        int familiares = 0;
+        int cont = 0;
+        ResultSet res = modelo.mostrar_registros_fecha(fecha_apertura, usuario);
+
+        while (res.next()) {
+            cont = 0;
+            if (res.getString("comentario").equals("ha ingresado un nuevo particular acampante")) {
+                cont_particular_acampantes++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo alumno acampante")) {
+                cont_alumnos_acampantes++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo aportante acampante")) {
+                cont_aportantes_acampantes++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo invitado acampante")) {
+                cont_invitados_acampantes++;
+            } else {
+                cont++;
+            }
+            //por el dia
+            if (res.getString("comentario").equals("ha ingresado un nuevo particular por el dia")) {
+                cont_particular_dia++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo alumno por el dia")) {
+                cont_alumnos_dia++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo aportante por el dia")) {
+                cont_aportantes_dia++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo invitado por el dia")) {
+                cont_invitados_dia++;
+            } else {
+                cont++;
+            }
+            if (cont == 8) {
+                String comentario = res.getString("comentario");
+
+                char cant_familiares = comentario.charAt(13);
+
+                familiares += Character.getNumericValue(cant_familiares);
+
+            }
+
+        }
+
+        final String serial = "0006-00000001";
+
+        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, serial);
+
+        tiket.Iniciar()
+                .Corte(1)
+                .DeshabilitarElModoDeCaracteresChinos()
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .CargarImagenLocalEImprimir("C:\\Users\\lauti\\OneDrive\\Escritorio\\SIGA\\src\\com\\images\\icon-2_1.png", 0, 216)
+                .Feed(1)
+                .EscribirTexto("SAEBU\n")
+                .EscribirTexto("Camping Universitario\n"
+                        + "Cierre de Caja\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Numero de caja: " + id_caja + "\nCajero: " + usuario + "\n")
+                .EscribirTexto("Fecha y hora de Apertura: " + fecha_hora + "hs \n"
+                        + "Fecha y hora de Cierre: " + fecha_cierre +"hs \n")
+                .Feed(1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
+                .EscribirTexto("______________________________________________\n"
+                        + "Detalles de Ingresantes del dia: " + fecha_apertura + "\n(del usuario: " + usuario + ")\n\n"
+                        + "Acampantes:                      Por el Dia:\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Alumnos: " + cont_alumnos_acampantes + "                       Alumnos: " + cont_alumnos_dia + "\n"
+                        + "Aportantes: " + cont_aportantes_acampantes + "                    Aportantes: " + cont_aportantes_dia + "\n"
+                        + "Particulares: " + cont_particular_acampantes + "                  Particulares: " + cont_particular_dia + "\n"
+                        + "Invitados: " + cont_invitados_acampantes + "                     Invitados: " + cont_invitados_dia + "\n"
+                        + "Familiares: " + familiares + "\n")
+                .EscribirTexto("______________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
+                .EscribirTexto("Retiros: $" + retiros + " \n"
+                        + "Dinero en Caja: $" + plata_al_cierre + "\n"
+                        + "Total recaudado: $" + total + "\n")
+                .EscribirTexto("_____________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
+                //.EscribirTexto("TOTAL:  $" + importe + "\n")
+                .EstablecerEnfatizado(true)
+                .EstablecerTamanoFuente(1, 1)
+                .EscribirTexto("Si.G.A.")
+                .Feed(3)
+                .Corte(1)
+                .Pulso(48, 30, 120);
+
+        try {
+            System.out.println("hola");
+            tiket.imprimirEn("impresora termica");
+            
+
+            System.out.println("Impreso correctamente");
+        } catch (Exception e) {
+            System.out.println("Error imprimiendo: " + e.getMessage());
+        }
     }
 
     public void tablacajaabierta() throws SQLException {
@@ -652,20 +819,21 @@ public class Cajas extends javax.swing.JPanel {
         try {
             cerrarcaja();
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             tablacajaabierta();
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_cerrar_cajaMousePressed
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         try {
             tablacajaabierta();
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel3MousePressed
     public void generarretiro() throws SQLException {
@@ -694,7 +862,7 @@ public class Cajas extends javax.swing.JPanel {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -702,9 +870,6 @@ public class Cajas extends javax.swing.JPanel {
         int contador_acampantes = 0, contador_diario = 0;
         ResultSet res = modelo.MostarOcupacionActual();
         while (res.next()) {
-            if (res.getString("fecha_ingreso").equals(Main.Main.DiaActual)) {
-                contador_acampantes++;
-            }
 
         }
         ResultSet res2 = modelo.MostarOcupacionActualDia();
@@ -715,6 +880,69 @@ public class Cajas extends javax.swing.JPanel {
 
         cantidad_acampantes.setText(String.valueOf(contador_acampantes));
         cantidad_dia.setText(String.valueOf(contador_diario));
+
+    }
+
+    public void ingresoporcategoria_fecha(String fecha, String usuario) throws SQLException {
+        int cont_alumnos_acampantes = 0, cont_aportantes_acampantes = 0, cont_particular_acampantes = 0, cont_invitados_acampantes = 0;
+        int cont_alumnos_dia = 0, cont_aportantes_dia = 0, cont_particular_dia = 0, cont_invitados_dia = 0;
+        int familiares = 0;
+        int cont = 0;
+        ResultSet res = modelo.mostrar_registros_fecha(fecha, usuario);
+
+        while (res.next()) {
+            cont = 0;
+            if (res.getString("comentario").equals("ha ingresado un nuevo particular acampante")) {
+                cont_particular_acampantes++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo alumno acampante")) {
+                cont_alumnos_acampantes++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo aportante acampante")) {
+                cont_aportantes_acampantes++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo invitado acampante")) {
+                cont_invitados_acampantes++;
+            } else {
+                cont++;
+            }
+            //por el dia
+            if (res.getString("comentario").equals("ha ingresado un nuevo particular por el dia")) {
+                cont_particular_dia++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo alumno por el dia")) {
+                cont_alumnos_dia++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo aportante por el dia")) {
+                cont_aportantes_dia++;
+            } else {
+                cont++;
+            }
+            if (res.getString("comentario").equals("ha ingresado un nuevo invitado por el dia")) {
+                cont_invitados_dia++;
+            } else {
+                cont++;
+            }
+            if (cont == 8) {
+                String comentario = res.getString("comentario");
+
+                char cant_familiares = comentario.charAt(13);
+
+                familiares += Character.getNumericValue(cant_familiares);
+
+            }
+
+        }
 
     }
 
@@ -745,12 +973,13 @@ public class Cajas extends javax.swing.JPanel {
             String fecha_cierre = res.getString("fecha_cierre");
 
             String retiros = String.valueOf(res.getString("retiros"));
+            String id = res.getString("id");
             float retiro = Float.valueOf(res.getString("retiros"));
             float plata_en_caja = Float.valueOf(res.getString("plata_en_caja_al_cierre"));
 
             float total_recaudado = (retiro + plata_en_caja);
 
-            String tab[] = {usuario, fecha_apertura, fecha_cierre, retiros, String.valueOf(plata_en_caja), String.valueOf(total_recaudado), "cerrada"};
+            String tab[] = {usuario, fecha_apertura, fecha_cierre, retiros, String.valueOf(plata_en_caja), String.valueOf(total_recaudado), id};
 
             modelo.addRow(tab);
         }
@@ -765,13 +994,13 @@ public class Cajas extends javax.swing.JPanel {
         try {
             cantacmapantesydiario();
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             tabla_caja_cerrada();
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_actualizar_totalesMousePressed
@@ -793,12 +1022,12 @@ public class Cajas extends javax.swing.JPanel {
         try {
             generarretiro();
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             tablacajaabierta();
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_generar_retiroMousePressed
 
@@ -817,6 +1046,51 @@ public class Cajas extends javax.swing.JPanel {
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MousePressed
+    public void imprimircierre() throws SQLException {
+        Component jFrame=null;
+        int result = JOptionPane.showConfirmDialog(jFrame, "Desea imprimir cierre?");
+        if (result == 0) {
+            String fecha_ab = "";
+            int fila = tabla_cajas_cerrada.getSelectedRow();
+            String usuario = tabla_cajas_cerrada.getValueAt(fila, 0).toString();
+            String fecha_hora_apertura = tabla_cajas_cerrada.getValueAt(fila, 1).toString();
+            String fecha_hora_cierre = tabla_cajas_cerrada.getValueAt(fila, 2).toString();
+            String retiros = tabla_cajas_cerrada.getValueAt(fila, 3).toString();
+            String monto_caja = tabla_cajas_cerrada.getValueAt(fila, 4).toString();
+            String total = tabla_cajas_cerrada.getValueAt(fila, 5).toString();
+            String id = tabla_cajas_cerrada.getValueAt(fila, 6).toString();
+
+            for (int i = 0; i < 12; i++) {
+                char a = fecha_hora_apertura.charAt(i);
+
+                if (!String.valueOf(a).equals(" ")) {
+                    fecha_ab += a;
+                } else {
+                    i = 12;
+                }
+            }
+            
+            imprimir_tiket_caja(fecha_ab,fecha_hora_cierre,usuario,id,fecha_hora_apertura,retiros,monto_caja,total);
+        }
+
+    }
+    private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
+        try {
+            imprimircierre();
+        } catch (SQLException ex) {
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel7MousePressed
+
+    private void tabla_cajas_cerradaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabla_cajas_cerradaKeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+        try {
+            imprimircierre();
+        } catch (SQLException ex) {
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_tabla_cajas_cerradaKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -841,6 +1115,7 @@ public class Cajas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel22;

@@ -1182,7 +1182,7 @@ public class Usuarios extends javax.swing.JPanel {
 
     private void tabla1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla1MousePressed
         if ("Administrador".equals(Main.privilegio)) {
-
+            
             try {
                 TablaUsuario();
             } catch (SQLException ex) {

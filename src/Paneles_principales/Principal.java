@@ -4,8 +4,9 @@
  */
 package Paneles_principales;
 
+import Main.Main;
 import Main.Modelo;
-import Paneles_rotativos.Cajas;
+import Paneles_rotativos.cajas;
 import Paneles_rotativos.Padron;
 import Paneles_rotativos.Usuarios;
 import Paneles_rotativos.Ingre;
@@ -32,7 +33,7 @@ public class Principal extends javax.swing.JFrame {
     // Ocupacion ocupacion = new Ocupacion();
     Salidas_temporales salidas = new Salidas_temporales();
     Usuarios usuarios = new Usuarios();
-    Cajas cajas = new Cajas();
+    cajas cajas = new cajas();
     OcupacionC ocupacionC = new OcupacionC();
     Padron padron = new Padron();
     Inicio inicio = new Inicio();
@@ -257,15 +258,14 @@ public class Principal extends javax.swing.JFrame {
         Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(padron);
         try {
+            padron.tabla_completa_alumnos();
             padron.tabla_completa_aportante();
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            padron.tabla_completa_alumnos();
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        
+       
     }//GEN-LAST:event_PadronMousePressed
 
     private void OcupacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OcupacionMousePressed
@@ -282,7 +282,7 @@ public class Principal extends javax.swing.JFrame {
         Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(ocupacionC);
-        
+
     }//GEN-LAST:event_OcupacionMousePressed
 
     private void UsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsuariosMousePressed
@@ -299,6 +299,12 @@ public class Principal extends javax.swing.JFrame {
             usuarios.tarifasactulaes();
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            usuarios.TablaUsuario();
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -351,7 +357,7 @@ public class Principal extends javax.swing.JFrame {
         Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(salidas);
-          try { 
+        try {
             salidas.tabla_salidas_temp();
         } catch (SQLException ex) {
             Logger.getLogger(Salidas_temporales.class.getName()).log(Level.SEVERE, null, ex);
@@ -371,6 +377,14 @@ public class Principal extends javax.swing.JFrame {
         Ocupacion.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Cajas.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         MostrarPanel(inicio);
+        try {
+            inicio.TablaVehiculos();
+            inicio.TablaParcelas();
+            inicio.TablaEgresantes();
+            inicio.Tabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_InicioMousePressed
 
     private void CajasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CajasMousePressed
@@ -392,13 +406,13 @@ public class Principal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-          try {
+        try {
             cajas.tabla_caja_cerrada();
         } catch (SQLException ex) {
-            Logger.getLogger(Cajas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_CajasMousePressed
     public void MostrarPanel(JPanel p) {
 

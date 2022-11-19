@@ -77,7 +77,7 @@ public class Inicio extends javax.swing.JPanel {
             String fecha_egreso = res.getString("fecha_egreso");
             String fecha_ingreso = res.getString("fecha_ingreso");
             String parcela = res.getString("parsela");
-            String tab[] = {documento, nombre, categoria, importe, fecha_egreso, fecha_ingreso, parcela};
+            String tab[] = {documento, nombre, categoria, importe,  fecha_ingreso,fecha_egreso, parcela};
            modelo.addRow(tab);
 
         }
@@ -864,6 +864,7 @@ public class Inicio extends javax.swing.JPanel {
             TablaVehiculos();
             TablaParcelas();
             TablaEgresantes();
+            Tabla();
         } catch (SQLException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }

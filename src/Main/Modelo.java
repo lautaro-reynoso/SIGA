@@ -480,7 +480,12 @@ public class Modelo {
         }
 
     }
-
+    public ResultSet mostrarregistros(){
+        
+        String sql = "SELECT * FROM registros";
+        System.out.println("entra1");
+        return Main.conexion.EjecutarConsultaSQL(sql);
+    }
     public int generearretiro(String importe_retiro) throws SQLException {
         String sql1;
         sql1 = "SELECT * FROM caja_abierta WHERE usuario = '" + Login.usuario + "'";
@@ -516,11 +521,24 @@ public class Modelo {
     public ResultSet mostrarretiros(String usuario) {
 
         String sql1;
-        sql1 = "SELECT * FROM retiros WHERE usuario = '" + Login.usuario + "'";
+        sql1 = "SELECT * FROM retiros WHERE usuario = '" + Login.usuario + "' and fecha_hora = '" + Main.DiaActual + "'";
 
         ResultSet res = Main.conexion.EjecutarConsultaSQL(sql1);
         return res;
 
+    }
+    public ResultSet mostrar_registros_fecha(String fecha, String usuario){
+        String sql;
+        sql ="SELECT * FROM registros where usuario = '" + usuario + "' and fecha = '" + fecha + "'";
+        
+        return Main.conexion.EjecutarConsultaSQL(sql);
+        
+        
+    }
+    public void borrarretiros(){
+        String sql = "DELETE FROM retiros where usuario = '" + Login.usuario + "' and fecha_hora = '" + Main.DiaActual + "'";
+        Main.conexion.EjecutarOperacion(sql);
+        
     }
 
     public int insertardinerocaja(float importe) throws SQLException {
