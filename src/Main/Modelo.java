@@ -415,6 +415,13 @@ public class Modelo {
 
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
+    public ResultSet MostrarEgreso_1() {
+        String sql;
+        sql = "SELECT * FROM egreso";
+
+        return Main.conexion.EjecutarConsultaSQL(sql);
+    }
+
 
     public int AbrirCaja(String monto_inicial) {
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
@@ -483,7 +490,13 @@ public class Modelo {
     public ResultSet mostrarregistros(){
         
         String sql = "SELECT * FROM registros";
-        System.out.println("entra1");
+        
+        return Main.conexion.EjecutarConsultaSQL(sql);
+    }
+     public ResultSet mostrarregistros1(){
+        
+        String sql = "SELECT * FROM registros ORDER BY id DESC";
+        
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
     public int generearretiro(String importe_retiro) throws SQLException {

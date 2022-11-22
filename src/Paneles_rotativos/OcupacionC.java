@@ -1595,7 +1595,11 @@ public void ActualizarOcupacion() throws SQLException {
     }//GEN-LAST:event_jMenuItem1MousePressed
 
     private void j2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j2MousePressed
-
+try {
+            traerinfo(2);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_j2MousePressed
 
