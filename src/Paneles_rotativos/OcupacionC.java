@@ -76,6 +76,8 @@ public class OcupacionC extends javax.swing.JPanel {
         jMenuItem1 = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         j10 = new javax.swing.JLabel();
         j12 = new javax.swing.JLabel();
@@ -225,6 +227,13 @@ public class OcupacionC extends javax.swing.JPanel {
         });
         jPopupMenu2.add(jMenuItem2);
 
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel1MouseEntered(evt);
@@ -232,7 +241,8 @@ public class OcupacionC extends javax.swing.JPanel {
         });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        j10.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j10.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j10.setForeground(new java.awt.Color(255, 255, 255));
         j10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j10.setText("10");
         j10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -240,9 +250,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j10MousePressed(evt);
             }
         });
-        jPanel1.add(j10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, -1, -1));
+        jPanel1.add(j10, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, -1, -1));
 
-        j12.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j12.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j12.setForeground(new java.awt.Color(255, 255, 255));
         j12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j12.setText("12");
         j12.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -250,9 +261,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j12MousePressed(evt);
             }
         });
-        jPanel1.add(j12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, -1, -1));
+        jPanel1.add(j12, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 310, -1, -1));
 
-        j5.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j5.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j5.setForeground(new java.awt.Color(255, 255, 255));
         j5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j5.setText("5");
         j5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -260,9 +272,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j5MousePressed(evt);
             }
         });
-        jPanel1.add(j5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, -1, -1));
+        jPanel1.add(j5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 310, -1, -1));
 
-        j27.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j27.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j27.setForeground(new java.awt.Color(255, 255, 255));
         j27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j27.setText("27");
         j27.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -270,9 +283,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j27MousePressed(evt);
             }
         });
-        jPanel1.add(j27, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, -1, -1));
+        jPanel1.add(j27, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 30, -1));
 
-        j7.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j7.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j7.setForeground(new java.awt.Color(255, 255, 255));
         j7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j7.setText("7");
         j7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -280,9 +294,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j7MousePressed(evt);
             }
         });
-        jPanel1.add(j7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, -1, -1));
+        jPanel1.add(j7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 330, 30, -1));
 
-        j29.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j29.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j29.setForeground(new java.awt.Color(255, 255, 255));
         j29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j29.setText("29");
         j29.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -290,9 +305,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j29MousePressed(evt);
             }
         });
-        jPanel1.add(j29, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, -1, -1));
+        jPanel1.add(j29, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 220, 40, -1));
 
-        j20.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j20.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j20.setForeground(new java.awt.Color(255, 255, 255));
         j20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j20.setText("20");
         j20.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -300,9 +316,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j20MousePressed(evt);
             }
         });
-        jPanel1.add(j20, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 520, -1, -1));
+        jPanel1.add(j20, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, -1, -1));
 
-        j3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j3.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j3.setForeground(new java.awt.Color(255, 255, 255));
         j3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j3.setText("3");
         j3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -310,9 +327,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j3MousePressed(evt);
             }
         });
-        jPanel1.add(j3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, -1));
+        jPanel1.add(j3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 350, -1, -1));
 
-        j31.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j31.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j31.setForeground(new java.awt.Color(255, 255, 255));
         j31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j31.setText("31");
         j31.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -320,9 +338,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j31MousePressed(evt);
             }
         });
-        jPanel1.add(j31, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, -1, -1));
+        jPanel1.add(j31, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 240, -1, -1));
 
-        j40.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j40.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j40.setForeground(new java.awt.Color(255, 255, 255));
         j40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j40.setText("40");
         j40.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -330,9 +349,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j40MousePressed(evt);
             }
         });
-        jPanel1.add(j40, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, -1, -1));
+        jPanel1.add(j40, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
 
-        j49.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j49.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j49.setForeground(new java.awt.Color(255, 255, 255));
         j49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j49.setText("49");
         j49.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -340,9 +360,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j49MousePressed(evt);
             }
         });
-        jPanel1.add(j49, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, -1));
+        jPanel1.add(j49, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, -1, -1));
 
-        j45.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j45.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j45.setForeground(new java.awt.Color(255, 255, 255));
         j45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j45.setText("45");
         j45.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -350,9 +371,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j45MousePressed(evt);
             }
         });
-        jPanel1.add(j45, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, -1, -1));
+        jPanel1.add(j45, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, -1, -1));
 
-        j50.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j50.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j50.setForeground(new java.awt.Color(255, 255, 255));
         j50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j50.setText("50");
         j50.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -360,9 +382,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j50MousePressed(evt);
             }
         });
-        jPanel1.add(j50, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, -1, -1));
+        jPanel1.add(j50, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, -1, -1));
 
-        j6.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j6.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j6.setForeground(new java.awt.Color(255, 255, 255));
         j6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j6.setText("6");
         j6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -370,9 +393,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j6MousePressed(evt);
             }
         });
-        jPanel1.add(j6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, -1, -1));
+        jPanel1.add(j6, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, -1, -1));
 
-        j15.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j15.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j15.setForeground(new java.awt.Color(255, 255, 255));
         j15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j15.setText("15");
         j15.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -380,9 +404,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j15MousePressed(evt);
             }
         });
-        jPanel1.add(j15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, -1, -1));
+        jPanel1.add(j15, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 250, -1, -1));
 
-        j2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j2.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j2.setForeground(new java.awt.Color(255, 255, 255));
         j2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j2.setText("2");
         j2.setComponentPopupMenu(jPopupMenu2);
@@ -392,9 +417,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j2MousePressed(evt);
             }
         });
-        jPanel1.add(j2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, -1, -1));
+        jPanel1.add(j2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 370, -1, 10));
 
-        j25.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j25.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j25.setForeground(new java.awt.Color(255, 255, 255));
         j25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j25.setText("25");
         j25.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -402,9 +428,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j25MousePressed(evt);
             }
         });
-        jPanel1.add(j25, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, -1, -1));
+        jPanel1.add(j25, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 270, -1, -1));
 
-        j33.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j33.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j33.setForeground(new java.awt.Color(255, 255, 255));
         j33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j33.setText("33");
         j33.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -412,9 +439,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j33MousePressed(evt);
             }
         });
-        jPanel1.add(j33, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, -1, -1));
+        jPanel1.add(j33, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, -1, -1));
 
-        j37.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j37.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j37.setForeground(new java.awt.Color(255, 255, 255));
         j37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j37.setText("37");
         j37.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -422,8 +450,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j37MousePressed(evt);
             }
         });
-        jPanel1.add(j37, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, -1, -1));
+        jPanel1.add(j37, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, -1, -1));
 
+        j36.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j36.setForeground(new java.awt.Color(255, 255, 255));
         j36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j36.setText("36");
         j36.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -431,9 +461,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j36MousePressed(evt);
             }
         });
-        jPanel1.add(j36, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, -1, -1));
+        jPanel1.add(j36, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, -1, -1));
 
-        j48.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j48.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j48.setForeground(new java.awt.Color(255, 255, 255));
         j48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j48.setText("48");
         j48.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -441,9 +472,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j48MousePressed(evt);
             }
         });
-        jPanel1.add(j48, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, -1, -1));
+        jPanel1.add(j48, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, -1, -1));
 
-        j39.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j39.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j39.setForeground(new java.awt.Color(255, 255, 255));
         j39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j39.setText("39");
         j39.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -451,9 +483,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j39MousePressed(evt);
             }
         });
-        jPanel1.add(j39, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 490, -1, -1));
+        jPanel1.add(j39, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, -1, -1));
 
-        j38.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j38.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j38.setForeground(new java.awt.Color(255, 255, 255));
         j38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j38.setText("38");
         j38.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -461,9 +494,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j38MousePressed(evt);
             }
         });
-        jPanel1.add(j38, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, -1, -1));
+        jPanel1.add(j38, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
 
-        j34.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j34.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j34.setForeground(new java.awt.Color(255, 255, 255));
         j34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j34.setText("34");
         j34.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -471,9 +505,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j34MousePressed(evt);
             }
         });
-        jPanel1.add(j34, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
+        jPanel1.add(j34, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, -1, -1));
 
-        j43.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j43.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j43.setForeground(new java.awt.Color(255, 255, 255));
         j43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j43.setText("43");
         j43.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -481,9 +516,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j43MousePressed(evt);
             }
         });
-        jPanel1.add(j43, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, -1, -1));
+        jPanel1.add(j43, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, -1, -1));
 
-        j30.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j30.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j30.setForeground(new java.awt.Color(255, 255, 255));
         j30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j30.setText("30");
         j30.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -491,9 +527,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j30MousePressed(evt);
             }
         });
-        jPanel1.add(j30, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, -1));
+        jPanel1.add(j30, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, -1, -1));
 
-        j42.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j42.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j42.setForeground(new java.awt.Color(255, 255, 255));
         j42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j42.setText("42");
         j42.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -501,9 +538,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j42MousePressed(evt);
             }
         });
-        jPanel1.add(j42, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, -1, -1));
+        jPanel1.add(j42, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, -1, -1));
 
-        j24.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j24.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j24.setForeground(new java.awt.Color(255, 255, 255));
         j24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j24.setText("24");
         j24.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -511,9 +549,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j24MousePressed(evt);
             }
         });
-        jPanel1.add(j24, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, -1));
+        jPanel1.add(j24, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, -1, -1));
 
-        j23.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j23.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j23.setForeground(new java.awt.Color(255, 255, 255));
         j23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j23.setText("23");
         j23.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -521,9 +560,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j23MousePressed(evt);
             }
         });
-        jPanel1.add(j23, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
+        jPanel1.add(j23, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, -1, -1));
 
-        j21.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j21.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j21.setForeground(new java.awt.Color(255, 255, 255));
         j21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j21.setText("21");
         j21.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -531,9 +571,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j21MousePressed(evt);
             }
         });
-        jPanel1.add(j21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, -1, -1));
+        jPanel1.add(j21, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, -1, -1));
 
-        j19.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j19.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j19.setForeground(new java.awt.Color(255, 255, 255));
         j19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j19.setText("19");
         j19.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -541,9 +582,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j19MousePressed(evt);
             }
         });
-        jPanel1.add(j19, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, -1, -1));
+        jPanel1.add(j19, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, -1, -1));
 
-        j18.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j18.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j18.setForeground(new java.awt.Color(255, 255, 255));
         j18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j18.setText("18");
         j18.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -551,9 +593,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j18MousePressed(evt);
             }
         });
-        jPanel1.add(j18, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 550, -1, -1));
+        jPanel1.add(j18, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, -1, -1));
 
-        j4.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j4.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j4.setForeground(new java.awt.Color(255, 255, 255));
         j4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j4.setText("4");
         j4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -561,9 +604,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j4MousePressed(evt);
             }
         });
-        jPanel1.add(j4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+        jPanel1.add(j4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 320, -1, -1));
 
-        j16.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j16.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j16.setForeground(new java.awt.Color(255, 255, 255));
         j16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j16.setText("16");
         j16.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -571,9 +615,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j16MousePressed(evt);
             }
         });
-        jPanel1.add(j16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
+        jPanel1.add(j16, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 260, -1, -1));
 
-        j17.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j17.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j17.setForeground(new java.awt.Color(255, 255, 255));
         j17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j17.setText("17");
         j17.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -581,9 +626,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j17MousePressed(evt);
             }
         });
-        jPanel1.add(j17, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
+        jPanel1.add(j17, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, -1, -1));
 
-        j14.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j14.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j14.setForeground(new java.awt.Color(255, 255, 255));
         j14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j14.setText("14");
         j14.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -591,9 +637,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j14MousePressed(evt);
             }
         });
-        jPanel1.add(j14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 480, -1, -1));
+        jPanel1.add(j14, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, -1));
 
-        j13.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j13.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j13.setForeground(new java.awt.Color(255, 255, 255));
         j13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j13.setText("13");
         j13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -601,9 +648,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j13MousePressed(evt);
             }
         });
-        jPanel1.add(j13, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, -1, -1));
+        jPanel1.add(j13, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, -1, -1));
 
-        j8.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j8.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j8.setForeground(new java.awt.Color(255, 255, 255));
         j8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j8.setText("8");
         j8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -611,9 +659,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j8MousePressed(evt);
             }
         });
-        jPanel1.add(j8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, -1, -1));
+        jPanel1.add(j8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 340, -1, -1));
 
-        j9.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j9.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j9.setForeground(new java.awt.Color(255, 255, 255));
         j9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j9.setText("9");
         j9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -621,9 +670,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j9MousePressed(evt);
             }
         });
-        jPanel1.add(j9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, -1, -1));
+        jPanel1.add(j9, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 280, -1, -1));
 
-        j11.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j11.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j11.setForeground(new java.awt.Color(255, 255, 255));
         j11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j11.setText("11");
         j11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -631,9 +681,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j11MousePressed(evt);
             }
         });
-        jPanel1.add(j11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
+        jPanel1.add(j11, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 300, -1, -1));
 
-        j46.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j46.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j46.setForeground(new java.awt.Color(255, 255, 255));
         j46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j46.setText("46");
         j46.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -641,9 +692,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j46MousePressed(evt);
             }
         });
-        jPanel1.add(j46, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 570, -1, -1));
+        jPanel1.add(j46, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, -1, -1));
 
-        j35.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j35.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j35.setForeground(new java.awt.Color(255, 255, 255));
         j35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j35.setText("35");
         j35.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -651,9 +703,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j35MousePressed(evt);
             }
         });
-        jPanel1.add(j35, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 370, -1, -1));
+        jPanel1.add(j35, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, -1, -1));
 
-        j41.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j41.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j41.setForeground(new java.awt.Color(255, 255, 255));
         j41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j41.setText("41");
         j41.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -661,9 +714,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j41MousePressed(evt);
             }
         });
-        jPanel1.add(j41, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, -1, -1));
+        jPanel1.add(j41, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, -1, -1));
 
-        j32.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j32.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j32.setForeground(new java.awt.Color(255, 255, 255));
         j32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j32.setText("32");
         j32.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -671,9 +725,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j32MousePressed(evt);
             }
         });
-        jPanel1.add(j32, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, -1, -1));
+        jPanel1.add(j32, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, -1, -1));
 
-        j28.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j28.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j28.setForeground(new java.awt.Color(255, 255, 255));
         j28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j28.setText("28");
         j28.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -681,9 +736,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j28MousePressed(evt);
             }
         });
-        jPanel1.add(j28, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, -1, -1));
+        jPanel1.add(j28, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, -1, -1));
 
-        j26.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j26.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j26.setForeground(new java.awt.Color(255, 255, 255));
         j26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j26.setText("26");
         j26.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -691,9 +747,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j26MousePressed(evt);
             }
         });
-        jPanel1.add(j26, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
+        jPanel1.add(j26, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, -1, -1));
 
-        j1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j1.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j1.setForeground(new java.awt.Color(255, 255, 255));
         j1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j1.setText("1");
         j1.setComponentPopupMenu(jPopupMenu1);
@@ -702,9 +759,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j1MousePressed(evt);
             }
         });
-        jPanel1.add(j1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
+        jPanel1.add(j1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 390, -1, -1));
 
-        j22.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j22.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j22.setForeground(new java.awt.Color(255, 255, 255));
         j22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j22.setText("22");
         j22.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -712,9 +770,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j22MousePressed(evt);
             }
         });
-        jPanel1.add(j22, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, -1));
+        jPanel1.add(j22, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, -1, -1));
 
-        j44.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j44.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j44.setForeground(new java.awt.Color(255, 255, 255));
         j44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j44.setText("44");
         j44.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -722,9 +781,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j44MousePressed(evt);
             }
         });
-        jPanel1.add(j44, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
+        jPanel1.add(j44, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, -1));
 
-        j47.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j47.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j47.setForeground(new java.awt.Color(255, 255, 255));
         j47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j47.setText("47");
         j47.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -732,9 +792,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j47MousePressed(evt);
             }
         });
-        jPanel1.add(j47, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, -1, -1));
+        jPanel1.add(j47, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, -1, -1));
 
-        j51.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j51.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j51.setForeground(new java.awt.Color(255, 255, 255));
         j51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j51.setText("51");
         j51.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -742,9 +803,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j51MousePressed(evt);
             }
         });
-        jPanel1.add(j51, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, -1, -1));
+        jPanel1.add(j51, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, -1, -1));
 
-        j52.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j52.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j52.setForeground(new java.awt.Color(255, 255, 255));
         j52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j52.setText("52");
         j52.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -752,9 +814,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j52MousePressed(evt);
             }
         });
-        jPanel1.add(j52, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, -1, -1));
+        jPanel1.add(j52, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, -1));
 
-        j53.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j53.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j53.setForeground(new java.awt.Color(255, 255, 255));
         j53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j53.setText("53");
         j53.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -762,9 +825,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j53MousePressed(evt);
             }
         });
-        jPanel1.add(j53, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, -1, -1));
+        jPanel1.add(j53, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
 
-        j54.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j54.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j54.setForeground(new java.awt.Color(255, 255, 255));
         j54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j54.setText("54");
         j54.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -772,9 +836,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j54MousePressed(evt);
             }
         });
-        jPanel1.add(j54, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
+        jPanel1.add(j54, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, -1, -1));
 
-        j55.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j55.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j55.setForeground(new java.awt.Color(255, 255, 255));
         j55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j55.setText("55");
         j55.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -782,9 +847,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j55MousePressed(evt);
             }
         });
-        jPanel1.add(j55, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, -1));
+        jPanel1.add(j55, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, -1, -1));
 
-        j56.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j56.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j56.setForeground(new java.awt.Color(255, 255, 255));
         j56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j56.setText("56");
         j56.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -792,9 +858,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j56MousePressed(evt);
             }
         });
-        jPanel1.add(j56, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, -1, -1));
+        jPanel1.add(j56, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, -1, -1));
 
-        j57.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j57.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j57.setForeground(new java.awt.Color(255, 255, 255));
         j57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j57.setText("57");
         j57.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -802,9 +869,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j57MousePressed(evt);
             }
         });
-        jPanel1.add(j57, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
+        jPanel1.add(j57, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
 
-        j58.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j58.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j58.setForeground(new java.awt.Color(255, 255, 255));
         j58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j58.setText("58");
         j58.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -812,9 +880,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j58MousePressed(evt);
             }
         });
-        jPanel1.add(j58, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, -1, -1));
+        jPanel1.add(j58, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
 
-        j59.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j59.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j59.setForeground(new java.awt.Color(255, 255, 255));
         j59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j59.setText("59");
         j59.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -822,9 +891,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j59MousePressed(evt);
             }
         });
-        jPanel1.add(j59, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, -1, -1));
+        jPanel1.add(j59, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, -1, -1));
 
-        j60.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j60.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j60.setForeground(new java.awt.Color(255, 255, 255));
         j60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j60.setText("60");
         j60.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -832,9 +902,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j60MousePressed(evt);
             }
         });
-        jPanel1.add(j60, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, -1));
+        jPanel1.add(j60, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
 
-        j61.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j61.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j61.setForeground(new java.awt.Color(255, 255, 255));
         j61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j61.setText("61");
         j61.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -842,9 +913,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j61MousePressed(evt);
             }
         });
-        jPanel1.add(j61, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, -1, -1));
+        jPanel1.add(j61, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, -1, -1));
 
-        j62.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j62.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j62.setForeground(new java.awt.Color(255, 255, 255));
         j62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j62.setText("62");
         j62.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -852,9 +924,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j62MousePressed(evt);
             }
         });
-        jPanel1.add(j62, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, -1, -1));
+        jPanel1.add(j62, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
 
-        j63.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j63.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j63.setForeground(new java.awt.Color(255, 255, 255));
         j63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j63.setText("63");
         j63.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -862,9 +935,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j63MousePressed(evt);
             }
         });
-        jPanel1.add(j63, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, -1, -1));
+        jPanel1.add(j63, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, -1, -1));
 
-        j64.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j64.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j64.setForeground(new java.awt.Color(255, 255, 255));
         j64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j64.setText("64");
         j64.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -872,9 +946,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j64MousePressed(evt);
             }
         });
-        jPanel1.add(j64, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, -1, -1));
+        jPanel1.add(j64, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, -1, -1));
 
-        j65.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j65.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j65.setForeground(new java.awt.Color(255, 255, 255));
         j65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j65.setText("65");
         j65.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -882,19 +957,21 @@ public class OcupacionC extends javax.swing.JPanel {
                 j65MousePressed(evt);
             }
         });
-        jPanel1.add(j65, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, -1, -1));
+        jPanel1.add(j65, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, -1, -1));
 
-        j66.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j66.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j66.setForeground(new java.awt.Color(255, 255, 255));
         j66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j66.setText("78");
+        j66.setText("66");
         j66.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 j66MousePressed(evt);
             }
         });
-        jPanel1.add(j66, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
+        jPanel1.add(j66, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, -1, -1));
 
-        j67.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j67.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j67.setForeground(new java.awt.Color(255, 255, 255));
         j67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j67.setText("67");
         j67.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -902,39 +979,43 @@ public class OcupacionC extends javax.swing.JPanel {
                 j67MousePressed(evt);
             }
         });
-        jPanel1.add(j67, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+        jPanel1.add(j67, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
 
-        j68.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j68.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j68.setForeground(new java.awt.Color(255, 255, 255));
         j68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j68.setText("66");
+        j68.setText("68");
         j68.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 j68MousePressed(evt);
             }
         });
-        jPanel1.add(j68, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
+        jPanel1.add(j68, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, -1, -1));
 
-        j69.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j69.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j69.setForeground(new java.awt.Color(255, 255, 255));
         j69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j69.setText("68");
+        j69.setText("69");
         j69.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 j69MousePressed(evt);
             }
         });
-        jPanel1.add(j69, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
+        jPanel1.add(j69, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, -1, -1));
 
-        j70.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j70.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j70.setForeground(new java.awt.Color(255, 255, 255));
         j70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j70.setText("69");
+        j70.setText("70");
         j70.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 j70MousePressed(evt);
             }
         });
-        jPanel1.add(j70, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, -1, -1));
+        jPanel1.add(j70, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, -1, -1));
 
-        j71.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j71.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j71.setForeground(new java.awt.Color(255, 255, 255));
         j71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j71.setText("71");
         j71.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -942,9 +1023,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j71MousePressed(evt);
             }
         });
-        jPanel1.add(j71, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, -1, -1));
+        jPanel1.add(j71, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, -1, -1));
 
-        j72.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j72.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j72.setForeground(new java.awt.Color(255, 255, 255));
         j72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j72.setText("72");
         j72.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -952,9 +1034,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j72MousePressed(evt);
             }
         });
-        jPanel1.add(j72, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
+        jPanel1.add(j72, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
 
-        j73.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j73.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j73.setForeground(new java.awt.Color(255, 255, 255));
         j73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j73.setText("73");
         j73.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -962,9 +1045,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j73MousePressed(evt);
             }
         });
-        jPanel1.add(j73, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, -1, -1));
+        jPanel1.add(j73, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, -1, -1));
 
-        j74.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j74.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j74.setForeground(new java.awt.Color(255, 255, 255));
         j74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j74.setText("74");
         j74.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -972,9 +1056,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j74MousePressed(evt);
             }
         });
-        jPanel1.add(j74, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+        jPanel1.add(j74, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, -1, -1));
 
-        j75.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j75.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j75.setForeground(new java.awt.Color(255, 255, 255));
         j75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j75.setText("75");
         j75.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -982,9 +1067,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j75MousePressed(evt);
             }
         });
-        jPanel1.add(j75, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, -1));
+        jPanel1.add(j75, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
 
-        j76.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j76.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j76.setForeground(new java.awt.Color(255, 255, 255));
         j76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j76.setText("76");
         j76.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -992,9 +1078,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j76MousePressed(evt);
             }
         });
-        jPanel1.add(j76, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
+        jPanel1.add(j76, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, -1, -1));
 
-        j77.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j77.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j77.setForeground(new java.awt.Color(255, 255, 255));
         j77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j77.setText("77");
         j77.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1002,19 +1089,21 @@ public class OcupacionC extends javax.swing.JPanel {
                 j77MousePressed(evt);
             }
         });
-        jPanel1.add(j77, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, -1, -1));
+        jPanel1.add(j77, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
 
-        j78.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j78.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j78.setForeground(new java.awt.Color(255, 255, 255));
         j78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j78.setText("70");
+        j78.setText("78");
         j78.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 j78MousePressed(evt);
             }
         });
-        jPanel1.add(j78, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, -1, -1));
+        jPanel1.add(j78, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
 
-        j79.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j79.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j79.setForeground(new java.awt.Color(255, 255, 255));
         j79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j79.setText("79");
         j79.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1022,9 +1111,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j79MousePressed(evt);
             }
         });
-        jPanel1.add(j79, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, -1));
+        jPanel1.add(j79, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
 
-        j80.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j80.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j80.setForeground(new java.awt.Color(255, 255, 255));
         j80.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j80.setText("80");
         j80.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1032,9 +1122,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j80MousePressed(evt);
             }
         });
-        jPanel1.add(j80, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, -1, -1));
+        jPanel1.add(j80, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, -1, -1));
 
-        j81.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j81.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j81.setForeground(new java.awt.Color(255, 255, 255));
         j81.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j81.setText("81");
         j81.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1042,9 +1133,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j81MousePressed(evt);
             }
         });
-        jPanel1.add(j81, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
+        jPanel1.add(j81, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
 
-        j82.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j82.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j82.setForeground(new java.awt.Color(255, 255, 255));
         j82.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j82.setText("82");
         j82.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1052,9 +1144,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j82MousePressed(evt);
             }
         });
-        jPanel1.add(j82, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, -1, -1));
+        jPanel1.add(j82, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
 
-        j83.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j83.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j83.setForeground(new java.awt.Color(255, 255, 255));
         j83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j83.setText("83");
         j83.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1062,9 +1155,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j83MousePressed(evt);
             }
         });
-        jPanel1.add(j83, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, -1, -1));
+        jPanel1.add(j83, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
 
-        j84.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j84.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j84.setForeground(new java.awt.Color(255, 255, 255));
         j84.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j84.setText("84");
         j84.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1072,9 +1166,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j84MousePressed(evt);
             }
         });
-        jPanel1.add(j84, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, -1, -1));
+        jPanel1.add(j84, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, -1, -1));
 
-        j85.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j85.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j85.setForeground(new java.awt.Color(255, 255, 255));
         j85.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j85.setText("85");
         j85.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1082,9 +1177,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j85MousePressed(evt);
             }
         });
-        jPanel1.add(j85, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
+        jPanel1.add(j85, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, -1, -1));
 
-        j86.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j86.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j86.setForeground(new java.awt.Color(255, 255, 255));
         j86.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j86.setText("86");
         j86.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1092,9 +1188,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j86MousePressed(evt);
             }
         });
-        jPanel1.add(j86, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, -1, -1));
+        jPanel1.add(j86, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
 
-        j87.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j87.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j87.setForeground(new java.awt.Color(255, 255, 255));
         j87.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j87.setText("87");
         j87.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1102,9 +1199,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j87MousePressed(evt);
             }
         });
-        jPanel1.add(j87, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, -1, -1));
+        jPanel1.add(j87, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, -1, -1));
 
-        j88.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j88.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j88.setForeground(new java.awt.Color(255, 255, 255));
         j88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j88.setText("88");
         j88.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1112,9 +1210,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j88MousePressed(evt);
             }
         });
-        jPanel1.add(j88, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, -1, -1));
+        jPanel1.add(j88, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, -1, -1));
 
-        j89.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j89.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j89.setForeground(new java.awt.Color(255, 255, 255));
         j89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j89.setText("89");
         j89.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1122,9 +1221,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j89MousePressed(evt);
             }
         });
-        jPanel1.add(j89, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, -1, -1));
+        jPanel1.add(j89, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, -1, -1));
 
-        j90.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j90.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j90.setForeground(new java.awt.Color(255, 255, 255));
         j90.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j90.setText("90");
         j90.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1132,9 +1232,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j90MousePressed(evt);
             }
         });
-        jPanel1.add(j90, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, -1, -1));
+        jPanel1.add(j90, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
 
-        j91.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j91.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j91.setForeground(new java.awt.Color(255, 255, 255));
         j91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j91.setText("91");
         j91.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1142,9 +1243,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j91MousePressed(evt);
             }
         });
-        jPanel1.add(j91, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, -1, -1));
+        jPanel1.add(j91, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, -1, -1));
 
-        j92.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j92.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j92.setForeground(new java.awt.Color(255, 255, 255));
         j92.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j92.setText("92");
         j92.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1152,9 +1254,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j92MousePressed(evt);
             }
         });
-        jPanel1.add(j92, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, -1, -1));
+        jPanel1.add(j92, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, -1, -1));
 
-        j93.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j93.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j93.setForeground(new java.awt.Color(255, 255, 255));
         j93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j93.setText("93");
         j93.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1162,9 +1265,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j93MousePressed(evt);
             }
         });
-        jPanel1.add(j93, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, -1, -1));
+        jPanel1.add(j93, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
 
-        j94.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j94.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j94.setForeground(new java.awt.Color(255, 255, 255));
         j94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j94.setText("94");
         j94.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1172,9 +1276,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j94MousePressed(evt);
             }
         });
-        jPanel1.add(j94, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, -1, -1));
+        jPanel1.add(j94, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, -1));
 
-        j95.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j95.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j95.setForeground(new java.awt.Color(255, 255, 255));
         j95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j95.setText("95");
         j95.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1182,9 +1287,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j95MousePressed(evt);
             }
         });
-        jPanel1.add(j95, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
+        jPanel1.add(j95, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, -1, -1));
 
-        j96.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j96.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j96.setForeground(new java.awt.Color(255, 255, 255));
         j96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j96.setText("96");
         j96.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1192,9 +1298,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j96MousePressed(evt);
             }
         });
-        jPanel1.add(j96, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, -1, -1));
+        jPanel1.add(j96, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
 
-        j97.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j97.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j97.setForeground(new java.awt.Color(255, 255, 255));
         j97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j97.setText("97");
         j97.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1202,9 +1309,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j97MousePressed(evt);
             }
         });
-        jPanel1.add(j97, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, -1, -1));
+        jPanel1.add(j97, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, -1, -1));
 
-        j98.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j98.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j98.setForeground(new java.awt.Color(255, 255, 255));
         j98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j98.setText("98");
         j98.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1212,9 +1320,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j98MousePressed(evt);
             }
         });
-        jPanel1.add(j98, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, -1, -1));
+        jPanel1.add(j98, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, -1));
 
-        j99.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j99.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j99.setForeground(new java.awt.Color(255, 255, 255));
         j99.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j99.setText("99");
         j99.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1222,9 +1331,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j99MousePressed(evt);
             }
         });
-        jPanel1.add(j99, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, -1));
+        jPanel1.add(j99, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, -1, -1));
 
-        j100.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j100.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j100.setForeground(new java.awt.Color(255, 255, 255));
         j100.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j100.setText("100");
         j100.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1232,9 +1342,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j100MousePressed(evt);
             }
         });
-        jPanel1.add(j100, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
+        jPanel1.add(j100, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
 
-        j101.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j101.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j101.setForeground(new java.awt.Color(255, 255, 255));
         j101.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j101.setText("101");
         j101.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1242,9 +1353,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j101MousePressed(evt);
             }
         });
-        jPanel1.add(j101, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
+        jPanel1.add(j101, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, -1, -1));
 
-        j102.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j102.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j102.setForeground(new java.awt.Color(255, 255, 255));
         j102.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j102.setText("102");
         j102.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1252,9 +1364,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j102MousePressed(evt);
             }
         });
-        jPanel1.add(j102, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, -1));
+        jPanel1.add(j102, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, -1, -1));
 
-        j103.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j103.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j103.setForeground(new java.awt.Color(255, 255, 255));
         j103.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j103.setText("103");
         j103.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1262,9 +1375,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j103MousePressed(evt);
             }
         });
-        jPanel1.add(j103, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, -1, -1));
+        jPanel1.add(j103, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, -1, -1));
 
-        j104.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j104.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j104.setForeground(new java.awt.Color(255, 255, 255));
         j104.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j104.setText("104");
         j104.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1272,9 +1386,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j104MousePressed(evt);
             }
         });
-        jPanel1.add(j104, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+        jPanel1.add(j104, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, -1, -1));
 
-        j105.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j105.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j105.setForeground(new java.awt.Color(255, 255, 255));
         j105.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j105.setText("105");
         j105.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1282,9 +1397,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j105MousePressed(evt);
             }
         });
-        jPanel1.add(j105, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
+        jPanel1.add(j105, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, -1, -1));
 
-        j106.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j106.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j106.setForeground(new java.awt.Color(255, 255, 255));
         j106.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j106.setText("106");
         j106.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1292,9 +1408,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j106MousePressed(evt);
             }
         });
-        jPanel1.add(j106, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+        jPanel1.add(j106, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, -1, -1));
 
-        j107.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j107.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j107.setForeground(new java.awt.Color(255, 255, 255));
         j107.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j107.setText("107");
         j107.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1302,9 +1419,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j107MousePressed(evt);
             }
         });
-        jPanel1.add(j107, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
+        jPanel1.add(j107, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, -1, -1));
 
-        j108.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j108.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j108.setForeground(new java.awt.Color(255, 255, 255));
         j108.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j108.setText("108");
         j108.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1312,9 +1430,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j108MousePressed(evt);
             }
         });
-        jPanel1.add(j108, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
+        jPanel1.add(j108, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, -1, -1));
 
-        j109.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j109.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j109.setForeground(new java.awt.Color(255, 255, 255));
         j109.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j109.setText("109");
         j109.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1322,9 +1441,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j109MousePressed(evt);
             }
         });
-        jPanel1.add(j109, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+        jPanel1.add(j109, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, -1, -1));
 
-        j110.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j110.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j110.setForeground(new java.awt.Color(255, 255, 255));
         j110.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j110.setText("110");
         j110.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1332,9 +1452,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j110MousePressed(evt);
             }
         });
-        jPanel1.add(j110, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, -1, -1));
+        jPanel1.add(j110, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, -1, -1));
 
-        j111.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j111.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j111.setForeground(new java.awt.Color(255, 255, 255));
         j111.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j111.setText("111");
         j111.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1342,9 +1463,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j111MousePressed(evt);
             }
         });
-        jPanel1.add(j111, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, -1, -1));
+        jPanel1.add(j111, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, -1, -1));
 
-        j112.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j112.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j112.setForeground(new java.awt.Color(255, 255, 255));
         j112.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j112.setText("112");
         j112.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1352,9 +1474,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j112MousePressed(evt);
             }
         });
-        jPanel1.add(j112, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
+        jPanel1.add(j112, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, -1, -1));
 
-        j113.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j113.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j113.setForeground(new java.awt.Color(255, 255, 255));
         j113.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j113.setText("113");
         j113.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1362,9 +1485,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j113MousePressed(evt);
             }
         });
-        jPanel1.add(j113, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, -1, -1));
+        jPanel1.add(j113, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, -1, -1));
 
-        j114.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j114.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j114.setForeground(new java.awt.Color(255, 255, 255));
         j114.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j114.setText("114");
         j114.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1372,9 +1496,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j114MousePressed(evt);
             }
         });
-        jPanel1.add(j114, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+        jPanel1.add(j114, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, -1, -1));
 
-        j115.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j115.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j115.setForeground(new java.awt.Color(255, 255, 255));
         j115.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j115.setText("115");
         j115.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1382,9 +1507,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j115MousePressed(evt);
             }
         });
-        jPanel1.add(j115, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, -1, -1));
+        jPanel1.add(j115, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, -1, -1));
 
-        j116.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j116.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j116.setForeground(new java.awt.Color(255, 255, 255));
         j116.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j116.setText("116");
         j116.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1392,9 +1518,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j116MousePressed(evt);
             }
         });
-        jPanel1.add(j116, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
+        jPanel1.add(j116, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, -1, -1));
 
-        j117.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j117.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j117.setForeground(new java.awt.Color(255, 255, 255));
         j117.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j117.setText("117");
         j117.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1402,9 +1529,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j117MousePressed(evt);
             }
         });
-        jPanel1.add(j117, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
+        jPanel1.add(j117, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, -1, -1));
 
-        j118.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j118.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j118.setForeground(new java.awt.Color(255, 255, 255));
         j118.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j118.setText("118");
         j118.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1412,9 +1540,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j118MousePressed(evt);
             }
         });
-        jPanel1.add(j118, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
+        jPanel1.add(j118, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, -1, -1));
 
-        j119.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j119.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j119.setForeground(new java.awt.Color(255, 255, 255));
         j119.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j119.setText("119");
         j119.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1422,9 +1551,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j119MousePressed(evt);
             }
         });
-        jPanel1.add(j119, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, -1));
+        jPanel1.add(j119, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 350, -1, -1));
 
-        j120.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j120.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j120.setForeground(new java.awt.Color(255, 255, 255));
         j120.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j120.setText("120");
         j120.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1432,9 +1562,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j120MousePressed(evt);
             }
         });
-        jPanel1.add(j120, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
+        jPanel1.add(j120, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 330, -1, -1));
 
-        j121.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j121.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j121.setForeground(new java.awt.Color(255, 255, 255));
         j121.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j121.setText("121");
         j121.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1442,9 +1573,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j121MousePressed(evt);
             }
         });
-        jPanel1.add(j121, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, -1, -1));
+        jPanel1.add(j121, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, -1, -1));
 
-        j122.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j122.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j122.setForeground(new java.awt.Color(255, 255, 255));
         j122.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j122.setText("122");
         j122.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1452,9 +1584,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j122MousePressed(evt);
             }
         });
-        jPanel1.add(j122, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, -1, -1));
+        jPanel1.add(j122, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 350, -1, -1));
 
-        j123.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j123.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j123.setForeground(new java.awt.Color(255, 255, 255));
         j123.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j123.setText("123");
         j123.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1462,9 +1595,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j123MousePressed(evt);
             }
         });
-        jPanel1.add(j123, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+        jPanel1.add(j123, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 340, -1, -1));
 
-        j124.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j124.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j124.setForeground(new java.awt.Color(255, 255, 255));
         j124.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j124.setText("124");
         j124.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1472,9 +1606,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j124MousePressed(evt);
             }
         });
-        jPanel1.add(j124, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 670, -1, -1));
+        jPanel1.add(j124, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 340, -1, -1));
 
-        j125.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j125.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j125.setForeground(new java.awt.Color(255, 255, 255));
         j125.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j125.setText("125");
         j125.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1482,9 +1617,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j125MousePressed(evt);
             }
         });
-        jPanel1.add(j125, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 600, -1, -1));
+        jPanel1.add(j125, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, -1, -1));
 
-        j126.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j126.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j126.setForeground(new java.awt.Color(255, 255, 255));
         j126.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j126.setText("126");
         j126.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1492,9 +1628,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j126MousePressed(evt);
             }
         });
-        jPanel1.add(j126, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 630, -1, -1));
+        jPanel1.add(j126, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 370, -1, -1));
 
-        j127.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j127.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j127.setForeground(new java.awt.Color(255, 255, 255));
         j127.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j127.setText("127");
         j127.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1502,9 +1639,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j127MousePressed(evt);
             }
         });
-        jPanel1.add(j127, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 690, -1, -1));
+        jPanel1.add(j127, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 390, -1, -1));
 
-        j128.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j128.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j128.setForeground(new java.awt.Color(255, 255, 255));
         j128.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j128.setText("128");
         j128.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1512,9 +1650,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 j128MousePressed(evt);
             }
         });
-        jPanel1.add(j128, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 650, -1, -1));
+        jPanel1.add(j128, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 350, -1, -1));
 
-        boton_v.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        boton_v.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        boton_v.setForeground(new java.awt.Color(255, 255, 255));
         boton_v.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         boton_v.setText("Libre");
         boton_v.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1522,9 +1661,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 boton_vMousePressed(evt);
             }
         });
-        jPanel1.add(boton_v, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, -1, -1));
+        jPanel1.add(boton_v, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, -1, -1));
 
-        boton_r.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        boton_r.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        boton_r.setForeground(new java.awt.Color(255, 255, 255));
         boton_r.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/false1x.png"))); // NOI18N
         boton_r.setText("Ocupado");
         boton_r.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1532,10 +1672,10 @@ public class OcupacionC extends javax.swing.JPanel {
                 boton_rMousePressed(evt);
             }
         });
-        jPanel1.add(boton_r, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, -1, -1));
+        jPanel1.add(boton_r, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, -1, -1));
 
-        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/mapa-4.jpg"))); // NOI18N
-        jPanel1.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1080, -1));
+        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/Mapa Color2.png"))); // NOI18N
+        jPanel1.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -3042,10 +3182,12 @@ try {
     private javax.swing.JLabel j98;
     private javax.swing.JLabel j99;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

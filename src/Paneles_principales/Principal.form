@@ -20,6 +20,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -42,9 +43,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="content" pref="1289" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="content" min="-2" pref="1280" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,9 +53,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="content" min="-2" pref="780" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="content" min="-2" pref="721" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -122,11 +122,11 @@
               <Font name="Segoe UI" size="10" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="f" green="2e" red="0" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/images/baseline_account_circle_black_24dp_1.png"/>
+              <Image iconType="3" name="/com/images/kisspng-clip-art-scalable-vector-graphics-computer-icons-p-exit-svg-png-icon-free-download-380770-online-5b67625f74c909.9973847815335020474784 (1).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SALIR"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -138,7 +138,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="720" width="179" height="60"/>
+              <AbsoluteConstraints x="0" y="670" width="180" height="60"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -261,7 +261,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/images/baseline_supervised_user_circle_black_24dp.png"/>
+              <Image iconType="3" name="/com/images/pngwing.com.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="OCUPACION"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -313,7 +313,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/images/baseline_supervised_user_circle_black_24dp.png"/>
+              <Image iconType="3" name="/com/images/kisspng-cash-register-computer-icons-money-payment-point-o-5af3897e79ef57.5804234915259098864995 (1).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CAJAS"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">

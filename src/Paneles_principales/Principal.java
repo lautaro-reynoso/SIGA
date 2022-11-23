@@ -84,6 +84,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(214, 226, 195));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,9 +114,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         Salir.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        Salir.setForeground(new java.awt.Color(255, 255, 255));
+        Salir.setForeground(new java.awt.Color(0, 46, 15));
         Salir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_account_circle_black_24dp_1.png"))); // NOI18N
+        Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/kisspng-clip-art-scalable-vector-graphics-computer-icons-p-exit-svg-png-icon-free-download-380770-online-5b67625f74c909.9973847815335020474784 (1).png"))); // NOI18N
         Salir.setText("SALIR");
         Salir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Salir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,7 +124,7 @@ public class Principal extends javax.swing.JFrame {
                 SalirMousePressed(evt);
             }
         });
-        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 720, 179, 60));
+        jPanel2.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 180, 60));
 
         SalidasTemporales.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         SalidasTemporales.setForeground(new java.awt.Color(0, 46, 15));
@@ -187,7 +188,7 @@ public class Principal extends javax.swing.JFrame {
         Ocupacion.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         Ocupacion.setForeground(new java.awt.Color(0, 46, 15));
         Ocupacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Ocupacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_supervised_user_circle_black_24dp.png"))); // NOI18N
+        Ocupacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/pngwing.com.png"))); // NOI18N
         Ocupacion.setText("OCUPACION");
         Ocupacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Ocupacion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -213,7 +214,7 @@ public class Principal extends javax.swing.JFrame {
         Cajas.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         Cajas.setForeground(new java.awt.Color(0, 46, 15));
         Cajas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Cajas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_supervised_user_circle_black_24dp.png"))); // NOI18N
+        Cajas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/kisspng-cash-register-computer-icons-money-payment-point-o-5af3897e79ef57.5804234915259098864995 (1).png"))); // NOI18N
         Cajas.setText("CAJAS");
         Cajas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Cajas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -231,17 +232,16 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1289, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 1280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
