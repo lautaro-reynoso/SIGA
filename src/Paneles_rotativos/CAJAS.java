@@ -324,7 +324,7 @@ public class cajas extends javax.swing.JPanel {
 
         jTabbedPane6.addTab("CAJA", jPanel39);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion Diaria "));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion Diaria de este Usuario"));
 
         jLabel5.setText("Cantidad De ingresos Diarios de Hoy:");
 
@@ -1226,14 +1226,10 @@ public class cajas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel40;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane6;
@@ -1241,9 +1237,7 @@ public class cajas extends javax.swing.JPanel {
     private javax.swing.JLabel particulares_d;
     public javax.swing.JTable tabla_cajas;
     public javax.swing.JTable tabla_cajas_cerrada;
-    public javax.swing.JTable tabla_retiros;
-    public javax.swing.JTable tabla_retiros1;
-    private javax.swing.JTable tabla_retiros2;
+    public javax.swing.JTable tabla_retiros2;
     // End of variables declaration//GEN-END:variables
 
 }

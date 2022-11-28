@@ -413,6 +413,12 @@ public class Controlador {
                 return importe;
 
             }
+            if (categoria == 5){//es un aportante ingresando a una cabaña
+                return importe = (CantDias * (Main.tarifa_cabaña_aportante));
+            }
+            if (categoria == 6){//es un NO aportante ingresando a una cabaña
+                return importe = (CantDias * (Main.tarifa_cabaña_noaportante));
+            }
 
         }
 

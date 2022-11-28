@@ -1353,7 +1353,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j101MousePressed(evt);
             }
         });
-        jPanel1.add(j101, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, -1, -1));
+        jPanel1.add(j101, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, -1, -1));
 
         j102.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
         j102.setForeground(new java.awt.Color(255, 255, 255));
@@ -1364,7 +1364,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j102MousePressed(evt);
             }
         });
-        jPanel1.add(j102, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, -1, -1));
+        jPanel1.add(j102, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, -1, -1));
 
         j103.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
         j103.setForeground(new java.awt.Color(255, 255, 255));
@@ -1375,7 +1375,7 @@ public class OcupacionC extends javax.swing.JPanel {
                 j103MousePressed(evt);
             }
         });
-        jPanel1.add(j103, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, -1, -1));
+        jPanel1.add(j103, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, -1, -1));
 
         j104.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
         j104.setForeground(new java.awt.Color(255, 255, 255));

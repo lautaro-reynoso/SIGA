@@ -64,7 +64,8 @@ public class Ingre extends javax.swing.JPanel {
         Parsela_p.setText("Parcela");
 
     }
-    public void setearnullinvitado(){
+
+    public void setearnullinvitado() {
         documento_p1.setText("");
         nombre_p1.setText("");
 
@@ -118,8 +119,16 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
 
-            float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 3);
+            float importe = 0;
             int c;
+            if (Integer.parseInt(Parsela_p.getText()) >= 1 && Integer.parseInt(Parsela_p.getText()) <= 4) {
+                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 6);
+                tarifa1.setText(String.valueOf(importe));
+            } else {
+                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 3);
+                tarifa1.setText(String.valueOf(importe));
+            }
+
             if (fecha_egreso_p.getDate() != null && fecha_ingreso_p.getDate() != null) {
 
                 c = controlador.IngresoParticular(documento_p.getText(), nombre_p.getText(), "Particular", calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), Parsela_p.getText(), importe);
@@ -134,7 +143,7 @@ public class Ingre extends javax.swing.JPanel {
                     String hora_actual = hora + ":" + minutos;
                     modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular acampante", Main.DiaActual, hora_actual);
                     modelo.insertardinerocaja(importe);
-                    
+
                     Component jFrame = null;
                     int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
 
@@ -142,11 +151,11 @@ public class Ingre extends javax.swing.JPanel {
 
                         if (!pasar_dia2.isSelected()) {
 
-                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe,nombre_p.getText(),documento_p.getText());
+                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe, nombre_p.getText(), documento_p.getText());
                         } else {
 
                             importe = Main.tarifa_dia_particular;
-                            imprimirtiketdia("Particular", importe,nombre_p.getText(),documento_p.getText());
+                            imprimirtiketdia("Particular", importe, nombre_p.getText(), documento_p.getText());
                         }
                     }
                     setearnullparticular();
@@ -167,8 +176,15 @@ public class Ingre extends javax.swing.JPanel {
 
     public void RegistrarIngresoAportante() throws java.text.ParseException, SQLException {
         try {
+            float importe = 0;
 
-            float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p1, fecha_egreso_p1), 2);
+            if (Integer.parseInt(Parsela_a.getText()) >= 1 && Integer.parseInt(Parsela_a.getText()) <= 4) {
+                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p1, fecha_egreso_p1), 5);
+                tarifa2.setText(String.valueOf(importe));
+            } else {
+                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p1, fecha_egreso_p1), 2);
+                tarifa2.setText(String.valueOf(importe));
+            }
             int c;
             if (fecha_egreso_p1.getDate() != null && fecha_ingreso_p1.getDate() != null) {
 
@@ -193,11 +209,11 @@ public class Ingre extends javax.swing.JPanel {
 
                         if (!pasar_dia1.isSelected()) {
 
-                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe,nombre_a.getText(),documento_a.getText());
+                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe, nombre_a.getText(), documento_a.getText());
                         } else {
 
                             importe = Main.tarifa_dia_aportantes;
-                            imprimirtiketdia("Aportante", importe,nombre_a.getText(),documento_a.getText());
+                            imprimirtiketdia("Aportante", importe, nombre_a.getText(), documento_a.getText());
                         }
                     }
                     familiares.setText("0");
@@ -250,9 +266,15 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void RegistrarIngreso() throws java.text.ParseException, SQLException {
-        float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso, fecha_egreso), 1);
+        float importe = 0;
         int c;
-        //   System.out.println("fecha:" + fecha_egreso);
+        if (Integer.parseInt(Parcela.getText()) >= 1 && Integer.parseInt(Parcela.getText()) <= 4) {
+            importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso, fecha_egreso), 6);
+            tarifa.setText(String.valueOf(importe));
+        } else {
+            importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso, fecha_egreso), 1);
+            tarifa.setText(String.valueOf(importe));
+        }
 
         if (fecha_egreso.getDate() != null && fecha_ingreso.getDate() != null) {
 
@@ -268,7 +290,7 @@ public class Ingre extends javax.swing.JPanel {
                 String hora_actual = hora + ":" + minutos;
                 modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo alumno acampante", Main.DiaActual, hora_actual);
                 modelo.insertardinerocaja(importe);
-                setearnullalumno();
+                
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
 
@@ -276,14 +298,15 @@ public class Ingre extends javax.swing.JPanel {
 
                     if (!pasar_dia.isSelected()) {
 
-                        imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe,nombre_e.getText(),documento_e.getText());
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe, nombre_e.getText(), documento_e.getText());
                     } else {
 
                         importe = Main.tarifa_dia_alumnos;
-                        imprimirtiketdia("Alumno", importe,nombre_e.getText(),documento_e.getText());
+                        imprimirtiketdia("Alumno", importe, nombre_e.getText(), documento_e.getText());
 
                     }
                 }
+                setearnullalumno();
             }
 
         }
@@ -550,14 +573,14 @@ public class Ingre extends javax.swing.JPanel {
         j121 = new javax.swing.JLabel();
         j122 = new javax.swing.JLabel();
         j123 = new javax.swing.JLabel();
+        boton_v = new javax.swing.JLabel();
+        boton_r = new javax.swing.JLabel();
         j124 = new javax.swing.JLabel();
         j125 = new javax.swing.JLabel();
         j126 = new javax.swing.JLabel();
         j127 = new javax.swing.JLabel();
         j128 = new javax.swing.JLabel();
-        boton_v = new javax.swing.JLabel();
-        boton_r = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -651,6 +674,11 @@ public class Ingre extends javax.swing.JPanel {
         cod_aportante.setForeground(new java.awt.Color(0, 0, 0));
         cod_aportante.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cod_aportante.setText(null);
+        cod_aportante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cod_aportanteKeyPressed(evt);
+            }
+        });
 
         apellido_a.setForeground(new java.awt.Color(0, 0, 0));
         apellido_a.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -867,7 +895,7 @@ public class Ingre extends javax.swing.JPanel {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -917,13 +945,13 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(aportantesLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         aportantesLayout.setVerticalGroup(
             aportantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(aportantesLayout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 58, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         menu_ingreso_egreso.addTab("APORTANTES", aportantes);
@@ -1292,7 +1320,7 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(alumnossLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         menu_ingreso_egreso.addTab("ALUMNOS", alumnoss);
@@ -1552,14 +1580,14 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(particularLayout.createSequentialGroup()
                 .addGap(102, 102, 102)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         particularLayout.setVerticalGroup(
             particularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(particularLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         menu_ingreso_egreso.addTab("PARTICULAR", particular);
@@ -1819,14 +1847,14 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(invitadosLayout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         invitadosLayout.setVerticalGroup(
             invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invitadosLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         menu_ingreso_egreso.addTab("INVITADOS", invitados);
@@ -1936,21 +1964,23 @@ public class Ingre extends javax.swing.JPanel {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(361, 361, 361)
                         .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel33))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 10, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1968,7 +1998,7 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, egresosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(542, 542, 542))
+                .addGap(589, 589, 589))
         );
         egresosLayout.setVerticalGroup(
             egresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1977,7 +2007,7 @@ public class Ingre extends javax.swing.JPanel {
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         menu_ingreso_egreso.addTab("EGRESOS", egresos);
@@ -2038,7 +2068,7 @@ public class Ingre extends javax.swing.JPanel {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ingreso_vehiculo, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
@@ -2081,13 +2111,15 @@ public class Ingre extends javax.swing.JPanel {
             vahiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vahiculosLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addGroup(vahiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(vahiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel35)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGroup(vahiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel35)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vahiculosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         vahiculosLayout.setVerticalGroup(
             vahiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2097,10 +2129,10 @@ public class Ingre extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel35)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         menu_ingreso_egreso.addTab("VEHICULOS", vahiculos);
@@ -2112,7 +2144,8 @@ public class Ingre extends javax.swing.JPanel {
         });
         jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        j10.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j10.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j10.setForeground(new java.awt.Color(255, 255, 255));
         j10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j10.setText("10");
         j10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2120,9 +2153,10 @@ public class Ingre extends javax.swing.JPanel {
                 j10MousePressed(evt);
             }
         });
-        jPanel22.add(j10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, -1, -1));
+        jPanel22.add(j10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, -1, -1));
 
-        j12.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j12.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j12.setForeground(new java.awt.Color(255, 255, 255));
         j12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j12.setText("12");
         j12.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2130,9 +2164,10 @@ public class Ingre extends javax.swing.JPanel {
                 j12MousePressed(evt);
             }
         });
-        jPanel22.add(j12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, -1, -1));
+        jPanel22.add(j12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
 
-        j5.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j5.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j5.setForeground(new java.awt.Color(255, 255, 255));
         j5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j5.setText("5");
         j5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2140,9 +2175,10 @@ public class Ingre extends javax.swing.JPanel {
                 j5MousePressed(evt);
             }
         });
-        jPanel22.add(j5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, -1, -1));
+        jPanel22.add(j5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, -1, -1));
 
-        j27.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j27.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j27.setForeground(new java.awt.Color(255, 255, 255));
         j27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j27.setText("27");
         j27.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2150,9 +2186,10 @@ public class Ingre extends javax.swing.JPanel {
                 j27MousePressed(evt);
             }
         });
-        jPanel22.add(j27, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, -1, -1));
+        jPanel22.add(j27, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, -1, -1));
 
-        j7.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j7.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j7.setForeground(new java.awt.Color(255, 255, 255));
         j7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j7.setText("7");
         j7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2160,9 +2197,10 @@ public class Ingre extends javax.swing.JPanel {
                 j7MousePressed(evt);
             }
         });
-        jPanel22.add(j7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, -1, -1));
+        jPanel22.add(j7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
 
-        j29.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j29.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j29.setForeground(new java.awt.Color(255, 255, 255));
         j29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j29.setText("29");
         j29.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2170,9 +2208,10 @@ public class Ingre extends javax.swing.JPanel {
                 j29MousePressed(evt);
             }
         });
-        jPanel22.add(j29, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, -1, -1));
+        jPanel22.add(j29, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, -1, -1));
 
-        j20.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j20.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j20.setForeground(new java.awt.Color(255, 255, 255));
         j20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j20.setText("20");
         j20.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2180,9 +2219,10 @@ public class Ingre extends javax.swing.JPanel {
                 j20MousePressed(evt);
             }
         });
-        jPanel22.add(j20, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 520, -1, -1));
+        jPanel22.add(j20, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, -1, -1));
 
-        j3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j3.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j3.setForeground(new java.awt.Color(255, 255, 255));
         j3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j3.setText("3");
         j3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2190,9 +2230,10 @@ public class Ingre extends javax.swing.JPanel {
                 j3MousePressed(evt);
             }
         });
-        jPanel22.add(j3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, -1));
+        jPanel22.add(j3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 670, -1, -1));
 
-        j31.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j31.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j31.setForeground(new java.awt.Color(255, 255, 255));
         j31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j31.setText("31");
         j31.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2200,9 +2241,10 @@ public class Ingre extends javax.swing.JPanel {
                 j31MousePressed(evt);
             }
         });
-        jPanel22.add(j31, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, -1, -1));
+        jPanel22.add(j31, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, -1, -1));
 
-        j40.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j40.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j40.setForeground(new java.awt.Color(255, 255, 255));
         j40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j40.setText("40");
         j40.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2210,9 +2252,10 @@ public class Ingre extends javax.swing.JPanel {
                 j40MousePressed(evt);
             }
         });
-        jPanel22.add(j40, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, -1, -1));
+        jPanel22.add(j40, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, -1, -1));
 
-        j49.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j49.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j49.setForeground(new java.awt.Color(255, 255, 255));
         j49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j49.setText("49");
         j49.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2220,9 +2263,10 @@ public class Ingre extends javax.swing.JPanel {
                 j49MousePressed(evt);
             }
         });
-        jPanel22.add(j49, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, -1));
+        jPanel22.add(j49, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, -1, -1));
 
-        j45.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j45.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j45.setForeground(new java.awt.Color(255, 255, 255));
         j45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j45.setText("45");
         j45.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2230,9 +2274,10 @@ public class Ingre extends javax.swing.JPanel {
                 j45MousePressed(evt);
             }
         });
-        jPanel22.add(j45, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, -1, -1));
+        jPanel22.add(j45, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
 
-        j50.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j50.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j50.setForeground(new java.awt.Color(255, 255, 255));
         j50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j50.setText("50");
         j50.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2240,9 +2285,10 @@ public class Ingre extends javax.swing.JPanel {
                 j50MousePressed(evt);
             }
         });
-        jPanel22.add(j50, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, -1, -1));
+        jPanel22.add(j50, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, -1));
 
-        j6.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j6.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j6.setForeground(new java.awt.Color(255, 255, 255));
         j6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j6.setText("6");
         j6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2250,9 +2296,10 @@ public class Ingre extends javax.swing.JPanel {
                 j6MousePressed(evt);
             }
         });
-        jPanel22.add(j6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, -1, -1));
+        jPanel22.add(j6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, -1));
 
-        j15.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j15.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j15.setForeground(new java.awt.Color(255, 255, 255));
         j15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j15.setText("15");
         j15.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2260,9 +2307,10 @@ public class Ingre extends javax.swing.JPanel {
                 j15MousePressed(evt);
             }
         });
-        jPanel22.add(j15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, -1, -1));
+        jPanel22.add(j15, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, -1, -1));
 
-        j2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j2.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j2.setForeground(new java.awt.Color(255, 255, 255));
         j2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j2.setText("2");
         j2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -2271,9 +2319,10 @@ public class Ingre extends javax.swing.JPanel {
                 j2MousePressed(evt);
             }
         });
-        jPanel22.add(j2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, -1, -1));
+        jPanel22.add(j2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 660, -1, -1));
 
-        j25.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j25.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j25.setForeground(new java.awt.Color(255, 255, 255));
         j25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j25.setText("25");
         j25.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2281,9 +2330,10 @@ public class Ingre extends javax.swing.JPanel {
                 j25MousePressed(evt);
             }
         });
-        jPanel22.add(j25, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, -1, -1));
+        jPanel22.add(j25, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
 
-        j33.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j33.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j33.setForeground(new java.awt.Color(255, 255, 255));
         j33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j33.setText("33");
         j33.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2291,9 +2341,10 @@ public class Ingre extends javax.swing.JPanel {
                 j33MousePressed(evt);
             }
         });
-        jPanel22.add(j33, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, -1, -1));
+        jPanel22.add(j33, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, -1, -1));
 
-        j37.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j37.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j37.setForeground(new java.awt.Color(255, 255, 255));
         j37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j37.setText("37");
         j37.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2301,8 +2352,10 @@ public class Ingre extends javax.swing.JPanel {
                 j37MousePressed(evt);
             }
         });
-        jPanel22.add(j37, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, -1, -1));
+        jPanel22.add(j37, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, -1, -1));
 
+        j36.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j36.setForeground(new java.awt.Color(255, 255, 255));
         j36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j36.setText("36");
         j36.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2310,9 +2363,10 @@ public class Ingre extends javax.swing.JPanel {
                 j36MousePressed(evt);
             }
         });
-        jPanel22.add(j36, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, -1, -1));
+        jPanel22.add(j36, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, -1));
 
-        j48.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j48.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j48.setForeground(new java.awt.Color(255, 255, 255));
         j48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j48.setText("48");
         j48.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2320,9 +2374,10 @@ public class Ingre extends javax.swing.JPanel {
                 j48MousePressed(evt);
             }
         });
-        jPanel22.add(j48, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, -1, -1));
+        jPanel22.add(j48, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, -1));
 
-        j39.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j39.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j39.setForeground(new java.awt.Color(255, 255, 255));
         j39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j39.setText("39");
         j39.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2330,9 +2385,10 @@ public class Ingre extends javax.swing.JPanel {
                 j39MousePressed(evt);
             }
         });
-        jPanel22.add(j39, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 490, -1, -1));
+        jPanel22.add(j39, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, -1, -1));
 
-        j38.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j38.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j38.setForeground(new java.awt.Color(255, 255, 255));
         j38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j38.setText("38");
         j38.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2340,9 +2396,10 @@ public class Ingre extends javax.swing.JPanel {
                 j38MousePressed(evt);
             }
         });
-        jPanel22.add(j38, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, -1, -1));
+        jPanel22.add(j38, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, -1, -1));
 
-        j34.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j34.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j34.setForeground(new java.awt.Color(255, 255, 255));
         j34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j34.setText("34");
         j34.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2350,9 +2407,10 @@ public class Ingre extends javax.swing.JPanel {
                 j34MousePressed(evt);
             }
         });
-        jPanel22.add(j34, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
+        jPanel22.add(j34, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
 
-        j43.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j43.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j43.setForeground(new java.awt.Color(255, 255, 255));
         j43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j43.setText("43");
         j43.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2360,9 +2418,10 @@ public class Ingre extends javax.swing.JPanel {
                 j43MousePressed(evt);
             }
         });
-        jPanel22.add(j43, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, -1, -1));
+        jPanel22.add(j43, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, -1, -1));
 
-        j30.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j30.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j30.setForeground(new java.awt.Color(255, 255, 255));
         j30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j30.setText("30");
         j30.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2370,9 +2429,10 @@ public class Ingre extends javax.swing.JPanel {
                 j30MousePressed(evt);
             }
         });
-        jPanel22.add(j30, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, -1));
+        jPanel22.add(j30, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, -1, -1));
 
-        j42.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j42.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j42.setForeground(new java.awt.Color(255, 255, 255));
         j42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j42.setText("42");
         j42.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2380,9 +2440,10 @@ public class Ingre extends javax.swing.JPanel {
                 j42MousePressed(evt);
             }
         });
-        jPanel22.add(j42, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, -1, -1));
+        jPanel22.add(j42, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, -1, -1));
 
-        j24.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j24.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j24.setForeground(new java.awt.Color(255, 255, 255));
         j24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j24.setText("24");
         j24.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2390,9 +2451,10 @@ public class Ingre extends javax.swing.JPanel {
                 j24MousePressed(evt);
             }
         });
-        jPanel22.add(j24, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, -1));
+        jPanel22.add(j24, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, -1, -1));
 
-        j23.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j23.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j23.setForeground(new java.awt.Color(255, 255, 255));
         j23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j23.setText("23");
         j23.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2400,9 +2462,10 @@ public class Ingre extends javax.swing.JPanel {
                 j23MousePressed(evt);
             }
         });
-        jPanel22.add(j23, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
+        jPanel22.add(j23, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 350, -1, 10));
 
-        j21.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j21.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j21.setForeground(new java.awt.Color(255, 255, 255));
         j21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j21.setText("21");
         j21.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2410,9 +2473,10 @@ public class Ingre extends javax.swing.JPanel {
                 j21MousePressed(evt);
             }
         });
-        jPanel22.add(j21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, -1, -1));
+        jPanel22.add(j21, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
 
-        j19.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j19.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j19.setForeground(new java.awt.Color(255, 255, 255));
         j19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j19.setText("19");
         j19.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2420,9 +2484,10 @@ public class Ingre extends javax.swing.JPanel {
                 j19MousePressed(evt);
             }
         });
-        jPanel22.add(j19, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, -1, -1));
+        jPanel22.add(j19, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
 
-        j18.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j18.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j18.setForeground(new java.awt.Color(255, 255, 255));
         j18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j18.setText("18");
         j18.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2430,9 +2495,10 @@ public class Ingre extends javax.swing.JPanel {
                 j18MousePressed(evt);
             }
         });
-        jPanel22.add(j18, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 550, -1, -1));
+        jPanel22.add(j18, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, -1, -1));
 
-        j4.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j4.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j4.setForeground(new java.awt.Color(255, 255, 255));
         j4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j4.setText("4");
         j4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2440,9 +2506,10 @@ public class Ingre extends javax.swing.JPanel {
                 j4MousePressed(evt);
             }
         });
-        jPanel22.add(j4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+        jPanel22.add(j4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 680, -1, -1));
 
-        j16.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j16.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j16.setForeground(new java.awt.Color(255, 255, 255));
         j16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j16.setText("16");
         j16.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2450,9 +2517,10 @@ public class Ingre extends javax.swing.JPanel {
                 j16MousePressed(evt);
             }
         });
-        jPanel22.add(j16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
+        jPanel22.add(j16, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, -1, -1));
 
-        j17.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j17.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j17.setForeground(new java.awt.Color(255, 255, 255));
         j17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j17.setText("17");
         j17.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2460,9 +2528,10 @@ public class Ingre extends javax.swing.JPanel {
                 j17MousePressed(evt);
             }
         });
-        jPanel22.add(j17, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
+        jPanel22.add(j17, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, -1, -1));
 
-        j14.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j14.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j14.setForeground(new java.awt.Color(255, 255, 255));
         j14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j14.setText("14");
         j14.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2470,9 +2539,10 @@ public class Ingre extends javax.swing.JPanel {
                 j14MousePressed(evt);
             }
         });
-        jPanel22.add(j14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 480, -1, -1));
+        jPanel22.add(j14, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
 
-        j13.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j13.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j13.setForeground(new java.awt.Color(255, 255, 255));
         j13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j13.setText("13");
         j13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2480,9 +2550,10 @@ public class Ingre extends javax.swing.JPanel {
                 j13MousePressed(evt);
             }
         });
-        jPanel22.add(j13, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, -1, -1));
+        jPanel22.add(j13, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, -1, -1));
 
-        j8.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j8.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j8.setForeground(new java.awt.Color(255, 255, 255));
         j8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j8.setText("8");
         j8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2490,9 +2561,10 @@ public class Ingre extends javax.swing.JPanel {
                 j8MousePressed(evt);
             }
         });
-        jPanel22.add(j8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, -1, -1));
+        jPanel22.add(j8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
 
-        j9.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j9.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j9.setForeground(new java.awt.Color(255, 255, 255));
         j9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j9.setText("9");
         j9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2500,9 +2572,10 @@ public class Ingre extends javax.swing.JPanel {
                 j9MousePressed(evt);
             }
         });
-        jPanel22.add(j9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, -1, -1));
+        jPanel22.add(j9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, -1, -1));
 
-        j11.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j11.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j11.setForeground(new java.awt.Color(255, 255, 255));
         j11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j11.setText("11");
         j11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2510,9 +2583,10 @@ public class Ingre extends javax.swing.JPanel {
                 j11MousePressed(evt);
             }
         });
-        jPanel22.add(j11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
+        jPanel22.add(j11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
 
-        j46.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j46.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j46.setForeground(new java.awt.Color(255, 255, 255));
         j46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j46.setText("46");
         j46.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2520,9 +2594,10 @@ public class Ingre extends javax.swing.JPanel {
                 j46MousePressed(evt);
             }
         });
-        jPanel22.add(j46, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 570, -1, -1));
+        jPanel22.add(j46, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, -1, -1));
 
-        j35.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j35.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j35.setForeground(new java.awt.Color(255, 255, 255));
         j35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j35.setText("35");
         j35.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2530,9 +2605,10 @@ public class Ingre extends javax.swing.JPanel {
                 j35MousePressed(evt);
             }
         });
-        jPanel22.add(j35, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 370, -1, -1));
+        jPanel22.add(j35, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, -1, -1));
 
-        j41.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j41.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j41.setForeground(new java.awt.Color(255, 255, 255));
         j41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j41.setText("41");
         j41.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2540,9 +2616,10 @@ public class Ingre extends javax.swing.JPanel {
                 j41MousePressed(evt);
             }
         });
-        jPanel22.add(j41, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, -1, -1));
+        jPanel22.add(j41, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, -1, -1));
 
-        j32.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j32.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j32.setForeground(new java.awt.Color(255, 255, 255));
         j32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j32.setText("32");
         j32.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2550,9 +2627,10 @@ public class Ingre extends javax.swing.JPanel {
                 j32MousePressed(evt);
             }
         });
-        jPanel22.add(j32, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, -1, -1));
+        jPanel22.add(j32, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, -1, -1));
 
-        j28.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j28.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j28.setForeground(new java.awt.Color(255, 255, 255));
         j28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j28.setText("28");
         j28.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2560,9 +2638,10 @@ public class Ingre extends javax.swing.JPanel {
                 j28MousePressed(evt);
             }
         });
-        jPanel22.add(j28, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, -1, -1));
+        jPanel22.add(j28, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, -1, -1));
 
-        j26.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j26.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j26.setForeground(new java.awt.Color(255, 255, 255));
         j26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j26.setText("26");
         j26.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2570,9 +2649,10 @@ public class Ingre extends javax.swing.JPanel {
                 j26MousePressed(evt);
             }
         });
-        jPanel22.add(j26, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
+        jPanel22.add(j26, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, -1, -1));
 
-        j1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j1.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j1.setForeground(new java.awt.Color(255, 255, 255));
         j1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j1.setText("1");
         j1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2580,9 +2660,10 @@ public class Ingre extends javax.swing.JPanel {
                 j1MousePressed(evt);
             }
         });
-        jPanel22.add(j1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
+        jPanel22.add(j1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 660, -1, -1));
 
-        j22.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j22.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j22.setForeground(new java.awt.Color(255, 255, 255));
         j22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j22.setText("22");
         j22.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2590,9 +2671,10 @@ public class Ingre extends javax.swing.JPanel {
                 j22MousePressed(evt);
             }
         });
-        jPanel22.add(j22, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, -1));
+        jPanel22.add(j22, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, -1, -1));
 
-        j44.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j44.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j44.setForeground(new java.awt.Color(255, 255, 255));
         j44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j44.setText("44");
         j44.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2600,9 +2682,10 @@ public class Ingre extends javax.swing.JPanel {
                 j44MousePressed(evt);
             }
         });
-        jPanel22.add(j44, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
+        jPanel22.add(j44, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
 
-        j47.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j47.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j47.setForeground(new java.awt.Color(255, 255, 255));
         j47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j47.setText("47");
         j47.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2610,9 +2693,10 @@ public class Ingre extends javax.swing.JPanel {
                 j47MousePressed(evt);
             }
         });
-        jPanel22.add(j47, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, -1, -1));
+        jPanel22.add(j47, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, -1, -1));
 
-        j51.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j51.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j51.setForeground(new java.awt.Color(255, 255, 255));
         j51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j51.setText("51");
         j51.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2620,9 +2704,10 @@ public class Ingre extends javax.swing.JPanel {
                 j51MousePressed(evt);
             }
         });
-        jPanel22.add(j51, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, -1, -1));
+        jPanel22.add(j51, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, -1, -1));
 
-        j52.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j52.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j52.setForeground(new java.awt.Color(255, 255, 255));
         j52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j52.setText("52");
         j52.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2630,9 +2715,10 @@ public class Ingre extends javax.swing.JPanel {
                 j52MousePressed(evt);
             }
         });
-        jPanel22.add(j52, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, -1, -1));
+        jPanel22.add(j52, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, -1, -1));
 
-        j53.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j53.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j53.setForeground(new java.awt.Color(255, 255, 255));
         j53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j53.setText("53");
         j53.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2640,9 +2726,10 @@ public class Ingre extends javax.swing.JPanel {
                 j53MousePressed(evt);
             }
         });
-        jPanel22.add(j53, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, -1, -1));
+        jPanel22.add(j53, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, -1, -1));
 
-        j54.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j54.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j54.setForeground(new java.awt.Color(255, 255, 255));
         j54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j54.setText("54");
         j54.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2650,9 +2737,10 @@ public class Ingre extends javax.swing.JPanel {
                 j54MousePressed(evt);
             }
         });
-        jPanel22.add(j54, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
+        jPanel22.add(j54, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 310, -1, -1));
 
-        j55.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j55.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j55.setForeground(new java.awt.Color(255, 255, 255));
         j55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j55.setText("55");
         j55.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2660,9 +2748,10 @@ public class Ingre extends javax.swing.JPanel {
                 j55MousePressed(evt);
             }
         });
-        jPanel22.add(j55, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, -1));
+        jPanel22.add(j55, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, -1, -1));
 
-        j56.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j56.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j56.setForeground(new java.awt.Color(255, 255, 255));
         j56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j56.setText("56");
         j56.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2670,9 +2759,10 @@ public class Ingre extends javax.swing.JPanel {
                 j56MousePressed(evt);
             }
         });
-        jPanel22.add(j56, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, -1, -1));
+        jPanel22.add(j56, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, -1, -1));
 
-        j57.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j57.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j57.setForeground(new java.awt.Color(255, 255, 255));
         j57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j57.setText("57");
         j57.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2680,9 +2770,10 @@ public class Ingre extends javax.swing.JPanel {
                 j57MousePressed(evt);
             }
         });
-        jPanel22.add(j57, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
+        jPanel22.add(j57, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, -1, -1));
 
-        j58.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j58.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j58.setForeground(new java.awt.Color(255, 255, 255));
         j58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j58.setText("58");
         j58.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2690,9 +2781,10 @@ public class Ingre extends javax.swing.JPanel {
                 j58MousePressed(evt);
             }
         });
-        jPanel22.add(j58, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, -1, -1));
+        jPanel22.add(j58, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, -1, -1));
 
-        j59.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j59.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j59.setForeground(new java.awt.Color(255, 255, 255));
         j59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j59.setText("59");
         j59.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2700,9 +2792,10 @@ public class Ingre extends javax.swing.JPanel {
                 j59MousePressed(evt);
             }
         });
-        jPanel22.add(j59, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, -1, -1));
+        jPanel22.add(j59, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, -1, -1));
 
-        j60.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j60.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j60.setForeground(new java.awt.Color(255, 255, 255));
         j60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j60.setText("60");
         j60.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2710,9 +2803,10 @@ public class Ingre extends javax.swing.JPanel {
                 j60MousePressed(evt);
             }
         });
-        jPanel22.add(j60, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, -1));
+        jPanel22.add(j60, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, -1, -1));
 
-        j61.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j61.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j61.setForeground(new java.awt.Color(255, 255, 255));
         j61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j61.setText("61");
         j61.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2720,9 +2814,10 @@ public class Ingre extends javax.swing.JPanel {
                 j61MousePressed(evt);
             }
         });
-        jPanel22.add(j61, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, -1, -1));
+        jPanel22.add(j61, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, -1, -1));
 
-        j62.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j62.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j62.setForeground(new java.awt.Color(255, 255, 255));
         j62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j62.setText("62");
         j62.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2730,9 +2825,10 @@ public class Ingre extends javax.swing.JPanel {
                 j62MousePressed(evt);
             }
         });
-        jPanel22.add(j62, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, -1, -1));
+        jPanel22.add(j62, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, -1, -1));
 
-        j63.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j63.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j63.setForeground(new java.awt.Color(255, 255, 255));
         j63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j63.setText("63");
         j63.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2740,9 +2836,10 @@ public class Ingre extends javax.swing.JPanel {
                 j63MousePressed(evt);
             }
         });
-        jPanel22.add(j63, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, -1, -1));
+        jPanel22.add(j63, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, -1, -1));
 
-        j64.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j64.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j64.setForeground(new java.awt.Color(255, 255, 255));
         j64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j64.setText("64");
         j64.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2750,9 +2847,10 @@ public class Ingre extends javax.swing.JPanel {
                 j64MousePressed(evt);
             }
         });
-        jPanel22.add(j64, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, -1, -1));
+        jPanel22.add(j64, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, -1, -1));
 
-        j65.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j65.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j65.setForeground(new java.awt.Color(255, 255, 255));
         j65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j65.setText("65");
         j65.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2760,19 +2858,21 @@ public class Ingre extends javax.swing.JPanel {
                 j65MousePressed(evt);
             }
         });
-        jPanel22.add(j65, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, -1, -1));
+        jPanel22.add(j65, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, -1, -1));
 
-        j66.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j66.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j66.setForeground(new java.awt.Color(255, 255, 255));
         j66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j66.setText("78");
+        j66.setText("66");
         j66.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 j66MousePressed(evt);
             }
         });
-        jPanel22.add(j66, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
+        jPanel22.add(j66, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
 
-        j67.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j67.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j67.setForeground(new java.awt.Color(255, 255, 255));
         j67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j67.setText("67");
         j67.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2780,39 +2880,43 @@ public class Ingre extends javax.swing.JPanel {
                 j67MousePressed(evt);
             }
         });
-        jPanel22.add(j67, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+        jPanel22.add(j67, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, -1, -1));
 
-        j68.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j68.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j68.setForeground(new java.awt.Color(255, 255, 255));
         j68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j68.setText("66");
+        j68.setText("68");
         j68.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 j68MousePressed(evt);
             }
         });
-        jPanel22.add(j68, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
+        jPanel22.add(j68, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 270, -1, -1));
 
-        j69.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j69.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j69.setForeground(new java.awt.Color(255, 255, 255));
         j69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j69.setText("68");
+        j69.setText("69");
         j69.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 j69MousePressed(evt);
             }
         });
-        jPanel22.add(j69, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
+        jPanel22.add(j69, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 260, -1, -1));
 
-        j70.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j70.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j70.setForeground(new java.awt.Color(255, 255, 255));
         j70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j70.setText("69");
+        j70.setText("70");
         j70.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 j70MousePressed(evt);
             }
         });
-        jPanel22.add(j70, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, -1, -1));
+        jPanel22.add(j70, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 30, -1));
 
-        j71.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j71.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j71.setForeground(new java.awt.Color(255, 255, 255));
         j71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j71.setText("71");
         j71.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2820,9 +2924,10 @@ public class Ingre extends javax.swing.JPanel {
                 j71MousePressed(evt);
             }
         });
-        jPanel22.add(j71, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, -1, -1));
+        jPanel22.add(j71, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, -1, -1));
 
-        j72.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j72.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j72.setForeground(new java.awt.Color(255, 255, 255));
         j72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j72.setText("72");
         j72.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2830,9 +2935,10 @@ public class Ingre extends javax.swing.JPanel {
                 j72MousePressed(evt);
             }
         });
-        jPanel22.add(j72, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
+        jPanel22.add(j72, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, -1, -1));
 
-        j73.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j73.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j73.setForeground(new java.awt.Color(255, 255, 255));
         j73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j73.setText("73");
         j73.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2840,9 +2946,10 @@ public class Ingre extends javax.swing.JPanel {
                 j73MousePressed(evt);
             }
         });
-        jPanel22.add(j73, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, -1, -1));
+        jPanel22.add(j73, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, -1, -1));
 
-        j74.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j74.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j74.setForeground(new java.awt.Color(255, 255, 255));
         j74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j74.setText("74");
         j74.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2850,9 +2957,10 @@ public class Ingre extends javax.swing.JPanel {
                 j74MousePressed(evt);
             }
         });
-        jPanel22.add(j74, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+        jPanel22.add(j74, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, -1, -1));
 
-        j75.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j75.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j75.setForeground(new java.awt.Color(255, 255, 255));
         j75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j75.setText("75");
         j75.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2860,9 +2968,10 @@ public class Ingre extends javax.swing.JPanel {
                 j75MousePressed(evt);
             }
         });
-        jPanel22.add(j75, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, -1));
+        jPanel22.add(j75, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, -1, -1));
 
-        j76.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j76.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j76.setForeground(new java.awt.Color(255, 255, 255));
         j76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j76.setText("76");
         j76.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2870,9 +2979,10 @@ public class Ingre extends javax.swing.JPanel {
                 j76MousePressed(evt);
             }
         });
-        jPanel22.add(j76, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
+        jPanel22.add(j76, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 250, -1, -1));
 
-        j77.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j77.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j77.setForeground(new java.awt.Color(255, 255, 255));
         j77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j77.setText("77");
         j77.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2880,19 +2990,21 @@ public class Ingre extends javax.swing.JPanel {
                 j77MousePressed(evt);
             }
         });
-        jPanel22.add(j77, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, -1, -1));
+        jPanel22.add(j77, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, -1, -1));
 
-        j78.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j78.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j78.setForeground(new java.awt.Color(255, 255, 255));
         j78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j78.setText("70");
+        j78.setText("78");
         j78.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 j78MousePressed(evt);
             }
         });
-        jPanel22.add(j78, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, -1, -1));
+        jPanel22.add(j78, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, -1, -1));
 
-        j79.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j79.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j79.setForeground(new java.awt.Color(255, 255, 255));
         j79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j79.setText("79");
         j79.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2900,9 +3012,10 @@ public class Ingre extends javax.swing.JPanel {
                 j79MousePressed(evt);
             }
         });
-        jPanel22.add(j79, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, -1));
+        jPanel22.add(j79, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
 
-        j80.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j80.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j80.setForeground(new java.awt.Color(255, 255, 255));
         j80.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j80.setText("80");
         j80.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2910,9 +3023,10 @@ public class Ingre extends javax.swing.JPanel {
                 j80MousePressed(evt);
             }
         });
-        jPanel22.add(j80, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, -1, -1));
+        jPanel22.add(j80, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, -1, -1));
 
-        j81.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j81.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j81.setForeground(new java.awt.Color(255, 255, 255));
         j81.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j81.setText("81");
         j81.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2920,9 +3034,10 @@ public class Ingre extends javax.swing.JPanel {
                 j81MousePressed(evt);
             }
         });
-        jPanel22.add(j81, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
+        jPanel22.add(j81, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 250, -1, -1));
 
-        j82.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j82.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j82.setForeground(new java.awt.Color(255, 255, 255));
         j82.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j82.setText("82");
         j82.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2930,9 +3045,10 @@ public class Ingre extends javax.swing.JPanel {
                 j82MousePressed(evt);
             }
         });
-        jPanel22.add(j82, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, -1, -1));
+        jPanel22.add(j82, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, -1, -1));
 
-        j83.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j83.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j83.setForeground(new java.awt.Color(255, 255, 255));
         j83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j83.setText("83");
         j83.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2940,9 +3056,10 @@ public class Ingre extends javax.swing.JPanel {
                 j83MousePressed(evt);
             }
         });
-        jPanel22.add(j83, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, -1, -1));
+        jPanel22.add(j83, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 220, -1, -1));
 
-        j84.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j84.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j84.setForeground(new java.awt.Color(255, 255, 255));
         j84.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j84.setText("84");
         j84.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2950,9 +3067,10 @@ public class Ingre extends javax.swing.JPanel {
                 j84MousePressed(evt);
             }
         });
-        jPanel22.add(j84, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, -1, -1));
+        jPanel22.add(j84, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, -1, -1));
 
-        j85.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j85.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j85.setForeground(new java.awt.Color(255, 255, 255));
         j85.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j85.setText("85");
         j85.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2960,9 +3078,10 @@ public class Ingre extends javax.swing.JPanel {
                 j85MousePressed(evt);
             }
         });
-        jPanel22.add(j85, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
+        jPanel22.add(j85, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, -1, -1));
 
-        j86.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j86.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j86.setForeground(new java.awt.Color(255, 255, 255));
         j86.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j86.setText("86");
         j86.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2970,9 +3089,10 @@ public class Ingre extends javax.swing.JPanel {
                 j86MousePressed(evt);
             }
         });
-        jPanel22.add(j86, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, -1, -1));
+        jPanel22.add(j86, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, -1, -1));
 
-        j87.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j87.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j87.setForeground(new java.awt.Color(255, 255, 255));
         j87.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j87.setText("87");
         j87.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2980,9 +3100,10 @@ public class Ingre extends javax.swing.JPanel {
                 j87MousePressed(evt);
             }
         });
-        jPanel22.add(j87, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, -1, -1));
+        jPanel22.add(j87, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
 
-        j88.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j88.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j88.setForeground(new java.awt.Color(255, 255, 255));
         j88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j88.setText("88");
         j88.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2990,9 +3111,10 @@ public class Ingre extends javax.swing.JPanel {
                 j88MousePressed(evt);
             }
         });
-        jPanel22.add(j88, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, -1, -1));
+        jPanel22.add(j88, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 240, -1, -1));
 
-        j89.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j89.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j89.setForeground(new java.awt.Color(255, 255, 255));
         j89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j89.setText("89");
         j89.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3000,9 +3122,10 @@ public class Ingre extends javax.swing.JPanel {
                 j89MousePressed(evt);
             }
         });
-        jPanel22.add(j89, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, -1, -1));
+        jPanel22.add(j89, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, -1, -1));
 
-        j90.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j90.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j90.setForeground(new java.awt.Color(255, 255, 255));
         j90.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j90.setText("90");
         j90.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3010,9 +3133,10 @@ public class Ingre extends javax.swing.JPanel {
                 j90MousePressed(evt);
             }
         });
-        jPanel22.add(j90, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, -1, -1));
+        jPanel22.add(j90, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 210, -1, -1));
 
-        j91.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j91.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j91.setForeground(new java.awt.Color(255, 255, 255));
         j91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j91.setText("91");
         j91.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3020,9 +3144,10 @@ public class Ingre extends javax.swing.JPanel {
                 j91MousePressed(evt);
             }
         });
-        jPanel22.add(j91, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, -1, -1));
+        jPanel22.add(j91, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, -1, -1));
 
-        j92.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j92.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j92.setForeground(new java.awt.Color(255, 255, 255));
         j92.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j92.setText("92");
         j92.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3030,9 +3155,10 @@ public class Ingre extends javax.swing.JPanel {
                 j92MousePressed(evt);
             }
         });
-        jPanel22.add(j92, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, -1, -1));
+        jPanel22.add(j92, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, -1, -1));
 
-        j93.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j93.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j93.setForeground(new java.awt.Color(255, 255, 255));
         j93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j93.setText("93");
         j93.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3040,9 +3166,10 @@ public class Ingre extends javax.swing.JPanel {
                 j93MousePressed(evt);
             }
         });
-        jPanel22.add(j93, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, -1, -1));
+        jPanel22.add(j93, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, -1, -1));
 
-        j94.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j94.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j94.setForeground(new java.awt.Color(255, 255, 255));
         j94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j94.setText("94");
         j94.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3050,9 +3177,10 @@ public class Ingre extends javax.swing.JPanel {
                 j94MousePressed(evt);
             }
         });
-        jPanel22.add(j94, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, -1, -1));
+        jPanel22.add(j94, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, -1));
 
-        j95.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j95.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j95.setForeground(new java.awt.Color(255, 255, 255));
         j95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j95.setText("95");
         j95.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3060,9 +3188,10 @@ public class Ingre extends javax.swing.JPanel {
                 j95MousePressed(evt);
             }
         });
-        jPanel22.add(j95, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
+        jPanel22.add(j95, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, -1, -1));
 
-        j96.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j96.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j96.setForeground(new java.awt.Color(255, 255, 255));
         j96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j96.setText("96");
         j96.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3070,9 +3199,10 @@ public class Ingre extends javax.swing.JPanel {
                 j96MousePressed(evt);
             }
         });
-        jPanel22.add(j96, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, -1, -1));
+        jPanel22.add(j96, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, -1));
 
-        j97.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j97.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j97.setForeground(new java.awt.Color(255, 255, 255));
         j97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j97.setText("97");
         j97.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3080,9 +3210,10 @@ public class Ingre extends javax.swing.JPanel {
                 j97MousePressed(evt);
             }
         });
-        jPanel22.add(j97, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, -1, -1));
+        jPanel22.add(j97, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, -1));
 
-        j98.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j98.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j98.setForeground(new java.awt.Color(255, 255, 255));
         j98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j98.setText("98");
         j98.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3090,9 +3221,10 @@ public class Ingre extends javax.swing.JPanel {
                 j98MousePressed(evt);
             }
         });
-        jPanel22.add(j98, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, -1, -1));
+        jPanel22.add(j98, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, -1));
 
-        j99.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j99.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j99.setForeground(new java.awt.Color(255, 255, 255));
         j99.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j99.setText("99");
         j99.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3100,9 +3232,10 @@ public class Ingre extends javax.swing.JPanel {
                 j99MousePressed(evt);
             }
         });
-        jPanel22.add(j99, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, -1));
+        jPanel22.add(j99, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, -1, -1));
 
-        j100.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j100.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j100.setForeground(new java.awt.Color(255, 255, 255));
         j100.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j100.setText("100");
         j100.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3110,9 +3243,10 @@ public class Ingre extends javax.swing.JPanel {
                 j100MousePressed(evt);
             }
         });
-        jPanel22.add(j100, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
+        jPanel22.add(j100, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
 
-        j101.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j101.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j101.setForeground(new java.awt.Color(255, 255, 255));
         j101.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j101.setText("101");
         j101.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3120,9 +3254,10 @@ public class Ingre extends javax.swing.JPanel {
                 j101MousePressed(evt);
             }
         });
-        jPanel22.add(j101, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
+        jPanel22.add(j101, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
-        j102.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j102.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j102.setForeground(new java.awt.Color(255, 255, 255));
         j102.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j102.setText("102");
         j102.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3130,9 +3265,10 @@ public class Ingre extends javax.swing.JPanel {
                 j102MousePressed(evt);
             }
         });
-        jPanel22.add(j102, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, -1));
+        jPanel22.add(j102, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, -1));
 
-        j103.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j103.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j103.setForeground(new java.awt.Color(255, 255, 255));
         j103.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j103.setText("103");
         j103.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3140,9 +3276,10 @@ public class Ingre extends javax.swing.JPanel {
                 j103MousePressed(evt);
             }
         });
-        jPanel22.add(j103, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, -1, -1));
+        jPanel22.add(j103, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, -1, -1));
 
-        j104.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j104.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j104.setForeground(new java.awt.Color(255, 255, 255));
         j104.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j104.setText("104");
         j104.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3150,9 +3287,10 @@ public class Ingre extends javax.swing.JPanel {
                 j104MousePressed(evt);
             }
         });
-        jPanel22.add(j104, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+        jPanel22.add(j104, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
 
-        j105.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j105.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j105.setForeground(new java.awt.Color(255, 255, 255));
         j105.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j105.setText("105");
         j105.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3160,9 +3298,10 @@ public class Ingre extends javax.swing.JPanel {
                 j105MousePressed(evt);
             }
         });
-        jPanel22.add(j105, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
+        jPanel22.add(j105, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
 
-        j106.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j106.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j106.setForeground(new java.awt.Color(255, 255, 255));
         j106.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j106.setText("106");
         j106.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3170,9 +3309,10 @@ public class Ingre extends javax.swing.JPanel {
                 j106MousePressed(evt);
             }
         });
-        jPanel22.add(j106, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+        jPanel22.add(j106, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, -1));
 
-        j107.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j107.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j107.setForeground(new java.awt.Color(255, 255, 255));
         j107.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j107.setText("107");
         j107.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3180,9 +3320,10 @@ public class Ingre extends javax.swing.JPanel {
                 j107MousePressed(evt);
             }
         });
-        jPanel22.add(j107, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
+        jPanel22.add(j107, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, -1, -1));
 
-        j108.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j108.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j108.setForeground(new java.awt.Color(255, 255, 255));
         j108.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j108.setText("108");
         j108.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3190,9 +3331,10 @@ public class Ingre extends javax.swing.JPanel {
                 j108MousePressed(evt);
             }
         });
-        jPanel22.add(j108, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
+        jPanel22.add(j108, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
 
-        j109.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j109.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j109.setForeground(new java.awt.Color(255, 255, 255));
         j109.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j109.setText("109");
         j109.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3200,9 +3342,10 @@ public class Ingre extends javax.swing.JPanel {
                 j109MousePressed(evt);
             }
         });
-        jPanel22.add(j109, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+        jPanel22.add(j109, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, -1, -1));
 
-        j110.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j110.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j110.setForeground(new java.awt.Color(255, 255, 255));
         j110.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j110.setText("110");
         j110.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3210,9 +3353,10 @@ public class Ingre extends javax.swing.JPanel {
                 j110MousePressed(evt);
             }
         });
-        jPanel22.add(j110, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, -1, -1));
+        jPanel22.add(j110, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
 
-        j111.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j111.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j111.setForeground(new java.awt.Color(255, 255, 255));
         j111.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j111.setText("111");
         j111.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3220,9 +3364,10 @@ public class Ingre extends javax.swing.JPanel {
                 j111MousePressed(evt);
             }
         });
-        jPanel22.add(j111, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, -1, -1));
+        jPanel22.add(j111, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, -1, -1));
 
-        j112.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j112.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j112.setForeground(new java.awt.Color(255, 255, 255));
         j112.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j112.setText("112");
         j112.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3230,9 +3375,10 @@ public class Ingre extends javax.swing.JPanel {
                 j112MousePressed(evt);
             }
         });
-        jPanel22.add(j112, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
+        jPanel22.add(j112, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
-        j113.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j113.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j113.setForeground(new java.awt.Color(255, 255, 255));
         j113.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j113.setText("113");
         j113.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3240,9 +3386,10 @@ public class Ingre extends javax.swing.JPanel {
                 j113MousePressed(evt);
             }
         });
-        jPanel22.add(j113, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, -1, -1));
+        jPanel22.add(j113, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
 
-        j114.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j114.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j114.setForeground(new java.awt.Color(255, 255, 255));
         j114.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j114.setText("114");
         j114.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3250,9 +3397,10 @@ public class Ingre extends javax.swing.JPanel {
                 j114MousePressed(evt);
             }
         });
-        jPanel22.add(j114, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+        jPanel22.add(j114, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
-        j115.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j115.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j115.setForeground(new java.awt.Color(255, 255, 255));
         j115.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j115.setText("115");
         j115.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3260,9 +3408,10 @@ public class Ingre extends javax.swing.JPanel {
                 j115MousePressed(evt);
             }
         });
-        jPanel22.add(j115, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, -1, -1));
+        jPanel22.add(j115, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
 
-        j116.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j116.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j116.setForeground(new java.awt.Color(255, 255, 255));
         j116.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j116.setText("116");
         j116.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3270,9 +3419,10 @@ public class Ingre extends javax.swing.JPanel {
                 j116MousePressed(evt);
             }
         });
-        jPanel22.add(j116, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
+        jPanel22.add(j116, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
 
-        j117.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j117.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j117.setForeground(new java.awt.Color(255, 255, 255));
         j117.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j117.setText("117");
         j117.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3280,9 +3430,10 @@ public class Ingre extends javax.swing.JPanel {
                 j117MousePressed(evt);
             }
         });
-        jPanel22.add(j117, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
+        jPanel22.add(j117, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, -1, -1));
 
-        j118.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j118.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j118.setForeground(new java.awt.Color(255, 255, 255));
         j118.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j118.setText("118");
         j118.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3290,9 +3441,10 @@ public class Ingre extends javax.swing.JPanel {
                 j118MousePressed(evt);
             }
         });
-        jPanel22.add(j118, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
+        jPanel22.add(j118, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
 
-        j119.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j119.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j119.setForeground(new java.awt.Color(255, 255, 255));
         j119.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j119.setText("119");
         j119.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3300,9 +3452,10 @@ public class Ingre extends javax.swing.JPanel {
                 j119MousePressed(evt);
             }
         });
-        jPanel22.add(j119, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, -1));
+        jPanel22.add(j119, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, -1, -1));
 
-        j120.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j120.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j120.setForeground(new java.awt.Color(255, 255, 255));
         j120.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j120.setText("120");
         j120.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3310,9 +3463,10 @@ public class Ingre extends javax.swing.JPanel {
                 j120MousePressed(evt);
             }
         });
-        jPanel22.add(j120, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
+        jPanel22.add(j120, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, -1, -1));
 
-        j121.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j121.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j121.setForeground(new java.awt.Color(255, 255, 255));
         j121.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j121.setText("121");
         j121.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3320,9 +3474,10 @@ public class Ingre extends javax.swing.JPanel {
                 j121MousePressed(evt);
             }
         });
-        jPanel22.add(j121, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, -1, -1));
+        jPanel22.add(j121, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, -1, -1));
 
-        j122.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j122.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j122.setForeground(new java.awt.Color(255, 255, 255));
         j122.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j122.setText("122");
         j122.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3330,9 +3485,10 @@ public class Ingre extends javax.swing.JPanel {
                 j122MousePressed(evt);
             }
         });
-        jPanel22.add(j122, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, -1, -1));
+        jPanel22.add(j122, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, -1, -1));
 
-        j123.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        j123.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j123.setForeground(new java.awt.Color(255, 255, 255));
         j123.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         j123.setText("123");
         j123.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3340,59 +3496,10 @@ public class Ingre extends javax.swing.JPanel {
                 j123MousePressed(evt);
             }
         });
-        jPanel22.add(j123, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+        jPanel22.add(j123, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 460, -1, -1));
 
-        j124.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        j124.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j124.setText("124");
-        j124.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                j124MousePressed(evt);
-            }
-        });
-        jPanel22.add(j124, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 670, -1, -1));
-
-        j125.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        j125.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j125.setText("125");
-        j125.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                j125MousePressed(evt);
-            }
-        });
-        jPanel22.add(j125, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 600, -1, -1));
-
-        j126.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        j126.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j126.setText("126");
-        j126.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                j126MousePressed(evt);
-            }
-        });
-        jPanel22.add(j126, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 630, -1, -1));
-
-        j127.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        j127.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j127.setText("127");
-        j127.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                j127MousePressed(evt);
-            }
-        });
-        jPanel22.add(j127, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 690, -1, -1));
-
-        j128.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        j128.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
-        j128.setText("128");
-        j128.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                j128MousePressed(evt);
-            }
-        });
-        jPanel22.add(j128, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 650, -1, -1));
-
-        boton_v.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        boton_v.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        boton_v.setForeground(new java.awt.Color(255, 255, 255));
         boton_v.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
         boton_v.setText("Libre");
         boton_v.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3400,9 +3507,10 @@ public class Ingre extends javax.swing.JPanel {
                 boton_vMousePressed(evt);
             }
         });
-        jPanel22.add(boton_v, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, -1, -1));
+        jPanel22.add(boton_v, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, -1, -1));
 
-        boton_r.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        boton_r.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        boton_r.setForeground(new java.awt.Color(255, 255, 255));
         boton_r.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/false1x.png"))); // NOI18N
         boton_r.setText("Ocupado");
         boton_r.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3410,10 +3518,65 @@ public class Ingre extends javax.swing.JPanel {
                 boton_rMousePressed(evt);
             }
         });
-        jPanel22.add(boton_r, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, -1, -1));
+        jPanel22.add(boton_r, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, -1, -1));
 
-        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/mapa-4.jpg"))); // NOI18N
-        jPanel22.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -30, 680, 790));
+        j124.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j124.setForeground(new java.awt.Color(255, 255, 255));
+        j124.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j124.setText("124");
+        j124.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j124MousePressed(evt);
+            }
+        });
+        jPanel22.add(j124, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 490, -1, -1));
+
+        j125.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j125.setForeground(new java.awt.Color(255, 255, 255));
+        j125.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j125.setText("125");
+        j125.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j125MousePressed(evt);
+            }
+        });
+        jPanel22.add(j125, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, -1, -1));
+
+        j126.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j126.setForeground(new java.awt.Color(255, 255, 255));
+        j126.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j126.setText("126");
+        j126.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j126MousePressed(evt);
+            }
+        });
+        jPanel22.add(j126, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, -1, -1));
+
+        j127.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j127.setForeground(new java.awt.Color(255, 255, 255));
+        j127.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j127.setText("127");
+        j127.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j127MousePressed(evt);
+            }
+        });
+        jPanel22.add(j127, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, -1, -1));
+
+        j128.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        j128.setForeground(new java.awt.Color(255, 255, 255));
+        j128.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/true1x.png"))); // NOI18N
+        j128.setText("128");
+        j128.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                j128MousePressed(evt);
+            }
+        });
+        jPanel22.add(j128, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, -1, -1));
+
+        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/Mapa Coloringre (1).png"))); // NOI18N
+        jPanel22.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 710));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -3421,17 +3584,20 @@ public class Ingre extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(menu_ingreso_egreso, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(menu_ingreso_egreso, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(menu_ingreso_egreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jPanel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(menu_ingreso_egreso)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -3600,7 +3766,11 @@ public class Ingre extends javax.swing.JPanel {
     }
     private void Boton_ingresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_ingresoMousePressed
         Boton_ingreso_alumno();
-
+        try {
+            prueba();
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Boton_ingresoMousePressed
 
     public long cant_dias(JDateChooser fecha_1, JDateChooser fecha_2) throws java.text.ParseException, java.lang.NullPointerException {
@@ -3712,11 +3882,11 @@ public class Ingre extends javax.swing.JPanel {
 
                     if (!pasar_dia.isSelected()) {
                         float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso, fecha_egreso), 2);
-                        imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe,nombre_e.getText(),documento_e.getText());
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe, nombre_e.getText(), documento_e.getText());
                     } else {
 
                         float importe = Main.tarifa_dia_alumnos;
-                        imprimirtiketdia("Alumno", importe,nombre_e.getText(),documento_e.getText());
+                        imprimirtiketdia("Alumno", importe, nombre_e.getText(), documento_e.getText());
                     }
                 }
             }
@@ -3728,16 +3898,16 @@ public class Ingre extends javax.swing.JPanel {
                 modelo.insertardinerocaja(Main.tarifa_dia_aportantes);
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
-                
+
                 if (result == 0) {
 
                     if (!pasar_dia1.isSelected()) {
                         float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p1, fecha_egreso_p1), 2);
-                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe,nombre_a.getText(),documento_a.getText());
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe, nombre_a.getText(), documento_a.getText());
                     } else {
 
                         float importe = Main.tarifa_dia_aportantes;
-                        imprimirtiketdia("Aportante", importe,nombre_a.getText(),documento_a.getText());
+                        imprimirtiketdia("Aportante", importe, nombre_a.getText(), documento_a.getText());
                     }
                 }
                 familiares.setText("0");
@@ -3753,11 +3923,11 @@ public class Ingre extends javax.swing.JPanel {
 
                     if (!pasar_dia2.isSelected()) {
                         float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 2);
-                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe,nombre_p.getText(),documento_p.getText());
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe, nombre_p.getText(), documento_p.getText());
                     } else {
 
                         float importe = Main.tarifa_dia_particular;
-                        imprimirtiketdia("Particular", importe,nombre_p.getText(),documento_p.getText());
+                        imprimirtiketdia("Particular", importe, nombre_p.getText(), documento_p.getText());
                     }
                 }
             }
@@ -3771,12 +3941,12 @@ public class Ingre extends javax.swing.JPanel {
 
                     if (!pasar_dia3.isSelected()) {
                         float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 4);
-                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), "Invitado", importe,nombre_p1.getText(),documento_p1.getText());
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), "Invitado", importe, nombre_p1.getText(), documento_p1.getText());
                     } else {
 
                         float importe = Main.tarifa_dia_invitados;
 
-                        imprimirtiketdia("Invitado", importe,nombre_p1.getText(),documento_p1.getText());
+                        imprimirtiketdia("Invitado", importe, nombre_p1.getText(), documento_p1.getText());
                     }
                 }
             }
@@ -3791,9 +3961,20 @@ public class Ingre extends javax.swing.JPanel {
     private void ObtenerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ObtenerMousePressed
         try {
             if (!pasar_dia.isSelected()) {
-                float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso, fecha_egreso), 1);
+                if (!Parcela.getText().isEmpty()) {
+                    float importe = 0;
 
-                tarifa.setText(String.format("%.2f", importe));
+                    if (Integer.parseInt(Parcela.getText()) >= 1 && Integer.parseInt(Parcela.getText()) <= 4) {
+                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso, fecha_egreso), 6);
+                        tarifa.setText(String.format("%.2f", importe));
+                    } else {
+                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso, fecha_egreso), 1);
+                        tarifa.setText(String.format("%.2f", importe));
+                    }
+
+                    
+                }
+                
 
             } else {
                 tarifa.setText(String.format("%.2f", Main.tarifa_dia_alumnos));
@@ -3825,15 +4006,32 @@ public class Ingre extends javax.swing.JPanel {
     private void Obtener1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Obtener1MousePressed
 
         try {
+
             if (!pasar_dia2.isSelected()) {
-                float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 3);
-                tarifa1.setText(String.format("%.2f", importe));
+                if (!Parsela_p.getText().isEmpty()) {
+                    float importe = 0;
+
+                    if (Integer.parseInt(Parsela_p.getText()) >= 1 && Integer.parseInt(Parsela_p.getText()) <= 4) {
+                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 6);
+                        tarifa1.setText(String.format("%.2f", importe));
+                    } else {
+                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 3);
+                        tarifa1.setText(String.format("%.2f", importe));
+                    }
+
+                    
+                }
+
             } else {
                 tarifa1.setText(String.format("%.2f", Main.tarifa_dia_particular));
 
             }
         } catch (java.text.ParseException ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ingrese una fecha de ingreso y egreso \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            javax.swing.JOptionPane.showMessageDialog(this, "Ingreso una letra donde se espera numero \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Obtener1MousePressed
 
@@ -3888,8 +4086,21 @@ public class Ingre extends javax.swing.JPanel {
     private void Obtener2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Obtener2MousePressed
         try {
             if (!pasar_dia1.isSelected()) {
-                float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p1, fecha_egreso_p1), 2);
-                tarifa2.setText(String.format("%.2f", importe));
+                if (!Parsela_a.getText().isEmpty()) {
+                    float importe = 0;
+
+                    if (Integer.parseInt(Parsela_a.getText()) >= 1 && Integer.parseInt(Parsela_a.getText()) <= 4) {
+                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p1, fecha_egreso_p1), 5);
+                        tarifa2.setText(String.format("%.2f", importe));
+                    } else {
+                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p1, fecha_egreso_p1), 2);
+                        tarifa2.setText(String.format("%.2f", importe));
+                    }
+
+                    
+                }
+                
+                
             } else {
                 tarifa2.setText(String.format("%.2f", Main.tarifa_dia_aportantes));
             }
@@ -3917,6 +4128,7 @@ public class Ingre extends javax.swing.JPanel {
                         ingre_dia("aportante", documento_a.getText(), nombre_a.getText());
                     } else {
                         ingre_a();
+
                     }
 
                 } else {
@@ -4276,7 +4488,16 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_dni_buscadoKeyPressed
 
     private void nombre_pKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_pKeyPressed
-        // TODO add your handling code here:
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
     }//GEN-LAST:event_nombre_pKeyPressed
 
     private void patenteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_patenteKeyPressed
@@ -4349,7 +4570,16 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_pasar_diaKeyPressed
 
     private void ParcelaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ParcelaKeyPressed
+        char validador = evt.getKeyChar();
 
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             Boton_ingreso_alumno();
         }
@@ -4420,6 +4650,16 @@ public class Ingre extends javax.swing.JPanel {
     private void Parsela_aKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Parsela_aKeyPressed
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             botoningresoaportante();
+        }
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
         }
 
     }//GEN-LAST:event_Parsela_aKeyPressed
@@ -4505,6 +4745,16 @@ public class Ingre extends javax.swing.JPanel {
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
 
             Boton_ingreso_particular();
+        }
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
         }
     }//GEN-LAST:event_Parsela_pKeyPressed
 
@@ -5675,51 +5925,6 @@ public class Ingre extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_j123MousePressed
 
-    private void j124MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j124MousePressed
-
-        try {
-            traerinfo(124);
-        } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_j124MousePressed
-
-    private void j125MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j125MousePressed
-
-        try {
-            traerinfo(125);
-        } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_j125MousePressed
-
-    private void j126MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j126MousePressed
-
-        try {
-            traerinfo(126);
-        } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_j126MousePressed
-
-    private void j127MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j127MousePressed
-
-        try {
-            traerinfo(127);
-        } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_j127MousePressed
-
-    private void j128MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j128MousePressed
-
-        try {
-            traerinfo(128);
-        } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_j128MousePressed
-
     private void boton_vMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_vMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_boton_vMousePressed
@@ -5729,7 +5934,7 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_boton_rMousePressed
 
     private void jPanel22MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MouseEntered
-    
+
     }//GEN-LAST:event_jPanel22MouseEntered
     public void eliminarvehiculo() throws SQLException {
         int fila = tabla_vehiculo.getSelectedRow();
@@ -5770,23 +5975,22 @@ public class Ingre extends javax.swing.JPanel {
             Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tabla_vehiculoKeyPressed
-    public void imprimirtiketdia(String categoria, float importe,String nombre, String documento) throws SQLException {
+    public void imprimirtiketdia(String categoria, float importe, String nombre, String documento) throws SQLException {
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
         String segundos = String.valueOf(calendario.get(Calendar.SECOND));
-        String n_serial="0";
+        String n_serial = "0";
         String hora_actual = hora + ":" + minutos;
         ResultSet res = modelo.mostrarregistros1();
         // Aquí tu serial en caso de tener uno
-        if (res.next()){
+        if (res.next()) {
             n_serial = res.getString("id");
         }
-        
+
         String serial;
         String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
-        
 
-        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, "0006-"+nro_serial);
+        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, "0006-" + nro_serial);
 
         tiket.Iniciar()
                 .Corte(1)
@@ -5796,12 +6000,12 @@ public class Ingre extends javax.swing.JPanel {
                 .Feed(1)
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n")
-                .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-"+nro_serial + "\nCajero: " + Login.usuario + "\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
                 .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
                 .Feed(1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n")
-                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: "+nombre+"        DNI: "+documento+"\n"+"Categoria: " + categoria + "\n" + "Hora-ingreso: " + hora_actual + "\n" + "Solo por el dia\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria: " + categoria + "\n" + "Hora-ingreso: " + hora_actual + "\n" + "Solo por el dia\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
                 .EscribirTexto("Sub total: $" + importe + "\n")
@@ -5832,23 +6036,23 @@ public class Ingre extends javax.swing.JPanel {
         }
     }
 
-    public void imprimirtiketacampante(String fecha_ingreso, String fecha_egreso, String categoria, float importe,String nombre, String documento) throws SQLException {
+    public void imprimirtiketacampante(String fecha_ingreso, String fecha_egreso, String categoria, float importe, String nombre, String documento) throws SQLException {
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
         String segundos = String.valueOf(calendario.get(Calendar.SECOND));
         String n_serial = "0";
         String hora_actual = hora + ":" + minutos;
         ResultSet res = modelo.mostrarregistros1();
-        
+
         // Aquí tu serial en caso de tener uno
-        if (res.next()){
+        if (res.next()) {
             n_serial = res.getString("id");
         }
-        
+
         String serial;
         String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
 
-        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, "0006-"+nro_serial);
+        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, "0006-" + nro_serial);
 
         tiket.Iniciar()
                 .Corte(1)
@@ -5858,12 +6062,12 @@ public class Ingre extends javax.swing.JPanel {
                 .Feed(1)
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n")
-                .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-"+nro_serial + "\nCajero: " + Login.usuario + "\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
                 .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
                 .Feed(1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n")
-                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: "+nombre+"        DNI: "+documento+"\n"+"Categoria:" + categoria + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria:" + categoria + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
                 .EscribirTexto("Sub total: $" + importe + "\n")
@@ -5885,7 +6089,7 @@ public class Ingre extends javax.swing.JPanel {
                 .Pulso(48, 30, 120);
 
         try {
-            
+
             tiket.imprimirEn("impresora termica");
 
             System.out.println("Impreso correctamente");
@@ -5894,7 +6098,16 @@ public class Ingre extends javax.swing.JPanel {
         }
     }
     private void documento_aKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documento_aKeyPressed
+        char validador = evt.getKeyChar();
 
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
     }//GEN-LAST:event_documento_aKeyPressed
 
     private void documento_p1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documento_p1ActionPerformed
@@ -5902,7 +6115,16 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_documento_p1ActionPerformed
 
     private void documento_p1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documento_p1KeyPressed
-        // TODO add your handling code here:
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
     }//GEN-LAST:event_documento_p1KeyPressed
 
     private void nombre_p1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_p1KeyPressed
@@ -5919,16 +6141,26 @@ public class Ingre extends javax.swing.JPanel {
 
     private void Obtener3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Obtener3MousePressed
         if (!pasar_dia3.isSelected()) {
+            if (!Parsela_p1.getText().isEmpty()) {
+                float importe = 0;
+                try {
 
-            float importe = 0;
-            try {
-                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 4);
-            } catch (java.text.ParseException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NullPointerException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                    if (Integer.parseInt(Parsela_p1.getText()) >= 1 && Integer.parseInt(Parsela_p1.getText()) <= 4) {
+                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 6);
+                        tarifa3.setText(String.valueOf(importe));
+                    } else {
+                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 4);
+                        tarifa3.setText(String.valueOf(importe));
+                    }
+
+                } catch (java.text.ParseException ex) {
+                    Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NullPointerException ex) {
+                    Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                tarifa3.setText(Float.toString(importe));
             }
-            tarifa3.setText(Float.toString(importe));
+
         } else {
 
             float importe = Main.tarifa_dia_invitados;
@@ -5943,8 +6175,15 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
 
-            float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 4);
+            float importe = 0;
             int c;
+            if (Integer.parseInt(Parsela_p1.getText()) >= 1 && Integer.parseInt(Parsela_p1.getText()) <= 4) {
+                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 6);
+                tarifa3.setText(String.valueOf(importe));
+            } else {
+                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 4);
+                tarifa3.setText(String.valueOf(importe));
+            }
             if (fecha_egreso_p2.getDate() != null && fecha_ingreso_p2.getDate() != null) {
 
                 c = controlador.IngresoParticular(documento_p1.getText(), nombre_p1.getText(), "Invitado", calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), Parsela_p1.getText(), importe);
@@ -5958,7 +6197,7 @@ public class Ingre extends javax.swing.JPanel {
                     String hora_actual = hora + ":" + minutos;
                     modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado acampante", Main.DiaActual, hora_actual);
                     modelo.insertardinerocaja(importe);
-                    
+
                     Component jFrame = null;
                     int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
 
@@ -5966,11 +6205,11 @@ public class Ingre extends javax.swing.JPanel {
 
                         if (!pasar_dia3.isSelected()) {
 
-                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), "Invitado", importe,nombre_p1.getText(),documento_p1.getText());
+                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), "Invitado", importe, nombre_p1.getText(), documento_p1.getText());
                         } else {
 
                             importe = Main.tarifa_dia_invitados;
-                            imprimirtiketdia("Invitado", importe,nombre_p1.getText(),documento_p1.getText());
+                            imprimirtiketdia("Invitado", importe, nombre_p1.getText(), documento_p1.getText());
                         }
                     }
                     setearnullinvitado();
@@ -6080,7 +6319,16 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_Parsela_p1ActionPerformed
 
     private void Parsela_p1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Parsela_p1KeyPressed
-        // TODO add your handling code here:
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
     }//GEN-LAST:event_Parsela_p1KeyPressed
 
     private void jPanel23ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel23ComponentHidden
@@ -6101,7 +6349,7 @@ public class Ingre extends javax.swing.JPanel {
             fecha_egreso_p2.setEnabled(true);
             Parsela_p.setEnabled(true);
         }
-            
+
     }//GEN-LAST:event_pasar_dia3ActionPerformed
 
     private void pasar_dia3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasar_dia3KeyPressed
@@ -6121,6 +6369,50 @@ public class Ingre extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_familiaresKeyPressed
+
+    private void j124MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j124MousePressed
+        try {
+            traerinfo(124);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_j124MousePressed
+
+    private void j125MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j125MousePressed
+        try {
+            traerinfo(125);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_j125MousePressed
+
+    private void j126MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j126MousePressed
+        try {
+            traerinfo(126);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_j126MousePressed
+
+    private void j127MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j127MousePressed
+        try {
+            traerinfo(127);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_j127MousePressed
+
+    private void j128MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j128MousePressed
+        try {
+            traerinfo(128);
+        } catch (SQLException ex) {
+            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_j128MousePressed
+
+    private void cod_aportanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cod_aportanteKeyPressed
+        
+    }//GEN-LAST:event_cod_aportanteKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -6333,8 +6625,8 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
