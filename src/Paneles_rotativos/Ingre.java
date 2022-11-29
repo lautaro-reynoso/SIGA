@@ -4488,16 +4488,7 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_dni_buscadoKeyPressed
 
     private void nombre_pKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_pKeyPressed
-        char validador = evt.getKeyChar();
-
-        if (Character.isLetter(validador)) {
-            getToolkit().beep();
-            evt.consume();
-            Component rootPane = null;
-
-            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
-
-        }
+        
     }//GEN-LAST:event_nombre_pKeyPressed
 
     private void patenteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_patenteKeyPressed
