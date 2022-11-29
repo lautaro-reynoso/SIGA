@@ -5,6 +5,7 @@
 package Paneles_principales;
 
 import Main.Main;
+import static Main.Main.controlador;
 import Main.Modelo;
 import Paneles_rotativos.cajas;
 import Paneles_rotativos.Padron;
@@ -263,9 +264,8 @@ public class Principal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-       
+
+
     }//GEN-LAST:event_PadronMousePressed
 
     private void OcupacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OcupacionMousePressed
@@ -316,6 +316,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_UsuariosMouseEntered
 
     private void IngresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IngresoMousePressed
+
         Ingreso.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
         Inicio.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
@@ -342,6 +343,8 @@ public class Principal extends javax.swing.JFrame {
         ingreso.setearnullalumno();
         ingreso.setearnullparticular();
         ingreso.setearnullaportante();
+
+
     }//GEN-LAST:event_IngresoMousePressed
 
     private void IngresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IngresoMouseClicked
@@ -388,6 +391,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_InicioMousePressed
 
     private void CajasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CajasMousePressed
+
         Cajas.setFont(new java.awt.Font("Segoe UI Black", 0, 10));
         Ingreso.setFont(new java.awt.Font("Segoe UI ", 0, 10));
         Usuarios.setFont(new java.awt.Font("Segoe UI ", 0, 10));
@@ -412,15 +416,11 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            cajas.ingresoporcategoria_fecha(Main.DiaActual,Login.usuario);
-            
+            cajas.ingresoporcategoria_fecha(Main.DiaActual, Login.usuario);
+
         } catch (SQLException ex) {
             Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        
-
-        
 
 
     }//GEN-LAST:event_CajasMousePressed

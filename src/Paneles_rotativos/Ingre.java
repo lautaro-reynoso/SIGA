@@ -6021,7 +6021,7 @@ public class Ingre extends javax.swing.JPanel {
                         ConectorPluginV3.TAMANO_IMAGEN_NORMAL)
                 .Feed(1)
                 .EstablecerTamanoFuente(1, 1)
-                .EscribirTexto("Si.G.A.")
+                .EscribirTexto("PROHIBIDO EL INGRESO CON ANIMALES\nSi.G.A.")
                 .Feed(3)
                 .Corte(1)
                 .Pulso(48, 30, 120);
@@ -6083,7 +6083,7 @@ public class Ingre extends javax.swing.JPanel {
                         ConectorPluginV3.TAMANO_IMAGEN_NORMAL)
                 .Feed(1)
                 .EstablecerTamanoFuente(1, 1)
-                .EscribirTexto("Si.G.A.")
+                .EscribirTexto("PROHIBIDO EL INGRESO CON ANIMALES\nSi.G.A.")
                 .Feed(3)
                 .Corte(1)
                 .Pulso(48, 30, 120);
