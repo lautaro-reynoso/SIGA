@@ -209,7 +209,7 @@ public class Ingre extends javax.swing.JPanel {
             }
 
             if (fecha_egreso_otros.getDate() != null && fecha_ingreso_otros.getDate() != null) {
-                c = controlador.IngresoParticular(documento_otros.getText(), nombre_otros.getText(), "Otros "+"("+descripcion_otros.getText()+")", calc_fecha(fecha_ingreso_otros), calc_fecha(fecha_egreso_otros), Parcela_otros.getText(), importe, Integer.parseInt(acomp_otros.getText()));
+                c = controlador.IngresoParticular(documento_otros.getText(), nombre_otros.getText(), "Otros " + "(" + descripcion_otros.getText() + ")", calc_fecha(fecha_ingreso_otros), calc_fecha(fecha_egreso_otros), Parcela_otros.getText(), importe, Integer.parseInt(acomp_otros.getText()));
 
                 if (c != 1) {
                     javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -218,9 +218,9 @@ public class Ingre extends javax.swing.JPanel {
                     String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
 
                     String hora_actual = hora + ":" + minutos;
-              
-                        modelo.InsertarRegistro(Login.usuario, "registro " + String.format("%02d", (Integer.parseInt(acomp_otros.getText()) + 1)) + " nuevo/s ingresante/s(otros) acampante/s", Main.DiaActual, hora_actual);
-                 
+
+                    modelo.InsertarRegistro(Login.usuario, "registro " + String.format("%02d", (Integer.parseInt(acomp_otros.getText()) + 1)) + " nuevo/s ingresante/s(otros) acampante/s", Main.DiaActual, hora_actual);
+
                     if (Integer.parseInt(acomp_otros.getText()) == 0) {
                         modelo.insertardinerocaja(importe);
                         System.out.println("importe en caja otros: " + importe);
@@ -2467,8 +2467,18 @@ public class Ingre extends javax.swing.JPanel {
         jLabel55.setText("Acompañantes:");
 
         acomp_otros.setText("0");
+        acomp_otros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                acomp_otrosKeyPressed(evt);
+            }
+        });
 
         tarifa_otros.setText("0.0");
+        tarifa_otros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tarifa_otrosKeyPressed(evt);
+            }
+        });
 
         jLabel56.setText("Tarifa individual por persona:");
 
@@ -4335,8 +4345,12 @@ public class Ingre extends javax.swing.JPanel {
 
         String hora_actual = hora + ":" + minutos;
 
-        c = controlador.IngresoDiario(dni, nombre, hora_actual, categoria, acomp);
+        if (categoria.equals("otros")) {
+            c = controlador.IngresoDiario(dni, nombre, hora_actual, categoria+"("+descripcion_otros.getText()+")", acomp);
+        } else {
 
+            c = controlador.IngresoDiario(dni, nombre, hora_actual, categoria, acomp);
+        }
         if (c != 1) {
             javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -4410,10 +4424,9 @@ public class Ingre extends javax.swing.JPanel {
 
             if (categoria.equals("otros")) {
 
-         
-                    modelo.InsertarRegistro(Login.usuario, "registro " + String.format("%02d", (Integer.parseInt(acomp_otros.getText()) + 1)) + " nuevo/s ingresante/s(otros) por el dia", Main.DiaActual, hora_actual);
-                    modelo.insertardinerocaja(Float.parseFloat(tarifa_otros.getText()) * (Integer.parseInt(acomp_otros.getText()) + 1));
-                  
+                modelo.InsertarRegistro(Login.usuario, "registro " + String.format("%02d", (Integer.parseInt(acomp_otros.getText()) + 1)) + " nuevo/s ingresante/s(otros) por el dia", Main.DiaActual, hora_actual);
+                modelo.insertardinerocaja(Float.parseFloat(tarifa_otros.getText()) * (Integer.parseInt(acomp_otros.getText()) + 1));
+
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
 
@@ -4603,7 +4616,9 @@ public class Ingre extends javax.swing.JPanel {
                 if (documento_otros.getText().equals("") || nombre_otros.getText().equals("")) {
                     throw new Exception();
                 }
-
+                if(descripcion_otros.getText().isEmpty()){
+                    descripcion_otros.setText("Sin especificar");
+                }
                 if (c == 0 && b == 0) {
                     if (pasar_dia4.isSelected()) {
 
@@ -6965,7 +6980,7 @@ public class Ingre extends javax.swing.JPanel {
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Descripcion:" + descripcion + "\n" + "Acompañantes: " + acomp + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
-                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) +" por: "+ (int)cant_dias(fecha_ingreso_otros, fecha_egreso_otros)+  " dias"+ "\n")
+                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) + " por: " + (int) cant_dias(fecha_ingreso_otros, fecha_egreso_otros) + " dias" + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
                 .EscribirTexto("TOTAL:  $" + importe + "\n")
@@ -7026,7 +7041,7 @@ public class Ingre extends javax.swing.JPanel {
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria:" + categoria + "\n" + "Acompañantes: " + acomp + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
-                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) +" por: "+ (int)cant_dias(fecha_ingreso_p, fecha_egreso_p)+  " dias"+ "\n")
+                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) + " por: " + (int) cant_dias(fecha_ingreso_p, fecha_egreso_p) + " dias" + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
                 .EscribirTexto("TOTAL:  $" + importe + "\n")
@@ -7406,15 +7421,12 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_acomp_particularKeyPressed
 
     private void documento_otrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documento_otrosActionPerformed
-      
-        
-       
-        
-        
+
+
     }//GEN-LAST:event_documento_otrosActionPerformed
 
     private void documento_otrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documento_otrosKeyPressed
-        
+
         char validador = evt.getKeyChar();
 
         if (Character.isLetter(validador)) {
@@ -7441,37 +7453,34 @@ public class Ingre extends javax.swing.JPanel {
 
     private void Obtener4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Obtener4MousePressed
 
- 
-
         try {
 
             if (!pasar_dia4.isSelected()) {
                 if (!Parcela_otros.getText().isEmpty()) {
-                  
+
                     float importe = 0;
-  
-                   if (Integer.parseInt(Parcela_otros.getText()) >= 1 && Integer.parseInt(Parcela_otros.getText()) <= 4) {
-                        importe = ((int)cant_dias(fecha_ingreso_otros, fecha_egreso_otros)) * Float.parseFloat(tarifa_otros.getText());
-                      
+
+                    if (Integer.parseInt(Parcela_otros.getText()) >= 1 && Integer.parseInt(Parcela_otros.getText()) <= 4) {
+                        importe = ((int) cant_dias(fecha_ingreso_otros, fecha_egreso_otros)) * Float.parseFloat(tarifa_otros.getText());
+
                         tarifa4.setText(String.format("%.2f", importe));
                     } else {
-                   
+
                         if (Integer.parseInt(acomp_otros.getText()) == 0) {
-                        
-                            importe = (Float.parseFloat(tarifa_otros.getText()) * ((int)cant_dias(fecha_ingreso_otros, fecha_egreso_otros)));
+
+                            importe = (Float.parseFloat(tarifa_otros.getText()) * ((int) cant_dias(fecha_ingreso_otros, fecha_egreso_otros)));
                             tarifa4.setText(String.format("%.2f", importe));
-                            System.out.println("importe::"+importe);
-                          
-                    
+                            System.out.println("importe::" + importe);
+
                         } else {
-                     
-                            importe = ((int)cant_dias(fecha_ingreso_otros, fecha_egreso_otros)) * Float.parseFloat(tarifa_otros.getText());
+
+                            importe = ((int) cant_dias(fecha_ingreso_otros, fecha_egreso_otros)) * Float.parseFloat(tarifa_otros.getText());
                             tarifa4.setText(String.format("%.2f", importe * (Integer.parseInt(acomp_otros.getText()) + 1)));
-                             System.out.println("importeimporte::"+importe);
-                           
+                            System.out.println("importeimporte::" + importe);
+
                         }
 
-                   }
+                    }
                 }
 
             } else {
@@ -7506,7 +7515,7 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_tarifa4ActionPerformed
 
     private void Boton_ingreso_p2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_ingreso_p2MousePressed
-      
+
         Boton_ingreso_otro();
         try {
             prueba();
@@ -7554,6 +7563,35 @@ public class Ingre extends javax.swing.JPanel {
     private void pasar_dia4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasar_dia4KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_pasar_dia4KeyPressed
+
+    private void tarifa_otrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tarifa_otrosKeyPressed
+
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
+
+
+    }//GEN-LAST:event_tarifa_otrosKeyPressed
+
+    private void acomp_otrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_acomp_otrosKeyPressed
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
+    }//GEN-LAST:event_acomp_otrosKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
