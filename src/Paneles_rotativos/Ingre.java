@@ -64,12 +64,24 @@ public class Ingre extends javax.swing.JPanel {
         Parsela_p.setText("Parcela");
 
     }
+    
 
     public void setearnullinvitado() {
         documento_p1.setText("");
         nombre_p1.setText("");
 
         Parsela_p1.setText("Parcela");
+        
+        documento_p1.setEnabled(false);
+        nombre_p1.setEnabled(false);
+        
+        documento_a1.setText("");
+        nombre_a1.setText("");
+
+        
+        cod_aportante1.setText("");
+        apellido_a1.setText("");
+        
     }
 
     public void setearnullaportante() {
@@ -428,6 +440,20 @@ public class Ingre extends javax.swing.JPanel {
         Parsela_p1 = new javax.swing.JTextField();
         pasar_dia3 = new javax.swing.JCheckBox();
         jLabel44 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel25 = new javax.swing.JPanel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        documento_a1 = new javax.swing.JTextField();
+        cod_aportante1 = new javax.swing.JTextField();
+        apellido_a1 = new javax.swing.JTextField();
+        nombre_a1 = new javax.swing.JTextField();
+        jPanel24 = new javax.swing.JPanel();
+        Documento_a1 = new javax.swing.JTextField();
+        jLabel46 = new javax.swing.JLabel();
+        Buscar_a1 = new javax.swing.JLabel();
         egresos = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
@@ -943,7 +969,7 @@ public class Ingre extends javax.swing.JPanel {
         aportantesLayout.setHorizontalGroup(
             aportantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(aportantesLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1807,7 +1833,7 @@ public class Ingre extends javax.swing.JPanel {
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel10Layout.createSequentialGroup()
                                 .addComponent(jLabel38)
-                                .addGap(367, 367, 367))
+                                .addGap(358, 358, 358))
                             .addComponent(nombre_p1)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -1823,21 +1849,176 @@ public class Ingre extends javax.swing.JPanel {
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap()
                 .addComponent(jLabel39)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(documento_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel38)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nombre_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pasar_dia3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel44))
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(12, 12, 12))
+        );
+
+        jPanel25.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion del Aportante"));
+
+        jLabel47.setText("Nombre:");
+
+        jLabel48.setText("Apellido:");
+
+        jLabel49.setText("Cod. aportante:");
+
+        jLabel50.setText("Documento:");
+
+        documento_a1.setForeground(new java.awt.Color(0, 0, 0));
+        documento_a1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        documento_a1.setText(null);
+        documento_a1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                documento_a1KeyPressed(evt);
+            }
+        });
+
+        cod_aportante1.setForeground(new java.awt.Color(0, 0, 0));
+        cod_aportante1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cod_aportante1.setText(null);
+        cod_aportante1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cod_aportante1KeyPressed(evt);
+            }
+        });
+
+        apellido_a1.setForeground(new java.awt.Color(0, 0, 0));
+        apellido_a1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        apellido_a1.setText(null);
+
+        nombre_a1.setForeground(new java.awt.Color(0, 0, 0));
+        nombre_a1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nombre_a1.setText(null);
+
+        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+        jPanel25.setLayout(jPanel25Layout);
+        jPanel25Layout.setHorizontalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel47)
+                    .addComponent(jLabel48)
+                    .addComponent(jLabel49)
+                    .addComponent(jLabel50))
+                .addGap(90, 90, 90)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(documento_a1)
+                    .addComponent(cod_aportante1)
+                    .addComponent(apellido_a1)
+                    .addComponent(nombre_a1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jPanel25Layout.setVerticalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel47)
+                    .addComponent(nombre_a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(apellido_a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel48))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cod_aportante1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel49))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(documento_a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda de Aportante"));
+
+        Documento_a1.setForeground(new java.awt.Color(0, 0, 0));
+        Documento_a1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Documento_a1.setText(null);
+        Documento_a1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Documento_a1ActionPerformed(evt);
+            }
+        });
+        Documento_a1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Documento_a1KeyPressed(evt);
+            }
+        });
+
+        jLabel46.setText("INGRESE EL DNI DEL APORTANTE ");
+
+        Buscar_a1.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar_a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_search_black_24dp.png"))); // NOI18N
+        Buscar_a1.setText("BUSCAR");
+        Buscar_a1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Buscar_a1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar_a1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar_a1MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
+        jPanel24.setLayout(jPanel24Layout);
+        jPanel24Layout.setHorizontalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jLabel46)
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Buscar_a1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Documento_a1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
+        );
+        jPanel24Layout.setVerticalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Documento_a1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Buscar_a1))
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout invitadosLayout = new javax.swing.GroupLayout(invitados);
@@ -1845,16 +2026,23 @@ public class Ingre extends javax.swing.JPanel {
         invitadosLayout.setHorizontalGroup(
             invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invitadosLayout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addGroup(invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitadosLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitadosLayout.createSequentialGroup()
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))))
         );
         invitadosLayout.setVerticalGroup(
             invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(invitadosLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         menu_ingreso_egreso.addTab("INVITADOS", invitados);
@@ -1992,7 +2180,7 @@ public class Ingre extends javax.swing.JPanel {
         egresosLayout.setHorizontalGroup(
             egresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(egresosLayout.createSequentialGroup()
-                .addGap(136, 136, 136)
+                .addGap(118, 118, 118)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, egresosLayout.createSequentialGroup()
@@ -3592,11 +3780,11 @@ public class Ingre extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(menu_ingreso_egreso)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(menu_ingreso_egreso)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -3936,7 +4124,7 @@ public class Ingre extends javax.swing.JPanel {
                 modelo.insertardinerocaja(Main.tarifa_dia_invitados);
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
-
+                
                 if (result == 0) {
 
                     if (!pasar_dia3.isSelected()) {
@@ -3949,6 +4137,7 @@ public class Ingre extends javax.swing.JPanel {
                         imprimirtiketdia("Invitado", importe, nombre_p1.getText(), documento_p1.getText());
                     }
                 }
+                
             }
             setearnullalumno();
             setearnullparticular();
@@ -4195,7 +4384,10 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_Parsela_pActionPerformed
 
     private void menu_ingreso_egresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_ingreso_egresoMousePressed
-
+        nombre_p1.setEnabled(false);
+        documento_p1.setEnabled(false);
+        setearnullinvitado();
+        
     }//GEN-LAST:event_menu_ingreso_egresoMousePressed
 
     private void pasar_dia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_dia2ActionPerformed
@@ -6405,6 +6597,54 @@ public class Ingre extends javax.swing.JPanel {
         
     }//GEN-LAST:event_cod_aportanteKeyPressed
 
+    private void Documento_a1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Documento_a1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Documento_a1ActionPerformed
+
+    private void Documento_a1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Documento_a1KeyPressed
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
+    }//GEN-LAST:event_Documento_a1KeyPressed
+    public void buscaraportanteinvitado () throws SQLException{
+        ResultSet res;
+        res = controlador.BuscarAportante(Documento_a1.getText());
+        if (res.next() == true) {
+            nombre_a1.setText(res.getString("nombre"));
+            documento_a1.setText(res.getString("doc"));
+            cod_aportante1.setText(res.getString("cod_aportante"));
+            apellido_a1.setText(res.getString("apellido"));
+            nombre_p1.setEnabled(true);
+            documento_p1.setEnabled(true);
+
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se encontro el documento solicitado.\n Intente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }
+    private void Buscar_a1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar_a1MousePressed
+        try {
+            buscaraportanteinvitado();
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Buscar_a1MousePressed
+
+    private void documento_a1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documento_a1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_documento_a1KeyPressed
+
+    private void cod_aportante1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cod_aportante1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cod_aportante1KeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Boton_ingreso;
@@ -6413,8 +6653,10 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JLabel Boton_ingreso_p1;
     private javax.swing.JLabel Buscar;
     private javax.swing.JLabel Buscar_a;
+    private javax.swing.JLabel Buscar_a1;
     private javax.swing.JTextField Documento;
     private javax.swing.JTextField Documento_a;
+    private javax.swing.JTextField Documento_a1;
     private javax.swing.JButton Obtener;
     private javax.swing.JButton Obtener1;
     private javax.swing.JButton Obtener2;
@@ -6425,14 +6667,17 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JTextField Parsela_p1;
     private javax.swing.JPanel alumnoss;
     private javax.swing.JTextField apellido_a;
+    private javax.swing.JTextField apellido_a1;
     private javax.swing.JTextField apellido_e;
     private javax.swing.JPanel aportantes;
     private javax.swing.JLabel boton_r;
     private javax.swing.JLabel boton_v;
     private javax.swing.JTextField carrera_e;
     private javax.swing.JTextField cod_aportante;
+    private javax.swing.JTextField cod_aportante1;
     private javax.swing.JTextField dni_buscado;
     private javax.swing.JTextField documento_a;
+    private javax.swing.JTextField documento_a1;
     private javax.swing.JTextField documento_e;
     private javax.swing.JTextField documento_p;
     private javax.swing.JTextField documento_p1;
@@ -6617,7 +6862,12 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -6636,10 +6886,13 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -6650,6 +6903,7 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JTextField marca;
     private javax.swing.JTabbedPane menu_ingreso_egreso;
     private javax.swing.JTextField nombre_a;
+    private javax.swing.JTextField nombre_a1;
     private javax.swing.JTextField nombre_e;
     private javax.swing.JTextField nombre_p;
     private javax.swing.JTextField nombre_p1;
