@@ -78,6 +78,8 @@ public class cajas extends javax.swing.JPanel {
         aportantes_a = new javax.swing.JLabel();
         particulares_a = new javax.swing.JLabel();
         invitados_a = new javax.swing.JLabel();
+        gg = new javax.swing.JLabel();
+        cantidad_otros_acampantes = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -87,6 +89,7 @@ public class cajas extends javax.swing.JPanel {
         aportantes_d = new javax.swing.JLabel();
         particulares_d = new javax.swing.JLabel();
         invitados_d = new javax.swing.JLabel();
+        cantidad_otros_dia = new javax.swing.JLabel();
         actualizar_totales = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -308,7 +311,7 @@ public class cajas extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cerrar_caja, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel39Layout.setVerticalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,13 +335,15 @@ public class cajas extends javax.swing.JPanel {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Acampantes"));
 
-        jLabel4.setText("Cantidad Alumnos:");
+        jLabel4.setText("Cantidad de Alumnos:");
 
-        jLabel8.setText("Cantidad Aportantes:");
+        jLabel8.setText("Cantidad de Aportantes:");
 
         jLabel9.setText("Cantidad Particulares:");
 
         jLabel10.setText("Cantidad Invitados:");
+
+        gg.setText("Cantidad Otros:");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -346,50 +351,68 @@ public class cajas extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(alumnos_a)
-                    .addComponent(aportantes_a)
-                    .addComponent(particulares_a)
-                    .addComponent(invitados_a))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(alumnos_a)
+                            .addComponent(aportantes_a)
+                            .addComponent(particulares_a)
+                            .addComponent(invitados_a)))
+                    .addComponent(gg))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cantidad_otros_acampantes)
+                .addGap(18, 18, 18))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(alumnos_a))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(aportantes_a))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(particulares_a)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(invitados_a))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(alumnos_a)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(aportantes_a))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel9)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel10)
+                        .addGap(6, 6, 6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(particulares_a)
+                        .addGap(18, 18, 18)
+                        .addComponent(invitados_a))
+                    .addComponent(gg))
                 .addContainerGap())
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(cantidad_otros_acampantes)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Por el dia"));
 
-        jLabel12.setText("Cantidad Alumnos:");
+        jLabel12.setText("Cantidad de Alumnos:");
 
-        jLabel13.setText("Cantidad Aportantes:");
+        jLabel13.setText("Cantidad de Aportantes:");
 
-        jLabel14.setText("Cantidad Particulares:");
+        jLabel14.setText("Cantidad  de Particulares:");
 
-        jLabel16.setText("Cantidad Invitados:");
+        jLabel16.setText("Cantidad de Invitados:");
+
+        cantidad_otros_dia.setText("Cantidad Otros:");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -397,16 +420,19 @@ public class cajas extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel16))
-                .addGap(57, 57, 57)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(invitados_d)
-                    .addComponent(particulares_d)
-                    .addComponent(aportantes_d)
-                    .addComponent(alumnos_d))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel16))
+                        .addGap(57, 57, 57)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(invitados_d)
+                            .addComponent(particulares_d)
+                            .addComponent(aportantes_d)
+                            .addComponent(alumnos_d)))
+                    .addComponent(cantidad_otros_dia))
                 .addGap(0, 68, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -424,11 +450,17 @@ public class cajas extends javax.swing.JPanel {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(particulares_d))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(invitados_d))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(invitados_d)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cantidad_otros_dia, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         actualizar_totales.setText("Actualizar Datos");
@@ -466,6 +498,10 @@ public class cajas extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -476,17 +512,10 @@ public class cajas extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cantidad_acampantes, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(cantidad_acampantes, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(actualizar_totales, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(actualizar_totales, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -554,12 +583,12 @@ public class cajas extends javax.swing.JPanel {
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel29Layout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
+                .addContainerGap(87, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -576,7 +605,7 @@ public class cajas extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jTabbedPane6)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -685,7 +714,7 @@ public class cajas extends javax.swing.JPanel {
 
         String hora_actual = hora + ":" + minutos;
         int cont_alumnos_acampantes = 0, cont_aportantes_acampantes = 0, cont_particular_acampantes = 0, cont_invitados_acampantes = 0;
-        int cont_alumnos_dia = 0, cont_aportantes_dia = 0, cont_particular_dia = 0, cont_invitados_dia = 0;
+        int cont_alumnos_dia = 0, cont_aportantes_dia = 0, cont_particular_dia = 0, cont_invitados_dia = 0, cont_otros_acampantes = 0, cont_otros_dia = 0;
         int familiares = 0;
         int cont = 0;
         ResultSet res = modelo.mostrar_registros_fecha(fecha_apertura, usuario);
@@ -696,6 +725,30 @@ public class cajas extends javax.swing.JPanel {
                 cont_particular_acampantes++;
             } else {
                 cont++;
+            }
+
+            if (res.getString("comentario").length() == 51) {
+                int p = Integer.parseInt(res.getString("comentario").substring(9, 11));
+                System.out.println("cantidad de ingresantes otro por acampar ::::" + p);
+                cont_otros_acampantes = cont_otros_acampantes + p;
+            }
+
+            if (res.getString("comentario").length() == 50) {
+                int p = Integer.parseInt(res.getString("comentario").substring(9, 11));
+                System.out.println("cantidad de ingresantes otro por el dia::::" + p);
+                cont_otros_dia = cont_otros_dia + p;
+            }
+
+            if (res.getString("comentario").length() == 46) {
+                int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
+
+                cont_particular_acampantes = cont_particular_acampantes + p;
+            }
+
+            if (res.getString("comentario").length() == 39) {
+                int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
+
+                cont_particular_dia = cont_particular_dia + p;
             }
 
             if (res.getString("comentario").equals("ha ingresado un nuevo alumno acampante")) {
@@ -753,7 +806,7 @@ public class cajas extends javax.swing.JPanel {
                 .Corte(1)
                 .DeshabilitarElModoDeCaracteresChinos()
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
-                .CargarImagenLocalEImprimir("C:\\Users\\lauti\\OneDrive\\Escritorio\\SIGA\\src\\com\\images\\icon-2_1.png", 0, 216)
+                .CargarImagenLocalEImprimir("C:\\Users\\mateo\\Desktop\\Nueva carpeta\\SIGA-main\\src\\com\\images\\icon-2_1.png", 0, 216)
                 .Feed(1)
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n"
@@ -765,12 +818,12 @@ public class cajas extends javax.swing.JPanel {
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n"
                         + "Detalles de Ingresantes del dia: " + fecha_apertura + "\n(del usuario: " + usuario + ")\n\n"
-                        + "Acampantes:                      Por el Dia:\n")
-                .TextoSegunPaginaDeCodigos(2, "cp850", "Alumnos: " + cont_alumnos_acampantes + "                       Alumnos: " + cont_alumnos_dia + "\n"
-                        + "Aportantes: " + cont_aportantes_acampantes + "                    Aportantes: " + cont_aportantes_dia + "\n"
-                        + "Particulares: " + cont_particular_acampantes + "                  Particulares: " + cont_particular_dia + "\n"
-                        + "Invitados: " + cont_invitados_acampantes + "                     Invitados: " + cont_invitados_dia + "\n"
-                        + "Familiares: " + familiares + "\n")
+                        + "Acampantes:                     Por el Dia:\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Alumnos: " + cont_alumnos_acampantes + "                      Alumnos:" + cont_alumnos_dia + "\n"
+                        + "Aportantes:" + cont_aportantes_acampantes + "                    Aportantes:" + cont_aportantes_dia + "\n"
+                        + "Particulares:" + cont_particular_acampantes + "                Particulares:" + cont_particular_dia + "\n"
+                        + "Invitados:" + cont_invitados_acampantes + "                     Invitados:" + cont_invitados_dia + "\n"
+                        + "Familiares:" + familiares + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("Retiros: $" + retiros + " \n"
@@ -939,7 +992,7 @@ public class cajas extends javax.swing.JPanel {
 
     public void ingresoporcategoria_fecha(String fecha, String usuario) throws SQLException {
         int cont_alumnos_acampantes = 0, cont_aportantes_acampantes = 0, cont_particular_acampantes = 0, cont_invitados_acampantes = 0;
-        int cont_alumnos_dia = 0, cont_aportantes_dia = 0, cont_particular_dia = 0, cont_invitados_dia = 0;
+        int cont_alumnos_dia = 0, cont_aportantes_dia = 0, cont_particular_dia = 0, cont_invitados_dia = 0, cont_otros_dia = 0, cont_otros_acampantes = 0;
         int familiares = 0;
         int cont = 0;
         int cont1 = 0;
@@ -955,15 +1008,27 @@ public class cajas extends javax.swing.JPanel {
                 cont++;
             }
 
-            if (res.getString("comentario").length() > 45) {
+            if (res.getString("comentario").length() == 51) {
+                int p = Integer.parseInt(res.getString("comentario").substring(9, 11));
+                System.out.println("cantidad de ingresantes otro por acampar ::::" + p);
+                cont_otros_acampantes = cont_otros_acampantes + p;
+            }
+
+            if (res.getString("comentario").length() == 50) {
+                int p = Integer.parseInt(res.getString("comentario").substring(9, 11));
+                System.out.println("cantidad de ingresantes otro por el dia::::" + p);
+                cont_otros_dia = cont_otros_dia + p;
+            }
+
+            if (res.getString("comentario").length() == 46) {
                 int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
-                System.out.println("cantidad de ingresantes ::::" + p);
+
                 cont_particular_acampantes = cont_particular_acampantes + p;
             }
-            // 
-            if(res.getString("comentario").length()==39){
+
+            if (res.getString("comentario").length() == 39) {
                 int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
-                System.out.println("cantidad de ingresantes por dia ::::" + p);
+
                 cont_particular_dia = cont_particular_dia + p;
             }
 
@@ -1013,19 +1078,46 @@ public class cajas extends javax.swing.JPanel {
             }
 
         }
+        /*
         alumnos_a.setText(String.valueOf(cont_alumnos_acampantes));
+         */
+        jLabel4.setText("Cantidad de Alumnos: " + String.valueOf(cont_alumnos_acampantes));
+
+        /*
         aportantes_a.setText(String.valueOf(cont_aportantes_acampantes));
+         */
+        jLabel8.setText("Cantidad de Aportantes: " + String.valueOf(cont_aportantes_acampantes));
+        /*
         particulares_a.setText(String.valueOf(cont_particular_acampantes));
-        invitados_a.setText(String.valueOf(cont_invitados_acampantes));
+         */
+        jLabel9.setText("Cantidad de Particulares: " + String.valueOf(cont_particular_acampantes));
 
-        cont2 = cont_alumnos_acampantes + cont_aportantes_acampantes + cont_particular_acampantes + cont_invitados_acampantes;
+        /*
+         invitados_a.setText(String.valueOf(cont_invitados_acampantes));
+         */
+        jLabel10.setText("Cantidad de Invitados: " + String.valueOf(cont_invitados_acampantes));
 
+        gg.setText("Cantidad Otros: " + String.valueOf(cont_otros_acampantes));
+
+        cont2 = cont_alumnos_acampantes + cont_aportantes_acampantes + cont_particular_acampantes + cont_invitados_acampantes + cont_otros_acampantes;
+
+        jLabel12.setText("Cantidad de Alumnos: " + String.valueOf(cont_alumnos_dia));
+
+        jLabel13.setText("Cantidad de Aportantes: " + String.valueOf(cont_aportantes_dia));
+
+        jLabel14.setText("Cantidad de Particulares: " + String.valueOf(cont_particular_dia));
+
+        jLabel16.setText("Cantidad de Invitados: " + String.valueOf(cont_invitados_dia));
+
+        cantidad_otros_dia.setText("Cantidad Otros: " + String.valueOf(cont_otros_dia));
+        /*
         alumnos_d.setText(String.valueOf(cont_alumnos_dia));
+       
         aportantes_d.setText(String.valueOf(cont_aportantes_dia));
         particulares_d.setText(String.valueOf(cont_particular_dia));
         invitados_d.setText(String.valueOf(cont_invitados_dia));
-
-        cont1 = cont_alumnos_dia + cont_aportantes_dia + cont_particular_dia + cont_invitados_dia;
+         */
+        cont1 = cont_alumnos_dia + cont_aportantes_dia + cont_particular_dia + cont_invitados_dia + cont_otros_dia;
 
         cantidad_acampantes.setText(String.valueOf(cont2));
         cantidad_dia.setText(String.valueOf(cont1));
@@ -1206,8 +1298,11 @@ public class cajas extends javax.swing.JPanel {
     private javax.swing.JLabel aportantes_d;
     private javax.swing.JLabel cantidad_acampantes;
     private javax.swing.JLabel cantidad_dia;
+    private javax.swing.JLabel cantidad_otros_acampantes;
+    private javax.swing.JLabel cantidad_otros_dia;
     public javax.swing.JButton cerrar_caja;
     public javax.swing.JButton generar_retiro;
+    private javax.swing.JLabel gg;
     public javax.swing.JTextField importe_inicial_caja;
     public javax.swing.JTextField importe_retiro;
     private javax.swing.JLabel invitados_a;
