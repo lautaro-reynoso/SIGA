@@ -14,6 +14,8 @@ import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -28,6 +30,7 @@ import javax.swing.table.DefaultTableModel;
 public class cajas extends javax.swing.JPanel {
 
     Modelo modelo = new Modelo();
+    public DateTimeFormatter f = DateTimeFormatter.ofPattern("h':'mm");
 
     public cajas() throws SQLException, SQLException, SQLException {
         initComponents();
@@ -666,11 +669,12 @@ public class cajas extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel1MousePressed
     public void cerrarcaja() throws SQLException {
         ResultSet res = modelo.cajausuario(Login.usuario);
-        String fecha_ab = "";
+        String fecha_ab = "", hora_apertura = "";
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
-
+        LocalTime HoraActual = LocalTime.now();
         String hora_actual = hora + ":" + minutos;
+        int cont = 0;
         if (res.next()) {
             String fecha_apertura = res.getString("fecha_abertura");
             for (int i = 0; i < 12; i++) {
@@ -682,6 +686,18 @@ public class cajas extends javax.swing.JPanel {
                     i = 12;
                 }
             }
+            for (int i = 0; i < 16; i++) {
+                char a = fecha_apertura.charAt(i);
+                if (cont > 0) {
+                    hora_apertura += a;
+                }
+
+                if (String.valueOf(a).equals(" ")&&cont==0) {
+                    cont++;
+                }
+
+            }
+            
 
             String id = res.getString("id");
             String retiros = res.getString("retiros");
@@ -694,7 +710,7 @@ public class cajas extends javax.swing.JPanel {
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Desea imprimir cierre?");
                 if (result == 0) {
-                    imprimir_tiket_caja(fecha_ab, Main.DiaActual + " " + hora_actual, Login.usuario, id, fecha_apertura, retiros, String.valueOf(plata_alcierre), total);
+                    imprimir_tiket_caja(fecha_ab, Main.DiaActual + " " + HoraActual.format(f), Login.usuario, id, fecha_apertura, retiros, String.valueOf(plata_alcierre), total,hora_apertura);
                 }
 
             }
@@ -707,18 +723,18 @@ public class cajas extends javax.swing.JPanel {
 
     }
 
-    public void imprimir_tiket_caja(String fecha_apertura, String fecha_cierre, String usuario, String id_caja, String fecha_hora, String retiros, String plata_al_cierre, String total) throws SQLException {
+    public void imprimir_tiket_caja(String fecha_apertura, String fecha_cierre, String usuario, String id_caja, String fecha_hora, String retiros, String plata_al_cierre, String total,String hora_apertura) throws SQLException {
 
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
-
+        LocalTime HoraActual = LocalTime.now();
         String hora_actual = hora + ":" + minutos;
         int cont_alumnos_acampantes = 0, cont_aportantes_acampantes = 0, cont_particular_acampantes = 0, cont_invitados_acampantes = 0;
         int cont_alumnos_dia = 0, cont_aportantes_dia = 0, cont_particular_dia = 0, cont_invitados_dia = 0, cont_otros_acampantes = 0, cont_otros_dia = 0;
         int familiares = 0;
         int cont = 0;
-        ResultSet res = modelo.mostrar_registros_fecha(fecha_apertura, usuario);
-
+        //ResultSet res = modelo.mostrar_registros_fecha(fecha_apertura, usuario);
+        ResultSet res = modelo.mostrar_registros_fecha_hora(fecha_apertura, usuario,hora_apertura,HoraActual.format(f));
         while (res.next()) {
             cont = 0;
             if (res.getString("comentario").equals("ha ingresado un nuevo particular acampante")) {
@@ -735,21 +751,21 @@ public class cajas extends javax.swing.JPanel {
 
             if (res.getString("comentario").length() == 44) {
                 int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
-               
+
                 cont_invitados_acampantes = cont_invitados_acampantes + p;
             }
-            if (res.getString("comentario").length() == 43) {
+          /*  if (res.getString("comentario").length() == 43) {
                 int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
-              
+
                 cont_invitados_dia = cont_invitados_dia + p;
             }
-
+*/
             if (res.getString("comentario").length() == 50) {
                 int p = Integer.parseInt(res.getString("comentario").substring(9, 11));
 
                 cont_otros_dia = cont_otros_dia + p;
             }
-
+            
             if (res.getString("comentario").length() == 46) {
                 int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
 
@@ -1024,12 +1040,12 @@ public class cajas extends javax.swing.JPanel {
                 System.out.println("cantidad de invitados por acampar ::::" + p);
                 cont_invitados_acampantes = cont_invitados_acampantes + p;
             }
-            if (res.getString("comentario").length() == 43) {
+           /* if (res.getString("comentario").length() == 43) {
                 int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
                 System.out.println("cantidad de invitados por dia ::::" + p);
                 cont_invitados_dia = cont_invitados_dia + p;
             }
-
+*/
             if (res.getString("comentario").length() == 51) {
                 int p = Integer.parseInt(res.getString("comentario").substring(9, 11));
                 System.out.println("cantidad de ingresantes otro por acampar ::::" + p);
@@ -1237,6 +1253,7 @@ public class cajas extends javax.swing.JPanel {
         }
         try {
             tablacajaabierta();
+
         } catch (SQLException ex) {
             Logger.getLogger(cajas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1267,6 +1284,8 @@ public class cajas extends javax.swing.JPanel {
     }//GEN-LAST:event_importe_retiroKeyPressed
     public void imprimircierre() throws SQLException {
         Component jFrame = null;
+        String hora_apertura="";
+        int cont=0;
         int result = JOptionPane.showConfirmDialog(jFrame, "Desea imprimir cierre?");
         if (result == 0) {
             String fecha_ab = "";
@@ -1279,17 +1298,28 @@ public class cajas extends javax.swing.JPanel {
             String total = tabla_cajas_cerrada.getValueAt(fila, 5).toString();
             String id = tabla_cajas_cerrada.getValueAt(fila, 6).toString();
 
-            for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < fecha_hora_apertura.length(); i++) {
                 char a = fecha_hora_apertura.charAt(i);
 
                 if (!String.valueOf(a).equals(" ")) {
                     fecha_ab += a;
                 } else {
-                    i = 12;
+                    i = fecha_hora_apertura.length();
                 }
             }
+            for (int i = 0; i <  fecha_hora_apertura.length(); i++) {
+                char a = fecha_hora_apertura.charAt(i);
+                if (cont > 0) {
+                    hora_apertura += a;
+                }
 
-            imprimir_tiket_caja(fecha_ab, fecha_hora_cierre, usuario, id, fecha_hora_apertura, retiros, monto_caja, total);
+                if (String.valueOf(a).equals(" ")&&cont==0) {
+                    cont++;
+                }
+
+            }
+            System.out.println(hora_apertura);
+            imprimir_tiket_caja(fecha_ab, fecha_hora_cierre, usuario, id, fecha_hora_apertura, retiros, monto_caja, total,hora_apertura);
         }
 
     }

@@ -22,7 +22,7 @@ public class Main {
     public static Conexion conexion = new Conexion();
     public static String privilegio;
     public static String DiaActual = LocalDate.now().toString();
-    public static String HoraActual = LocalTime.now().toString();
+    
     public static float tarfia_acampar_alumnos, tarfia_acampar_aportantes, tarfia_acampar_particular,
             tarifa_dia_alumnos,tarifa_dia_aportantes,tarifa_dia_particular,tarifa_dia_invitados,tarifa_acampar_invitados,tarifa_cabaña_aportante,tarifa_cabaña_noaportante;
     public static Calendar calendario = Calendar.getInstance();

@@ -5,10 +5,13 @@ import static Paneles_rotativos.Ingre.calendario;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Modelo {
+    public DateTimeFormatter f = DateTimeFormatter.ofPattern("h':'mm");
 
     public ResultSet BuscarPrivilegio(String usuario) {
 
@@ -426,9 +429,10 @@ public class Modelo {
     public int AbrirCaja(String monto_inicial) {
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
-
+        LocalTime HoraActual = LocalTime.now();
         String hora_actual = hora + ":" + minutos;
-        String sql = "INSERT INTO caja_abierta (usuario,retiros,plata_en_caja,fecha_abertura)" + "VALUES('" + Login.usuario + "','" + "0" + "','" + monto_inicial + "','" + Main.DiaActual + " " + hora_actual + "')";
+        
+        String sql = "INSERT INTO caja_abierta (usuario,retiros,plata_en_caja,fecha_abertura)" + "VALUES('" + Login.usuario + "','" + "0" + "','" + monto_inicial + "','" + Main.DiaActual + " " + HoraActual.format(f) + "')";
         return Main.conexion.EjecutarOperacion(sql);
 
     }
@@ -452,7 +456,7 @@ public class Modelo {
         sql = "SELECT * FROM caja_abierta WHERE usuario = '" + usuario + "'";
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
-
+        LocalTime HoraActual = LocalTime.now();
         String hora_actual = hora + ":" + minutos;
         ResultSet res = Main.conexion.EjecutarConsultaSQL(sql);
 
@@ -464,7 +468,7 @@ public class Modelo {
             float plata_alcierre = (plata_en_caja - retiros);
 
             String sql2 = "INSERT INTO caja_cerradas (usuario,retiros,total_recaudado,fecha_abertura,fecha_cierre,plata_en_caja_al_cierre)" + "VALUES('" + usuario
-                    + "','" + retiros + "','" + String.valueOf(plata_en_caja) + "','" + fecha_abertura + "','" + Main.DiaActual + " " + hora_actual + "','" + String.valueOf(plata_alcierre) + "')";
+                    + "','" + retiros + "','" + String.valueOf(plata_en_caja) + "','" + fecha_abertura + "','" + Main.DiaActual + " " + HoraActual.format(f) + "','" + String.valueOf(plata_alcierre) + "')";
             int v = Main.conexion.EjecutarOperacion(sql2);
 
             if (v == 1) {
@@ -500,6 +504,7 @@ public class Modelo {
         return Main.conexion.EjecutarConsultaSQL(sql);
     }
     public int generearretiro(String importe_retiro) throws SQLException {
+        LocalTime HoraActual = LocalTime.now();
         String sql1;
         sql1 = "SELECT * FROM caja_abierta WHERE usuario = '" + Login.usuario + "'";
 
@@ -515,7 +520,7 @@ public class Modelo {
             if (respuesta == 1) {
                 String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
                 String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
-
+                
                 String hora_actual = hora + ":" + minutos;
 
                 String sql3 = "INSERT INTO retiros (usuario,fecha_hora,importe)" + "VALUES('" + Login.usuario + "','" + Main.DiaActual + "','" + importe_retiro + "')";
@@ -544,6 +549,14 @@ public class Modelo {
         String sql;
         sql ="SELECT * FROM registros where usuario = '" + usuario + "' and fecha = '" + fecha + "'";
         
+        return Main.conexion.EjecutarConsultaSQL(sql);
+        
+        
+    }
+    public ResultSet mostrar_registros_fecha_hora(String fecha, String usuario,String hora_apertura, String hora_cierrre){
+        String sql;
+        sql ="SELECT * FROM registros where usuario = '" + usuario + "' and fecha = '" + fecha  + "'and hora >= '" +hora_apertura+ "'and hora<= '" + hora_cierrre+ "'";
+        System.out.println(sql);
         return Main.conexion.EjecutarConsultaSQL(sql);
         
         

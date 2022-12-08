@@ -31,6 +31,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Clases_tiketera.ConectorPluginV3;
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +40,8 @@ import java.util.ArrayList;
  * @author ig:lauti_reynosoo
  */
 public class Ingre extends javax.swing.JPanel {
-
+    public DateTimeFormatter f = DateTimeFormatter.ofPattern("h':'mm");
+    
     int filas = 0;
     Modelo modelo = new Modelo();
     public static Calendar calendario = Calendar.getInstance();
@@ -127,7 +130,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void RegistrarIngresoParticular() throws java.text.ParseException, java.lang.NullPointerException, SQLException {
-
+         LocalTime HoraActual = LocalTime.now();
         try {
 
             float importe = 0;
@@ -155,9 +158,9 @@ public class Ingre extends javax.swing.JPanel {
 
                     String hora_actual = hora + ":" + minutos;
                     if (Integer.parseInt(acomp_particular.getText()) == 0) {
-                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular acampante", Main.DiaActual, hora_actual);
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular acampante", Main.DiaActual, HoraActual.format(f));
                     } else {
-                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_particular.getText()) + 1)) + " nuevos particulares acampantes", Main.DiaActual, hora_actual);
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_particular.getText()) + 1)) + " nuevos particulares acampantes", Main.DiaActual, HoraActual.format(f));
                     }
 
                     if (Integer.parseInt(acomp_particular.getText()) == 0) {
@@ -199,7 +202,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void RegistrarIngresoOtros() throws java.text.ParseException, java.lang.NullPointerException, SQLException {
-
+         LocalTime HoraActual = LocalTime.now();
         try {
 
             float importe = 0;
@@ -230,7 +233,7 @@ public class Ingre extends javax.swing.JPanel {
 
                     String hora_actual = hora + ":" + minutos;
 
-                    modelo.InsertarRegistro(Login.usuario, "registro " + String.format("%02d", (Integer.parseInt(acomp_otros.getText()) + 1)) + " nuevo/s ingresante/s(otros) acampante/s", Main.DiaActual, hora_actual);
+                    modelo.InsertarRegistro(Login.usuario, "registro " + String.format("%02d", (Integer.parseInt(acomp_otros.getText()) + 1)) + " nuevo/s ingresante/s(otros) acampante/s", Main.DiaActual, HoraActual.format(f));
 
                     if (Integer.parseInt(acomp_otros.getText()) == 0) {
                         modelo.insertardinerocaja(importe);
@@ -271,6 +274,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void RegistrarIngresoAportante() throws java.text.ParseException, SQLException {
+         LocalTime HoraActual = LocalTime.now();
         try {
             float importe = 0;
 
@@ -293,9 +297,9 @@ public class Ingre extends javax.swing.JPanel {
                     String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
 
                     String hora_actual = hora + ":" + minutos;
-                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo aportante acampante", Main.DiaActual, hora_actual);
+                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo aportante acampante", Main.DiaActual, HoraActual.format(f));
                     if (!familiares.getText().equals("0")) {
-                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + familiares.getText() + " familiares de aportantes acampar", Main.DiaActual, hora_actual);
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + familiares.getText() + " familiares de aportantes acampar", Main.DiaActual, HoraActual.format(f));
                     }
                     modelo.insertardinerocaja(importe);
                     Component jFrame = null;
@@ -329,7 +333,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void BuscarAportante() throws SQLException {
-
+ LocalTime HoraActual = LocalTime.now();    
         ResultSet res;
         res = controlador.BuscarAportante(Documento_a.getText());
         if (res.next() == true) {
@@ -345,6 +349,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void TablaParselas() throws SQLException {
+         LocalTime HoraActual = LocalTime.now();
         int f = 0;
         ResultSet res;
         res = controlador.MostraParselas();
@@ -362,6 +367,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void RegistrarIngreso() throws java.text.ParseException, SQLException {
+         LocalTime HoraActual = LocalTime.now();
         float importe = 0;
         int c;
         if (Integer.parseInt(Parcela.getText()) >= 1 && Integer.parseInt(Parcela.getText()) <= 4) {
@@ -383,7 +389,7 @@ public class Ingre extends javax.swing.JPanel {
                 String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
 
                 String hora_actual = hora + ":" + minutos;
-                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo alumno acampante", Main.DiaActual, hora_actual);
+                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo alumno acampante", Main.DiaActual, HoraActual.format(f));
                 modelo.insertardinerocaja(importe);
 
                 Component jFrame = null;
@@ -4300,7 +4306,7 @@ public class Ingre extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_DocumentoActionPerformed
     public void ingre_p() throws NullPointerException, SQLException {
-
+         LocalTime HoraActual = LocalTime.now();
         if (!documento_p.getText().isEmpty() || !nombre_p.getText().isEmpty()) {
 
             int parsela = 0;
@@ -4561,7 +4567,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void ingre_dia(String categoria, String dni, String nombre, int acomp) throws SQLException, java.text.ParseException {
-
+         LocalTime HoraActual = LocalTime.now();
         int c;
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
@@ -4570,16 +4576,16 @@ public class Ingre extends javax.swing.JPanel {
         String hora_actual = hora + ":" + minutos;
 
         if (categoria.equals("otros")) {
-            c = controlador.IngresoDiario(dni, nombre, hora_actual, categoria + "(" + descripcion_otros.getText() + ")", acomp);
+            c = controlador.IngresoDiario(dni, nombre, HoraActual.format(f), categoria + "(" + descripcion_otros.getText() + ")", acomp);
         } else {
 
-            c = controlador.IngresoDiario(dni, nombre, hora_actual, categoria, acomp);
+            c = controlador.IngresoDiario(dni, nombre, HoraActual.format(f), categoria, acomp);
         }
         if (c != 1) {
             javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         } else {
             if (categoria.equals("alumno")) {
-                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo alumno por el dia", Main.DiaActual, hora_actual);
+                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo alumno por el dia", Main.DiaActual, HoraActual.format(f));
                 modelo.insertardinerocaja(Main.tarifa_dia_alumnos);
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
@@ -4597,9 +4603,9 @@ public class Ingre extends javax.swing.JPanel {
                 }
             }
             if (categoria.equals("aportante")) {
-                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo aportante por el dia", Main.DiaActual, hora_actual);
+                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo aportante por el dia", Main.DiaActual, HoraActual.format(f));
                 if (!familiares.getText().equals("0")) {
-                    modelo.InsertarRegistro(Login.usuario, "ha ingresado " + familiares.getText() + " familiares de aportantes dia", Main.DiaActual, hora_actual);
+                    modelo.InsertarRegistro(Login.usuario, "ha ingresado " + familiares.getText() + " familiares de aportantes dia", Main.DiaActual, HoraActual.format(f));
                 }
                 modelo.insertardinerocaja(Main.tarifa_dia_aportantes);
                 Component jFrame = null;
@@ -4622,11 +4628,11 @@ public class Ingre extends javax.swing.JPanel {
             if (categoria.equals("particular")) {
 
                 if (Integer.parseInt(acomp_particular.getText()) == 0) {
-                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular por el dia", Main.DiaActual, hora_actual);
+                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular por el dia", Main.DiaActual, HoraActual.format(f));
                     modelo.insertardinerocaja(Main.tarifa_dia_particular);
                     System.out.println("tarifa individual: " + Main.tarifa_dia_particular);
                 } else {
-                    modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_particular.getText()) + 1)) + " particulares por el dia", Main.DiaActual, hora_actual);
+                    modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_particular.getText()) + 1)) + " particulares por el dia", Main.DiaActual, HoraActual.format(f));
                     modelo.insertardinerocaja(Main.tarifa_dia_particular * (Integer.parseInt(acomp_particular.getText()) + 1));
                     System.out.println("tarifa con acompañantes: " + Main.tarifa_dia_particular + "$ *" + (Integer.parseInt(acomp_particular.getText()) + 1) + "=" + Main.tarifa_dia_particular * (Integer.parseInt(acomp_particular.getText()) + 1));
                 }
@@ -4648,7 +4654,7 @@ public class Ingre extends javax.swing.JPanel {
 
             if (categoria.equals("otros")) {
 
-                modelo.InsertarRegistro(Login.usuario, "registro " + String.format("%02d", (Integer.parseInt(acomp_otros.getText()) + 1)) + " nuevo/s ingresante/s(otros) por el dia", Main.DiaActual, hora_actual);
+                modelo.InsertarRegistro(Login.usuario, "registro " + String.format("%02d", (Integer.parseInt(acomp_otros.getText()) + 1)) + " nuevo/s ingresante/s(otros) por el dia", Main.DiaActual, HoraActual.format(f));
                 modelo.insertardinerocaja(Float.parseFloat(tarifa_otros.getText()) * (Integer.parseInt(acomp_otros.getText()) + 1));
 
                 Component jFrame = null;
@@ -4670,11 +4676,11 @@ public class Ingre extends javax.swing.JPanel {
             if (categoria.equals("invitado")) {
                 
                   if (Integer.parseInt(acomp_invitados.getText()) == 0) {
-                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado por el dia", Main.DiaActual, hora_actual);
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado por el dia", Main.DiaActual, HoraActual.format(f));
                         modelo.insertardinerocaja(Main.tarifa_dia_invitados);
                     } else {
                         modelo.insertardinerocaja(Main.tarifa_dia_invitados * (Integer.parseInt(acomp_invitados.getText()) + 1));
-                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_invitados.getText()) + 1)) + " nuevos invitados por el dia", Main.DiaActual, hora_actual);
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_invitados.getText()) + 1)) + " nuevos invitados por el dia", Main.DiaActual, HoraActual.format(f));
                     }
       
               
@@ -5009,6 +5015,8 @@ public class Ingre extends javax.swing.JPanel {
     private void menu_ingreso_egresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_ingreso_egresoMousePressed
         documento_p1.setEnabled(false);
         nombre_p1.setEnabled(false);
+         LocalTime HoraActual = LocalTime.now();
+        System.out.println(HoraActual.format(f));
     }//GEN-LAST:event_menu_ingreso_egresoMousePressed
 
     private void pasar_dia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_dia2ActionPerformed
@@ -7063,6 +7071,7 @@ public class Ingre extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tabla_vehiculoKeyPressed
     public void imprimirtiketdia(String categoria, float importe, String nombre, String documento, int acomp, float tarifa) throws SQLException {
+         LocalTime HoraActual = LocalTime.now();
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
         String segundos = String.valueOf(calendario.get(Calendar.SECOND));
@@ -7088,11 +7097,11 @@ public class Ingre extends javax.swing.JPanel {
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n")
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
-                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
                 .Feed(1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n")
-                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria: " + categoria + "\n" + "Hora-ingreso: " + hora_actual + "\n" + "Acompañantes: " + acomp + "\n" + "Solo por el dia\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria: " + categoria + "\n" + "Hora-ingreso: " + HoraActual.format(f) + "\n" + "Acompañantes: " + acomp + "\n" + "Solo por el dia\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
                 .EscribirTexto("Sub total: $" + tarifa + "*" + (acomp + 1) + "\n")
@@ -7132,7 +7141,7 @@ public class Ingre extends javax.swing.JPanel {
         if (res.next()) {
             n_serial = res.getString("id");
         }
-
+         LocalTime HoraActual = LocalTime.now();
         String serial;
         String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
 
@@ -7147,11 +7156,11 @@ public class Ingre extends javax.swing.JPanel {
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n")
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
-                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
                 .Feed(1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n")
-                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre del Aportante: " + nombre_a1.getText() + "        DNI: " + documento_a1.getText() + "\n" + "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria: " + categoria + "\n" + "Hora-ingreso: " + hora_actual + "\n" + "Acompañantes: " + acomp + "\n" + "Solo por el dia\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre del Aportante: " + nombre_a1.getText() + "        DNI: " + documento_a1.getText() + "\n" + "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria: " + categoria + "\n" + "Hora-ingreso: " + HoraActual.format(f) + "\n" + "Acompañantes: " + acomp + "\n" + "Solo por el dia\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
                 .EscribirTexto("Sub total: $" + tarifa + "*" + (acomp + 1) + "\n")
@@ -7191,7 +7200,7 @@ public class Ingre extends javax.swing.JPanel {
         if (res.next()) {
             n_serial = res.getString("id");
         }
-
+         LocalTime HoraActual = LocalTime.now();
         String serial;
         String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
 
@@ -7206,11 +7215,11 @@ public class Ingre extends javax.swing.JPanel {
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n")
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
-                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
                 .Feed(1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n")
-                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Descripcion: " + descripcion + "\n" + "Hora-ingreso: " + hora_actual + "\n" + "Acompañantes: " + acomp + "\n" + "Solo por el dia\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Descripcion: " + descripcion + "\n" + "Hora-ingreso: " + HoraActual.format(f) + "\n" + "Acompañantes: " + acomp + "\n" + "Solo por el dia\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
                 .EscribirTexto("Sub total: $" + tarifa + "*" + (acomp + 1) + "\n")
@@ -7245,8 +7254,8 @@ public class Ingre extends javax.swing.JPanel {
         String n_serial = "0";
         String hora_actual = hora + ":" + minutos;
         ResultSet res = modelo.mostrarregistros1();
-
-        // Aquí tu serial en caso de tener uno
+         LocalTime HoraActual = LocalTime.now();
+        // Aquí tu  serial en caso de tener uno
         if (res.next()) {
             n_serial = res.getString("id");
         }
@@ -7265,7 +7274,7 @@ public class Ingre extends javax.swing.JPanel {
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n")
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
-                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
                 .Feed(1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n")
@@ -7306,12 +7315,12 @@ public class Ingre extends javax.swing.JPanel {
         String n_serial = "0";
         String hora_actual = hora + ":" + minutos;
         ResultSet res = modelo.mostrarregistros1();
-
+         LocalTime HoraActual = LocalTime.now();
         // Aquí tu serial en caso de tener uno
         if (res.next()) {
             n_serial = res.getString("id");
         }
-
+        
         String serial;
         String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
 
@@ -7326,7 +7335,7 @@ public class Ingre extends javax.swing.JPanel {
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n")
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
-                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
                 .Feed(1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n")
@@ -7367,7 +7376,7 @@ public class Ingre extends javax.swing.JPanel {
         String n_serial = "0";
         String hora_actual = hora + ":" + minutos;
         ResultSet res = modelo.mostrarregistros1();
-
+         LocalTime HoraActual = LocalTime.now();
         // Aquí tu serial en caso de tener uno
         if (res.next()) {
             n_serial = res.getString("id");
@@ -7387,7 +7396,7 @@ public class Ingre extends javax.swing.JPanel {
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n")
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
-                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
                 .Feed(1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n")
@@ -7533,7 +7542,7 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_tarifa3ActionPerformed
     public void RegistrarIngresoInvitados() throws java.text.ParseException, java.lang.NullPointerException, SQLException {
         try {
-
+             LocalTime HoraActual = LocalTime.now();
             float importe = 0;
             int c;
 
@@ -7555,11 +7564,11 @@ public class Ingre extends javax.swing.JPanel {
                     String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
 
                     String hora_actual = hora + ":" + minutos;
-
+                    
                     if (Integer.parseInt(acomp_invitados.getText()) == 0) {
-                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado acampante", Main.DiaActual, hora_actual);
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado acampante", Main.DiaActual, HoraActual.format(f));
                     } else {
-                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_invitados.getText()) + 1)) + " nuevos invitados acampantes.", Main.DiaActual, hora_actual);
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_invitados.getText()) + 1)) + " nuevos invitados acampantes.", Main.DiaActual, HoraActual.format(f));
                     }
                     
                        if (Integer.parseInt(acomp_invitados.getText()) == 0) {
