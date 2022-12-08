@@ -63,6 +63,7 @@ public class Inicio extends javax.swing.JPanel {
         nombrecolumna.add("Fecha ingreso");
         nombrecolumna.add("Fecha egreso");
         nombrecolumna.add("Parcela");
+        nombrecolumna.add("Acompañantes");
         for (Object columna : nombrecolumna) {
             modelo.addColumn(columna);
         }
@@ -77,7 +78,8 @@ public class Inicio extends javax.swing.JPanel {
             String fecha_egreso = res.getString("fecha_egreso");
             String fecha_ingreso = res.getString("fecha_ingreso");
             String parcela = res.getString("parsela");
-            String tab[] = {documento, nombre, categoria, importe,  fecha_ingreso,fecha_egreso, parcela};
+            String acomp = res.getString("acomp");
+            String tab[] = {documento, nombre, categoria, importe,  fecha_ingreso,fecha_egreso, parcela,acomp};
            modelo.addRow(tab);
 
         }
@@ -92,7 +94,7 @@ public class Inicio extends javax.swing.JPanel {
         nombrecolumna.add("Nombre");
         nombrecolumna.add("Hora ingreso");
         nombrecolumna.add("Categoria");
-        
+        nombrecolumna.add("Acompañantes");
         for (Object columna : nombrecolumna) {
             modelo.addColumn(columna);
         }
@@ -105,7 +107,8 @@ public class Inicio extends javax.swing.JPanel {
             String nombre = res.getString("nombre");
             String hora_ingreso = res.getString("hora_ingreso");
             String categoria = res.getString("categoria");
-            String tab[] = {documento, nombre, hora_ingreso, categoria};
+            String acomp = res.getString("acomp");
+            String tab[] = {documento, nombre, hora_ingreso, categoria,acomp};
             
             modelo.addRow(tab);
 
@@ -250,11 +253,11 @@ public class Inicio extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Documento", "Nombre", "Hora de ingreso", "Categoría"
+                "Documento", "Nombre", "Hora de ingreso", "Categoría", "Acompañantes"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -437,11 +440,11 @@ public class Inicio extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Documento", "Nombre", "Categoria", "Importe", "Fecha de egreso", "Fecha de ingreso", "Parcela"
+                "Documento", "Nombre", "Categoria", "Importe", "Fecha de egreso", "Fecha de ingreso", "Parcela", "Acompañantes"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -471,7 +474,7 @@ public class Inicio extends javax.swing.JPanel {
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(19, 19, 19)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -502,7 +505,7 @@ public class Inicio extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(247, 247, 247)
                         .addComponent(jLabel5)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(1037, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
@@ -569,7 +572,7 @@ public class Inicio extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(

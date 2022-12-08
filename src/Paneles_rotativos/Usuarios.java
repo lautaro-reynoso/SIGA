@@ -179,6 +179,12 @@ public class Usuarios extends javax.swing.JPanel {
             jButton2.setEnabled(false);
             tabla1.setEnabled(false);
             boton_e1.setEnabled(false);
+            invitados_dia.setEnabled(false);
+            invitados_acampar.setEnabled(false);
+            cabañas_aportantes1.setEnabled(false);
+            cabañas_noaportantes1.setEnabled(false);
+            cabañas_aportantes.setEnabled(false);
+            cabañas_noaportantes.setEnabled(false);
         }
     }
 

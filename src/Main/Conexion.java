@@ -16,37 +16,37 @@ public class Conexion {
 
     Modelo modelo = new Modelo();
 
-    public void Conectar() throws SQLException, ClassNotFoundException{
-        try{
-            if (conexion != null)
+    public void Conectar() throws SQLException, ClassNotFoundException {
+        try {
+            if (conexion != null) {
                 return;
+            }
 
-            conexion = DriverManager.getConnection(url,user,pass);
-            if (conexion !=null)
-                System.out.println("Conexion a base de datos: "+url+" ... Ok");
-        }catch (SQLException e) {
+            conexion = DriverManager.getConnection(url, user, pass);
+            if (conexion != null) {
+                System.out.println("Conexion a base de datos: " + url + " ... Ok");
+            }
+        } catch (SQLException e) {
             System.out.println("Problema al establecer la Conexión a la base de datos");
-              
+
         }
         this.s = conexion.createStatement();
 
-
     }
 
-    public void Desconectar(){
-        try{
+    public void Desconectar() {
+        try {
             conexion.close();
-            conexion= null;
-        }catch(Exception e)
-        {
+            conexion = null;
+        } catch (Exception e) {
             System.out.println("Problema para cerrar la Conexión a la base de datos ");
         }
     }
 
-    public  java.sql.ResultSet EjecutarConsultaSQL(String sql){
+    public java.sql.ResultSet EjecutarConsultaSQL(String sql) {
 
         try {
-            resultado=s.executeQuery(sql);
+            resultado = s.executeQuery(sql);
 
         } catch (SQLException ex) {
             return null;
@@ -54,35 +54,32 @@ public class Conexion {
         return resultado;
     }
 
-
-
-    public int EjecutarOperacion(String sql){
+    public int EjecutarOperacion(String sql) {
         int respuesta = 0;
         try {
-            respuesta=this.s.executeUpdate(sql);
-            if(respuesta==1){
+            respuesta = this.s.executeUpdate(sql);
+            if (respuesta == 1) {
                 System.out.println("Registro Guardado");
-            }
-            else{
+            } else {
                 System.out.println("Ocurrio un problema al agregar el registro");
 
             }
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             // Mostramos toda la informacion sobre el error disponible
-            System.out.println( "Error: SQLException" );
+            System.out.println("Error: SQLException");
             while (ex != null) {
-                System.out.println ("SQLState: " + ex.getSQLState ());
-                System.out.println ("Mensaje:  " + ex.getMessage ());
-                System.out.println ("ErrorCode:   " + ex.getErrorCode ());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("Mensaje:  " + ex.getMessage());
+                System.out.println("ErrorCode:   " + ex.getErrorCode());
                 ex = ex.getNextException();
             }
-        } catch(Exception e) {
-            System.out.println("Se produjo un error inesperado:    "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se produjo un error inesperado:    " + e.getMessage());
         }
         return respuesta;
     }
 
-/*
+    /*
     public int InsertarIngreso(String documento, String nombre, String cod_pulsera, String categoria, String dia_ingreso, String importe){
         String sql="INSERT INTO ingreso (documento, nombre, cod_pulsera,categoria, dia_ingreso, importe) "
                 + "VALUES('"+documento+"','"+nombre+"','"+cod_pulsera+"','"+categoria+"','"+dia_ingreso+"','"+importe+"')";
@@ -117,5 +114,5 @@ public class Conexion {
         sql="SELECT * FROM aportantes WHERE doc = '"+documento+"'";
         return EjecutarConsultaSQL(sql);
     }
-*/
+     */
 }

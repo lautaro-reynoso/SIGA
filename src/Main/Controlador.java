@@ -87,12 +87,12 @@ public class Controlador {
         return null;
     }
 
-    public int IngresoParticular(String documento, String nombre, String categoria, String dia_ingreso, String dia_egreso, String parsela, float importe) {
+    public int IngresoParticular(String documento, String nombre, String categoria, String dia_ingreso, String dia_egreso, String parsela, float importe, int acomp) {
 
         if (Main.conexion != null) {
 
             //devuelve 1 si se completo el registro
-            int c = modelo.InsertarIngreso(documento, nombre, categoria, dia_ingreso, dia_egreso, parsela, importe);
+            int c = modelo.InsertarIngreso(documento, nombre, categoria, dia_ingreso, dia_egreso, parsela, importe, acomp);
 
             if (c == 1) {
                 return c;
@@ -116,11 +116,11 @@ public class Controlador {
         
     }
 
-    public int IngresoDiario(String documento, String nombre, String hora_ingreso, String categoria) {
+    public int IngresoDiario(String documento, String nombre, String hora_ingreso, String categoria, int acomp) {
         if (Main.conexion != null) {
 
             //devuelve 1 si se completo el registro
-            int c = modelo.InsertarIngresoDiario(documento, nombre, hora_ingreso, categoria);
+            int c = modelo.InsertarIngresoDiario(documento, nombre, hora_ingreso, categoria,acomp);
             
             if (c == 1) {
                 return c;

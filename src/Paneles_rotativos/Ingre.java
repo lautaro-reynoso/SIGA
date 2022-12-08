@@ -31,6 +31,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Clases_tiketera.ConectorPluginV3;
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +40,8 @@ import java.util.ArrayList;
  * @author ig:lauti_reynosoo
  */
 public class Ingre extends javax.swing.JPanel {
-
+    public DateTimeFormatter f = DateTimeFormatter.ofPattern("h':'mm");
+    
     int filas = 0;
     Modelo modelo = new Modelo();
     public static Calendar calendario = Calendar.getInstance();
@@ -64,24 +67,23 @@ public class Ingre extends javax.swing.JPanel {
         Parsela_p.setText("Parcela");
 
     }
-    
 
     public void setearnullinvitado() {
         documento_p1.setText("");
         nombre_p1.setText("");
 
         Parsela_p1.setText("Parcela");
-        
+
         documento_p1.setEnabled(false);
         nombre_p1.setEnabled(false);
-        
+
         documento_a1.setText("");
+        Documento_a2.setText("");
         nombre_a1.setText("");
 
-        
         cod_aportante1.setText("");
         apellido_a1.setText("");
-        
+
     }
 
     public void setearnullaportante() {
@@ -128,7 +130,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void RegistrarIngresoParticular() throws java.text.ParseException, java.lang.NullPointerException, SQLException {
-
+         LocalTime HoraActual = LocalTime.now();
         try {
 
             float importe = 0;
@@ -137,24 +139,37 @@ public class Ingre extends javax.swing.JPanel {
                 importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 6);
                 tarifa1.setText(String.valueOf(importe));
             } else {
-                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 3);
-                tarifa1.setText(String.valueOf(importe));
+                if (Integer.parseInt(acomp_particular.getText()) == 0) {
+                    importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 3);
+                    tarifa1.setText(String.format("%.2f", importe));
+                } else {
+                    importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 3) * (Integer.parseInt(acomp_particular.getText()) + 1);
+                }
             }
 
             if (fecha_egreso_p.getDate() != null && fecha_ingreso_p.getDate() != null) {
-
-                c = controlador.IngresoParticular(documento_p.getText(), nombre_p.getText(), "Particular", calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), Parsela_p.getText(), importe);
+                c = controlador.IngresoParticular(documento_p.getText(), nombre_p.getText(), "Particular", calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), Parsela_p.getText(), importe, Integer.parseInt(acomp_particular.getText()));
 
                 if (c != 1) {
                     javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
                     String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
-                    String segundos = String.valueOf(calendario.get(Calendar.SECOND));
 
                     String hora_actual = hora + ":" + minutos;
-                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular acampante", Main.DiaActual, hora_actual);
-                    modelo.insertardinerocaja(importe);
+                    if (Integer.parseInt(acomp_particular.getText()) == 0) {
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular acampante", Main.DiaActual, HoraActual.format(f));
+                    } else {
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_particular.getText()) + 1)) + " nuevos particulares acampantes", Main.DiaActual, HoraActual.format(f));
+                    }
+
+                    if (Integer.parseInt(acomp_particular.getText()) == 0) {
+                        modelo.insertardinerocaja(importe);
+                        System.out.println("importe en caja: " + importe);
+                    } else {
+                        modelo.insertardinerocaja(importe);
+                        System.out.println("importe en caja con acampañantes: " + importe);
+                    }
 
                     Component jFrame = null;
                     int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
@@ -163,11 +178,83 @@ public class Ingre extends javax.swing.JPanel {
 
                         if (!pasar_dia2.isSelected()) {
 
-                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe, nombre_p.getText(), documento_p.getText());
+                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe, nombre_p.getText(), documento_p.getText(), Integer.parseInt(acomp_particular.getText()), Main.tarfia_acampar_particular);
                         } else {
 
                             importe = Main.tarifa_dia_particular;
-                            imprimirtiketdia("Particular", importe, nombre_p.getText(), documento_p.getText());
+                            imprimirtiketdia("Particular", importe, nombre_p.getText(), documento_p.getText(), Integer.parseInt(acomp_particular.getText()), importe);
+                        }
+                    }
+                    setearnullparticular();
+
+                }
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe de ingresar una fecha de ingreso y egreso.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (java.lang.NullPointerException e) {
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe completar todos los campos de ingreso.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+    }
+
+    public void RegistrarIngresoOtros() throws java.text.ParseException, java.lang.NullPointerException, SQLException {
+         LocalTime HoraActual = LocalTime.now();
+        try {
+
+            float importe = 0;
+            int c;
+
+            if (Integer.parseInt(Parcela_otros.getText()) >= 1 && Integer.parseInt(Parcela_otros.getText()) <= 4) {
+
+                importe = (cant_dias(fecha_ingreso_otros, fecha_egreso_otros) * Float.parseFloat(tarifa_otros.getText()));
+                tarifa4.setText(String.valueOf(importe));
+            } else {
+                if (Integer.parseInt(acomp_otros.getText()) == 0) {
+                    importe = (cant_dias(fecha_ingreso_otros, fecha_egreso_otros) * Float.parseFloat(tarifa_otros.getText()));
+                    tarifa4.setText(String.format("%.2f", importe));
+                } else {
+
+                    importe = cant_dias(fecha_ingreso_otros, fecha_egreso_otros) * (Integer.parseInt(acomp_otros.getText()) + 1) * Float.parseFloat(tarifa_otros.getText());
+                }
+            }
+
+            if (fecha_egreso_otros.getDate() != null && fecha_ingreso_otros.getDate() != null) {
+                c = controlador.IngresoParticular(documento_otros.getText(), nombre_otros.getText(), "Otros " + "(" + descripcion_otros.getText() + ")", calc_fecha(fecha_ingreso_otros), calc_fecha(fecha_egreso_otros), Parcela_otros.getText(), importe, Integer.parseInt(acomp_otros.getText()));
+
+                if (c != 1) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+                    String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+
+                    String hora_actual = hora + ":" + minutos;
+
+                    modelo.InsertarRegistro(Login.usuario, "registro " + String.format("%02d", (Integer.parseInt(acomp_otros.getText()) + 1)) + " nuevo/s ingresante/s(otros) acampante/s", Main.DiaActual, HoraActual.format(f));
+
+                    if (Integer.parseInt(acomp_otros.getText()) == 0) {
+                        modelo.insertardinerocaja(importe);
+                        System.out.println("importe en caja otros: " + importe);
+                    } else {
+                        modelo.insertardinerocaja(importe);
+                        System.out.println("importe en caja con acampañantes otros: " + importe);
+                    }
+
+                    Component jFrame = null;
+                    int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
+
+                    if (result == 0) {
+
+                        if (!pasar_dia4.isSelected()) {
+
+                            imprimirtiketacampanteotros(calc_fecha(fecha_ingreso_otros), calc_fecha(fecha_egreso_otros), descripcion_otros.getText(), importe, nombre_otros.getText(), documento_otros.getText(), Integer.parseInt(acomp_otros.getText()), Float.parseFloat(tarifa_otros.getText()));
+                        } else {
+
+                            importe = Float.parseFloat(tarifa_otros.getText());
+                            imprimirtiketdiaotros(descripcion_otros.getText(), importe, nombre_otros.getText(), documento_otros.getText(), Integer.parseInt(acomp_otros.getText()), Float.parseFloat(tarifa_otros.getText()));
                         }
                     }
                     setearnullparticular();
@@ -187,6 +274,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void RegistrarIngresoAportante() throws java.text.ParseException, SQLException {
+         LocalTime HoraActual = LocalTime.now();
         try {
             float importe = 0;
 
@@ -200,7 +288,7 @@ public class Ingre extends javax.swing.JPanel {
             int c;
             if (fecha_egreso_p1.getDate() != null && fecha_ingreso_p1.getDate() != null) {
 
-                c = controlador.IngresoParticular(documento_a.getText(), nombre_a.getText(), "Aportante", calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), Parsela_a.getText(), importe);
+                c = controlador.IngresoParticular(documento_a.getText(), nombre_a.getText(), "Aportante", calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), Parsela_a.getText(), importe, Integer.parseInt(acomp_particular.getText()));
 
                 if (c != 1) {
                     javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -209,9 +297,9 @@ public class Ingre extends javax.swing.JPanel {
                     String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
 
                     String hora_actual = hora + ":" + minutos;
-                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo aportante acampante", Main.DiaActual, hora_actual);
+                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo aportante acampante", Main.DiaActual, HoraActual.format(f));
                     if (!familiares.getText().equals("0")) {
-                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + familiares.getText() + " familiares de aportantes acampar", Main.DiaActual, hora_actual);
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + familiares.getText() + " familiares de aportantes acampar", Main.DiaActual, HoraActual.format(f));
                     }
                     modelo.insertardinerocaja(importe);
                     Component jFrame = null;
@@ -221,11 +309,11 @@ public class Ingre extends javax.swing.JPanel {
 
                         if (!pasar_dia1.isSelected()) {
 
-                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe, nombre_a.getText(), documento_a.getText());
+                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe, nombre_a.getText(), documento_a.getText(), 0, 0);
                         } else {
 
                             importe = Main.tarifa_dia_aportantes;
-                            imprimirtiketdia("Aportante", importe, nombre_a.getText(), documento_a.getText());
+                            imprimirtiketdia("Aportante", importe, nombre_a.getText(), documento_a.getText(), 0, 0);
                         }
                     }
                     familiares.setText("0");
@@ -245,7 +333,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void BuscarAportante() throws SQLException {
-
+ LocalTime HoraActual = LocalTime.now();    
         ResultSet res;
         res = controlador.BuscarAportante(Documento_a.getText());
         if (res.next() == true) {
@@ -261,6 +349,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void TablaParselas() throws SQLException {
+         LocalTime HoraActual = LocalTime.now();
         int f = 0;
         ResultSet res;
         res = controlador.MostraParselas();
@@ -278,6 +367,7 @@ public class Ingre extends javax.swing.JPanel {
     }
 
     public void RegistrarIngreso() throws java.text.ParseException, SQLException {
+         LocalTime HoraActual = LocalTime.now();
         float importe = 0;
         int c;
         if (Integer.parseInt(Parcela.getText()) >= 1 && Integer.parseInt(Parcela.getText()) <= 4) {
@@ -289,20 +379,19 @@ public class Ingre extends javax.swing.JPanel {
         }
 
         if (fecha_egreso.getDate() != null && fecha_ingreso.getDate() != null) {
-
-            c = controlador.IngresoParticular(documento_e.getText(), nombre_e.getText(), "Alumno", calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), Parcela.getText(), importe);
+            System.out.println("importe::" + importe);
+            c = controlador.IngresoParticular(documento_e.getText(), nombre_e.getText(), "Alumno", calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), Parcela.getText(), importe, Integer.parseInt(acomp_particular.getText()));
 
             if (c != 1) {
                 javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             } else {
                 String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
                 String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
-                String segundos = String.valueOf(calendario.get(Calendar.SECOND));
 
                 String hora_actual = hora + ":" + minutos;
-                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo alumno acampante", Main.DiaActual, hora_actual);
+                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo alumno acampante", Main.DiaActual, HoraActual.format(f));
                 modelo.insertardinerocaja(importe);
-                
+
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
 
@@ -310,11 +399,11 @@ public class Ingre extends javax.swing.JPanel {
 
                     if (!pasar_dia.isSelected()) {
 
-                        imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe, nombre_e.getText(), documento_e.getText());
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe, nombre_e.getText(), documento_e.getText(), 0, Main.tarfia_acampar_alumnos);
                     } else {
 
                         importe = Main.tarifa_dia_alumnos;
-                        imprimirtiketdia("Alumno", importe, nombre_e.getText(), documento_e.getText());
+                        imprimirtiketdia("Alumno", importe, nombre_e.getText(), documento_e.getText(), 0, importe);
 
                     }
                 }
@@ -420,12 +509,10 @@ public class Ingre extends javax.swing.JPanel {
         Parsela_p = new javax.swing.JTextField();
         pasar_dia2 = new javax.swing.JCheckBox();
         jLabel37 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        acomp_particular = new javax.swing.JTextField();
         invitados = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        documento_p1 = new javax.swing.JTextField();
-        jLabel38 = new javax.swing.JLabel();
-        nombre_p1 = new javax.swing.JTextField();
-        jLabel39 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
@@ -440,20 +527,26 @@ public class Ingre extends javax.swing.JPanel {
         Parsela_p1 = new javax.swing.JTextField();
         pasar_dia3 = new javax.swing.JCheckBox();
         jLabel44 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel25 = new javax.swing.JPanel();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
-        jLabel49 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
+        jPanel28 = new javax.swing.JPanel();
+        Documento_a2 = new javax.swing.JTextField();
+        jLabel58 = new javax.swing.JLabel();
+        Buscar_a2 = new javax.swing.JLabel();
+        jPanel29 = new javax.swing.JPanel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
         documento_a1 = new javax.swing.JTextField();
         cod_aportante1 = new javax.swing.JTextField();
         apellido_a1 = new javax.swing.JTextField();
         nombre_a1 = new javax.swing.JTextField();
-        jPanel24 = new javax.swing.JPanel();
-        Documento_a1 = new javax.swing.JTextField();
-        jLabel46 = new javax.swing.JLabel();
-        Buscar_a1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel38 = new javax.swing.JLabel();
+        nombre_p1 = new javax.swing.JTextField();
+        documento_p1 = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        acomp_invitados = new javax.swing.JTextField();
         egresos = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
@@ -475,6 +568,33 @@ public class Ingre extends javax.swing.JPanel {
         patente = new javax.swing.JTextField();
         ingreso_vehiculo = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel24 = new javax.swing.JPanel();
+        documento_otros = new javax.swing.JTextField();
+        jLabel47 = new javax.swing.JLabel();
+        nombre_otros = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        fecha_ingreso_otros = new com.toedter.calendar.JDateChooser();
+        fecha_egreso_otros = new com.toedter.calendar.JDateChooser();
+        Obtener4 = new javax.swing.JButton();
+        jPanel26 = new javax.swing.JPanel();
+        jLabel51 = new javax.swing.JLabel();
+        tarifa4 = new javax.swing.JTextField();
+        jLabel52 = new javax.swing.JLabel();
+        Boton_ingreso_p2 = new javax.swing.JLabel();
+        Parcela_otros = new javax.swing.JTextField();
+        pasar_dia4 = new javax.swing.JCheckBox();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        descripcion_otros = new javax.swing.JTextField();
+        jLabel55 = new javax.swing.JLabel();
+        acomp_otros = new javax.swing.JTextField();
+        tarifa_otros = new javax.swing.JTextField();
+        jLabel56 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         j10 = new javax.swing.JLabel();
         j12 = new javax.swing.JLabel();
@@ -949,9 +1069,9 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(pasar_dia1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -969,7 +1089,7 @@ public class Ingre extends javax.swing.JPanel {
         aportantesLayout.setHorizontalGroup(
             aportantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(aportantesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(26, 26, 26)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -980,7 +1100,7 @@ public class Ingre extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("APORTANTES", aportantes);
+        menu_ingreso_egreso.addTab("Aportantes", aportantes);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso Alumno"));
 
@@ -1346,10 +1466,10 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(alumnossLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("ALUMNOS", alumnoss);
+        menu_ingreso_egreso.addTab("Alumnos", alumnoss);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar un Particular"));
 
@@ -1544,21 +1664,21 @@ public class Ingre extends javax.swing.JPanel {
             }
         });
 
-        jLabel37.setText("Selecione si solo pasa el dia:");
+        jLabel37.setText("Seleccione si solo pasa el dia:");
+
+        jLabel46.setText("Acompañantes (MAX 98):");
+
+        acomp_particular.setText("0");
+        acomp_particular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                acomp_particularKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(documento_p)
-                        .addContainerGap())
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
@@ -1573,11 +1693,28 @@ public class Ingre extends javax.swing.JPanel {
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pasar_dia2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel46)
+                                .addGap(52, 52, 52)
+                                .addComponent(acomp_particular, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pasar_dia2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(65, 65, 65))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(documento_p)
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1590,7 +1727,11 @@ public class Ingre extends javax.swing.JPanel {
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nombre_p, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(acomp_particular, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel46))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pasar_dia2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel37))
@@ -1603,51 +1744,22 @@ public class Ingre extends javax.swing.JPanel {
         particular.setLayout(particularLayout);
         particularLayout.setHorizontalGroup(
             particularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(particularLayout.createSequentialGroup()
-                .addGap(102, 102, 102)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, particularLayout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
         particularLayout.setVerticalGroup(
             particularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(particularLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("PARTICULAR", particular);
+        menu_ingreso_egreso.addTab("Particular", particular);
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar un Invitado"));
-
-        documento_p1.setForeground(new java.awt.Color(0, 0, 0));
-        documento_p1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        documento_p1.setText(null);
-        documento_e.setEnabled(false);
-        documento_p1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                documento_p1ActionPerformed(evt);
-            }
-        });
-        documento_p1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                documento_p1KeyPressed(evt);
-            }
-        });
-
-        jLabel38.setText("NOMBRE");
-
-        nombre_p1.setForeground(new java.awt.Color(0, 0, 0));
-        nombre_p1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        nombre_p1.setText(null);
-        nombre_e.setEnabled(false);
-        nombre_p1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                nombre_p1KeyPressed(evt);
-            }
-        });
-
-        jLabel39.setText("DOCUMENTO");
 
         jLabel40.setText("FECHA DE EGRESO");
 
@@ -1753,47 +1865,6 @@ public class Ingre extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Obtener3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel40)
-                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(fecha_egreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(fecha_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel41))
-                        .addGap(75, 75, 75))))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel41)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fecha_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel40)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fecha_egreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Obtener3))
-                    .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
         pasar_dia3.setText("Pasar el dia");
         pasar_dia3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1811,70 +1882,121 @@ public class Ingre extends javax.swing.JPanel {
             }
         });
 
-        jLabel44.setText("Selecione si solo pasa el dia:");
+        jLabel44.setText("Seleccione si solo pasa el dia:");
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(documento_p1)
-                        .addContainerGap())
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel39)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel38)
-                                .addGap(358, 358, 358))
-                            .addComponent(nombre_p1)))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pasar_dia3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel39)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(documento_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel38)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombre_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pasar_dia3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel40)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(fecha_egreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fecha_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(Obtener3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)))
+                .addGap(35, 35, 35))
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pasar_dia3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pasar_dia3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel44))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel41)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fecha_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addComponent(fecha_egreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Obtener3)
+                        .addContainerGap())
+                    .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel25.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion del Aportante"));
+        jPanel28.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda de Aportante"));
 
-        jLabel47.setText("Nombre:");
+        Documento_a2.setForeground(new java.awt.Color(0, 0, 0));
+        Documento_a2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Documento_a2.setText(null);
+        Documento_a2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Documento_a2ActionPerformed(evt);
+            }
+        });
+        Documento_a2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Documento_a2KeyPressed(evt);
+            }
+        });
 
-        jLabel48.setText("Apellido:");
+        jLabel58.setText("INGRESE EL DNI DEL APORTANTE ");
 
-        jLabel49.setText("Cod. aportante:");
+        Buscar_a2.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar_a2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_search_black_24dp.png"))); // NOI18N
+        Buscar_a2.setText("BUSCAR");
+        Buscar_a2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Buscar_a2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar_a2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar_a2MousePressed(evt);
+            }
+        });
 
-        jLabel50.setText("Documento:");
+        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
+        jPanel28.setLayout(jPanel28Layout);
+        jPanel28Layout.setHorizontalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jLabel58)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Buscar_a2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Documento_a2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
+        );
+        jPanel28Layout.setVerticalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Documento_a2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(Buscar_a2))
+        );
+
+        jPanel29.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion del Aportante"));
+
+        jLabel59.setText("Nombre:");
+
+        jLabel60.setText("Apellido:");
+
+        jLabel61.setText("Cod. aportante:");
+
+        jLabel62.setText("Documento:");
 
         documento_a1.setForeground(new java.awt.Color(0, 0, 0));
         documento_a1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1902,123 +2024,163 @@ public class Ingre extends javax.swing.JPanel {
         nombre_a1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nombre_a1.setText(null);
 
-        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
-        jPanel25.setLayout(jPanel25Layout);
-        jPanel25Layout.setHorizontalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel25Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
+        jPanel29.setLayout(jPanel29Layout);
+        jPanel29Layout.setHorizontalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel47)
-                    .addComponent(jLabel48)
-                    .addComponent(jLabel49)
-                    .addComponent(jLabel50))
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel59)
+                    .addComponent(jLabel60)
+                    .addComponent(jLabel61)
+                    .addComponent(jLabel62))
                 .addGap(90, 90, 90)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(documento_a1)
                     .addComponent(cod_aportante1)
                     .addComponent(apellido_a1)
                     .addComponent(nombre_a1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
-        jPanel25Layout.setVerticalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel25Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel47)
+        jPanel29Layout.setVerticalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel59)
                     .addComponent(nombre_a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(apellido_a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel48))
+                    .addComponent(jLabel60))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cod_aportante1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel49))
+                    .addComponent(jLabel61))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(documento_a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel50))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel62)))
         );
 
-        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda de Aportante"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Información del Invitado"));
 
-        Documento_a1.setForeground(new java.awt.Color(0, 0, 0));
-        Documento_a1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Documento_a1.setText(null);
-        Documento_a1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Documento_a1ActionPerformed(evt);
-            }
-        });
-        Documento_a1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jLabel38.setText("NOMBRE");
+
+        nombre_p1.setForeground(new java.awt.Color(0, 0, 0));
+        nombre_p1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nombre_p1.setText(null);
+        nombre_e.setEnabled(false);
+        nombre_p1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                Documento_a1KeyPressed(evt);
+                nombre_p1KeyPressed(evt);
             }
         });
 
-        jLabel46.setText("INGRESE EL DNI DEL APORTANTE ");
-
-        Buscar_a1.setBackground(new java.awt.Color(255, 255, 255));
-        Buscar_a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_search_black_24dp.png"))); // NOI18N
-        Buscar_a1.setText("BUSCAR");
-        Buscar_a1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        Buscar_a1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Buscar_a1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                Buscar_a1MousePressed(evt);
+        documento_p1.setForeground(new java.awt.Color(0, 0, 0));
+        documento_p1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        documento_p1.setText(null);
+        documento_e.setEnabled(false);
+        documento_p1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                documento_p1ActionPerformed(evt);
+            }
+        });
+        documento_p1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                documento_p1KeyPressed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
-        jPanel24.setLayout(jPanel24Layout);
-        jPanel24Layout.setHorizontalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel24Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jLabel46)
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Buscar_a1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Documento_a1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
-        );
-        jPanel24Layout.setVerticalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel24Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Documento_a1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Buscar_a1))
-        );
+        jLabel39.setText("DOCUMENTO");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jLabel57.setText("Acompañantes MAX(5)");
+
+        acomp_invitados.setForeground(new java.awt.Color(0, 0, 0));
+        acomp_invitados.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        acomp_invitados.setText("0");
+        documento_e.setEnabled(false);
+        acomp_invitados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acomp_invitadosActionPerformed(evt);
+            }
+        });
+        acomp_invitados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                acomp_invitadosKeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel57)
+                        .addGap(25, 25, 25)
+                        .addComponent(acomp_invitados, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel39))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(documento_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombre_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombre_p1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel38))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel39)
+                    .addComponent(documento_p1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel57)
+                    .addComponent(acomp_invitados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout invitadosLayout = new javax.swing.GroupLayout(invitados);
@@ -2026,26 +2188,19 @@ public class Ingre extends javax.swing.JPanel {
         invitadosLayout.setHorizontalGroup(
             invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invitadosLayout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addGroup(invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitadosLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitadosLayout.createSequentialGroup()
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51))))
+                .addGap(39, 39, 39)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         invitadosLayout.setVerticalGroup(
             invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+            .addGroup(invitadosLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("INVITADOS", invitados);
+        menu_ingreso_egreso.addTab("Invitados", invitados);
 
         jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Acampante"));
 
@@ -2179,26 +2334,26 @@ public class Ingre extends javax.swing.JPanel {
         egresos.setLayout(egresosLayout);
         egresosLayout.setHorizontalGroup(
             egresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(egresosLayout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, egresosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(589, 589, 589))
+            .addGroup(egresosLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         egresosLayout.setVerticalGroup(
             egresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(egresosLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(39, 39, 39)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("EGRESOS", egresos);
+        menu_ingreso_egreso.addTab("Egresos", egresos);
 
         tabla_vehiculo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2320,10 +2475,336 @@ public class Ingre extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("VEHICULOS", vahiculos);
+        menu_ingreso_egreso.addTab("Vehiculos", vahiculos);
+
+        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso de caracter caso especial"));
+
+        documento_otros.setForeground(new java.awt.Color(0, 0, 0));
+        documento_otros.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        documento_otros.setText(null);
+        documento_e.setEnabled(false);
+        documento_otros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                documento_otrosActionPerformed(evt);
+            }
+        });
+        documento_otros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                documento_otrosKeyPressed(evt);
+            }
+        });
+
+        jLabel47.setText("NOMBRE");
+
+        nombre_otros.setForeground(new java.awt.Color(0, 0, 0));
+        nombre_otros.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nombre_otros.setText(null);
+        nombre_e.setEnabled(false);
+        nombre_otros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nombre_otrosKeyPressed(evt);
+            }
+        });
+
+        jLabel48.setText("DOCUMENTO");
+
+        jLabel49.setText("FECHA DE EGRESO");
+
+        jLabel50.setText("FECHA DE INGRESO");
+
+        fecha_ingreso_otros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fecha_ingreso_otrosKeyPressed(evt);
+            }
+        });
+
+        fecha_egreso_otros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fecha_egreso_otrosKeyPressed(evt);
+            }
+        });
+
+        Obtener4.setText("Obtener Total");
+        Obtener4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Obtener4MousePressed(evt);
+            }
+        });
+
+        jPanel26.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jPanel26ComponentHidden(evt);
+            }
+        });
+
+        jLabel51.setText("Total");
+
+        tarifa4.setEditable(false);
+        tarifa4.setText("Tarifa");
+        tarifa.setEnabled(false);
+        tarifa4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tarifa4ActionPerformed(evt);
+            }
+        });
+
+        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_attach_money_black_24dp.png"))); // NOI18N
+
+        Boton_ingreso_p2.setText(" REGISTRAR INGRESO ");
+        Boton_ingreso_p2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Boton_ingreso_p2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_ingreso_p2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Boton_ingreso_p2MousePressed(evt);
+            }
+        });
+        Boton_ingreso_p2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Boton_ingreso_p2KeyPressed(evt);
+            }
+        });
+
+        Parcela_otros.setText("Parcela");
+        Parcela_otros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Parcela_otrosActionPerformed(evt);
+            }
+        });
+        Parcela_otros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Parcela_otrosKeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
+        jPanel26.setLayout(jPanel26Layout);
+        jPanel26Layout.setHorizontalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Parcela_otros)
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Boton_ingreso_p2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel26Layout.createSequentialGroup()
+                        .addComponent(jLabel52)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel51)
+                            .addComponent(tarifa4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel26Layout.setVerticalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Parcela_otros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel51)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel52)
+                    .addComponent(tarifa4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(Boton_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+        jPanel25.setLayout(jPanel25Layout);
+        jPanel25Layout.setHorizontalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel49)
+                    .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(fecha_egreso_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fecha_ingreso_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel50)
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(Obtener4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel25Layout.setVerticalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addComponent(jLabel50)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fecha_ingreso_otros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel49)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fecha_egreso_otros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Obtener4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
+        pasar_dia4.setText("Pasar el dia");
+        pasar_dia4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pasar_dia4MousePressed(evt);
+            }
+        });
+        pasar_dia4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasar_dia4ActionPerformed(evt);
+            }
+        });
+        pasar_dia4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pasar_dia4KeyPressed(evt);
+            }
+        });
+
+        jLabel53.setText("Seleccione si solo pasa el dia:");
+
+        jLabel54.setText("DESCRIPCIÓN");
+
+        descripcion_otros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descripcion_otrosActionPerformed(evt);
+            }
+        });
+
+        jLabel55.setText("Acompañantes (MAX 98):");
+
+        acomp_otros.setText("0");
+        acomp_otros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                acomp_otrosKeyPressed(evt);
+            }
+        });
+
+        tarifa_otros.setText("0.0");
+        tarifa_otros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tarifa_otrosKeyPressed(evt);
+            }
+        });
+
+        jLabel56.setText("Tarifa individual por persona:");
+
+        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
+        jPanel24.setLayout(jPanel24Layout);
+        jPanel24Layout.setHorizontalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel24Layout.createSequentialGroup()
+                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(76, 76, 76)
+                                .addComponent(pasar_dia4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel24Layout.createSequentialGroup()
+                                        .addComponent(jLabel55)
+                                        .addGap(52, 52, 52))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
+                                        .addComponent(jLabel56)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tarifa_otros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(acomp_otros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel47))
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel54)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel24Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel25, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel48, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nombre_otros, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(descripcion_otros, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(documento_otros, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addGap(23, 23, 23))
+        );
+        jPanel24Layout.setVerticalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jLabel47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nombre_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(documento_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(descripcion_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tarifa_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel56))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(acomp_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel55))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pasar_dia4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel53))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(143, Short.MAX_VALUE))
+        );
+
+        jPanel24.getAccessibleContext().setAccessibleName("");
+
+        menu_ingreso_egreso.addTab("Otros", jPanel2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 563, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 716, Short.MAX_VALUE)
+        );
+
+        menu_ingreso_egreso.addTab("Personal", jPanel3);
 
         jPanel22.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -3773,7 +4254,7 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(menu_ingreso_egreso, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -3825,7 +4306,7 @@ public class Ingre extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_DocumentoActionPerformed
     public void ingre_p() throws NullPointerException, SQLException {
-
+         LocalTime HoraActual = LocalTime.now();
         if (!documento_p.getText().isEmpty() || !nombre_p.getText().isEmpty()) {
 
             int parsela = 0;
@@ -3848,6 +4329,45 @@ public class Ingre extends javax.swing.JPanel {
 
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar, Ingreso una parsela que no se encuentra en la base de datos.", "ERROR",
+                            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            } catch (java.text.ParseException ex) {
+                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (java.lang.NumberFormatException ex) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ingreso un texto donde se esperaba un numero.", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "ERROR, complete todos los campos antes de registrar un ingreso. \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public void ingre_otros() throws NullPointerException, SQLException {
+
+        if (!documento_otros.getText().isEmpty() || !nombre_otros.getText().isEmpty()) {
+
+            int parsela = 0;
+            try {
+
+                //controlar que en parsela no haya un string
+                try {
+                    parsela = Integer.parseInt(Parcela_otros.getText());
+                } catch (java.lang.NumberFormatException e) {
+                    System.out.println("es un string y no se puede pasar");
+                }
+
+                //control que parsela este entre 128 y 1
+                if (parsela <= 128 && parsela >= 1) {
+
+                    //  Ocupacion ocupacion = new Ocupacion();
+                    // RegistrarParsela();
+                    //ocupacion.BuscarParsela(Parsela.getText());
+                    RegistrarIngresoOtros();
+
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar, Ingreso una parcela que no se encuentra en la base de datos.", "ERROR",
                             javax.swing.JOptionPane.INFORMATION_MESSAGE);
                 }
 
@@ -3927,7 +4447,7 @@ public class Ingre extends javax.swing.JPanel {
                 if (c == 0 && b == 0) {
                     if (pasar_dia.isSelected()) {
 
-                        ingre_dia("alumno", documento_e.getText(), nombre_e.getText());
+                        ingre_dia("alumno", documento_e.getText(), nombre_e.getText(), Integer.parseInt(acomp_particular.getText()));
                     } else {
                         ingre();
                     }
@@ -4046,8 +4566,8 @@ public class Ingre extends javax.swing.JPanel {
         return null;
     }
 
-    public void ingre_dia(String categoria, String dni, String nombre) throws SQLException, java.text.ParseException {
-
+    public void ingre_dia(String categoria, String dni, String nombre, int acomp) throws SQLException, java.text.ParseException {
+         LocalTime HoraActual = LocalTime.now();
         int c;
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
@@ -4055,13 +4575,17 @@ public class Ingre extends javax.swing.JPanel {
 
         String hora_actual = hora + ":" + minutos;
 
-        c = controlador.IngresoDiario(dni, nombre, hora_actual, categoria);
+        if (categoria.equals("otros")) {
+            c = controlador.IngresoDiario(dni, nombre, HoraActual.format(f), categoria + "(" + descripcion_otros.getText() + ")", acomp);
+        } else {
 
+            c = controlador.IngresoDiario(dni, nombre, HoraActual.format(f), categoria, acomp);
+        }
         if (c != 1) {
             javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         } else {
             if (categoria.equals("alumno")) {
-                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo alumno por el dia", Main.DiaActual, hora_actual);
+                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo alumno por el dia", Main.DiaActual, HoraActual.format(f));
                 modelo.insertardinerocaja(Main.tarifa_dia_alumnos);
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
@@ -4070,18 +4594,18 @@ public class Ingre extends javax.swing.JPanel {
 
                     if (!pasar_dia.isSelected()) {
                         float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso, fecha_egreso), 2);
-                        imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe, nombre_e.getText(), documento_e.getText());
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso), calc_fecha(fecha_egreso), "Alumno", importe, nombre_e.getText(), documento_e.getText(), 0, Main.tarifa_dia_alumnos);
                     } else {
 
                         float importe = Main.tarifa_dia_alumnos;
-                        imprimirtiketdia("Alumno", importe, nombre_e.getText(), documento_e.getText());
+                        imprimirtiketdia("Alumno", importe, nombre_e.getText(), documento_e.getText(), 0, Main.tarifa_dia_alumnos);
                     }
                 }
             }
             if (categoria.equals("aportante")) {
-                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo aportante por el dia", Main.DiaActual, hora_actual);
+                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo aportante por el dia", Main.DiaActual, HoraActual.format(f));
                 if (!familiares.getText().equals("0")) {
-                    modelo.InsertarRegistro(Login.usuario, "ha ingresado " + familiares.getText() + " familiares de aportantes dia", Main.DiaActual, hora_actual);
+                    modelo.InsertarRegistro(Login.usuario, "ha ingresado " + familiares.getText() + " familiares de aportantes dia", Main.DiaActual, HoraActual.format(f));
                 }
                 modelo.insertardinerocaja(Main.tarifa_dia_aportantes);
                 Component jFrame = null;
@@ -4091,19 +4615,27 @@ public class Ingre extends javax.swing.JPanel {
 
                     if (!pasar_dia1.isSelected()) {
                         float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p1, fecha_egreso_p1), 2);
-                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe, nombre_a.getText(), documento_a.getText());
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p1), calc_fecha(fecha_egreso_p1), "Aportante", importe, nombre_a.getText(), documento_a.getText(), 0, 0);
                     } else {
 
                         float importe = Main.tarifa_dia_aportantes;
-                        imprimirtiketdia("Aportante", importe, nombre_a.getText(), documento_a.getText());
+                        imprimirtiketdia("Aportante", importe, nombre_a.getText(), documento_a.getText(), 0, 0);
                     }
                 }
                 familiares.setText("0");
 
             }
             if (categoria.equals("particular")) {
-                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular por el dia", Main.DiaActual, hora_actual);
-                modelo.insertardinerocaja(Main.tarifa_dia_particular);
+
+                if (Integer.parseInt(acomp_particular.getText()) == 0) {
+                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo particular por el dia", Main.DiaActual, HoraActual.format(f));
+                    modelo.insertardinerocaja(Main.tarifa_dia_particular);
+                    System.out.println("tarifa individual: " + Main.tarifa_dia_particular);
+                } else {
+                    modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_particular.getText()) + 1)) + " particulares por el dia", Main.DiaActual, HoraActual.format(f));
+                    modelo.insertardinerocaja(Main.tarifa_dia_particular * (Integer.parseInt(acomp_particular.getText()) + 1));
+                    System.out.println("tarifa con acompañantes: " + Main.tarifa_dia_particular + "$ *" + (Integer.parseInt(acomp_particular.getText()) + 1) + "=" + Main.tarifa_dia_particular * (Integer.parseInt(acomp_particular.getText()) + 1));
+                }
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
 
@@ -4111,33 +4643,62 @@ public class Ingre extends javax.swing.JPanel {
 
                     if (!pasar_dia2.isSelected()) {
                         float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 2);
-                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe, nombre_p.getText(), documento_p.getText());
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p), calc_fecha(fecha_egreso_p), "Particular", importe, nombre_p.getText(), documento_p.getText(), Integer.parseInt(acomp_particular.getText()), Main.tarifa_dia_particular);
                     } else {
 
                         float importe = Main.tarifa_dia_particular;
-                        imprimirtiketdia("Particular", importe, nombre_p.getText(), documento_p.getText());
+                        imprimirtiketdia("Particular", importe, nombre_p.getText(), documento_p.getText(), Integer.parseInt(acomp_particular.getText()), Main.tarifa_dia_particular);
                     }
                 }
             }
-            if (categoria.equals("invitado")) {
-                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado por el dia", Main.DiaActual, hora_actual);
-                modelo.insertardinerocaja(Main.tarifa_dia_invitados);
+
+            if (categoria.equals("otros")) {
+
+                modelo.InsertarRegistro(Login.usuario, "registro " + String.format("%02d", (Integer.parseInt(acomp_otros.getText()) + 1)) + " nuevo/s ingresante/s(otros) por el dia", Main.DiaActual, HoraActual.format(f));
+                modelo.insertardinerocaja(Float.parseFloat(tarifa_otros.getText()) * (Integer.parseInt(acomp_otros.getText()) + 1));
+
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
+
+                if (result == 0) {
+
+                    if (!pasar_dia4.isSelected()) {
+                        float importe = (cant_dias(fecha_ingreso_otros, fecha_egreso_otros) * Float.parseFloat(tarifa_otros.getText()));
+                        imprimirtiketacampanteotros(calc_fecha(fecha_ingreso_otros), calc_fecha(fecha_ingreso_otros), descripcion_otros.getText(), importe, nombre_otros.getText(), documento_otros.getText(), Integer.parseInt(acomp_otros.getText()), Float.parseFloat(tarifa_otros.getText()));
+                    } else {
+
+                        float importe = Float.parseFloat(tarifa_otros.getText());
+                        imprimirtiketdiaotros(descripcion_otros.getText(), importe, nombre_otros.getText(), documento_otros.getText(), Integer.parseInt(acomp_otros.getText()), Float.parseFloat(tarifa_otros.getText()));
+                    }
+                }
+            }
+
+            if (categoria.equals("invitado")) {
                 
+                  if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado por el dia", Main.DiaActual, HoraActual.format(f));
+                        modelo.insertardinerocaja(Main.tarifa_dia_invitados);
+                    } else {
+                        modelo.insertardinerocaja(Main.tarifa_dia_invitados * (Integer.parseInt(acomp_invitados.getText()) + 1));
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_invitados.getText()) + 1)) + " nuevos invitados por el dia", Main.DiaActual, HoraActual.format(f));
+                    }
+      
+              
+                Component jFrame = null;
+                int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
+
                 if (result == 0) {
 
                     if (!pasar_dia3.isSelected()) {
                         float importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 4);
-                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), "Invitado", importe, nombre_p1.getText(), documento_p1.getText());
+                        imprimirtiketacampante(calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), "Invitado", importe, nombre_p1.getText(), documento_p1.getText(), 0, Main.tarifa_acampar_invitados);
                     } else {
 
                         float importe = Main.tarifa_dia_invitados;
 
-                        imprimirtiketdia("Invitado", importe, nombre_p1.getText(), documento_p1.getText());
+                        imprimirtiketdiainvitado("Invitado", importe, nombre_p1.getText(), documento_p1.getText(), 0, importe);
                     }
                 }
-                
             }
             setearnullalumno();
             setearnullparticular();
@@ -4161,12 +4722,15 @@ public class Ingre extends javax.swing.JPanel {
                         tarifa.setText(String.format("%.2f", importe));
                     }
 
-                    
                 }
-                
 
             } else {
-                tarifa.setText(String.format("%.2f", Main.tarifa_dia_alumnos));
+                if (Integer.parseInt(acomp_particular.getText()) == 0) {
+
+                    tarifa.setText(String.format("%.2f", Main.tarifa_dia_alumnos));
+                } else {
+                    tarifa.setText(String.format("%.2f", Main.tarifa_dia_alumnos * Integer.parseInt(acomp_particular.getText())));
+                }
             }
 
         } catch (java.text.ParseException ex) {
@@ -4204,24 +4768,43 @@ public class Ingre extends javax.swing.JPanel {
                         importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 6);
                         tarifa1.setText(String.format("%.2f", importe));
                     } else {
-                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 3);
-                        tarifa1.setText(String.format("%.2f", importe));
+
+                        if (Integer.parseInt(acomp_particular.getText()) == 0) {
+                            importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 3);
+                            tarifa1.setText(String.format("%.2f", importe));
+                        } else {
+                            importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p, fecha_egreso_p), 3);
+                            tarifa1.setText(String.format("%.2f", importe * (Integer.parseInt(acomp_particular.getText()) + 1)));
+                        }
                     }
 
-                    
                 }
 
             } else {
-                tarifa1.setText(String.format("%.2f", Main.tarifa_dia_particular));
+
+                if (Integer.parseInt(acomp_particular.getText()) == 0) {
+
+                    tarifa1.setText(String.format("%.2f", Main.tarifa_dia_particular));
+
+                } else {
+                    tarifa1.setText(String.format("%.2f", (Main.tarifa_dia_particular) * (Integer.parseInt(acomp_particular.getText()) + 1)));
+
+                }
 
             }
         } catch (java.text.ParseException ex) {
             Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
             javax.swing.JOptionPane.showMessageDialog(this, "Ingreso una letra donde se espera numero \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
+        } catch (java.lang.NumberFormatException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            javax.swing.JOptionPane.showMessageDialog(this, "Especifique la parcela. \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
         } catch (NullPointerException ex) {
             Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }//GEN-LAST:event_Obtener1MousePressed
 
     private void tarifa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarifa1ActionPerformed
@@ -4240,7 +4823,7 @@ public class Ingre extends javax.swing.JPanel {
                 if (c == 0 && b == 0) {
                     if (pasar_dia2.isSelected()) {
 
-                        ingre_dia("particular", documento_p.getText(), nombre_p.getText());
+                        ingre_dia("particular", documento_p.getText(), nombre_p.getText(), Integer.parseInt(acomp_particular.getText()));
                     } else {
                         ingre_p();
                     }
@@ -4251,20 +4834,62 @@ public class Ingre extends javax.swing.JPanel {
             } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "Debe abrir la caja primero", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }
+
+    public void Boton_ingreso_otro() {
+        try {
+            if (controlador.ControlarCajaAbierta() == 1) {
+                int c = controlador.Controldnirepetidoingreso(documento_otros.getText());
+                int b = controlador.Controldnirepetidoingresodiario(documento_otros.getText());
+
+                if (documento_otros.getText().equals("") || nombre_otros.getText().equals("")) {
+                    throw new Exception();
+                }
+                if (descripcion_otros.getText().isEmpty()) {
+                    descripcion_otros.setText("Sin especificar");
+                }
+                if (c == 0 && b == 0) {
+                    if (pasar_dia4.isSelected()) {
+
+                        ingre_dia("otros", documento_otros.getText(), nombre_otros.getText(), Integer.parseInt(acomp_otros.getText()));
+                    } else {
+                        ingre_otros();
+                    }
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
+                            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe abrir la caja primero", "ERROR",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
     private void Boton_ingreso_pMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_ingreso_pMousePressed
         Boton_ingreso_particular();
         try {
             prueba();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Boton_ingreso_pMousePressed
 
@@ -4286,10 +4911,8 @@ public class Ingre extends javax.swing.JPanel {
                         tarifa2.setText(String.format("%.2f", importe));
                     }
 
-                    
                 }
-                
-                
+
             } else {
                 tarifa2.setText(String.format("%.2f", Main.tarifa_dia_aportantes));
             }
@@ -4314,7 +4937,7 @@ public class Ingre extends javax.swing.JPanel {
 
                 if (c == 0 && b == 0) {
                     if (pasar_dia1.isSelected()) {
-                        ingre_dia("aportante", documento_a.getText(), nombre_a.getText());
+                        ingre_dia("aportante", documento_a.getText(), nombre_a.getText(), 0);
                     } else {
                         ingre_a();
 
@@ -4327,25 +4950,31 @@ public class Ingre extends javax.swing.JPanel {
             } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "Debe primero abrir la caja", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
         try {
             Tabla();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void Boton_ingreso_aMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_ingreso_aMousePressed
         botoningresoaportante();
         try {
             prueba();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_Boton_ingreso_aMousePressed
@@ -4384,10 +5013,10 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_Parsela_pActionPerformed
 
     private void menu_ingreso_egresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_ingreso_egresoMousePressed
-        nombre_p1.setEnabled(false);
         documento_p1.setEnabled(false);
-        setearnullinvitado();
-        
+        nombre_p1.setEnabled(false);
+         LocalTime HoraActual = LocalTime.now();
+        System.out.println(HoraActual.format(f));
     }//GEN-LAST:event_menu_ingreso_egresoMousePressed
 
     private void pasar_dia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_dia2ActionPerformed
@@ -4457,8 +5086,10 @@ public class Ingre extends javax.swing.JPanel {
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             try {
                 BuscarAportante();
+
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -4478,8 +5109,10 @@ public class Ingre extends javax.swing.JPanel {
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             try {
                 BuscarEstudiante();
+
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -4506,8 +5139,10 @@ public class Ingre extends javax.swing.JPanel {
         if (dni_buscado.getText().isEmpty()) {
             try {
                 Tabla();
+
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_dni_buscadoActionPerformed
@@ -4589,6 +5224,7 @@ public class Ingre extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(this, " documento : '" + res.getString("documento") + "'" + "\n"
                     + "nombre: " + "'" + res.getString("nombre") + "'" + "\n"
                     + "categoria: " + "'" + res.getString("categoria") + "'" + "\n"
+                    + "acompañantes: " + "'" + res.getString("acomp") + "'" + "\n"
                     + "importe: " + "'" + res.getString("importe") + "'" + "\n"
                     + "fecha de ingreso: " + "'" + res.getString("fecha_ingreso") + "'" + "\n"
                     + "fecha de egreso: " + "'" + res.getString("fecha_egreso") + "'" + "\n",
@@ -4647,8 +5283,10 @@ public class Ingre extends javax.swing.JPanel {
     private void jLabel32MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MousePressed
         try {
             buscar_egreso();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel32MousePressed
 
@@ -4656,8 +5294,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             Tabla();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel33MousePressed
 
@@ -4665,22 +5305,26 @@ public class Ingre extends javax.swing.JPanel {
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             try {
                 buscar_egreso();
+
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (evt.getKeyChar() == KeyEvent.VK_SUBTRACT) {
             dni_buscado.setText(null);
             try {
                 Tabla();
+
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_dni_buscadoKeyPressed
 
     private void nombre_pKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_pKeyPressed
-        
+
     }//GEN-LAST:event_nombre_pKeyPressed
 
     private void patenteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_patenteKeyPressed
@@ -4717,8 +5361,10 @@ public class Ingre extends javax.swing.JPanel {
         }
         try {
             prueba();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -4726,8 +5372,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             eliminar_acampante();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (java.lang.ArrayIndexOutOfBoundsException ex) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error, ingrese un acampante de la lista.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
@@ -4738,8 +5386,10 @@ public class Ingre extends javax.swing.JPanel {
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             try {
                 eliminar_acampante();
+
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -4782,16 +5432,18 @@ public class Ingre extends javax.swing.JPanel {
                 if (c == 0 && b == 0) {
                     if (pasar_dia.isSelected()) {
 
-                        ingre_dia("alumno", documento_e.getText(), nombre_e.getText());
+                        ingre_dia("alumno", documento_e.getText(), nombre_e.getText(), 0);
                     } else {
                         ingre();
                     }
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
                             javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -4813,16 +5465,18 @@ public class Ingre extends javax.swing.JPanel {
                 if (c == 0 && b == 0) {
                     if (pasar_dia.isSelected()) {
 
-                        ingre_dia("alumno", documento_e.getText(), nombre_e.getText());
+                        ingre_dia("alumno", documento_e.getText(), nombre_e.getText(), 0);
                     } else {
                         ingre();
                     }
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
                             javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -4859,7 +5513,7 @@ public class Ingre extends javax.swing.JPanel {
 
                 if (c == 0 && b == 0) {
                     if (pasar_dia1.isSelected()) {
-                        ingre_dia("aportante", documento_a.getText(), nombre_a.getText());
+                        ingre_dia("aportante", documento_a.getText(), nombre_a.getText(), 0);
                     } else {
                         ingre_a();
                     }
@@ -4867,9 +5521,11 @@ public class Ingre extends javax.swing.JPanel {
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
                             javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -4895,7 +5551,7 @@ public class Ingre extends javax.swing.JPanel {
 
                 if (c == 0 && b == 0) {
                     if (pasar_dia1.isSelected()) {
-                        ingre_dia("aportante", documento_a.getText(), nombre_a.getText());
+                        ingre_dia("aportante", documento_a.getText(), nombre_a.getText(), 0);
                     } else {
                         ingre_a();
                     }
@@ -4903,9 +5559,11 @@ public class Ingre extends javax.swing.JPanel {
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
                             javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -4955,16 +5613,18 @@ public class Ingre extends javax.swing.JPanel {
                 if (c == 0 && b == 0) {
                     if (pasar_dia2.isSelected()) {
 
-                        ingre_dia("particular", documento_p.getText(), nombre_p.getText());
+                        ingre_dia("particular", documento_p.getText(), nombre_p.getText(), Integer.parseInt(acomp_particular.getText()));
                     } else {
                         ingre_p();
                     }
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
                             javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -4987,16 +5647,18 @@ public class Ingre extends javax.swing.JPanel {
                 if (c == 0 && b == 0) {
                     if (pasar_dia2.isSelected()) {
 
-                        ingre_dia("particular", documento_p.getText(), nombre_p.getText());
+                        ingre_dia("particular", documento_p.getText(), nombre_p.getText(), Integer.parseInt(acomp_particular.getText()));
                     } else {
                         ingre_p();
                     }
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(this, "Ya se encuentra un acampante con ese dni en el camping.", "ERROR",
                             javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -5008,8 +5670,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(10);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j10MousePressed
 
@@ -5017,8 +5681,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(12);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j12MousePressed
 
@@ -5026,8 +5692,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(5);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j5MousePressed
 
@@ -5035,8 +5703,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(27);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j27MousePressed
 
@@ -5044,8 +5714,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(7);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j7MousePressed
 
@@ -5053,8 +5725,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(29);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j29MousePressed
 
@@ -5062,16 +5736,20 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(20);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j20MousePressed
 
     private void j3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j3MousePressed
         try {
             traerinfo(3);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j3MousePressed
 
@@ -5079,8 +5757,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(31);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j31MousePressed
 
@@ -5088,8 +5768,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(40);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j40MousePressed
 
@@ -5097,8 +5779,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(49);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j49MousePressed
 
@@ -5106,8 +5790,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(45);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j45MousePressed
 
@@ -5115,8 +5801,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(50);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j50MousePressed
 
@@ -5124,8 +5812,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(6);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j6MousePressed
 
@@ -5133,16 +5823,20 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(15);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j15MousePressed
 
     private void j2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j2MousePressed
         try {
             traerinfo(2);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j2MousePressed
 
@@ -5150,8 +5844,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(25);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j25MousePressed
 
@@ -5159,8 +5855,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(33);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j33MousePressed
 
@@ -5168,8 +5866,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(37);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j37MousePressed
 
@@ -5177,8 +5877,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(36);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j36MousePressed
 
@@ -5186,8 +5888,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(48);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j48MousePressed
 
@@ -5195,8 +5899,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(39);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j39MousePressed
 
@@ -5204,8 +5910,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(38);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j38MousePressed
 
@@ -5213,8 +5921,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(34);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j34MousePressed
 
@@ -5222,8 +5932,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(43);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j43MousePressed
 
@@ -5231,8 +5943,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(30);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j30MousePressed
 
@@ -5240,8 +5954,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(42);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j42MousePressed
 
@@ -5249,8 +5965,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(24);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j24MousePressed
 
@@ -5258,8 +5976,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(23);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j23MousePressed
 
@@ -5267,8 +5987,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(21);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j21MousePressed
 
@@ -5276,8 +5998,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(19);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j19MousePressed
 
@@ -5285,8 +6009,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(18);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j18MousePressed
 
@@ -5294,8 +6020,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(4);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j4MousePressed
 
@@ -5303,8 +6031,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(16);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j16MousePressed
 
@@ -5312,16 +6042,20 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(17);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j17MousePressed
 
     private void j14MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j14MousePressed
         try {
             traerinfo(14);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j14MousePressed
 
@@ -5329,8 +6063,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(13);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j13MousePressed
 
@@ -5338,8 +6074,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(8);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j8MousePressed
 
@@ -5347,8 +6085,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(9);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j9MousePressed
 
@@ -5356,8 +6096,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(11);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j11MousePressed
 
@@ -5365,8 +6107,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(46);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j46MousePressed
 
@@ -5374,8 +6118,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(35);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j35MousePressed
 
@@ -5383,8 +6129,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(41);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j41MousePressed
 
@@ -5392,8 +6140,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(32);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j32MousePressed
 
@@ -5401,8 +6151,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(28);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j28MousePressed
 
@@ -5410,8 +6162,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(26);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j26MousePressed
 
@@ -5419,8 +6173,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(1);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j1MousePressed
 
@@ -5428,8 +6184,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(22);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j22MousePressed
 
@@ -5437,8 +6195,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(44);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j44MousePressed
 
@@ -5446,8 +6206,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(47);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j47MousePressed
 
@@ -5455,8 +6217,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(51);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j51MousePressed
 
@@ -5464,8 +6228,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(52);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j52MousePressed
 
@@ -5473,8 +6239,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(53);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j53MousePressed
 
@@ -5482,8 +6250,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(54);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j54MousePressed
 
@@ -5491,8 +6261,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(55);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j55MousePressed
 
@@ -5500,8 +6272,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(56);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j56MousePressed
 
@@ -5509,8 +6283,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(57);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j57MousePressed
 
@@ -5518,8 +6294,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(58);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j58MousePressed
 
@@ -5527,8 +6305,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(59);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j59MousePressed
 
@@ -5536,8 +6316,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(60);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j60MousePressed
 
@@ -5545,8 +6327,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(61);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j61MousePressed
 
@@ -5554,8 +6338,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(62);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j62MousePressed
 
@@ -5563,8 +6349,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(63);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j63MousePressed
 
@@ -5572,8 +6360,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(64);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j64MousePressed
 
@@ -5581,8 +6371,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(65);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j65MousePressed
 
@@ -5590,8 +6382,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(66);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j66MousePressed
 
@@ -5599,8 +6393,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(67);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j67MousePressed
 
@@ -5608,8 +6404,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(68);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j68MousePressed
 
@@ -5617,8 +6415,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(69);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j69MousePressed
 
@@ -5626,8 +6426,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(70);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j70MousePressed
 
@@ -5635,8 +6437,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(71);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j71MousePressed
 
@@ -5644,8 +6448,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(72);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j72MousePressed
 
@@ -5653,8 +6459,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(73);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j73MousePressed
 
@@ -5662,8 +6470,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(74);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j74MousePressed
 
@@ -5671,8 +6481,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(75);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j75MousePressed
 
@@ -5680,8 +6492,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(76);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j76MousePressed
 
@@ -5689,8 +6503,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(77);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j77MousePressed
 
@@ -5698,8 +6514,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(78);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j78MousePressed
 
@@ -5707,8 +6525,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(79);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j79MousePressed
 
@@ -5716,8 +6536,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(80);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j80MousePressed
 
@@ -5725,8 +6547,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(81);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j81MousePressed
 
@@ -5734,8 +6558,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(82);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j82MousePressed
 
@@ -5743,8 +6569,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(83);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j83MousePressed
 
@@ -5752,8 +6580,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(84);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j84MousePressed
 
@@ -5761,8 +6591,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(85);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j85MousePressed
 
@@ -5770,8 +6602,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(86);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j86MousePressed
 
@@ -5779,8 +6613,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(87);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j87MousePressed
 
@@ -5788,8 +6624,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(88);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j88MousePressed
 
@@ -5797,8 +6635,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(89);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j89MousePressed
 
@@ -5806,8 +6646,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(90);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j90MousePressed
 
@@ -5815,8 +6657,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(91);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j91MousePressed
 
@@ -5824,8 +6668,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(92);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j92MousePressed
 
@@ -5833,8 +6679,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(93);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j93MousePressed
 
@@ -5842,8 +6690,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(94);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j94MousePressed
 
@@ -5851,8 +6701,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(95);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j95MousePressed
 
@@ -5860,8 +6712,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(96);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j96MousePressed
 
@@ -5869,8 +6723,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(97);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j97MousePressed
 
@@ -5878,8 +6734,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(98);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j98MousePressed
 
@@ -5887,8 +6745,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(99);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j99MousePressed
 
@@ -5896,8 +6756,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(100);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j100MousePressed
 
@@ -5905,8 +6767,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(101);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j101MousePressed
 
@@ -5914,8 +6778,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(102);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j102MousePressed
 
@@ -5923,8 +6789,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(103);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j103MousePressed
 
@@ -5932,8 +6800,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(104);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j104MousePressed
 
@@ -5941,8 +6811,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(105);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j105MousePressed
 
@@ -5950,8 +6822,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(106);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j106MousePressed
 
@@ -5959,8 +6833,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(107);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j107MousePressed
 
@@ -5968,8 +6844,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(108);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j108MousePressed
 
@@ -5977,8 +6855,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(109);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j109MousePressed
 
@@ -5986,8 +6866,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(110);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j110MousePressed
 
@@ -5995,8 +6877,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(111);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j111MousePressed
 
@@ -6004,8 +6888,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(112);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j112MousePressed
 
@@ -6013,8 +6899,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(113);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j113MousePressed
 
@@ -6022,8 +6910,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(114);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j114MousePressed
 
@@ -6031,8 +6921,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(115);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j115MousePressed
 
@@ -6040,8 +6932,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(116);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j116MousePressed
 
@@ -6049,8 +6943,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(117);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j117MousePressed
 
@@ -6058,8 +6954,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(118);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j118MousePressed
 
@@ -6067,8 +6965,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(119);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j119MousePressed
 
@@ -6076,8 +6976,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(120);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j120MousePressed
 
@@ -6085,8 +6987,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(121);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j121MousePressed
 
@@ -6094,8 +6998,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(122);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j122MousePressed
 
@@ -6103,8 +7009,10 @@ public class Ingre extends javax.swing.JPanel {
 
         try {
             traerinfo(123);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j123MousePressed
 
@@ -6142,8 +7050,10 @@ public class Ingre extends javax.swing.JPanel {
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
         try {
             eliminarvehiculo();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel5MousePressed
 
@@ -6154,11 +7064,14 @@ public class Ingre extends javax.swing.JPanel {
     private void tabla_vehiculoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabla_vehiculoKeyPressed
         try {
             eliminarvehiculo();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tabla_vehiculoKeyPressed
-    public void imprimirtiketdia(String categoria, float importe, String nombre, String documento) throws SQLException {
+    public void imprimirtiketdia(String categoria, float importe, String nombre, String documento, int acomp, float tarifa) throws SQLException {
+         LocalTime HoraActual = LocalTime.now();
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
         String segundos = String.valueOf(calendario.get(Calendar.SECOND));
@@ -6179,22 +7092,22 @@ public class Ingre extends javax.swing.JPanel {
                 .Corte(1)
                 .DeshabilitarElModoDeCaracteresChinos()
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
-                .CargarImagenLocalEImprimir("C:\\Users\\lauti\\OneDrive\\Escritorio\\SIGA\\src\\com\\images\\icon-2_1.png", 0, 216)
+                .CargarImagenLocalEImprimir("C:\\Users\\mateo\\Desktop\\Nueva carpeta\\SIGA-main\\src\\com\\images\\icon-2_1.png", 0, 216)
                 .Feed(1)
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n")
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
-                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
                 .Feed(1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n")
-                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria: " + categoria + "\n" + "Hora-ingreso: " + hora_actual + "\n" + "Solo por el dia\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria: " + categoria + "\n" + "Hora-ingreso: " + HoraActual.format(f) + "\n" + "Acompañantes: " + acomp + "\n" + "Solo por el dia\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
-                .EscribirTexto("Sub total: $" + importe + "\n")
+                .EscribirTexto("Sub total: $" + tarifa + "*" + (acomp + 1) + "\n")
                 .EscribirTexto("_____________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
-                .EscribirTexto("TOTAL:  $" + importe + "\n")
+                .EscribirTexto("TOTAL:  $" + (tarifa * (acomp + 1)) + "\n")
                 .EstablecerEnfatizado(true)
                 .EstablecerTamanoFuente(1, 1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
@@ -6210,7 +7123,184 @@ public class Ingre extends javax.swing.JPanel {
                 .Pulso(48, 30, 120);
 
         try {
-            System.out.println("hola");
+            tiket.imprimirEn("impresora termica");
+            System.out.println("Impreso correctamente");
+        } catch (Exception e) {
+            System.out.println("Error imprimiendo: " + e.getMessage());
+        }
+    }
+
+    public void imprimirtiketdiainvitado(String categoria, float importe, String nombre, String documento, int acomp, float tarifa) throws SQLException {
+        String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+        String segundos = String.valueOf(calendario.get(Calendar.SECOND));
+        String n_serial = "0";
+        String hora_actual = hora + ":" + minutos;
+        ResultSet res = modelo.mostrarregistros1();
+        // Aquí tu serial en caso de tener uno
+        if (res.next()) {
+            n_serial = res.getString("id");
+        }
+         LocalTime HoraActual = LocalTime.now();
+        String serial;
+        String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
+
+        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, "0006-" + nro_serial);
+
+        tiket.Iniciar()
+                .Corte(1)
+                .DeshabilitarElModoDeCaracteresChinos()
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .CargarImagenLocalEImprimir("C:\\Users\\mateo\\Desktop\\Nueva carpeta\\SIGA-main\\src\\com\\images\\icon-2_1.png", 0, 216)
+                .Feed(1)
+                .EscribirTexto("SAEBU\n")
+                .EscribirTexto("Camping Universitario\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
+                .Feed(1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
+                .EscribirTexto("______________________________________________\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre del Aportante: " + nombre_a1.getText() + "        DNI: " + documento_a1.getText() + "\n" + "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria: " + categoria + "\n" + "Hora-ingreso: " + HoraActual.format(f) + "\n" + "Acompañantes: " + acomp + "\n" + "Solo por el dia\n")
+                .EscribirTexto("______________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("Sub total: $" + tarifa + "*" + (acomp + 1) + "\n")
+                .EscribirTexto("_____________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("TOTAL:  $" + (tarifa * (acomp + 1)) + "\n")
+                .EstablecerEnfatizado(true)
+                .EstablecerTamanoFuente(1, 1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .TextoSegunPaginaDeCodigos(2, "cp850", "¡Bienvenido, que tenga un buen dia!\nEscanee el qr y visite la web de SAEBU")
+                .Feed(1)
+                .ImprimirCodigoQr("http://saebu.unsl.edu.ar/camping-universitario", 160, ConectorPluginV3.RECUPERACION_QR_MEJOR,
+                        ConectorPluginV3.TAMANO_IMAGEN_NORMAL)
+                .Feed(1)
+                .EstablecerTamanoFuente(1, 1)
+                .EscribirTexto("PROHIBIDO EL INGRESO CON ANIMALES\nSi.G.A.")
+                .Feed(3)
+                .Corte(1)
+                .Pulso(48, 30, 120);
+
+        try {
+            tiket.imprimirEn("impresora termica");
+            System.out.println("Impreso correctamente");
+        } catch (Exception e) {
+            System.out.println("Error imprimiendo: " + e.getMessage());
+        }
+    }
+
+    public void imprimirtiketdiaotros(String descripcion, float importe, String nombre, String documento, int acomp, float tarifa) throws SQLException {
+        String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+        String segundos = String.valueOf(calendario.get(Calendar.SECOND));
+        String n_serial = "0";
+        String hora_actual = hora + ":" + minutos;
+        ResultSet res = modelo.mostrarregistros1();
+        // Aquí tu serial en caso de tener uno
+        if (res.next()) {
+            n_serial = res.getString("id");
+        }
+         LocalTime HoraActual = LocalTime.now();
+        String serial;
+        String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
+
+        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, "0006-" + nro_serial);
+
+        tiket.Iniciar()
+                .Corte(1)
+                .DeshabilitarElModoDeCaracteresChinos()
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .CargarImagenLocalEImprimir("C:\\Users\\mateo\\Desktop\\Nueva carpeta\\SIGA-main\\src\\com\\images\\icon-2_1.png", 0, 216)
+                .Feed(1)
+                .EscribirTexto("SAEBU\n")
+                .EscribirTexto("Camping Universitario\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
+                .Feed(1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
+                .EscribirTexto("______________________________________________\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Descripcion: " + descripcion + "\n" + "Hora-ingreso: " + HoraActual.format(f) + "\n" + "Acompañantes: " + acomp + "\n" + "Solo por el dia\n")
+                .EscribirTexto("______________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("Sub total: $" + tarifa + "*" + (acomp + 1) + "\n")
+                .EscribirTexto("_____________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("TOTAL:  $" + (tarifa * (acomp + 1)) + "\n")
+                .EstablecerEnfatizado(true)
+                .EstablecerTamanoFuente(1, 1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .TextoSegunPaginaDeCodigos(2, "cp850", "¡Bienvenido, que tenga un buen dia!\nEscanee el qr y visite la web de SAEBU")
+                .Feed(1)
+                .ImprimirCodigoQr("http://saebu.unsl.edu.ar/camping-universitario", 160, ConectorPluginV3.RECUPERACION_QR_MEJOR,
+                        ConectorPluginV3.TAMANO_IMAGEN_NORMAL)
+                .Feed(1)
+                .EstablecerTamanoFuente(1, 1)
+                .EscribirTexto("PROHIBIDO EL INGRESO CON ANIMALES\nSi.G.A.")
+                .Feed(3)
+                .Corte(1)
+                .Pulso(48, 30, 120);
+
+        try {
+            tiket.imprimirEn("impresora termica");
+            System.out.println("Impreso correctamente");
+        } catch (Exception e) {
+            System.out.println("Error imprimiendo: " + e.getMessage());
+        }
+    }
+
+    public void imprimirtiketacampanteotros(String fecha_ingreso, String fecha_egreso, String descripcion, float importe, String nombre, String documento, int acomp, float tarifas) throws SQLException, java.text.ParseException {
+        String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+        String n_serial = "0";
+        String hora_actual = hora + ":" + minutos;
+        ResultSet res = modelo.mostrarregistros1();
+         LocalTime HoraActual = LocalTime.now();
+        // Aquí tu  serial en caso de tener uno
+        if (res.next()) {
+            n_serial = res.getString("id");
+        }
+
+        String serial;
+        String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
+
+        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, "0006-" + nro_serial);
+
+        tiket.Iniciar()
+                .Corte(1)
+                .DeshabilitarElModoDeCaracteresChinos()
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .CargarImagenLocalEImprimir("C:\\Users\\mateo\\Desktop\\Nueva carpeta\\SIGA-main\\src\\com\\images\\icon-2_1.png", 0, 216)
+                .Feed(1)
+                .EscribirTexto("SAEBU\n")
+                .EscribirTexto("Camping Universitario\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
+                .Feed(1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
+                .EscribirTexto("______________________________________________\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Descripcion:" + descripcion + "\n" + "Acompañantes: " + acomp + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
+                .EscribirTexto("______________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) + " (x dia)" + "\n")
+                .EscribirTexto("______________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("TOTAL:  $" + importe + "\n")
+                .EstablecerEnfatizado(true)
+                .EstablecerTamanoFuente(1, 1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .TextoSegunPaginaDeCodigos(2, "cp850", "¡Bienvenido, que tenga un buen dia!\nEscanee el QR y visite la web de SAEBU")
+                .Feed(1)
+                .ImprimirCodigoQr("http://saebu.unsl.edu.ar/camping-universitario", 160, ConectorPluginV3.RECUPERACION_QR_MEJOR,
+                        ConectorPluginV3.TAMANO_IMAGEN_NORMAL)
+                .Feed(1)
+                .EstablecerTamanoFuente(1, 1)
+                .EscribirTexto("PROHIBIDO EL INGRESO CON ANIMALES\nSi.G.A.")
+                .Feed(3)
+                .Corte(1)
+                .Pulso(48, 30, 120);
+
+        try {
+
             tiket.imprimirEn("impresora termica");
 
             System.out.println("Impreso correctamente");
@@ -6219,14 +7309,74 @@ public class Ingre extends javax.swing.JPanel {
         }
     }
 
-    public void imprimirtiketacampante(String fecha_ingreso, String fecha_egreso, String categoria, float importe, String nombre, String documento) throws SQLException {
+    public void imprimirtiketacampanteinvitado(String fecha_ingreso, String fecha_egreso, String categoria, float importe, String nombre, String documento, int acomp, float tarifas) throws SQLException, java.text.ParseException {
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
-        String segundos = String.valueOf(calendario.get(Calendar.SECOND));
         String n_serial = "0";
         String hora_actual = hora + ":" + minutos;
         ResultSet res = modelo.mostrarregistros1();
+         LocalTime HoraActual = LocalTime.now();
+        // Aquí tu serial en caso de tener uno
+        if (res.next()) {
+            n_serial = res.getString("id");
+        }
+        
+        String serial;
+        String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
 
+        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, "0006-" + nro_serial);
+
+        tiket.Iniciar()
+                .Corte(1)
+                .DeshabilitarElModoDeCaracteresChinos()
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .CargarImagenLocalEImprimir("C:\\Users\\mateo\\Desktop\\Nueva carpeta\\SIGA-main\\src\\com\\images\\icon-2_1.png", 0, 216)
+                .Feed(1)
+                .EscribirTexto("SAEBU\n")
+                .EscribirTexto("Camping Universitario\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
+                .Feed(1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
+                .EscribirTexto("______________________________________________\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre del Aportante: " + nombre_a1.getText() + "\n" + "DNI APORTANTE: " + documento_a1.getText() + "\n" + "Nombre: " + nombre + "                   DNI: " + documento + "\n" + "Categoria:" + categoria + "\n" + "Acompañantes: " + acomp + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
+                .EscribirTexto("______________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) + " (x dia)" + "\n")
+                .EscribirTexto("______________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("TOTAL:  $" + importe + "\n")
+                .EstablecerEnfatizado(true)
+                .EstablecerTamanoFuente(1, 1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .TextoSegunPaginaDeCodigos(2, "cp850", "¡Bienvenido, que tenga un buen dia!\nEscanee el QR y visite la web de SAEBU")
+                .Feed(1)
+                .ImprimirCodigoQr("http://saebu.unsl.edu.ar/camping-universitario", 160, ConectorPluginV3.RECUPERACION_QR_MEJOR,
+                        ConectorPluginV3.TAMANO_IMAGEN_NORMAL)
+                .Feed(1)
+                .EstablecerTamanoFuente(1, 1)
+                .EscribirTexto("PROHIBIDO EL INGRESO CON ANIMALES\nSi.G.A.")
+                .Feed(3)
+                .Corte(1)
+                .Pulso(48, 30, 120);
+
+        try {
+
+            tiket.imprimirEn("impresora termica");
+
+            System.out.println("Impreso correctamente");
+        } catch (Exception e) {
+            System.out.println("Error imprimiendo: " + e.getMessage());
+        }
+    }
+
+    public void imprimirtiketacampante(String fecha_ingreso, String fecha_egreso, String categoria, float importe, String nombre, String documento, int acomp, float tarifas) throws SQLException, java.text.ParseException {
+        String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+        String n_serial = "0";
+        String hora_actual = hora + ":" + minutos;
+        ResultSet res = modelo.mostrarregistros1();
+         LocalTime HoraActual = LocalTime.now();
         // Aquí tu serial en caso de tener uno
         if (res.next()) {
             n_serial = res.getString("id");
@@ -6241,26 +7391,26 @@ public class Ingre extends javax.swing.JPanel {
                 .Corte(1)
                 .DeshabilitarElModoDeCaracteresChinos()
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
-                .CargarImagenLocalEImprimir("C:\\Users\\lauti\\OneDrive\\Escritorio\\SIGA\\src\\com\\images\\icon-2_1.png", 0, 216)
+                .CargarImagenLocalEImprimir("C:\\Users\\mateo\\Desktop\\Nueva carpeta\\SIGA-main\\src\\com\\images\\icon-2_1.png", 0, 216)
                 .Feed(1)
                 .EscribirTexto("SAEBU\n")
                 .EscribirTexto("Camping Universitario\n")
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
-                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + HoraActual.format(f) + "hs")
                 .Feed(1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
                 .EscribirTexto("______________________________________________\n")
-                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria:" + categoria + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria:" + categoria + "\n" + "Acompañantes: " + acomp + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
-                .EscribirTexto("Sub total: $" + importe + "\n")
+                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) + " (x dia)" + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
                 .EscribirTexto("TOTAL:  $" + importe + "\n")
                 .EstablecerEnfatizado(true)
                 .EstablecerTamanoFuente(1, 1)
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
-                .TextoSegunPaginaDeCodigos(2, "cp850", "¡Bienvenido, que tenga un buen dia!\nEscanee el qr y visite la web de SAEBU")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "¡Bienvenido, que tenga un buen dia!\nEscanee el QR y visite la web de SAEBU")
                 .Feed(1)
                 .ImprimirCodigoQr("http://saebu.unsl.edu.ar/camping-universitario", 160, ConectorPluginV3.RECUPERACION_QR_MEJOR,
                         ConectorPluginV3.TAMANO_IMAGEN_NORMAL)
@@ -6323,53 +7473,89 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_fecha_egreso_p2KeyPressed
 
     private void Obtener3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Obtener3MousePressed
-        if (!pasar_dia3.isSelected()) {
-            if (!Parsela_p1.getText().isEmpty()) {
-                float importe = 0;
-                try {
+
+        try {
+
+            if (!pasar_dia3.isSelected()) {
+                if (!Parsela_p1.getText().isEmpty()) {
+
+                    float importe = 0;
 
                     if (Integer.parseInt(Parsela_p1.getText()) >= 1 && Integer.parseInt(Parsela_p1.getText()) <= 4) {
-                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 6);
-                        tarifa3.setText(String.valueOf(importe));
+                        importe = ((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2)) * Main.tarifa_acampar_invitados;
+
+                        tarifa3.setText(String.format("%.2f", importe));
                     } else {
-                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 4);
-                        tarifa3.setText(String.valueOf(importe));
+
+                        if (Integer.parseInt(acomp_invitados.getText()) <= 5) {
+
+                            if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+
+                                importe = (Main.tarifa_acampar_invitados * ((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2)));
+                                tarifa3.setText(String.format("%.2f", importe));
+                            } else {
+
+                                importe = ((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2)) * Main.tarifa_acampar_invitados;
+                                tarifa3.setText(String.format("%.2f", importe * (Integer.parseInt(acomp_invitados.getText()) + 1)));
+
+                            }
+                        } else {
+                            javax.swing.JOptionPane.showMessageDialog(this, "Solo se permite hasta 5 invitados por aportante.\nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+                        }
                     }
-
-                } catch (java.text.ParseException ex) {
-                    Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (NullPointerException ex) {
-                    Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                tarifa3.setText(Float.toString(importe));
+
+            } else {
+                if (Integer.parseInt(acomp_invitados.getText()) <= 5) {
+
+                    if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+
+                        tarifa3.setText(String.format("%.2f", Main.tarifa_dia_invitados));
+
+                    } else {
+                        tarifa3.setText(String.format("%.2f", Main.tarifa_acampar_invitados * (Integer.parseInt(acomp_invitados.getText()) + 1)));
+
+                    }
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Solo se permite hasta 5 invitados por aportante.\nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+                }
             }
+        } catch (java.text.ParseException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            javax.swing.JOptionPane.showMessageDialog(this, "Ingreso una letra donde se espera numero \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-        } else {
+        } catch (java.lang.NumberFormatException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            javax.swing.JOptionPane.showMessageDialog(this, "Especifique la parcela. \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-            float importe = Main.tarifa_dia_invitados;
-            tarifa3.setText(Float.toString(importe));
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }//GEN-LAST:event_Obtener3MousePressed
 
     private void tarifa3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarifa3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tarifa3ActionPerformed
     public void RegistrarIngresoInvitados() throws java.text.ParseException, java.lang.NullPointerException, SQLException {
-
         try {
-
+             LocalTime HoraActual = LocalTime.now();
             float importe = 0;
             int c;
-            if (Integer.parseInt(Parsela_p1.getText()) >= 1 && Integer.parseInt(Parsela_p1.getText()) <= 4) {
-                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 6);
-                tarifa3.setText(String.valueOf(importe));
+
+            if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+                importe = (int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2) * Main.tarifa_acampar_invitados;
+                tarifa3.setText(String.format("%.2f", importe));
             } else {
-                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 4);
-                tarifa3.setText(String.valueOf(importe));
+                importe = (int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2) * (Integer.parseInt(acomp_invitados.getText()) + 1) * Main.tarifa_acampar_invitados;
             }
+
             if (fecha_egreso_p2.getDate() != null && fecha_ingreso_p2.getDate() != null) {
 
-                c = controlador.IngresoParticular(documento_p1.getText(), nombre_p1.getText(), "Invitado", calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), Parsela_p1.getText(), importe);
+                c = controlador.IngresoParticular(documento_p1.getText(), nombre_p1.getText(), "Invitado", calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), Parsela_p1.getText(), importe, Integer.parseInt(acomp_invitados.getText()));
 
                 if (c != 1) {
                     javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -6378,8 +7564,22 @@ public class Ingre extends javax.swing.JPanel {
                     String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
 
                     String hora_actual = hora + ":" + minutos;
-                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado acampante", Main.DiaActual, hora_actual);
-                    modelo.insertardinerocaja(importe);
+                    
+                    if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado acampante", Main.DiaActual, HoraActual.format(f));
+                    } else {
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_invitados.getText()) + 1)) + " nuevos invitados acampantes.", Main.DiaActual, HoraActual.format(f));
+                    }
+                    
+                       if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+                        modelo.insertardinerocaja(importe);
+                        System.out.println("importe en caja invitado: " + importe);
+                    } else {
+                        modelo.insertardinerocaja(importe);
+                        System.out.println("importe en caja con acampañantes invitado: " + importe);
+                    }
+
+             
 
                     Component jFrame = null;
                     int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
@@ -6388,11 +7588,11 @@ public class Ingre extends javax.swing.JPanel {
 
                         if (!pasar_dia3.isSelected()) {
 
-                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), "Invitado", importe, nombre_p1.getText(), documento_p1.getText());
+                            imprimirtiketacampanteinvitado(calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), "Invitado", importe, nombre_p1.getText(), documento_p1.getText(), 0, Main.tarifa_acampar_invitados);
                         } else {
 
                             importe = Main.tarifa_dia_invitados;
-                            imprimirtiketdia("Invitado", importe, nombre_p1.getText(), documento_p1.getText());
+                            imprimirtiketdia("Invitado", importe, nombre_p1.getText(), documento_p1.getText(), 0, importe);
                         }
                     }
                     setearnullinvitado();
@@ -6432,10 +7632,12 @@ public class Ingre extends javax.swing.JPanel {
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar, Ingreso una parsela que no se encuentra en la base de datos.", "ERROR",
                             javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
                 }
 
             } catch (java.text.ParseException ex) {
-                Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ingre.class
+                        .getName()).log(Level.SEVERE, null, ex);
             } catch (java.lang.NumberFormatException ex) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Ingreso un texto donde se esperaba un numero.", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -6459,7 +7661,7 @@ public class Ingre extends javax.swing.JPanel {
                 if (c == 0 && b == 0) {
                     if (pasar_dia3.isSelected()) {
 
-                        ingre_dia("invitado", documento_p1.getText(), nombre_p1.getText());
+                        ingre_dia("invitado", documento_p1.getText(), nombre_p1.getText(), Integer.parseInt(acomp_invitados.getText()));
                     } else {
                         ingre_i();
                     }
@@ -6470,17 +7672,21 @@ public class Ingre extends javax.swing.JPanel {
             } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "Debe abrir la caja primero", "ERROR",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos", "ERROR",
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
         try {
             Tabla();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ingre.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -6488,8 +7694,10 @@ public class Ingre extends javax.swing.JPanel {
         botoningresoinvitado();
         try {
             prueba();
+
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Boton_ingreso_p1MousePressed
 
@@ -6526,11 +7734,11 @@ public class Ingre extends javax.swing.JPanel {
         if (pasar_dia3.isSelected()) {
             fecha_ingreso_p2.setEnabled(false);
             fecha_egreso_p2.setEnabled(false);
-            Parsela_p.setEnabled(false);
+            Parsela_p1.setEnabled(false);
         } else {
             fecha_ingreso_p2.setEnabled(true);
             fecha_egreso_p2.setEnabled(true);
-            Parsela_p.setEnabled(true);
+            Parsela_p1.setEnabled(true);
         }
 
     }//GEN-LAST:event_pasar_dia3ActionPerformed
@@ -6556,52 +7764,58 @@ public class Ingre extends javax.swing.JPanel {
     private void j124MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j124MousePressed
         try {
             traerinfo(124);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j124MousePressed
 
     private void j125MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j125MousePressed
         try {
             traerinfo(125);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j125MousePressed
 
     private void j126MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j126MousePressed
         try {
             traerinfo(126);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j126MousePressed
 
     private void j127MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j127MousePressed
         try {
             traerinfo(127);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j127MousePressed
 
     private void j128MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j128MousePressed
         try {
             traerinfo(128);
+
         } catch (SQLException ex) {
-            Logger.getLogger(OcupacionC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OcupacionC.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_j128MousePressed
 
     private void cod_aportanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cod_aportanteKeyPressed
-        
+
     }//GEN-LAST:event_cod_aportanteKeyPressed
 
-    private void Documento_a1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Documento_a1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Documento_a1ActionPerformed
-
-    private void Documento_a1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Documento_a1KeyPressed
+    private void acomp_particularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_acomp_particularKeyPressed
         char validador = evt.getKeyChar();
 
         if (Character.isLetter(validador)) {
@@ -6612,10 +7826,199 @@ public class Ingre extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
 
         }
-    }//GEN-LAST:event_Documento_a1KeyPressed
-    public void buscaraportanteinvitado () throws SQLException{
+    }//GEN-LAST:event_acomp_particularKeyPressed
+
+    private void documento_otrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documento_otrosActionPerformed
+
+
+    }//GEN-LAST:event_documento_otrosActionPerformed
+
+    private void documento_otrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documento_otrosKeyPressed
+
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
+    }//GEN-LAST:event_documento_otrosKeyPressed
+
+    private void nombre_otrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_otrosKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombre_otrosKeyPressed
+
+    private void fecha_ingreso_otrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_ingreso_otrosKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fecha_ingreso_otrosKeyPressed
+
+    private void fecha_egreso_otrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_egreso_otrosKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fecha_egreso_otrosKeyPressed
+
+    private void Obtener4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Obtener4MousePressed
+
+        try {
+
+            if (!pasar_dia4.isSelected()) {
+                if (!Parcela_otros.getText().isEmpty()) {
+
+                    float importe = 0;
+
+                    if (Integer.parseInt(Parcela_otros.getText()) >= 1 && Integer.parseInt(Parcela_otros.getText()) <= 4) {
+                        importe = ((int) cant_dias(fecha_ingreso_otros, fecha_egreso_otros)) * Float.parseFloat(tarifa_otros.getText());
+
+                        tarifa4.setText(String.format("%.2f", importe));
+                    } else {
+
+                        if (Integer.parseInt(acomp_otros.getText()) == 0) {
+
+                            importe = (Float.parseFloat(tarifa_otros.getText()) * ((int) cant_dias(fecha_ingreso_otros, fecha_egreso_otros)));
+                            tarifa4.setText(String.format("%.2f", importe));
+                            System.out.println("importe::" + importe);
+
+                        } else {
+
+                            importe = ((int) cant_dias(fecha_ingreso_otros, fecha_egreso_otros)) * Float.parseFloat(tarifa_otros.getText());
+                            tarifa4.setText(String.format("%.2f", importe * (Integer.parseInt(acomp_otros.getText()) + 1)));
+
+                        }
+
+                    }
+                }
+
+            } else {
+
+                if (Integer.parseInt(acomp_otros.getText()) == 0) {
+
+                    tarifa4.setText(String.format("%.2f", Float.parseFloat(tarifa_otros.getText())));
+
+                } else {
+                    tarifa4.setText(String.format("%.2f", (Float.parseFloat(tarifa_otros.getText())) * (Integer.parseInt(acomp_otros.getText()) + 1)));
+
+                }
+
+            }
+        } catch (java.text.ParseException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            javax.swing.JOptionPane.showMessageDialog(this, "Ingreso una letra donde se espera numero \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (java.lang.NumberFormatException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            javax.swing.JOptionPane.showMessageDialog(this, "Especifique la parcela. \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_Obtener4MousePressed
+
+    private void tarifa4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarifa4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tarifa4ActionPerformed
+
+    private void Boton_ingreso_p2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_ingreso_p2MousePressed
+
+        Boton_ingreso_otro();
+        try {
+            prueba();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_Boton_ingreso_p2MousePressed
+
+    private void Boton_ingreso_p2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Boton_ingreso_p2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Boton_ingreso_p2KeyPressed
+
+    private void Parcela_otrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Parcela_otrosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Parcela_otrosActionPerformed
+
+    private void Parcela_otrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Parcela_otrosKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Parcela_otrosKeyPressed
+
+    private void jPanel26ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel26ComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel26ComponentHidden
+
+    private void pasar_dia4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pasar_dia4MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pasar_dia4MousePressed
+
+    private void pasar_dia4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_dia4ActionPerformed
+        if (pasar_dia4.isSelected()) {
+            fecha_ingreso_otros.setEnabled(false);
+            fecha_egreso_otros.setEnabled(false);
+            Parcela_otros.setEnabled(false);
+        } else {
+            Parcela_otros.setEnabled(true);
+            fecha_ingreso_otros.setEnabled(true);
+            fecha_egreso_otros.setEnabled(true);
+        }
+    }//GEN-LAST:event_pasar_dia4ActionPerformed
+
+    private void pasar_dia4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasar_dia4KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pasar_dia4KeyPressed
+
+    private void tarifa_otrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tarifa_otrosKeyPressed
+
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
+
+
+    }//GEN-LAST:event_tarifa_otrosKeyPressed
+
+    private void acomp_otrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_acomp_otrosKeyPressed
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
+    }//GEN-LAST:event_acomp_otrosKeyPressed
+
+    private void Documento_a2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Documento_a2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Documento_a2ActionPerformed
+
+    private void Documento_a2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Documento_a2KeyPressed
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
+    }//GEN-LAST:event_Documento_a2KeyPressed
+    public void buscaraportanteinvitado() throws SQLException {
         ResultSet res;
-        res = controlador.BuscarAportante(Documento_a1.getText());
+        res = controlador.BuscarAportante(Documento_a2.getText());
         if (res.next() == true) {
             nombre_a1.setText(res.getString("nombre"));
             documento_a1.setText(res.getString("doc"));
@@ -6629,13 +8032,14 @@ public class Ingre extends javax.swing.JPanel {
 
         }
     }
-    private void Buscar_a1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar_a1MousePressed
+
+    private void Buscar_a2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar_a2MousePressed
         try {
             buscaraportanteinvitado();
         } catch (SQLException ex) {
             Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_Buscar_a1MousePressed
+    }//GEN-LAST:event_Buscar_a2MousePressed
 
     private void documento_a1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documento_a1KeyPressed
         // TODO add your handling code here:
@@ -6645,26 +8049,56 @@ public class Ingre extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cod_aportante1KeyPressed
 
+    private void descripcion_otrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcion_otrosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descripcion_otrosActionPerformed
+
+    private void acomp_invitadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acomp_invitadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_acomp_invitadosActionPerformed
+
+    private void acomp_invitadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_acomp_invitadosKeyPressed
+
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
+
+
+    }//GEN-LAST:event_acomp_invitadosKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Boton_ingreso;
     private javax.swing.JLabel Boton_ingreso_a;
     private javax.swing.JLabel Boton_ingreso_p;
     private javax.swing.JLabel Boton_ingreso_p1;
+    private javax.swing.JLabel Boton_ingreso_p2;
     private javax.swing.JLabel Buscar;
     private javax.swing.JLabel Buscar_a;
-    private javax.swing.JLabel Buscar_a1;
+    private javax.swing.JLabel Buscar_a2;
     private javax.swing.JTextField Documento;
     private javax.swing.JTextField Documento_a;
-    private javax.swing.JTextField Documento_a1;
+    private javax.swing.JTextField Documento_a2;
     private javax.swing.JButton Obtener;
     private javax.swing.JButton Obtener1;
     private javax.swing.JButton Obtener2;
     private javax.swing.JButton Obtener3;
+    private javax.swing.JButton Obtener4;
     private javax.swing.JTextField Parcela;
+    private javax.swing.JTextField Parcela_otros;
     private javax.swing.JTextField Parsela_a;
     private javax.swing.JTextField Parsela_p;
     private javax.swing.JTextField Parsela_p1;
+    private javax.swing.JTextField acomp_invitados;
+    private javax.swing.JTextField acomp_otros;
+    private javax.swing.JTextField acomp_particular;
     private javax.swing.JPanel alumnoss;
     private javax.swing.JTextField apellido_a;
     private javax.swing.JTextField apellido_a1;
@@ -6675,20 +8109,24 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JTextField carrera_e;
     private javax.swing.JTextField cod_aportante;
     private javax.swing.JTextField cod_aportante1;
+    private javax.swing.JTextField descripcion_otros;
     private javax.swing.JTextField dni_buscado;
     private javax.swing.JTextField documento_a;
     private javax.swing.JTextField documento_a1;
     private javax.swing.JTextField documento_e;
+    private javax.swing.JTextField documento_otros;
     private javax.swing.JTextField documento_p;
     private javax.swing.JTextField documento_p1;
     private javax.swing.JPanel egresos;
     private javax.swing.JTextField facultad_e;
     private javax.swing.JTextField familiares;
     private com.toedter.calendar.JDateChooser fecha_egreso;
+    private com.toedter.calendar.JDateChooser fecha_egreso_otros;
     private com.toedter.calendar.JDateChooser fecha_egreso_p;
     private com.toedter.calendar.JDateChooser fecha_egreso_p1;
     private com.toedter.calendar.JDateChooser fecha_egreso_p2;
     private com.toedter.calendar.JDateChooser fecha_ingreso;
+    private com.toedter.calendar.JDateChooser fecha_ingreso_otros;
     private com.toedter.calendar.JDateChooser fecha_ingreso_p;
     private com.toedter.calendar.JDateChooser fecha_ingreso_p1;
     private com.toedter.calendar.JDateChooser fecha_ingreso_p2;
@@ -6868,7 +8306,19 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -6893,6 +8343,11 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -6905,6 +8360,7 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JTextField nombre_a;
     private javax.swing.JTextField nombre_a1;
     private javax.swing.JTextField nombre_e;
+    private javax.swing.JTextField nombre_otros;
     private javax.swing.JTextField nombre_p;
     private javax.swing.JTextField nombre_p1;
     private javax.swing.JPanel particular;
@@ -6912,6 +8368,7 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JCheckBox pasar_dia1;
     private javax.swing.JCheckBox pasar_dia2;
     private javax.swing.JCheckBox pasar_dia3;
+    private javax.swing.JCheckBox pasar_dia4;
     private javax.swing.JTextField patente;
     private javax.swing.JTable tabla_egreso;
     private javax.swing.JTable tabla_vehiculo;
@@ -6919,6 +8376,8 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JTextField tarifa1;
     private javax.swing.JTextField tarifa2;
     private javax.swing.JTextField tarifa3;
+    private javax.swing.JTextField tarifa4;
+    private javax.swing.JTextField tarifa_otros;
     private javax.swing.JPanel vahiculos;
     // End of variables declaration//GEN-END:variables
 

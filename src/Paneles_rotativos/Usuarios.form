@@ -321,7 +321,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="aportante_t" pref="64" max="32767" attributes="0"/>
+                                  <Component id="aportante_t" max="32767" attributes="0"/>
                                   <Component id="particular_t" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -689,7 +689,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="aportante_t1" alignment="0" pref="64" max="32767" attributes="0"/>
+                                      <Component id="aportante_t1" alignment="0" max="32767" attributes="0"/>
                                       <Component id="particular_t1" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
