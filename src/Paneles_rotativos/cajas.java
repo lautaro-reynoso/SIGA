@@ -677,16 +677,16 @@ public class cajas extends javax.swing.JPanel {
         int cont = 0;
         if (res.next()) {
             String fecha_apertura = res.getString("fecha_abertura");
-            for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < fecha_apertura.length(); i++) {
                 char a = fecha_apertura.charAt(i);
 
                 if (!String.valueOf(a).equals(" ")) {
                     fecha_ab += a;
                 } else {
-                    i = 12;
+                    i = fecha_apertura.length();
                 }
             }
-            for (int i = 0; i < 16; i++) {
+            for (int i = 0; i < fecha_apertura.length(); i++) {
                 char a = fecha_apertura.charAt(i);
                 if (cont > 0) {
                     hora_apertura += a;
@@ -710,7 +710,7 @@ public class cajas extends javax.swing.JPanel {
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Desea imprimir cierre?");
                 if (result == 0) {
-                    imprimir_tiket_caja(fecha_ab, Main.DiaActual + " " + HoraActual.format(f), Login.usuario, id, fecha_apertura, retiros, String.valueOf(plata_alcierre), total,hora_apertura);
+                    imprimir_tiket_caja(fecha_ab, Main.DiaActual + " " + HoraActual.format(f), Login.usuario, id, fecha_apertura, retiros, String.valueOf(plata_alcierre), total,hora_apertura,HoraActual.format(f));
                 }
 
             }
@@ -723,7 +723,7 @@ public class cajas extends javax.swing.JPanel {
 
     }
 
-    public void imprimir_tiket_caja(String fecha_apertura, String fecha_cierre, String usuario, String id_caja, String fecha_hora, String retiros, String plata_al_cierre, String total,String hora_apertura) throws SQLException {
+    public void imprimir_tiket_caja(String fecha_apertura, String fecha_cierre, String usuario, String id_caja, String fecha_hora, String retiros, String plata_al_cierre, String total,String hora_apertura,String hora_cierre) throws SQLException {
 
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
@@ -734,7 +734,7 @@ public class cajas extends javax.swing.JPanel {
         int familiares = 0;
         int cont = 0;
         //ResultSet res = modelo.mostrar_registros_fecha(fecha_apertura, usuario);
-        ResultSet res = modelo.mostrar_registros_fecha_hora(fecha_apertura, usuario,hora_apertura,HoraActual.format(f));
+        ResultSet res = modelo.mostrar_registros_fecha_hora(fecha_apertura, usuario,hora_apertura,hora_cierre);
         while (res.next()) {
             cont = 0;
             if (res.getString("comentario").equals("ha ingresado un nuevo particular acampante")) {
@@ -1285,6 +1285,7 @@ public class cajas extends javax.swing.JPanel {
     public void imprimircierre() throws SQLException {
         Component jFrame = null;
         String hora_apertura="";
+        String hora_cierre = "";
         int cont=0;
         int result = JOptionPane.showConfirmDialog(jFrame, "Desea imprimir cierre?");
         if (result == 0) {
@@ -1307,6 +1308,7 @@ public class cajas extends javax.swing.JPanel {
                     i = fecha_hora_apertura.length();
                 }
             }
+            
             for (int i = 0; i <  fecha_hora_apertura.length(); i++) {
                 char a = fecha_hora_apertura.charAt(i);
                 if (cont > 0) {
@@ -1318,8 +1320,20 @@ public class cajas extends javax.swing.JPanel {
                 }
 
             }
-            System.out.println(hora_apertura);
-            imprimir_tiket_caja(fecha_ab, fecha_hora_cierre, usuario, id, fecha_hora_apertura, retiros, monto_caja, total,hora_apertura);
+             System.out.println(fecha_hora_cierre+"cierre");
+            for (int i = 0; i <  fecha_hora_cierre.length(); i++) {
+                char a = fecha_hora_cierre.charAt(i);
+                if (cont > 0) {
+                    hora_cierre += a;
+                }
+
+                if (String.valueOf(a).equals(" ")&&cont==0) {
+                    cont++;
+                }
+
+            }
+            
+            imprimir_tiket_caja(fecha_ab, fecha_hora_cierre, usuario, id, fecha_hora_apertura, retiros, monto_caja, total,hora_apertura,hora_cierre);
         }
 
     }
