@@ -729,13 +729,24 @@ public class cajas extends javax.swing.JPanel {
 
             if (res.getString("comentario").length() == 51) {
                 int p = Integer.parseInt(res.getString("comentario").substring(9, 11));
-                System.out.println("cantidad de ingresantes otro por acampar ::::" + p);
+
                 cont_otros_acampantes = cont_otros_acampantes + p;
+            }
+
+            if (res.getString("comentario").length() == 44) {
+                int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
+               
+                cont_invitados_acampantes = cont_invitados_acampantes + p;
+            }
+            if (res.getString("comentario").length() == 43) {
+                int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
+              
+                cont_invitados_dia = cont_invitados_dia + p;
             }
 
             if (res.getString("comentario").length() == 50) {
                 int p = Integer.parseInt(res.getString("comentario").substring(9, 11));
-                System.out.println("cantidad de ingresantes otro por el dia::::" + p);
+
                 cont_otros_dia = cont_otros_dia + p;
             }
 
@@ -1006,6 +1017,17 @@ public class cajas extends javax.swing.JPanel {
                 cont_particular_acampantes++;
             } else {
                 cont++;
+            }
+
+            if (res.getString("comentario").length() == 44) {
+                int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
+                System.out.println("cantidad de invitados por acampar ::::" + p);
+                cont_invitados_acampantes = cont_invitados_acampantes + p;
+            }
+            if (res.getString("comentario").length() == 43) {
+                int p = Integer.parseInt(res.getString("comentario").substring(13, 15));
+                System.out.println("cantidad de invitados por dia ::::" + p);
+                cont_invitados_dia = cont_invitados_dia + p;
             }
 
             if (res.getString("comentario").length() == 51) {

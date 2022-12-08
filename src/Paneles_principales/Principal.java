@@ -343,6 +343,7 @@ public class Principal extends javax.swing.JFrame {
         ingreso.setearnullalumno();
         ingreso.setearnullparticular();
         ingreso.setearnullaportante();
+        ingreso.setearnullinvitado();
 
 
     }//GEN-LAST:event_IngresoMousePressed

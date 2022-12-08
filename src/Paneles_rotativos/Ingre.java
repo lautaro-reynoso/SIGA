@@ -70,6 +70,17 @@ public class Ingre extends javax.swing.JPanel {
         nombre_p1.setText("");
 
         Parsela_p1.setText("Parcela");
+
+        documento_p1.setEnabled(false);
+        nombre_p1.setEnabled(false);
+
+        documento_a1.setText("");
+        Documento_a2.setText("");
+        nombre_a1.setText("");
+
+        cod_aportante1.setText("");
+        apellido_a1.setText("");
+
     }
 
     public void setearnullaportante() {
@@ -496,10 +507,6 @@ public class Ingre extends javax.swing.JPanel {
         acomp_particular = new javax.swing.JTextField();
         invitados = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        documento_p1 = new javax.swing.JTextField();
-        jLabel38 = new javax.swing.JLabel();
-        nombre_p1 = new javax.swing.JTextField();
-        jLabel39 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
@@ -514,6 +521,26 @@ public class Ingre extends javax.swing.JPanel {
         Parsela_p1 = new javax.swing.JTextField();
         pasar_dia3 = new javax.swing.JCheckBox();
         jLabel44 = new javax.swing.JLabel();
+        jPanel28 = new javax.swing.JPanel();
+        Documento_a2 = new javax.swing.JTextField();
+        jLabel58 = new javax.swing.JLabel();
+        Buscar_a2 = new javax.swing.JLabel();
+        jPanel29 = new javax.swing.JPanel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        documento_a1 = new javax.swing.JTextField();
+        cod_aportante1 = new javax.swing.JTextField();
+        apellido_a1 = new javax.swing.JTextField();
+        nombre_a1 = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel38 = new javax.swing.JLabel();
+        nombre_p1 = new javax.swing.JTextField();
+        documento_p1 = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        acomp_invitados = new javax.swing.JTextField();
         egresos = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
@@ -561,6 +588,7 @@ public class Ingre extends javax.swing.JPanel {
         acomp_otros = new javax.swing.JTextField();
         tarifa_otros = new javax.swing.JTextField();
         jLabel56 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         j10 = new javax.swing.JLabel();
         j12 = new javax.swing.JLabel();
@@ -1035,9 +1063,9 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(pasar_dia1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1066,7 +1094,7 @@ public class Ingre extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("APORTANTES", aportantes);
+        menu_ingreso_egreso.addTab("Aportantes", aportantes);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso Alumno"));
 
@@ -1435,7 +1463,7 @@ public class Ingre extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("ALUMNOS", alumnoss);
+        menu_ingreso_egreso.addTab("Alumnos", alumnoss);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar un Particular"));
 
@@ -1632,7 +1660,7 @@ public class Ingre extends javax.swing.JPanel {
 
         jLabel37.setText("Seleccione si solo pasa el dia:");
 
-        jLabel46.setText("Acompañantes:");
+        jLabel46.setText("Acompañantes (MAX 98):");
 
         acomp_particular.setText("0");
         acomp_particular.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1710,51 +1738,22 @@ public class Ingre extends javax.swing.JPanel {
         particular.setLayout(particularLayout);
         particularLayout.setHorizontalGroup(
             particularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(particularLayout.createSequentialGroup()
-                .addGap(102, 102, 102)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, particularLayout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
         particularLayout.setVerticalGroup(
             particularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(particularLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("PARTICULAR", particular);
+        menu_ingreso_egreso.addTab("Particular", particular);
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar un Invitado"));
-
-        documento_p1.setForeground(new java.awt.Color(0, 0, 0));
-        documento_p1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        documento_p1.setText(null);
-        documento_e.setEnabled(false);
-        documento_p1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                documento_p1ActionPerformed(evt);
-            }
-        });
-        documento_p1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                documento_p1KeyPressed(evt);
-            }
-        });
-
-        jLabel38.setText("NOMBRE");
-
-        nombre_p1.setForeground(new java.awt.Color(0, 0, 0));
-        nombre_p1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        nombre_p1.setText(null);
-        nombre_e.setEnabled(false);
-        nombre_p1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                nombre_p1KeyPressed(evt);
-            }
-        });
-
-        jLabel39.setText("DOCUMENTO");
 
         jLabel40.setText("FECHA DE EGRESO");
 
@@ -1860,47 +1859,6 @@ public class Ingre extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Obtener3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel40)
-                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(fecha_egreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(fecha_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel41))
-                        .addGap(75, 75, 75))))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel41)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fecha_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel40)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fecha_egreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Obtener3))
-                    .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
         pasar_dia3.setText("Pasar el dia");
         pasar_dia3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1920,57 +1878,303 @@ public class Ingre extends javax.swing.JPanel {
 
         jLabel44.setText("Seleccione si solo pasa el dia:");
 
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel40)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(fecha_egreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fecha_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(Obtener3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)))
+                .addGap(35, 35, 35))
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pasar_dia3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pasar_dia3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel44))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel41)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fecha_ingreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addComponent(fecha_egreso_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Obtener3)
+                        .addContainerGap())
+                    .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        jPanel28.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda de Aportante"));
+
+        Documento_a2.setForeground(new java.awt.Color(0, 0, 0));
+        Documento_a2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Documento_a2.setText(null);
+        Documento_a2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Documento_a2ActionPerformed(evt);
+            }
+        });
+        Documento_a2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Documento_a2KeyPressed(evt);
+            }
+        });
+
+        jLabel58.setText("INGRESE EL DNI DEL APORTANTE ");
+
+        Buscar_a2.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar_a2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/baseline_search_black_24dp.png"))); // NOI18N
+        Buscar_a2.setText("BUSCAR");
+        Buscar_a2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Buscar_a2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar_a2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar_a2MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
+        jPanel28.setLayout(jPanel28Layout);
+        jPanel28Layout.setHorizontalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jLabel58)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Buscar_a2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Documento_a2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
+        );
+        jPanel28Layout.setVerticalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Documento_a2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(Buscar_a2))
+        );
+
+        jPanel29.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion del Aportante"));
+
+        jLabel59.setText("Nombre:");
+
+        jLabel60.setText("Apellido:");
+
+        jLabel61.setText("Cod. aportante:");
+
+        jLabel62.setText("Documento:");
+
+        documento_a1.setForeground(new java.awt.Color(0, 0, 0));
+        documento_a1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        documento_a1.setText(null);
+        documento_a1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                documento_a1KeyPressed(evt);
+            }
+        });
+
+        cod_aportante1.setForeground(new java.awt.Color(0, 0, 0));
+        cod_aportante1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cod_aportante1.setText(null);
+        cod_aportante1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cod_aportante1KeyPressed(evt);
+            }
+        });
+
+        apellido_a1.setForeground(new java.awt.Color(0, 0, 0));
+        apellido_a1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        apellido_a1.setText(null);
+
+        nombre_a1.setForeground(new java.awt.Color(0, 0, 0));
+        nombre_a1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nombre_a1.setText(null);
+
+        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
+        jPanel29.setLayout(jPanel29Layout);
+        jPanel29Layout.setHorizontalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel59)
+                    .addComponent(jLabel60)
+                    .addComponent(jLabel61)
+                    .addComponent(jLabel62))
+                .addGap(90, 90, 90)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(documento_a1)
+                    .addComponent(cod_aportante1)
+                    .addComponent(apellido_a1)
+                    .addComponent(nombre_a1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jPanel29Layout.setVerticalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel59)
+                    .addComponent(nombre_a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(apellido_a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel60))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cod_aportante1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel61))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(documento_a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel62)))
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Información del Invitado"));
+
+        jLabel38.setText("NOMBRE");
+
+        nombre_p1.setForeground(new java.awt.Color(0, 0, 0));
+        nombre_p1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nombre_p1.setText(null);
+        nombre_e.setEnabled(false);
+        nombre_p1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nombre_p1KeyPressed(evt);
+            }
+        });
+
+        documento_p1.setForeground(new java.awt.Color(0, 0, 0));
+        documento_p1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        documento_p1.setText(null);
+        documento_e.setEnabled(false);
+        documento_p1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                documento_p1ActionPerformed(evt);
+            }
+        });
+        documento_p1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                documento_p1KeyPressed(evt);
+            }
+        });
+
+        jLabel39.setText("DOCUMENTO");
+
+        jLabel57.setText("Acompañantes MAX(5)");
+
+        acomp_invitados.setForeground(new java.awt.Color(0, 0, 0));
+        acomp_invitados.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        acomp_invitados.setText("0");
+        documento_e.setEnabled(false);
+        acomp_invitados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acomp_invitadosActionPerformed(evt);
+            }
+        });
+        acomp_invitados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                acomp_invitadosKeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel57)
+                        .addGap(25, 25, 25)
+                        .addComponent(acomp_invitados, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel39))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(documento_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombre_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombre_p1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel38))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel39)
+                    .addComponent(documento_p1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel57)
+                    .addComponent(acomp_invitados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(documento_p1)
-                        .addContainerGap())
+                        .addGap(91, 91, 91)
+                        .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel39)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(31, 31, 31)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel38)
-                                .addGap(367, 367, 367))
-                            .addComponent(nombre_p1)))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pasar_dia3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel39)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(documento_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel38)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombre_p1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pasar_dia3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel44))
-                .addGap(43, 43, 43)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout invitadosLayout = new javax.swing.GroupLayout(invitados);
@@ -1978,19 +2182,19 @@ public class Ingre extends javax.swing.JPanel {
         invitadosLayout.setHorizontalGroup(
             invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invitadosLayout.createSequentialGroup()
-                .addGap(95, 95, 95)
+                .addGap(39, 39, 39)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         invitadosLayout.setVerticalGroup(
             invitadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invitadosLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(17, 17, 17)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("INVITADOS", invitados);
+        menu_ingreso_egreso.addTab("Invitados", invitados);
 
         jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Acampante"));
 
@@ -2124,26 +2328,26 @@ public class Ingre extends javax.swing.JPanel {
         egresos.setLayout(egresosLayout);
         egresosLayout.setHorizontalGroup(
             egresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(egresosLayout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, egresosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(589, 589, 589))
+            .addGroup(egresosLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         egresosLayout.setVerticalGroup(
             egresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(egresosLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(39, 39, 39)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("EGRESOS", egresos);
+        menu_ingreso_egreso.addTab("Egresos", egresos);
 
         tabla_vehiculo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2265,12 +2469,12 @@ public class Ingre extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
-        menu_ingreso_egreso.addTab("VEHICULOS", vahiculos);
+        menu_ingreso_egreso.addTab("Vehiculos", vahiculos);
 
-        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar otra  Categoría"));
+        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso de caracter caso especial"));
 
         documento_otros.setForeground(new java.awt.Color(0, 0, 0));
         documento_otros.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -2464,7 +2668,13 @@ public class Ingre extends javax.swing.JPanel {
 
         jLabel54.setText("DESCRIPCIÓN");
 
-        jLabel55.setText("Acompañantes:");
+        descripcion_otros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descripcion_otrosActionPerformed(evt);
+            }
+        });
+
+        jLabel55.setText("Acompañantes (MAX 98):");
 
         acomp_otros.setText("0");
         acomp_otros.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2486,59 +2696,60 @@ public class Ingre extends javax.swing.JPanel {
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel24Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel47)
-                            .addComponent(jLabel48)
-                            .addComponent(jLabel54))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nombre_otros)
-                            .addComponent(descripcion_otros)
-                            .addComponent(documento_otros, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap())))
-            .addGroup(jPanel24Layout.createSequentialGroup()
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
-                        .addComponent(pasar_dia4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel24Layout.createSequentialGroup()
                         .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel24Layout.createSequentialGroup()
-                                .addComponent(jLabel55)
-                                .addGap(52, 52, 52))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
-                                .addComponent(jLabel56)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(76, 76, 76)
+                                .addComponent(pasar_dia4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel24Layout.createSequentialGroup()
+                                        .addComponent(jLabel55)
+                                        .addGap(52, 52, 52))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
+                                        .addComponent(jLabel56)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tarifa_otros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(acomp_otros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel47))
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel54)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel24Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tarifa_otros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(acomp_otros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 23, Short.MAX_VALUE))
+                            .addComponent(jPanel25, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel48, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nombre_otros, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(descripcion_otros, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(documento_otros, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addGap(23, 23, 23))
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel54)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(descripcion_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jLabel47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nombre_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel48)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(documento_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel47)
+                .addComponent(jLabel54)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombre_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(descripcion_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tarifa_otros, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel56))
@@ -2560,7 +2771,7 @@ public class Ingre extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
@@ -2568,13 +2779,26 @@ public class Ingre extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         jPanel24.getAccessibleContext().setAccessibleName("");
 
-        menu_ingreso_egreso.addTab("OTROS", jPanel2);
+        menu_ingreso_egreso.addTab("Otros", jPanel2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 563, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 716, Short.MAX_VALUE)
+        );
+
+        menu_ingreso_egreso.addTab("Personal", jPanel3);
 
         jPanel22.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4024,7 +4248,7 @@ public class Ingre extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(menu_ingreso_egreso, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -4346,7 +4570,7 @@ public class Ingre extends javax.swing.JPanel {
         String hora_actual = hora + ":" + minutos;
 
         if (categoria.equals("otros")) {
-            c = controlador.IngresoDiario(dni, nombre, hora_actual, categoria+"("+descripcion_otros.getText()+")", acomp);
+            c = controlador.IngresoDiario(dni, nombre, hora_actual, categoria + "(" + descripcion_otros.getText() + ")", acomp);
         } else {
 
             c = controlador.IngresoDiario(dni, nombre, hora_actual, categoria, acomp);
@@ -4444,8 +4668,16 @@ public class Ingre extends javax.swing.JPanel {
             }
 
             if (categoria.equals("invitado")) {
-                modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado por el dia", Main.DiaActual, hora_actual);
-                modelo.insertardinerocaja(Main.tarifa_dia_invitados);
+                
+                  if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado por el dia", Main.DiaActual, hora_actual);
+                        modelo.insertardinerocaja(Main.tarifa_dia_invitados);
+                    } else {
+                        modelo.insertardinerocaja(Main.tarifa_dia_invitados * (Integer.parseInt(acomp_invitados.getText()) + 1));
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_invitados.getText()) + 1)) + " nuevos invitados por el dia", Main.DiaActual, hora_actual);
+                    }
+      
+              
                 Component jFrame = null;
                 int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
 
@@ -4458,7 +4690,7 @@ public class Ingre extends javax.swing.JPanel {
 
                         float importe = Main.tarifa_dia_invitados;
 
-                        imprimirtiketdia("Invitado", importe, nombre_p1.getText(), documento_p1.getText(), 0, importe);
+                        imprimirtiketdiainvitado("Invitado", importe, nombre_p1.getText(), documento_p1.getText(), 0, importe);
                     }
                 }
             }
@@ -4616,7 +4848,7 @@ public class Ingre extends javax.swing.JPanel {
                 if (documento_otros.getText().equals("") || nombre_otros.getText().equals("")) {
                     throw new Exception();
                 }
-                if(descripcion_otros.getText().isEmpty()){
+                if (descripcion_otros.getText().isEmpty()) {
                     descripcion_otros.setText("Sin especificar");
                 }
                 if (c == 0 && b == 0) {
@@ -4775,7 +5007,8 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_Parsela_pActionPerformed
 
     private void menu_ingreso_egresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_ingreso_egresoMousePressed
-
+        documento_p1.setEnabled(false);
+        nombre_p1.setEnabled(false);
     }//GEN-LAST:event_menu_ingreso_egresoMousePressed
 
     private void pasar_dia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasar_dia2ActionPerformed
@@ -6888,6 +7121,65 @@ public class Ingre extends javax.swing.JPanel {
         }
     }
 
+    public void imprimirtiketdiainvitado(String categoria, float importe, String nombre, String documento, int acomp, float tarifa) throws SQLException {
+        String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+        String segundos = String.valueOf(calendario.get(Calendar.SECOND));
+        String n_serial = "0";
+        String hora_actual = hora + ":" + minutos;
+        ResultSet res = modelo.mostrarregistros1();
+        // Aquí tu serial en caso de tener uno
+        if (res.next()) {
+            n_serial = res.getString("id");
+        }
+
+        String serial;
+        String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
+
+        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, "0006-" + nro_serial);
+
+        tiket.Iniciar()
+                .Corte(1)
+                .DeshabilitarElModoDeCaracteresChinos()
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .CargarImagenLocalEImprimir("C:\\Users\\mateo\\Desktop\\Nueva carpeta\\SIGA-main\\src\\com\\images\\icon-2_1.png", 0, 216)
+                .Feed(1)
+                .EscribirTexto("SAEBU\n")
+                .EscribirTexto("Camping Universitario\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
+                .Feed(1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
+                .EscribirTexto("______________________________________________\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre del Aportante: " + nombre_a1.getText() + "        DNI: " + documento_a1.getText() + "\n" + "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria: " + categoria + "\n" + "Hora-ingreso: " + hora_actual + "\n" + "Acompañantes: " + acomp + "\n" + "Solo por el dia\n")
+                .EscribirTexto("______________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("Sub total: $" + tarifa + "*" + (acomp + 1) + "\n")
+                .EscribirTexto("_____________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("TOTAL:  $" + (tarifa * (acomp + 1)) + "\n")
+                .EstablecerEnfatizado(true)
+                .EstablecerTamanoFuente(1, 1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .TextoSegunPaginaDeCodigos(2, "cp850", "¡Bienvenido, que tenga un buen dia!\nEscanee el qr y visite la web de SAEBU")
+                .Feed(1)
+                .ImprimirCodigoQr("http://saebu.unsl.edu.ar/camping-universitario", 160, ConectorPluginV3.RECUPERACION_QR_MEJOR,
+                        ConectorPluginV3.TAMANO_IMAGEN_NORMAL)
+                .Feed(1)
+                .EstablecerTamanoFuente(1, 1)
+                .EscribirTexto("PROHIBIDO EL INGRESO CON ANIMALES\nSi.G.A.")
+                .Feed(3)
+                .Corte(1)
+                .Pulso(48, 30, 120);
+
+        try {
+            tiket.imprimirEn("impresora termica");
+            System.out.println("Impreso correctamente");
+        } catch (Exception e) {
+            System.out.println("Error imprimiendo: " + e.getMessage());
+        }
+    }
+
     public void imprimirtiketdiaotros(String descripcion, float importe, String nombre, String documento, int acomp, float tarifa) throws SQLException {
         String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
         String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
@@ -6980,7 +7272,68 @@ public class Ingre extends javax.swing.JPanel {
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Descripcion:" + descripcion + "\n" + "Acompañantes: " + acomp + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
-                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) + " por: " + (int) cant_dias(fecha_ingreso_otros, fecha_egreso_otros) + " dias" + "\n")
+                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) + " (x dia)" + "\n")
+                .EscribirTexto("______________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("TOTAL:  $" + importe + "\n")
+                .EstablecerEnfatizado(true)
+                .EstablecerTamanoFuente(1, 1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .TextoSegunPaginaDeCodigos(2, "cp850", "¡Bienvenido, que tenga un buen dia!\nEscanee el QR y visite la web de SAEBU")
+                .Feed(1)
+                .ImprimirCodigoQr("http://saebu.unsl.edu.ar/camping-universitario", 160, ConectorPluginV3.RECUPERACION_QR_MEJOR,
+                        ConectorPluginV3.TAMANO_IMAGEN_NORMAL)
+                .Feed(1)
+                .EstablecerTamanoFuente(1, 1)
+                .EscribirTexto("PROHIBIDO EL INGRESO CON ANIMALES\nSi.G.A.")
+                .Feed(3)
+                .Corte(1)
+                .Pulso(48, 30, 120);
+
+        try {
+
+            tiket.imprimirEn("impresora termica");
+
+            System.out.println("Impreso correctamente");
+        } catch (Exception e) {
+            System.out.println("Error imprimiendo: " + e.getMessage());
+        }
+    }
+
+    public void imprimirtiketacampanteinvitado(String fecha_ingreso, String fecha_egreso, String categoria, float importe, String nombre, String documento, int acomp, float tarifas) throws SQLException, java.text.ParseException {
+        String hora = String.valueOf(calendario.get(Calendar.HOUR_OF_DAY));
+        String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
+        String n_serial = "0";
+        String hora_actual = hora + ":" + minutos;
+        ResultSet res = modelo.mostrarregistros1();
+
+        // Aquí tu serial en caso de tener uno
+        if (res.next()) {
+            n_serial = res.getString("id");
+        }
+
+        String serial;
+        String nro_serial = String.format("%08d", Integer.parseInt(n_serial));
+
+        ConectorPluginV3 tiket = new ConectorPluginV3(ConectorPluginV3.URL_PLUGIN_POR_DEFECTO, "0006-" + nro_serial);
+
+        tiket.Iniciar()
+                .Corte(1)
+                .DeshabilitarElModoDeCaracteresChinos()
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_CENTRO)
+                .CargarImagenLocalEImprimir("C:\\Users\\mateo\\Desktop\\Nueva carpeta\\SIGA-main\\src\\com\\images\\icon-2_1.png", 0, 216)
+                .Feed(1)
+                .EscribirTexto("SAEBU\n")
+                .EscribirTexto("Camping Universitario\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Serial: " + "0006-" + nro_serial + "\nCajero: " + Login.usuario + "\n")
+                .EscribirTexto("Fecha y hora: " + Main.DiaActual + " " + hora_actual + "hs")
+                .Feed(1)
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_IZQUIERDA)
+                .EscribirTexto("______________________________________________\n")
+                .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre del Aportante: " + nombre_a1.getText() + "\n" + "DNI APORTANTE: " + documento_a1.getText() + "\n" + "Nombre: " + nombre + "                   DNI: " + documento + "\n" + "Categoria:" + categoria + "\n" + "Acompañantes: " + acomp + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
+                .EscribirTexto("______________________________________________\n")
+                .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
+                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) + " (x dia)" + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
                 .EscribirTexto("TOTAL:  $" + importe + "\n")
@@ -7041,7 +7394,7 @@ public class Ingre extends javax.swing.JPanel {
                 .TextoSegunPaginaDeCodigos(2, "cp850", "Nombre: " + nombre + "        DNI: " + documento + "\n" + "Categoria:" + categoria + "\n" + "Acompañantes: " + acomp + "\n" + "Fecha-ingreso: " + fecha_ingreso + "\n" + "Fecha-egreso: " + fecha_egreso + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
-                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) + " por: " + (int) cant_dias(fecha_ingreso_p, fecha_egreso_p) + " dias" + "\n")
+                .EscribirTexto("Sub total: $" + tarifas + "*" + (acomp + 1) + " (x dia)" + "\n")
                 .EscribirTexto("______________________________________________\n")
                 .EstablecerAlineacion(ConectorPluginV3.ALINEACION_DERECHA)
                 .EscribirTexto("TOTAL:  $" + importe + "\n")
@@ -7111,57 +7464,89 @@ public class Ingre extends javax.swing.JPanel {
     }//GEN-LAST:event_fecha_egreso_p2KeyPressed
 
     private void Obtener3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Obtener3MousePressed
-        if (!pasar_dia3.isSelected()) {
-            if (!Parsela_p1.getText().isEmpty()) {
-                float importe = 0;
-                try {
+
+        try {
+
+            if (!pasar_dia3.isSelected()) {
+                if (!Parsela_p1.getText().isEmpty()) {
+
+                    float importe = 0;
 
                     if (Integer.parseInt(Parsela_p1.getText()) >= 1 && Integer.parseInt(Parsela_p1.getText()) <= 4) {
-                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 6);
-                        tarifa3.setText(String.valueOf(importe));
+                        importe = ((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2)) * Main.tarifa_acampar_invitados;
+
+                        tarifa3.setText(String.format("%.2f", importe));
                     } else {
-                        importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 4);
-                        tarifa3.setText(String.valueOf(importe));
+
+                        if (Integer.parseInt(acomp_invitados.getText()) <= 5) {
+
+                            if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+
+                                importe = (Main.tarifa_acampar_invitados * ((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2)));
+                                tarifa3.setText(String.format("%.2f", importe));
+                            } else {
+
+                                importe = ((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2)) * Main.tarifa_acampar_invitados;
+                                tarifa3.setText(String.format("%.2f", importe * (Integer.parseInt(acomp_invitados.getText()) + 1)));
+
+                            }
+                        } else {
+                            javax.swing.JOptionPane.showMessageDialog(this, "Solo se permite hasta 5 invitados por aportante.\nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+                        }
+                    }
+                }
+
+            } else {
+                if (Integer.parseInt(acomp_invitados.getText()) <= 5) {
+
+                    if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+
+                        tarifa3.setText(String.format("%.2f", Main.tarifa_dia_invitados));
+
+                    } else {
+                        tarifa3.setText(String.format("%.2f", Main.tarifa_acampar_invitados * (Integer.parseInt(acomp_invitados.getText()) + 1)));
 
                     }
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Solo se permite hasta 5 invitados por aportante.\nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-                } catch (java.text.ParseException ex) {
-                    Logger.getLogger(Ingre.class
-                            .getName()).log(Level.SEVERE, null, ex);
-
-                } catch (NullPointerException ex) {
-                    Logger.getLogger(Ingre.class
-                            .getName()).log(Level.SEVERE, null, ex);
                 }
-                tarifa3.setText(Float.toString(importe));
             }
+        } catch (java.text.ParseException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            javax.swing.JOptionPane.showMessageDialog(this, "Ingreso una letra donde se espera numero \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-        } else {
+        } catch (java.lang.NumberFormatException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+            javax.swing.JOptionPane.showMessageDialog(this, "Especifique la parcela. \nIntente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-            float importe = Main.tarifa_dia_invitados;
-            tarifa3.setText(Float.toString(importe));
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }//GEN-LAST:event_Obtener3MousePressed
 
     private void tarifa3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarifa3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tarifa3ActionPerformed
     public void RegistrarIngresoInvitados() throws java.text.ParseException, java.lang.NullPointerException, SQLException {
-
         try {
 
             float importe = 0;
             int c;
-            if (Integer.parseInt(Parsela_p1.getText()) >= 1 && Integer.parseInt(Parsela_p1.getText()) <= 4) {
-                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 6);
-                tarifa3.setText(String.valueOf(importe));
+
+            if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+                importe = (int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2) * Main.tarifa_acampar_invitados;
+                tarifa3.setText(String.format("%.2f", importe));
             } else {
-                importe = controlador.CalcularImporte((int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2), 4);
-                tarifa3.setText(String.valueOf(importe));
+                importe = (int) cant_dias(fecha_ingreso_p2, fecha_egreso_p2) * (Integer.parseInt(acomp_invitados.getText()) + 1) * Main.tarifa_acampar_invitados;
             }
+
             if (fecha_egreso_p2.getDate() != null && fecha_ingreso_p2.getDate() != null) {
 
-                c = controlador.IngresoParticular(documento_p1.getText(), nombre_p1.getText(), "Invitado", calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), Parsela_p1.getText(), importe, 0);
+                c = controlador.IngresoParticular(documento_p1.getText(), nombre_p1.getText(), "Invitado", calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), Parsela_p1.getText(), importe, Integer.parseInt(acomp_invitados.getText()));
 
                 if (c != 1) {
                     javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar.\n Error.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -7170,8 +7555,22 @@ public class Ingre extends javax.swing.JPanel {
                     String minutos = String.valueOf(calendario.get(Calendar.MINUTE));
 
                     String hora_actual = hora + ":" + minutos;
-                    modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado acampante", Main.DiaActual, hora_actual);
-                    modelo.insertardinerocaja(importe);
+
+                    if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado un nuevo invitado acampante", Main.DiaActual, hora_actual);
+                    } else {
+                        modelo.InsertarRegistro(Login.usuario, "ha ingresado " + String.format("%02d", (Integer.parseInt(acomp_invitados.getText()) + 1)) + " nuevos invitados acampantes.", Main.DiaActual, hora_actual);
+                    }
+                    
+                       if (Integer.parseInt(acomp_invitados.getText()) == 0) {
+                        modelo.insertardinerocaja(importe);
+                        System.out.println("importe en caja invitado: " + importe);
+                    } else {
+                        modelo.insertardinerocaja(importe);
+                        System.out.println("importe en caja con acampañantes invitado: " + importe);
+                    }
+
+             
 
                     Component jFrame = null;
                     int result = JOptionPane.showConfirmDialog(jFrame, "Registro exitoso, desea imprimir?");
@@ -7180,7 +7579,7 @@ public class Ingre extends javax.swing.JPanel {
 
                         if (!pasar_dia3.isSelected()) {
 
-                            imprimirtiketacampante(calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), "Invitado", importe, nombre_p1.getText(), documento_p1.getText(), 0, Main.tarifa_acampar_invitados);
+                            imprimirtiketacampanteinvitado(calc_fecha(fecha_ingreso_p2), calc_fecha(fecha_egreso_p2), "Invitado", importe, nombre_p1.getText(), documento_p1.getText(), 0, Main.tarifa_acampar_invitados);
                         } else {
 
                             importe = Main.tarifa_dia_invitados;
@@ -7253,7 +7652,7 @@ public class Ingre extends javax.swing.JPanel {
                 if (c == 0 && b == 0) {
                     if (pasar_dia3.isSelected()) {
 
-                        ingre_dia("invitado", documento_p1.getText(), nombre_p1.getText(), 0);
+                        ingre_dia("invitado", documento_p1.getText(), nombre_p1.getText(), Integer.parseInt(acomp_invitados.getText()));
                     } else {
                         ingre_i();
                     }
@@ -7326,11 +7725,11 @@ public class Ingre extends javax.swing.JPanel {
         if (pasar_dia3.isSelected()) {
             fecha_ingreso_p2.setEnabled(false);
             fecha_egreso_p2.setEnabled(false);
-            Parsela_p.setEnabled(false);
+            Parsela_p1.setEnabled(false);
         } else {
             fecha_ingreso_p2.setEnabled(true);
             fecha_egreso_p2.setEnabled(true);
-            Parsela_p.setEnabled(true);
+            Parsela_p1.setEnabled(true);
         }
 
     }//GEN-LAST:event_pasar_dia3ActionPerformed
@@ -7476,7 +7875,6 @@ public class Ingre extends javax.swing.JPanel {
 
                             importe = ((int) cant_dias(fecha_ingreso_otros, fecha_egreso_otros)) * Float.parseFloat(tarifa_otros.getText());
                             tarifa4.setText(String.format("%.2f", importe * (Integer.parseInt(acomp_otros.getText()) + 1)));
-                            System.out.println("importeimporte::" + importe);
 
                         }
 
@@ -7593,6 +7991,79 @@ public class Ingre extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_acomp_otrosKeyPressed
 
+    private void Documento_a2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Documento_a2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Documento_a2ActionPerformed
+
+    private void Documento_a2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Documento_a2KeyPressed
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
+    }//GEN-LAST:event_Documento_a2KeyPressed
+    public void buscaraportanteinvitado() throws SQLException {
+        ResultSet res;
+        res = controlador.BuscarAportante(Documento_a2.getText());
+        if (res.next() == true) {
+            nombre_a1.setText(res.getString("nombre"));
+            documento_a1.setText(res.getString("doc"));
+            cod_aportante1.setText(res.getString("cod_aportante"));
+            apellido_a1.setText(res.getString("apellido"));
+            nombre_p1.setEnabled(true);
+            documento_p1.setEnabled(true);
+
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se encontro el documento solicitado.\n Intente nuevamente.", "ERROR", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }
+
+    private void Buscar_a2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar_a2MousePressed
+        try {
+            buscaraportanteinvitado();
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Buscar_a2MousePressed
+
+    private void documento_a1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documento_a1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_documento_a1KeyPressed
+
+    private void cod_aportante1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cod_aportante1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cod_aportante1KeyPressed
+
+    private void descripcion_otrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcion_otrosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descripcion_otrosActionPerformed
+
+    private void acomp_invitadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acomp_invitadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_acomp_invitadosActionPerformed
+
+    private void acomp_invitadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_acomp_invitadosKeyPressed
+
+        char validador = evt.getKeyChar();
+
+        if (Character.isLetter(validador)) {
+            getToolkit().beep();
+            evt.consume();
+            Component rootPane = null;
+
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números!  ");
+
+        }
+
+
+    }//GEN-LAST:event_acomp_invitadosKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Boton_ingreso;
@@ -7602,8 +8073,10 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JLabel Boton_ingreso_p2;
     private javax.swing.JLabel Buscar;
     private javax.swing.JLabel Buscar_a;
+    private javax.swing.JLabel Buscar_a2;
     private javax.swing.JTextField Documento;
     private javax.swing.JTextField Documento_a;
+    private javax.swing.JTextField Documento_a2;
     private javax.swing.JButton Obtener;
     private javax.swing.JButton Obtener1;
     private javax.swing.JButton Obtener2;
@@ -7614,19 +8087,23 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JTextField Parsela_a;
     private javax.swing.JTextField Parsela_p;
     private javax.swing.JTextField Parsela_p1;
+    private javax.swing.JTextField acomp_invitados;
     private javax.swing.JTextField acomp_otros;
     private javax.swing.JTextField acomp_particular;
     private javax.swing.JPanel alumnoss;
     private javax.swing.JTextField apellido_a;
+    private javax.swing.JTextField apellido_a1;
     private javax.swing.JTextField apellido_e;
     private javax.swing.JPanel aportantes;
     private javax.swing.JLabel boton_r;
     private javax.swing.JLabel boton_v;
     private javax.swing.JTextField carrera_e;
     private javax.swing.JTextField cod_aportante;
+    private javax.swing.JTextField cod_aportante1;
     private javax.swing.JTextField descripcion_otros;
     private javax.swing.JTextField dni_buscado;
     private javax.swing.JTextField documento_a;
+    private javax.swing.JTextField documento_a1;
     private javax.swing.JTextField documento_e;
     private javax.swing.JTextField documento_otros;
     private javax.swing.JTextField documento_p;
@@ -7826,7 +8303,13 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -7852,6 +8335,10 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -7862,6 +8349,7 @@ public class Ingre extends javax.swing.JPanel {
     private javax.swing.JTextField marca;
     private javax.swing.JTabbedPane menu_ingreso_egreso;
     private javax.swing.JTextField nombre_a;
+    private javax.swing.JTextField nombre_a1;
     private javax.swing.JTextField nombre_e;
     private javax.swing.JTextField nombre_otros;
     private javax.swing.JTextField nombre_p;
